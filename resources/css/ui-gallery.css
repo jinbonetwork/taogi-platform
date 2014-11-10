@@ -1,0 +1,147 @@
+/** Gallery **/
+div.ui-gallery {
+}
+div.ui-gallery > ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+div.ui-gallery > ul:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+div.ui-gallery > ul > li {
+	position: relative;
+	overflow:hidden;
+	display: block;
+	width: 33.3%;
+	float: left;
+	margin: 0 0 30px 0;
+	padding: 0;
+	text-align: left;
+	cursor: pointer;
+}
+div.ui-gallery > ul > li:nth-child(3n+1){
+	clear: left;
+}
+
+div.ui-gallery > ul > li > dl {
+	margin: 0;
+	padding: 1em;
+}
+div.ui-gallery > ul > li > dl > dt {
+	display: none;
+}
+div.ui-gallery > ul > li > dl > dd {
+	margin: 0;
+	padding: 0;
+}
+div.ui-gallery > ul > li > dl > dd > div {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+@media all and ( max-width: 1024px ){
+	div.ui-gallery > ul > li {
+		width: 50%;
+		float: left;
+		clear: none !important;
+	}
+	div.ui-gallery > ul > li:nth-child(2n+1){
+		clear: left !important;
+	}
+}
+@media all and ( max-width: 640px ){
+	div.ui-gallery > ul > li {
+		width: 100%;
+		float: none;
+		clear: both;
+	}
+}
+/** Gallery -- Controls **/
+div.ui-gallery label.ui-checkbox-container,
+div.ui-gallery a.ui-controls-switch,
+div.ui-gallery a.ui-controls-switch:after {
+	position: absolute !important;
+	top: 0px !important;
+	display: block !important;
+	width: 30px !important;
+	height: 30px !important;
+	text-align: center !important;
+	line-height: 30px !important;
+}
+div.ui-gallery label.ui-checkbox-container {
+	left: 0px !important;
+}
+div.ui-gallery a.ui-controls-switch {
+	right: 0px !important;
+	box-shadow: none !important;
+}
+div.ui-gallery div.ui-controls {
+	position: absolute;
+	bottom: -100%;
+	left: 0;
+	width: 100%;
+	height: auto;
+	background-color: #FFFFFF;
+}
+div.ui-gallery div.ui-controls.active {
+	bottom: 0;
+}
+/** Gallery -- Fields **/
+div.ui-gallery ul li dd.item_image {
+	position: relative;
+	display: block;
+}
+div.ui-gallery ul li dd.item_image a {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 3px;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+	overflow: hidden;
+}
+div.ui-gallery ul li dd.item_image img {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: auto;
+}
+div.ui-gallery ul li dd.item_title {
+	margin: 0.5em 0;
+}
+div.ui-gallery ul li dd.item_title a {
+}
+div.ui-gallery ul li dd.item_description div {
+	max-height: 30px;
+	overflow: hidden;
+	line-height: 15px;
+	font-size: 12px;
+}
+div.ui-gallery ul li dd.item_owner,
+div.ui-gallery ul li dd.item_editor,
+div.ui-gallery ul li dd.item_name,
+div.ui-gallery ul li dd.item_author {
+	font-size: 12px;
+}
+div.ui-gallery ul li dd.item_owner:before,
+div.ui-gallery ul li dd.item_editor:before,
+div.ui-gallery ul li dd.item_author:before {
+	content: 'by ';
+	display: inline;
+}
+div.ui-gallery ul li.hover {
+	color: #000000;
+}
+div.ui-gallery ul li.hover dl {
+	border-radius: 3px;
+	background-color: rgba(255,255,255,0.3);
+}
+div.ui-gallery ul li.hover dd.item_title a {
+}
+div.ui-gallery ul li.hover dd.item_title a:hover {
+	text-decoration: underline;
+}
+

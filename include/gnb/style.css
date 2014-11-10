@@ -1,0 +1,96 @@
+@charset "utf-8";
+/****************************************************************************************************
+	LAYOUT start
+****************************************************************************************************/
+/* DOCUMENT */
+html,
+html body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+/* PLATFORM THEME */
+#taogi-net-site-main-container {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.taogi-model-wrap {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+/* LIBRARY THEME */
+body.view .taogi-model-wrap {
+	overflow: hidden;
+	max-width: auto;
+}
+/* MODEL -- timelineJS */
+body.timelineJS .taogi-model-wrap {
+	padding: 1em;
+}
+
+
+
+
+/****************************************************************************************************
+	OVERRIDE for PLATFORM 
+****************************************************************************************************/
+#taogi-gnb-wrap {
+	overflow-y: auto;
+}
+#taogi-gnb .ui-controls {
+	margin: 0 20px;
+}
+#taogi-gnb .ui-controls h3 {
+	height: 20px;
+	line-height: 20px;
+}
+#taogi-gnb .ui-controls ul {
+	margin: 0 0 10px 0;
+	padding: 0 0 10px 0;
+	border-bottom: 1px solid #333333;
+}
+#taogi-gnb .ui-controls.buildControls h3 {
+	position: relative;
+	display: block;
+	cursor: pointer;
+}
+#taogi-gnb .ui-controls.buildControls h3:hover {
+	color: #FFFFFF;
+}
+#taogi-gnb .ui-controls.buildControls h3:after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	font-family: 'FontAwesome';
+	content: '\F107';
+}
+#taogi-gnb .ui-controls.buildControls.active h3:after {
+	content: '\F106';
+}
+#taogi-gnb .ui-controls.buildControls ul {
+	display: none;
+}
+#taogi-gnb .ui-controls.buildControls.active ul {
+	display: block;
+}
+#taogi-gnb .ui-controls#user-console ul {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: 0 none;
+}
+#taogi-gnb .tooltip {
+	box-shadow: 0 0 3px rgba(255,255,255,0.25);
+}
+
+
+

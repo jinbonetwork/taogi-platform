@@ -1,0 +1,7 @@
+.DS_Store
+.*.swp
+config/settings.php
+files/*
+files/*/
+why-sewolho
+special/

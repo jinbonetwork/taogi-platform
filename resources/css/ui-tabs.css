@@ -1,0 +1,55 @@
+/** Tabs **/
+.ui-tabs-container {
+}
+.ui-tabs-container:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+ul.ui-tabs,
+ul.ui-tabs > li.ui-tab,
+ul.ui-tabs > li.ui-tab dl,
+ul.ui-tabs > li.ui-tab dl dt, 
+ul.ui-tabs > li.ui-tab dl dd,
+ul.ui-tab-contents,
+ul.ui-tab-contents > li.ui-tab-content {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+ul.ui-tabs,
+ul.ui-tab-contents {
+	list-style: none;
+}
+ul.ui-tabs:after,
+ul.ui-tab-contents:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+ul.ui-tabs > li.ui-tab {
+	float: left;
+	width: auto;
+	height: auto;
+	background-color: #FFFFFF;
+	border: 1px solid #DDDDDD;
+	border-bottom: 0 none;
+	border-radius: 5px 5px 0 0;
+}
+ul.ui-tabs > li.ui-tab.current {
+	font-weight: bold;
+}
+ul.ui-tabs:after {
+	border-top: 1px solid #CCCCCC;
+}
+ul.ui-tab-contents {
+}
+ul.ui-tab-contents > li.ui-tab-content {
+	display: none;
+	width: 100%;
+	height: auto;
+}
+ul.ui-tab-contents > li.ui-tab-content.current {
+	display: block;
+}
+

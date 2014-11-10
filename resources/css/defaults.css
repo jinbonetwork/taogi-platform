@@ -1,0 +1,131 @@
+@charset "utf-8";
+
+/* RESET */
+html, body,
+header, article, section, footer, nav,
+h1, h2, h3, h4, h5, h6,
+div, p, blockquote, pre,
+table, caption, col, colgroup, thead, tbody, tfoot, tr, th, td,
+ul, ol, li, dl, dt, dd,
+form, fieldset, legend, label, input, textarea, button,
+figure, img, video, audio, embed, object, iframe,
+a, strong, em, span, code, kbd, address,
+b, i, u, s, tt, font {
+	-webkit-text-size-adjust: none;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+	line-height: inherit;
+	font-weight: inherit;
+	font-style: inherit;
+	font-family: inherit;
+	font-size: inherit;
+}
+body {
+	line-height: 1.4;
+	font-size: 16px;
+}
+h1, h2, h3, h4, h5, h6, dt, th, strong, b {
+	font-weight: bold;
+}
+h1 {
+	font-size: 1.5em;
+}
+h2 {
+	font-size: 1.3em;
+}
+h3 {
+	font-size: 1.1em;
+}
+h4 {
+	font-size: 0.9em;
+}
+h5 {
+	font-size: 0.8em;
+}
+h6 {
+	font-size: 0.7em;
+}
+ul,ol {
+	list-style: none;
+}
+*+p, *+blockquote, *+pre, *+table, *+ul, *+ol, *+dl, *+form, *+fieldset {
+	margin-top: 1em;
+}
+hr {
+	margin: 2em 0;
+	padding: 0;
+	border: none;
+	border-top: 1px solid silver;
+	color: silver;
+	text-align: center;
+	line-height: 1;
+	font-size: 32px;
+}
+hr:after {
+	display: inline-block;
+	position: relative;
+	top: -0.65em;
+	padding: 0 0.25em;
+	background-color: #FFFFFF;
+	content: '\00a7';
+	font-size: inherit;
+}
+
+/* LINKS */
+a, a:link, a:visited {
+	color: #FF6600;
+	text-decoration: none;
+}
+a:hover, a:active {
+	color: #993300;
+	text-decoration: underline;
+	text-decoration: none;
+}
+
+/* TYPOGRAPHY */
+body {
+	font-family: 'Apple SD Gothic Neo', 'Segoe UI', 'Meiryo', 'NanumGothic', 'Malgun Gothic', 'Verdana', 'Tahoma', 'Dotum', 'Gulim', sans-serif;
+}
+blockquote {
+	font-family: 'Apple Myeongjo', 'NanumMyeongjo', 'Batang', serif;
+}
+pre, code, kbd, tt {
+	font-family: 'Monaco', 'Lucida Grande', 'Lucida Console', 'NanumGothicCoding', monospace;
+}
+
+/* FRAMESET */
+body.taoginet,
+body.taoginet > .frame > nav > .wrap {
+	max-width: 950px;
+	margin: 0 auto;
+}
+body.taoginet > .frame {
+	margin: 45px 30px 30px 30px;
+}
+body.taoginet > .frame > header {
+}
+body.taoginet > .frame > nav {
+}
+body.taoginet > .frame > article {
+}
+body.taoginet > .frame > footer {
+}
+
+/* FOOTER */
+
+/* OVERRIDES */
+.fancybox-wrap {
+	z-index: 999999999999999;
+}
+.tooltip,
+.tooltip * {
+	text-align: left !important;
+	white-space: normal !important;
+	font-size: 12px !important;
+}

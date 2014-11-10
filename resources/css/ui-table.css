@@ -1,0 +1,79 @@
+/** Table **/
+table.ui-table {
+	width: 100%;
+	border-spacing: 0;
+	border: 1px solid gray;
+	border-top: 0 none;
+	border-left: 0 none;
+	background-color: #FFFFFF;
+}
+table.ui-table tr {
+	background-color: #EEEEEE;
+}
+table.ui-table tr:nth-child(even) {
+	background-color: #EEEEEE;
+}
+table.ui-table th,
+table.ui-table td {
+	margin: 0;
+	padding: 0.25em 0.5em;
+	border: 1px solid gray;
+	border-right: 0 none;
+	border-bottom: 0 none;
+	text-align: left;
+	vertical-align: top;
+	white-space: nowrap;
+}
+table.ui-table th > div.wrap,
+table.ui-table td > div.wrap {
+	position: relative;
+}
+/** Table -- Colspan **/
+table.ui-table a.ui-controls-switch {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+table.ui-table tr.ui-controls-container td {
+	margin: 0;
+	padding: 0;
+	border-top: 0 none;
+}
+table.ui-table tr.ui-controls-container td div.ui-controls {
+	box-sizing: border-box;
+	max-height: 0px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+table.ui-table tr.ui-controls-container td div.ui-controls.active {
+	transition: height 0.2s;
+	max-height: 999999999px;
+	padding: 0.25em 0.5em;
+	border-top: 1px solid gray;
+}
+/** Table -- Cells **/
+table.ui-table tr .ui-checkbox-switch-container,
+table.ui-table tr .ui-checkbox-container {
+	width: 1px;
+}
+table.ui-table tr th.item_controls,
+table.ui-table tr td.item_controls {
+	width: 1px;
+}
+table.ui-table .item_title {
+	width: 40%;
+	white-space: normal;
+}
+table.ui-table td .label {
+	
+}
+table.ui-table .item_title .summary {
+	width: 100%;
+	max-height: 30px;
+	line-height: 15px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+}
+

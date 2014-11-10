@@ -1,0 +1,19 @@
+[submodule "taogi-timeline"]
+path = timeline
+url = https://github.com/jinbonetwork/taogi-timeline.git
+
+[submodule "PHPMailer"]
+path = contribute/PHPMailer
+url = https://github.com/PHPMailer/PHPMailer.git
+
+[submodule "ResponsiveFilemanager"]
+path = contribute/filemanager
+url = https://github.com/trippo/ResponsiveFilemanager.git
+
+[submodule "is-loadling"]
+path = contribute/is-loading
+url = https://github.com/hekigan/is-loading.git
+
+[submodule "fancybox"]
+path = resources/js/fancybox
+url = https://github.com/fancyapps/fancyBox.git

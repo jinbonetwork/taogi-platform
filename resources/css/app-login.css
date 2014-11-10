@@ -1,0 +1,112 @@
+@charset "utf-8";
+#login {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+#login h2 {
+	display: none;
+}
+#login form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	-moz-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	-o-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	width: 100%;
+	max-width: 480px;
+	max-height: 100%;
+	margin: 0;
+}
+#login form fieldset {
+	position: relative;
+	padding: 15px;
+	border: 0 none;
+	border-radius: 3px;
+	border: 1px solid #CCCCCC;
+}
+#login form fieldset legend {
+	padding: 0 .5em;
+	background-color: #FFFFFF;
+	font-weight: bold;
+}
+#login form fieldset .form-item {
+}
+#login form fieldset .form-item label {
+	display: block;
+	font-size: smaller;
+}
+#login form fieldset .form-item .input {
+	display: block;
+}
+#login form fieldset .form-item .button {
+	display: inline-block;
+}
+#login form fieldset .info {
+	margin: 0;
+}
+#login form fieldset .help {
+	margin: 0;
+	font-size: smaller;
+	color: red;
+}
+
+/** GENERAL SPACING **/
+#login form input + fieldset {
+	margin-top: 0;
+}
+#login form fieldset .block + .block {
+	margin-top: 0.8em;
+}
+#login form fieldset .form-item .block + .block {
+	margin-top: 0.3em;
+}
+
+/** INPUT TYPES **/
+#login form fieldset .form-item .input.text,
+#login form fieldset .form-item .input.textarea {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.3em;
+	border: 1px solid #666666;
+	border-radius: 3px;
+}
+
+/** BUTTONS **/
+#login form fieldset .form-item .button {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: bottom;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+	padding: 0 1em;
+	border-radius: 3px;
+	background-color: teal;
+	color: #FFFFFF !important;
+}
+#login form fieldset .form-item .button:hover {
+	background-color: #004040;
+}
+#login form fieldset .form-item .button + .button {
+	margin-left: 1em;
+}
+
+/** ACTIONS **/
+#login form fieldset .form-item .action {
+	display: inline-block;
+	vertical-align: bottom;
+	height: 30px;
+	line-height: 30px;
+	font-size: 11px;
+}
+#login form fieldset .form-item .recovery {
+	color: red;
+}
+#login form fieldset .form-item .recovery:hover {
+	text-decoration: underline;
+}
+

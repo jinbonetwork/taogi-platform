@@ -1,0 +1,42 @@
+	<h2>로그인하기</h2>
+	<form id="login_form" name="login" action="" method="POST" onsubmit="return check_login(this);">
+	<input type="hidden" name="requestURI" value="<?php print $params['requestURI']; ?>" />
+	<table class="mini_form_table">
+<?php
+$fb_user = $facebook->getUser();?>
+		<tr>
+			<td></td>
+			<td><a href="<?php print $fb_login_url; ?>"><img src="<?php print JFE_RESOURCE_URI; ?>/images/button_facebook_login.png" alt="페이스북으로 로그인 "/></a></td>
+			<td>페이스북 계정이 있으신 분은 별도의 가입없이 페이스북 계정으로 로그인이 가능합니다.</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				따오기는 소셜펀치와 통합 인증시스템을 사용합니다.
+			</div>
+		</tr>
+		<tr>
+			<th><label for="email_id">이메일 주소</label></th>
+			<td><input type="text" id="email_id" name="email_id" /></td>
+			<td>이메일 주소는 로그인시 아이디로 사용됩니다.</td>
+		</tr>
+		<tr>
+			<th><label for="password">비밀번호</label></th>
+			<td><input type="password" id="password" name="password" /></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>&nbsp;<input type="submit" class="submit" value="로그인" /></td>
+			<td></td>
+		</tr>
+	</table>
+	</form>
+	<div class="joinus">
+		<h3>아직 가입하지 않으셨나요?</h3>
+		<div class="round_5px">
+		<input type="button" id="join_button_on_login" value="회원가입" class="round_7px" onclick="<?php if($params['output'] != 'xml') print "document.location.href='".url("regist",array('ssl'=>true,'attribute'=>array('requestURI'=>$params['requestURI'])))."'"; else print "popJoin()" ?>;" />
+			<p>
+				타임라인 따오기에 가입하세요.
+			</p>
+		</div>
+	</div>
