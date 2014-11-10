@@ -15,5 +15,13 @@ path = contribute/is-loading
 url = https://github.com/hekigan/is-loading.git
 
 [submodule "fancybox"]
-path = resources/js/fancybox
+path = resources/js/fancyBox
 url = https://github.com/fancyapps/fancyBox.git
+
+[submodule "html5sortable"]
+path = contribute/html5sortable
+url = https://github.com/farhadi/html5sortable.git
+
+[submodule "autosize"]
+path = contribute/autosize
+url = https://github.com/jackmoore/autosize.git
