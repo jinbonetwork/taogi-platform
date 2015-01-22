@@ -1,0 +1,119 @@
+/** Table **/
+.ui-table-container {
+}
+@media all and ( max-width: 640px ) {
+	.ui-table-container {
+		overflow-x: scroll;
+	}
+}
+table.ui-table {
+	table-layout: fixed;
+	width: 100%;
+	min-width: 540px;
+	border-spacing: 0;
+	border: 1px solid #CECECE;
+	border-top: 0 none;
+	border-left: 0 none;
+	background-color: #FFFFFF;
+	font-size: 14px;
+}
+table.ui-table tr {
+	/*
+	background-color: rgba(0,0,0,0.025);
+	*/
+}
+table.ui-table tr:nth-child(even) {
+	background-color: transparent;
+}
+table.ui-table th,
+table.ui-table td {
+	position: relative;
+	margin: 0;
+	padding: 0.4em 0.7em;
+	border: 1px solid #CECECE;
+	border-right: 0 none;
+	border-bottom: 0 none;
+	text-align: left;
+	vertical-align: top;
+}
+table.ui-table th {
+	background-color: rgba(0,0,0,0.08);
+	font-weight: normal;
+	cursor: default;
+}
+/** Table -- Colspan **/
+table.ui-table a.ui-controls-switch {
+	position: absolute;
+	top: 0.25em;
+	right: 0.5em;
+}
+table.ui-table tr.ui-controls-container td {
+	margin: 0;
+	padding: 0;
+	border-top: 0 none;
+	background-color: rgba(0,0,0,0.05);
+}
+table.ui-table tr.ui-controls-container td div.ui-controls {
+	box-sizing: border-box;
+	max-height: 0px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+table.ui-table tr.ui-controls-container td div.ui-controls.active {
+	transition: height 0.2s;
+	max-height: 999999999px;
+	padding: 0.25em 0.5em;
+	border-top: 1px solid #CECECE;
+}
+/** Table -- Cells **/
+table.ui-table th > *,
+table.ui-table td > * {
+	box-sizing: border-box;
+}
+table.ui-table td > img {
+	position: absolute;
+	width: 32px;
+	height: 32px;
+}
+table.ui-table th.ui-checkbox-switch-container,
+table.ui-table td.ui-checkbox-container {
+	width: 30px;
+	min-width: 0;
+}
+table.ui-table td > img + div,
+table.ui-table td > img + div + div,
+table.ui-table td > img + div + div + div {
+	padding-left: 40px;
+}table.ui-table th.general,
+table.ui-table td.general {
+	width: 160px;
+}
+table.ui-table th.key,
+table.ui-table td.key {
+}
+table.ui-table td .value {
+}
+table.ui-table td .sub {
+	color: #666666;
+	font-size: 12px;
+}
+table.ui-table td .detail {
+	width: 100%;
+	max-height: 30px;
+	line-height: 15px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 12px;
+}
+table.ui-table td .detail > * {
+	margin: 0;
+}
+/** Override **/
+table.ui-table .item_title {
+	overflow: hidden;
+}
+table.ui-table .item_controls {
+	overflow: visible;
+}
+

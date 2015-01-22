@@ -1,0 +1,71 @@
+/** Tabs **/
+.ui-tabs-container {
+}
+.ui-tabs-container:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+ul.ui-tabs,
+ul.ui-tabs > li.ui-tab,
+ul.ui-tabs > li.ui-tab dl,
+ul.ui-tabs > li.ui-tab dl dt, 
+ul.ui-tabs > li.ui-tab dl dd,
+ul.ui-tab-contents,
+ul.ui-tab-contents > li.ui-tab-content {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+ul.ui-tabs,
+ul.ui-tab-contents {
+	list-style: none;
+}
+ul.ui-tabs:after,
+ul.ui-tab-contents:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+ul.ui-tabs {
+}
+ul.ui-tabs > li.ui-tab {
+	float: left;
+	width: auto;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+ul.ui-tabs > li.ui-tab + li.ui-tab {
+	margin-left: 5px;
+}
+ul.ui-tabs > li.ui-tab a {
+	display: block;
+	width: auto;
+	min-width: 80px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+	padding: 0 0.7em;
+	background-color: rgba(0,0,0,0.07);
+	border-radius: 5px;
+	font-size: 14px;
+	color: #555555;
+}
+ul.ui-tabs > li.ui-tab a:hover,
+ul.ui-tabs > li.ui-tab.current a {
+	background-color: rgba(0,0,0,0.15);	
+	color: #000000;
+}
+ul.ui-tab-contents {
+}
+ul.ui-tab-contents > li.ui-tab-content {
+	display: none;
+	width: 100%;
+	height: auto;
+}
+ul.ui-tab-contents > li.ui-tab-content.current {
+	display: block;
+}
+

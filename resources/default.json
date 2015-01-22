@@ -1,0 +1,824 @@
+{
+	"timeline":
+	{
+		"headline":"",
+		"type":"default",
+		"startDate":"",
+		"endDate":"",
+		"text":"진보넷이 2012년에 수행했던 주요사업들을 타임라인으로 만들었습니다.",
+		"date": [
+			{
+				"startDate":"2012,1,4",
+				"headline":"패킷감청 워크샵",
+				"text":"인터넷에서의 일거수일투족이 감시된다! 새해 벽두부터 인권단체들과 패킷감청 워크샵 개최. 현재 국정원 패킷감청에 대해 헌법소원 중.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/DSCF5895.preview.JPG",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/DSCF5895.preview.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://blog.jinbo.net/attach/3778/1099594379.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/18-qD49ihBYeYrDN_onK8LveyZJwcEjCz8ih3w8sb5EE/edit?usp=sharing",
+						"credit":"",
+						"caption":"<인권시민단체 워크샵> 패킷감청, 무엇이 문제인가"
+					},
+					{
+						"media":"http://vimeo.com/24104390",
+						"layout":"feature2",
+						"credit":"",
+						"caption":""
+					}
+				]
+			},
+			{
+				"startDate":"2012,1,9",
+				"headline":"통신심의 폐지 1인시위",
+				"text":"인터넷 검열 폐지! 방송통신심의위원회 앞에서 두 달째 릴레이 1인시위 중.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/_IMG_1077.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/_IMG_1077.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://yfrog.com/scaled/landing/875/23460144.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://blog.jinbo.net/attach/3778/1387916797.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1V0-rZXRLyzuvszWKLDdj0h9z_SmxdBu1cYXXvP64XJM/edit?usp=sharing",
+						"credit":"",
+						"caption":"'통신심의 폐지' 촉구 릴레이 1인 시위 두달째"
+					}
+				]
+			},
+			{
+				"startDate":"2012,1,9",
+				"headline":"개인정보보호위원회 감시",
+				"text":"1월 9일, 개인정보보호위원회의 사실상 첫 회의. 진보넷은 매회 참관하며 매의 눈으로 감시 중!",
+				"asset":
+				{
+					"media":"http://vimeo.com/30656319",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://vimeo.com/30656319",
+						"credit":"",
+						"caption":"",
+						"thumbnail":"http://b.vimeocdn.com/ts/206/026/206026208_100.jpg"
+					},
+					{
+						"media":"http://vimeo.com/30651672",
+						"credit":"",
+						"caption":"",
+						"thumbnail":"http://b.vimeocdn.com/ts/205/993/205993473_100.jpg"
+					},
+					{
+						"media":"https://docs.google.com/document/d/1Fdfa4FKo9kKI8NhHPT-0XRx74g-CnKNuAg5SxdmjBjU/edit?usp=sharing",
+						"credit":"",
+						"caption":"[논평] 개인정보보호위원회, 독립적 기구로서의 위상을 명확히 하라"
+					},
+					{
+						"media":"http://www.pipc.go.kr/",
+						"credit":"",
+						"caption":""
+					}
+				]
+			},
+			{
+				"startDate":"2012,1,29",
+				"headline":"미디어 생태계 민주화",
+				"text":"2011년 미디어 커뮤니케이션 네트워크의 소중한 연구 성과가 <미디어 생태계 민주화를 위한 2012 정책보고서>로 발간되었다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/mediareport.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"double",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/mediareport.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1N6JoK9a7UQC6c3L6xy4dZuHfUyJLaDewbaMwoIZTQRw/edit?usp=sharing",
+						"credit":"",
+						"caption":"[알림] 미디어 생태계 민주화를 위한 2012 정책보고서 소개"
+					}
+				]
+			},
+			{
+				"startDate":"2012,2,10",
+				"headline":"2012년 정기총회 개최",
+				"text":"정기총회를 개최하고 2012년 사업계획과 예산안을 승인했다. 오길영, 김지희 운영위원도 선임 ^^", 
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_9067.JPG",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_9067.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_9051.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_9057.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_9065.JPG",
+						"layout":"feature2",
+						"credit":"",
+						"caption":""
+					}
+				]
+			},
+			{
+				"startDate":"2012,2,16",
+				"headline":"주민등록제도, 이제는 바꾸자",
+				"text":"주민등록법 제정 50년을 맞아 주민등록제도 개혁 심포지엄 개최. 주민등록번호 변경 소송 중.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_2980.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_2980.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://vimeo.com/32122281",
+						"layout":"feature2",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1p9lAlwm9vccRhXQmAsWhpq_r-c7WtwKhPUCmMx_rL_s/edit?usp=sharing",
+						"layout":"feature",
+						"credit":"",
+						"caption":"박정희 주민등록법 제정 50년! 반인권, 반민주 주민등록제도, 이제는 손보자"
+					}
+				]
+			},
+			{
+				"startDate":"2012,2,23",
+				"headline":"헌재, 통신심의에 합헌 결정",
+				"text":"이제 국회에서 통신심의 폐지해야죠! 통신심의를 폐지하는 시민사회 법안까지 마련했습니다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_0585_1.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_0585_1.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/5.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1vHT83vG4lV4iLuUe0BvdFqTMIb-Wn4B6HR_9fZr3nIM/edit?usp=sharing",
+						"credit":"",
+						"caption":"방송통신심의위원회 인터넷 심의 제도에 대한 헌법재판소의 결정 관련 인권·시민단체 기자회견"
+					}
+				]
+			},
+			{
+				"startDate":"2012,2,24",
+				"headline":"19대 총선 정책제안",
+				"text":"미디어단체들과 함께 19대 총선 공동 정책제안. 각 당 미디어정책 비교 사이트도 제작해서 호응을 받았다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/1_2.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/1_2.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/2_6.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://2012media.kr/",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://2012media.kr/2012media/49",
+						"credit":"",
+						"caption":"",
+						"thumbnail":"http://center.jinbo.net/emeeting2013/timeline/images/2012media_timeline.jpg"
+					},
+					{
+						"media":"https://docs.google.com/document/d/14bR18ia4CQtymX36x0uQ2lQiVUxAiajKRnRbogqWvjw/edit?usp=sharing",
+						"credit":"",
+						"caption":"정보 민주주의를 위한 총선정책공약 제안"
+					}
+				]
+			},
+			{
+				"startDate":"2012,2,29",
+				"headline":"휴대전화 위치추적에 대한 헌법소원",
+				"text":"경찰은 희망버스 참가자들을 실시간 위치추적하며 사찰했다. 휴대전화 실시간 위치추적은 위헌이다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/120229.JPG",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/120229.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/120229.png",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1nIQiRH0tRw5NO0LuLcgVMFMg1IGlQG6GRwNNZzUArqo/edit?usp=sharing",
+						"credit":"",
+						"caption":"희망버스 관련 휴대전화 실시간 위치추적에 대한 헌법소원 청구 기자회견"
+					}
+				]
+			},
+			{
+				"startDate":"2012,3,19",
+				"endDAte":"2012,4,16",
+				"headline":"표현의 자유 연대",
+				"text":"2011년 결성된 표현의 자유 연대는 시민강좌와 정책제안 토크쇼를 개최하였다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/(%EC%B5%9C%EC%A2%85)_0.preview.JPG",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/(%EC%B5%9C%EC%A2%85)_0.preview.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/%20-chrc1335160353.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/%20-chrc1335160228.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1dfJS4HjiBFMjB9oyE-ZYiv8b0jxn2ord4ulhrX3uJQg/edit?usp=sharing",
+						"credit":"",
+						"caption":"표현의 자유를 위한 정책제안 발표 토크쇼"
+					}
+				]
+			},
+			{
+				"startDate":"2012,5,3",
+				"headline":"망중립성 이용자포럼",
+				"text":"이용자포럼은 공개 세미나, 강좌, 토론회 개최 및 방통위에 대한 특별감사청구 등 이용자 관점에서 망중립성 이슈를 제기했다.",
+				"asset":
+				{
+					"media":"http://center.jinbo.net/emeeting2013/timeline/images/DSC_1674.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://center.jinbo.net/emeeting2013/timeline/images/DSC_1674.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://youtu.be/BsoNgpykj7I",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/s_DSC_0618.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://nnforum.kr/",
+						"credit":"",
+						"caption":""
+					}
+				]
+			},
+			{
+				"startDate":"2012,5,8",
+				"headline":"쌍용자동차 희생자추모 및 해고자복직 범국민대책위 홈페이지 제작",
+				"text":"타임라인등의 인포그래픽과 트위터 해쉬테그를 이용한 액션공유등을 컨셉으로 쌍용자동차 추모위 홈페이지 제작",
+				"asset":
+				{
+					"media":"http://victory77.jinbo.net",
+					"credit":"",
+					"caption":"쌍용자동차 추모위 홈페이지",
+					"thumbnail":"http://center.jinbo.net/emeeting2013/timeline/images/victory77_thumb.jpg"
+				}
+			},
+			{
+				"startDate":"2012,6,12",
+				"headline":"현병철 퇴진하라!",
+				"text":"진보넷은 인권단체들과 함께 국가인권위 현병철 위원장 퇴진을 위해 싸워왔다.",
+				"asset":
+				{
+					"media":"http://ablenews.co.kr/news/newsimages/newsimage/c_0_001320120614133731688944.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://ablenews.co.kr/news/newsimages/newsimage/c_0_001320120614133731688944.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://www.newscham.net/data/news/photo/7/56247/w1.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1G-pFKqXdrj22t7EciafC4ey6sZr5E3FRkVxOf28ZunY/edit?usp=sharing",
+						"credit":"",
+						"caption":"<성 명> 청와대는 현병철 인권위원장 연임내정 철회하라!"
+					},
+					{
+						"media":"https://docs.google.com/document/d/12-NOW8bVqyWYYn-nM0zWeY41HWPRFQpsMyJN0iN7ppY/edit?usp=sharing",
+						"credit":"",
+						"caption":"현병철 위원장 사퇴를 촉구하는 인권침해 당사자 기자회견"
+					}
+				]
+			},
+			{
+				"startDate":"2012,7,25",
+				"endDate":"2012,8,8",
+				"headline":"감시사회",
+				"text":"2011년 개최했던 ‘감시사회' 강좌의 내용을 단행본으로 발간했다. ",
+				"asset":
+				{
+					"media":"http://image.aladin.co.kr/product/1766/64/cover/8993463301_1.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://image.aladin.co.kr/product/1766/64/cover/8993463301_1.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://www.aladin.co.kr/shop/book/wletslookViewer.aspx?ISBN=8993463301",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://vimeo.com/24807677",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://bigbrother.jinbo.net/bigbrother/",
+						"credit":"",
+						"caption":""
+					}
+				]
+			},
+			{
+				"startDate":"2012,7,30",
+				"headline":"개인정보 유출",
+				"text":"KT에서도 800만명 개인정보 유출. 주민번호 수집을 금지하고 재발급을 해야한다. 그러나 방통위는 통신사를 본인확인기관으로 지정하는데...",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_0115.JPG",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"double",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/IMG_0115.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1Ze_gypH9Q1I8pMl3-0QX-0NjAvWAg7sQI9AQTCmQ4qA/edit?usp=sharing",
+						"credit":"",
+						"caption":"KT도 개인정보 유출... 주민번호제도 개선만이 답이다"
+					}
+				]
+			},
+			{
+				"startDate":"2012,8,16",
+				"headline":"더많은수다 2012",
+				"text":"문화, 미디어, 정보통신, 표현의 자유 활동가들이 상호 교류와 소통을 위해 모였다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/suda.preview.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/suda.preview.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://acton.jinbo.net/drupal/sites/default/files/images/IMG_3328.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://acton.jinbo.net/drupal/sites/default/files/images/IMG_3316.preview.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1L-KqFXAJRL1ZB2pPXpsWy6KIJE4-dfCt_PyeFGmrx2E/edit?usp=sharing",
+						"credit":"",
+						"caption":"[더많은수다2012] 문화.미디어.정보통신.표현의자유 사회포럼"
+					}
+				]
+			},
+			{
+				"startDate":"2012,8,23",
+				"headline":"인터넷 실명제 위헌",
+				"text":"헌법재판소가 인터넷 실명제에 만장일치로 위헌결정을 내렸다.",
+				"asset":
+				{
+					"media":"http://center.jinbo.net/emeeting2013/timeline/images/res2.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://center.jinbo.net/emeeting2013/timeline/images/res2.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://vimeo.com/52148456",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1oOBBRWyRjOJJMk7_ID1gN90FnGEej6nKquTPTOcW3GY/edit?usp=sharing",
+						"credit":"",
+						"caption":"인터넷 본인확인제 위헌 결정을 환영한다"
+					},
+					{
+						"media":"https://docs.google.com/document/d/1-Gr4TgVsRMEf1YOI1TKkl_EA_OJKp6f6yaW9bWgiMOg/edit?usp=sharing",
+						"credit":"",
+						"caption":"<제1회 한국 인터넷 멍에의 전당 : 인터넷 실명제> 시상식 열려"
+					}
+				]
+			},
+			{
+				"startDate":"2012,8,30",
+				"headline":"망중립성을 말하다",
+				"text":"망중립성이용자포럼은 오픈 세미나를 개최하고 2013년 1월 단행본 <망중립성을 말하다>를 발간했다.",
+				"asset":
+				{
+					"media":"http://center.jinbo.net/emeeting2013/timeline/images/netneutrall_open_seminar_poster.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://center.jinbo.net/emeeting2013/timeline/images/netneutrall_open_seminar_poster.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://www.bloter.net/wp-content/uploads/2013/02/network_neutrality_cover.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://www.bloter.net/archives/137207",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/10mMkq2XKDPsUsB-Axoc83qsyEuPbJBxgFQj-ToBY8As/edit?usp=sharing",
+						"credit":"",
+						"caption":"'망 중립성 오픈 세미나' 개최"
+					}
+				]
+			},
+			{
+				"startDate":"2012,9,13",
+				"headline":"선거법상 실명제 폐지하라",
+				"text":"인터넷 실명제는 위헌 결정을 받았지만, 선거법상 실명제는 여전히 남았다. 대선기간 릴레이 1인시위를 했지만 아직 폐지되지 않고 있다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/%20-DSC01366.png",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/%20-DSC01366.png",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/2_7.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/3_2.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1ah5Ce7OssmncyU_AFdCwaIwHe5xiVYffG7LWV8ZFbzc/edit?usp=sharing",
+						"credit":"",
+						"caption":"공직선거법 인터넷실명제 즉각 폐지 촉구 기자회견"
+					}
+				]
+			},
+			{
+				"startDate":"2012,10,9",
+				"headline":"대선 정책제안",
+				"text":"미디어 단체, 망중립성이용자포럼과 함께 대선 각 캠프에 정보통신정책을 제안했다.",
+				"asset":
+				{
+					"media":"http://center.jinbo.net/emeeting2013/timeline/images/candidate.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://center.jinbo.net/emeeting2013/timeline/images/candidate.jpg",
+						"layout":"feature2",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1wx9F6OyZSsXqBd0V2jl0i2-70n2EqmM7LN-eHTWH7A8/edit?usp=sharing",
+						"credit":"",
+						"caption":"[2012대선 미디어 정책/공약 제안대회] 나는 미디어 생태계 민주화 대통령입니다"
+					},
+					{
+						"media":"https://docs.google.com/document/d/1DzKHtxfbSPWQaS07jKO7ttDYKmYf81T7XMxnxB3yAhE/edit?usp=sharing",
+						"credit":"",
+						"caption":"제18대 대통령선거, 정보민주주의를 위한 IT정책과제를 제안한다."
+					},
+					{
+						"media":"http://nnforum.kr/57",
+						"credit":"",
+						"caption":""
+					}
+				]
+			},
+			{
+				"startDate":"2012,10,23",
+				"headline":"따오기",
+				"text":"현재 개발중인 타임라인 서비스의 이름이 '따오기' 로 정해졌다. 따오기는 2013년 3월에 오픈할 예정이다.",
+				"assest":
+				{
+					"media":"http://act.jinbo.net/timelineJS/internet_realname_system/",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"double",
+				"media": [
+					{
+						"media":"http://center.jinbo.net/emeeting2013/timeline/images/taogi-cmyk-300.jpg",
+						"credit":"",
+						"caption":"따오기 로고 시안"
+					},
+					{
+						"media":"http://act.jinbo.net/timelineJS/internet_realname_system/",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://www.newscham.net/issue/",
+						"credit":"",
+						"caption":""
+					}
+				]
+			},
+			{
+				"startDate":"2012,11,2",
+				"headline":"통신비밀보호법 발의",
+				"text":"정보수사기관 감청의 오남용방지를 위한 통신비밀보호법 개정안을 서영교 의원을 통해 발의했다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/301.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"double",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/301.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1e5zIaaO0monQECO2BtlRr3oXkHwXiZ89aPSjtU2Efvs/edit?usp=sharing",
+						"credit":"",
+						"caption":"정보수사기관 감청의 오남용방지를 위한 통신비밀보호법 개정안 발의 기자회견"
+					}
+				]
+			},
+			{
+				"startDate":"2012,11,14",
+				"headline":"공안기구 개혁",
+				"text":"18대 대선 각 캠프에 경찰, 국가정보원 등 공안기구 개혁과제를 제안했다.",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/_DSC_6211.JPG",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"triple",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/_DSC_6211.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/_DSC_6244.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"https://docs.google.com/document/d/1f17TMRBoGn3EC2o7SCXXf8AW9IfgcyASWlJnCoWnZ9U/edit?usp=sharing",
+						"credit":"",
+						"caption":"인권.시민단체가 대통령후보에게 제안하는 공안기구 개혁과제"
+					}
+				]
+			},
+			{
+				"startDate":"2012,11,22",
+				"headline":"소셜펀치",
+				"text":"소셜펀치 모바일 페이지를 오픈했다. 2012년에 79,421,851원 (후원자수 : 2,425명)을 모금했다.",
+				"asset":
+				{
+					"media":"http://center.jinbo.net/emeeting2013/images/Funch4.JPG",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"double",
+				"media": [
+					{
+						"media":"http://center.jinbo.net/emeeting2013/images/Funch4.JPG",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://www.socialfunch.org/",
+						"credit":"",
+						"caption":"",
+						"thumbnail":"http://center.jinbo.net/emeeting2013/timeline/images/m.socialfunch.jpg"
+					}
+				]
+			},
+			{
+				"startDate":"2012,12,31",
+				"headline":"서버관리",
+				"text":"1년 내내 서버는 쉬지 않고 돌아갔고, 보이지 않는 곳에서 서버를 관리하는 손이 있었다. 서버관리자에게 박수를...",
+				"asset":
+				{
+					"media":"http://act.jinbo.net/drupal/sites/default/files/images/036.jpg",
+					"credit":"",
+					"caption":""
+				},
+				"layout":"double",
+				"media": [
+					{
+						"media":"http://act.jinbo.net/drupal/sites/default/files/images/036.jpg",
+						"credit":"",
+						"caption":""
+					},
+					{
+						"media":"http://blog.jinbo.net/attach/1/280629513.gif",
+						"credit":"",
+						"caption":""
+					}
+				]
+			}
+		],
+		"era":
+		{
+			"startDate":"2012,1,1",
+			"endDate":"2012,12,31",
+			"headline":"진보네트워크 2012",
+			"tag":"진보네트워크"
+		},
+		"extra":
+		{
+			"template":"TouchCarousel",
+			"author":"진보넷",
+			"theme":
+			{
+				"cover":
+				{
+					"background":"#333",
+					"subject":
+					{
+						"font-family":"The120",
+						"color":"#FDE0EC"
+					},
+					"summary":
+					{
+						"font-family":"KoPubDotumLight",
+						"color":"#F1ADC8"
+					}
+				},
+				"post":
+				{
+					"background":"#fff",
+					"subject":
+					{
+						"font-family":"The120",
+						"color":"#000"
+					},
+					"summary":
+					{
+						"font-family":"KoPubDotumLight",
+						"color":"#000"
+					}
+				}
+			}
+		}
+	}
+}

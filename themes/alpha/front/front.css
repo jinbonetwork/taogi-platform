@@ -1,0 +1,352 @@
+/******************************************************************************
+*	Container
+******************************************************************************/
+html body .taogi-model-wrap {
+	position: static;
+
+}
+/*
+html body .taogi-model-wrap:after {
+	content: '';
+	display: block;
+	position: absolute;
+	z-index: 99999999999999;
+	top: 15px;
+	right: 15px;
+	width: 50px;
+	height: 50px;
+	background: transparent url(../images/logo_shadow_white-hd.png) scroll no-repeat center center;
+	background-size: 50px 50px;
+	*background-image: url(../images/logo_shadow_white-sd.png);
+}
+*/
+html body .taogi-model-wrap article {
+	position: relative;
+	z-index: 2;
+	max-width: none;
+}
+/** Component **/
+.cover-background {
+	position: absolute;
+	top:0;
+	left:0;
+	display: block;
+	min-width: 100%;
+	min-height: 100%;
+}
+.cover-background.shadow {
+	z-index: 1;
+	left: -10000px;
+}
+.cover-background.master {
+	z-index: 2;
+}
+
+.align-center-center {
+	position: absolute !important;
+	top: 50% !important;
+	left: 50% !important;
+	-webkit-transform:translate(-50%,-50%) !important;
+	-moz-transform:translate(-50%,-50%) !important;
+	-ms-transform:translate(-50%,-50%) !important;
+	-o-transform:translate(-50%,-50%) !important;
+	transform:translate(-50%,-50%) !important;
+}
+
+
+/******************************************************************************
+*	Background
+******************************************************************************/
+#cover-background {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+/******************************************************************************
+*	Stage -- General
+******************************************************************************/
+section.stage {
+	position: relative;
+	z-index: 2;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+section.stage .wrap {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+section.stage .inner-wrap {
+	max-width: 950px;
+	margin: 0 auto;
+	padding: 30px 80px;
+	padding-bottom: 80px !important;
+}
+section.stage .inner-wrap > div {
+	margin-top: 30px;
+}
+@media all and ( max-width: 950px ) {
+	section.stage .inner-wrap {
+		padding: 20px 50px;
+	}
+	section.stage .inner-wrap > div {
+		margin-top: 20px;
+	}
+}
+@media all and ( max-width: 900px ) {
+	section.stage .inner-wrap {
+		padding: 15px 30px;
+	}
+	section.stage .inner-wrap div {
+		margin-top: 15px;
+	}
+}
+@media all and ( max-width: 850px ) {
+	section.stage .inner-wrap {
+		padding: 15px 20px;
+	}
+}
+
+/******************************************************************************
+*	Stage -- Feature
+******************************************************************************/
+section#feature {
+	background-color: transparent;
+}
+section#feature .wrap {
+	
+}
+@keyframes wave {
+	0%		{ transform: translateY(0); }
+	50%		{ transform: translateY(-20px); }
+	100%	{ transform: translateY(0); }
+}
+@-webkit-keyframes wave {
+	0%		{ -webkit-transform: translateY(0); }
+	50%		{ -webkit-transform: translateY(-20px); }
+	100%	{ -webkit-transform: translateY(0); }
+}
+@moz-keyframes wave {
+	0%		{ -moz-transform: translateY(0); }
+	50%		{ -moz-transform: translateY(-20px); }
+	100%	{ -moz-transform: translateY(0); }
+}
+@-ms-keyframes wave {
+	0%		{ -ms-transform: translateY(0); }
+	50%		{ -ms-transform: translateY(-20px); }
+	100%	{ -ms-transform: translateY(0); }
+}
+@-o-keyframes wave {
+	0%		{ -o-transform: translateY(0); }
+	50%		{ -o-transform: translateY(-20px); }
+	100%	{ -o-transform: translateY(0); }
+}
+section#feature .wrap h1#site-name {
+	animation: wave 5s ease-in-out infinite;
+	-webkit-animation: wave 5s ease-in-out infinite;
+	-moz-animation: wave 5s ease-in-out infinite;
+	-ms-animation: wave 5s ease-in-out infinite;
+	-o-animation: wave 5s ease-in-out infinite;
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 320px;
+	width: 80%;
+	height: 320px;
+	margin: 0;
+	padding: 0;
+	background: transparent url(../images/logo_eyecatch.png) scroll no-repeat center center;
+	background-size: contain;
+	text-indent: -10000px;
+	overflow: hidden;
+}
+section#feature .wrap p#site-description {
+	display: none;
+	/*
+	animation: wave 4s ease-in-out infinite;
+	-webkit-animation: wave 4s ease-in-out infinite;
+	-moz-animation: wave 4s ease-in-out infinite;
+	-ms-animation: wave 4s ease-in-out infinite;
+	-o-animation: wave 4s ease-in-out infinite;
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+	max-width: 200px;
+	width: 40%;
+	height: 200px;
+	margin: 0;
+	padding: 0;
+	background: transparent url(../images/logo_typography.png) scroll no-repeat center center;
+	background-size: contain;
+	text-indent: -100000px;
+	overflow: hidden; */
+}
+section#feature .wrap ul.buttons {
+	list-style: none;
+	position: absolute;
+	bottom: 10%;
+	left: 50%;
+	width: 400px;
+	margin: 0 0 0 -200px;
+	padding: 0;
+}
+section#feature .wrap ul.buttons:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+section#feature .wrap ul.buttons li {
+	float: left;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+section#feature .wrap ul.buttons li + li {
+	float: right;
+	margin-left: 20px;
+}
+section#feature .wrap ul.buttons li a {
+	display: block;
+	width: 190px;
+	/*
+	height: 70px;
+	text-indent: -999999px;
+	*/
+	overflow: hidden;
+	background-color: #FF8888;
+	border: 3px solid #FF8888;
+	border-radius: 3px;
+	transition: border-color,background-color 0.2s linear;
+}
+section#feature .wrap ul.buttons li.join a,
+section#feature .wrap ul.buttons li a:hover {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+section#feature .wrap ul.buttons li a img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 0;
+}
+@media all and ( max-width: 480px ) {
+	section#feature .wrap ul.buttons {
+		width: 300px;
+		margin-left: -150px;
+	}
+	section#feature .wrap ul.buttons li a {
+		width: 145px;
+	}
+	section#feature .wrap ul.buttons li + li {
+		margin-left: 10px;
+	}
+}
+
+/** bella **/
+section#feature .wrap .list {
+	margin-top: 10%;
+	text-align: initial;
+	color: white;
+	line-height: 1;
+	position: absolute;
+	left: 15%;
+}
+
+/******************************************************************************
+*	Stage -- About
+******************************************************************************/
+section#about .wrap {
+	background-color: #EF8080;
+	color: #FFFFFF;
+}
+section#about .feature {
+	position: relative;
+	width: 100%;
+}
+section#about .feature img.sample.desktop {
+	position: relative;
+	z-index: 1;
+	width: 70%;
+	margin: 0 0 0 15%;
+}
+section#about .feature img.sample.tablet {
+	position: absolute;
+	z-index: 2;
+	bottom: 0;
+	left: 0;
+	width: 55%;
+}
+section#about .feature img.sample.mobile {
+	position: absolute;
+	z-index: 3;
+	bottom: 0;
+	right: 0;
+	width: 25%;
+}
+section#about .content a {
+	color: #FFFFFF;
+}
+section#about .content a:hover {
+	text-decoration: underline;
+}
+
+/******************************************************************************
+*	Stage -- Preview
+******************************************************************************/
+section#preview .wrap {
+	background-color: #040506;
+	color: #FFFFFF;
+}
+section#preview .feature {
+	position: relative;
+	width: 650px;
+	height: 552px;
+	margin: 0 auto;
+	/*
+	background: transparent url(../images/decoration_device_background_desktop.png) scroll no-repeat center center;
+	*/
+}
+section#preview .feature img {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+}
+section#preview .feature iframe {
+	position: absolute;
+	z-index: 9999999;
+	top: 30px;
+	left: 30px;
+	display: block;
+	width: 590px;
+	height: 373px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 1px solid #CCCCCC;
+}
+
+/******************************************************************************
+*	Stage -- List
+******************************************************************************/
+section#list {
+	background: #ED676C url(../images/wallpaper_pattern_logo-hd.png) scroll repeat left top;
+	background-size: 150px 150px;
+	*background-image: url(../images/wallpaper_pattern_logo-sd.png);
+}
+section#list div.ui-gallery * {
+	color: #FFFFFF;
+}
+section#list div.ui-gallery ul li.hover * {
+	color: #000000;
+}

@@ -1,0 +1,186 @@
+@charset "utf-8";
+
+#join {
+	margin-top:60px;
+	padding: 30px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 5px #ccc;
+}
+.fancybox-inner #join {
+	margin-top: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+#join .info {
+	margin: 15px 10px 0 10px;
+	padding: 10px 15px;
+	border: 1px solid #666666;
+	border-radius: 5px;
+}
+#join .info ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#join .info ul li {
+	margin: 0;
+	padding: 0 0 4px 0;
+}
+#join_form fieldset {
+	border: 0;
+}
+#join_form fieldset.fields {
+	margin: 0;
+	padding: 5px 10px 5px 180px;
+	position: relative;
+	z-index: 0;
+	overflow: show;
+}
+#join_form fieldset.fields.focus {
+	z-index: 1;
+}
+#join_form fieldset.fields label {
+	position: absolute;
+	z-index: 2;
+	left: 10px;
+	top: 10px;
+}
+#join_form fieldset.fields input.text {
+	position: relative;
+	z-index: 0;
+	box-sizing: border-box;
+	padding: 0.3em;
+	border: 1px solid #666666;
+	border-radius: 3px;
+}
+#join_form fieldset.fields input.text.focus {
+	border-color: #f00;
+}
+#join_form fieldset.fields input.text.small {
+	width: 120px;
+}
+#join_form fieldset.fields input.button {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: bottom;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 0 5px;
+	padding: 0 0.8em;
+	border-radius: 3px;
+	background-color: #ff6600;
+	color: #FFFFFF !important;
+}
+#join_form fieldset.fields input.button:hover {
+	background-color: #ff3300;
+}
+#join_form fieldset.fields p.explain {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+#join_form fieldset.fields div.check_dup_taoginame_box {
+	margin: 10px 0 10px 0;
+	padding: 10px 2em;
+	border-radius: 5px;
+	display: none;
+	color: #fff;
+	background-color: #ff6600;
+	position: relative;
+}
+#join_form fieldset.fields div.check_dup_taoginame_box:before {
+	position: absolute;
+	top: -8px;
+	left: 235px;;
+	width: 0;
+	height: 0;
+	content: ' ';
+	border-style: solid;
+	border-width: 0 4px 8px 4px;
+	border-color: transparent transparent #FF6600 transparent;
+}
+#join_form fieldset.fields div.check_dup_taoginame_box .close {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	width: 20px;
+	height: 20px;
+	font-size: 0.85em;
+	border-radius: 10px;
+	background: #fff;
+	line-height: 130%;
+	color: #ff6600;
+	cursor: pointer;
+	text-align: center;
+}
+#join .buttons {
+	text-align: center;
+}
+#join .buttons input.button {
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: bottom;
+	height: 30px;
+	line-height: 30px;
+	margin: 0;
+	padding: 0 1em;
+	border-radius: 3px;
+	background-color: teal;
+	color: #FFFFFF !important;
+}
+#join .buttons input.button:hover {
+	background-color: #004040;
+}
+#join_form fieldset.fields span.focus {
+	position: absolute;
+	z-index: 303;
+	top: 44px;
+	left: 180px;
+	background: #F00;
+	border-radius: 3px;
+	color: #fff;
+	padding: 3px 5px;
+	margin: 0;
+	display: inline-block;
+}
+#join_form fieldset.fields.taoginame span.focus {
+	left: 362px;
+}
+#join_form fieldset.fields span.focus:before {
+	position: absolute;
+	top: -8px;
+	left: 10px;;
+	width: 0;
+	height: 0;
+	content: ' ';
+	border-style: solid;
+	border-width: 0 4px 8px 4px;
+	border-color: transparent transparent #FF0000 transparent;
+}
+
+.animated {
+	-webkit-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+#join .join_success_box {
+	padding: 30px 10px;
+}
+
+@-webkit-keyframes shake {
+	0%, 100% {-webkit-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
+}
+@keyframes shake {
+	0%, 100% {transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {transform: translateX(10px);}
+} 
+.shake {
+	-webkit-animation-name: shake;
+	animation-name: shake;
+}

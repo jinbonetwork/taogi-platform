@@ -1,0 +1,160 @@
+/** Interface **/
+a.ui-controls-switch {
+	display: block;
+}
+a.ui-controls-switch span {
+	display: none;
+}
+a.ui-controls-switch:after {
+	font-family: 'fontAwesome';
+	content: '\f013';
+	display: block;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	line-height: 16px;
+}
+
+/** Console **/
+.ui-controls {
+	margin: 0;
+	padding: 0;	
+}
+.ui-controls h3 {
+	/*
+	display: block;
+	*/
+	display: none;
+	height: 20px;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+}
+.ui-controls ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.ui-controls ul li {
+	display: block;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+.ui-controls ul li a {
+	display: block;
+	width: auto;
+	height: 20px;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	color: #666666;
+}
+.ui-controls ul li a:hover {
+	color: #000000;
+}
+.ui-controls ul li.current a {
+	color: #FF0000;	
+}
+.ui-controls ul li a:before {
+	font-family: 'FontAwesome';
+	content: '';
+	/*
+	display: inline-block;
+	*/
+	display: none;
+	vertical-align: top;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+}
+.ui-controls ul li a:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.ui-controls ul li a span {
+	/*
+	display: inline-block;
+	*/
+	display: none;
+	vertical-align: top;
+	width: auto;
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+}
+/** console type **/
+.ui-controls.title h3 {
+	display: block;
+}
+.ui-controls.icon ul li a:before {
+	display: inline-block;
+}
+.ui-controls.label ul li a span {
+	display: inline-block;
+}
+.ui-controls.list ul,
+.ui-controls.list ul li {
+	display: block;
+}
+.ui-controls.group ul {
+	display: block;
+}
+.ui-controls.group li {
+	display: inline-block;
+}
+.ui-controls.inline ul,
+.ui-controls.inline ul li {
+	display: inline-block;
+}
+/** console icons **/
+.ui-controls ul li.view a:before {
+	content: '\f06e';
+}
+.ui-controls ul li.edit a:before {
+	content: '\f044';
+}
+.ui-controls ul li.history a:before {
+	content: '\f017';
+}
+.ui-controls ul li.authors a:before {
+	content: '\f0c0';
+}
+.ui-controls ul li.leave a:before {
+	content: '\f05e';
+}
+.ui-controls ul li.public a:before {
+	content: '\f0ac';
+}
+.ui-controls ul li.open a:before {
+	content: '\f09c';
+}
+.ui-controls ul li.private a:before {
+	content: '\f023';
+}
+.ui-controls ul li.delete a:before {
+	content: '\f1f8';
+}
+.ui-controls ul li.forkable a:before {
+	content: '\f079';
+}
+.ui-controls ul li.notForkable a:before {
+	content: '\f132';
+}
+.ui-controls ul li.fork a:before {
+	content: '\f126';
+}
+.ui-controls ul li.backup a:before {
+	content: '\f019';
+}
+
+.ui-controls ul li.dashboard a:before {
+	content: '\f007';
+}
+

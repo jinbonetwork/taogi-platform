@@ -1,0 +1,192 @@
+/** Gallery **/
+div.ui-gallery {
+}
+div.ui-gallery > ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+div.ui-gallery > ul:after {
+	content: '';
+	display: block;
+	clear: both;
+	text-align: center;
+	word-spacing: 0;
+}
+div.ui-gallery > ul > li {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	word-spacing: normal;
+	cursor: pointer;
+}
+div.ui-gallery > ul > li > dl {
+	margin: 0;
+	padding: 1em;
+}
+div.ui-gallery > ul > li > dl > dt,
+div.ui-gallery > ul > li > dl > dd {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+div.ui-gallery > ul > li > dl > dt {
+	font-size: 14px;
+}
+div.ui-gallery > ul > li > dl > dt + dt {
+	margin: 0.3em 0;
+}
+div.ui-gallery > ul > li > dl > dd {
+	font-size: 12px;
+}
+div.ui-gallery > ul > li > dl > dd > div {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+/** Controls **/
+div.ui-gallery .ui-checkbox-container,
+div.ui-gallery .ui-controls-switch,
+div.ui-gallery .ui-controls-switch:after {
+	position: absolute !important;
+	top: 0px !important;
+	display: block !important;
+	width: 30px !important;
+	height: 30px !important;
+	text-align: center !important;
+	line-height: 30px !important;
+}
+div.ui-gallery .ui-checkbox-container {
+	left: 0px !important;
+}
+div.ui-gallery .ui-controls-switch {
+	right: 0px !important;
+	box-shadow: none !important;
+}
+div.ui-gallery div.ui-controls {
+	display: none;
+	position: absolute;
+	top: 30px;
+	left: 0;
+	width: 100%;
+	height: auto;
+	margin: 20px 0 0 0;
+	background-color: #FFFFFF;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+	border: 3px solid #FFFFFF;
+	border-radius: 3px;
+}
+div.ui-gallery div.ui-controls:after {
+	content: '';
+	display: block;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	top: -9px;
+	right: 22px;
+	border-style: solid;
+	border-color: #FFFFFF transparent;
+	border-width: 0px 6px 6px 6px;
+}
+div.ui-gallery div.ui-controls.active {
+	display: block;
+}
+div.ui-checkbox-switch-container {
+	display: block;
+	height: 20px;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+div.ui-checkbox-switch-container input,
+div.ui-checkbox-switch-container label {
+	display: inline-block;
+	vertical-align: middle;
+}
+/** Hover **/
+div.ui-gallery ul li.hover {
+	color: #000000;
+}
+div.ui-gallery ul li.hover dl {
+	border-radius: 3px;
+	background-color: rgba(200,200,200,0.3);
+}
+div.ui-gallery ul li.hover .item_title a {
+}
+div.ui-gallery ul li.hover .item_title a:hover {
+	text-decoration: underline;
+}
+/** Values **/
+div.ui-gallery ul li .value {
+}
+div.ui-gallery ul li .detail {
+	font-size: 12px;
+}
+div.ui-gallery ul li .sub {
+	color: #666666;
+	font-size: 12px;
+}
+/** Fields **/
+div.ui-gallery ul li dt.item_image {
+	position: relative;
+	display: block;
+}
+div.ui-gallery ul li dt.item_image a {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 3px;
+	box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+	overflow: hidden;
+}
+div.ui-gallery ul li dt.item_image img {
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: auto;
+	background-color: #FFFFFF;
+}
+div.ui-gallery ul li dd.item_description div {
+	max-height: 30px;
+	overflow: hidden;
+	line-height: 15px;
+	font-size: 12px;
+}
+/** Columns **/
+div.ui-gallery > ul > li {
+	width: 33.3%;
+}
+@media all and ( max-width: 1024px ){
+	div.ui-gallery > ul > li {
+		width: 50%;
+	}
+}
+@media all and ( max-width: 640px ){
+	div.ui-gallery > ul > li {
+		width: 100%;
+	}
+}
+@media all and ( max-width: 480px ){
+	div.ui-gallery > ul > li {
+		width: 100% !important;
+	}
+}
+div.ui-gallery-narrow > ul > li {
+	width: 25%;
+}
+@media all and ( max-width: 1024px ){
+	div.ui-gallery-narrow > ul > li {
+		width: 33.3%;
+	}
+}
+@media all and ( max-width: 640px ){
+	div.ui-gallery-narrow > ul > li {
+		width: 50%;
+	}
+}
+
