@@ -1,11 +1,7 @@
 <?php
 class entry_index extends Interface_Entry {
 	public function index() {
-		// Resources
-		$this->css[] = 'ui-init.css';
-		$this->script[] = 'ui-init.js';
-		$this->css[] = 'ui-controls.css';
-		$this->script[] = 'ui-controls.js';
+		require_once JFE_PATH.'/include/userEntryControls.php';
 
 		global $uri;
 		$context = Model_Context::instance();
@@ -30,6 +26,11 @@ class entry_index extends Interface_Entry {
 		}
 
 		if($this->mode != 'revision') {
+			if(!$this->entry['is_public']) {
+				if($_SESSION['acl']['taogi.'.$this->entry['eid']] < BITWISE_EDITOR) {
+					Error("접근 권한이 없습니다.",403);
+				}
+			}
 			if(!($json_path = $this->getJsonPath())) {
 				$revision = Entry::getEntryData($this->entry['eid'],$this->entry['vid']); 
 				if($revision) {

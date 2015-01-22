@@ -9,9 +9,6 @@ jQuery(document).ready(function(e){
 	$body = jQuery('body');
 	$container = jQuery('.taogi-model-wrap article');
 
-	jQuery('#taogi-gnb .ui-controls.buildControls h3').on('click',function(e) {
-		jQuery('#taogi-gnb .ui-controls.buildControls').toggleClass('active');
-	});
 
 });
 

@@ -1,40 +1,33 @@
 <?php
 class user_index extends Controller {
 	public function index() {
-
 		// Objects
-		$this->user = User::getUser($this->params['userid'],1);
-		$this->entryList = Entry_List::getOwnList($this->params['userid']);
+		$this->user = User::getUserProfile($this->params['userid']);
+		// force redirection to archives while alpha period
+		header('location:'.$this->user['archives_link']);
+		$this->entries = Entry::getEntryProfiles(Entry_List::getOwnList($this->params['userid']));
+
+		// Page
+		$this->title = $this->user['DISPLAY_NAME'];
+		$this->description = $this->user['summary'];
 
 		// Views
-		$this->userProfile = new Markup_Profile($this->user);
-		$this->entryGallery = new Markup_Gallery('entries','entry','eid');
-		unset($this->entryGallery->headers['item_controls']);
-		unset($this->entryGallery->options['checkbox_field']);
-		unset($this->entryGallery->options['checkbox_append_field']);
-		unset($this->entryGallery->options['controls_field']);
-		unset($this->entryGallery->options['controls_switch_field']);
+		require_once JFE_PATH.'/include/userVcard.php';
+		$this->css[] = 'ui-vcard.css';
+		$this->script[] = 'ui-vcard.js';
 
-		// Resources
-		$this->css[] = 'ui-init.css';
-		$this->script[] = 'ui-init.js';
-		$this->css[] = 'ui-controls.css';
-		$this->script[] = 'ui-controls.js';
-
-		$this->css[] = 'ui-profile.css';
-		$this->script[] = 'ui-profile.js';
+		require_once JFE_PATH.'/include/userTabs.php';
 		$this->css[] = 'ui-tabs.css';
 		$this->script[] = 'ui-tabs.js';
 
+		require_once JFE_PATH.'/include/userEntryGallery.php';
 		$this->css[] = 'ui-gallery.css';
 		$this->script[] = 'ui-gallery.js';
 
+		// Resources - app
 		$this->css[] = 'app-user.css';
 		$this->script[] = 'app-user.js';
-
-
 	}
-
 
 }
 ?>

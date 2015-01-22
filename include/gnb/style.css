@@ -1,96 +1,140 @@
 @charset "utf-8";
-/****************************************************************************************************
-	LAYOUT start
-****************************************************************************************************/
-/* DOCUMENT */
-html,
-html body {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	margin: 0;
-	padding: 0;
-}
-/* PLATFORM THEME */
-#taogi-net-site-main-container {
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-.taogi-model-wrap {
-	width: 100%;
-	height: 100%;
-	overflow-x: hidden;
-	overflow-y: scroll;
-}
-/* LIBRARY THEME */
-body.view .taogi-model-wrap {
-	overflow: hidden;
-	max-width: auto;
-}
-/* MODEL -- timelineJS */
-body.timelineJS .taogi-model-wrap {
-	padding: 1em;
-}
-
-
-
 
 /****************************************************************************************************
-	OVERRIDE for PLATFORM 
+	COMPONENTS 
 ****************************************************************************************************/
-#taogi-gnb-wrap {
-	overflow-y: auto;
+/** Sharing **/
+#taogi-gnb .share {
 }
+/** Controls **/
 #taogi-gnb .ui-controls {
 	margin: 0 20px;
+	padding: 0;
 }
 #taogi-gnb .ui-controls h3 {
 	height: 20px;
 	line-height: 20px;
 }
 #taogi-gnb .ui-controls ul {
-	margin: 0 0 10px 0;
-	padding: 0 0 10px 0;
-	border-bottom: 1px solid #333333;
+	margin: 0;
+	padding: 0;
 }
-#taogi-gnb .ui-controls.buildControls h3 {
+#taogi-gnb .ui-controls.entrySidebar h3 {
 	position: relative;
+	/*
 	display: block;
+	*/
+	display: none;
 	cursor: pointer;
 }
-#taogi-gnb .ui-controls.buildControls h3:hover {
+#taogi-gnb .ui-controls.entrySidebar h3:hover {
 	color: #FFFFFF;
 }
-#taogi-gnb .ui-controls.buildControls h3:after {
-	position: absolute;
-	top: 0;
-	right: 0;
-	display: block;
+#taogi-gnb .ui-controls.entrySidebar h3:before {
+	display: inline-block;
+	vertical-align: top;
 	width: 20px;
 	height: 20px;
 	text-align: center;
 	line-height: 20px;
 	font-family: 'FontAwesome';
-	content: '\F107';
+	font-weight: normal;
+	font-size: 16px;
+	content: '\F013';
 }
-#taogi-gnb .ui-controls.buildControls.active h3:after {
+#taogi-gnb .ui-controls.entrySidebar.active h3:before {
+	/*
 	content: '\F106';
+	*/
 }
-#taogi-gnb .ui-controls.buildControls ul {
+#taogi-gnb .ui-controls.entrySidebar ul {
+	/*
 	display: none;
-}
-#taogi-gnb .ui-controls.buildControls.active ul {
+	*/
 	display: block;
 }
-#taogi-gnb .ui-controls#user-console ul {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	border-bottom: 0 none;
+#taogi-gnb .ui-controls.entrySidebar.active ul {
+	/*
+	display: block;
+	*/
+}
+#taogi-gnb .ui-controls + .ui-controls:before,
+#taogi-gnb .ui-controls > ul + ul:before {
+	content: '';
+	display: block;
+	margin: 5px 0;
+	padding: 0;
+	border-top: 1px solid rgba(255,255,255,0.1);
+}
+#taogi-gnb .ui-controls ul li:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+#taogi-gnb .ui-controls ul li a {
+	float: left;
+	display: block;
+	width: auto;
+	height: 20px;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	color: #666666;
+}
+#taogi-gnb .ui-controls ul li a:hover {
+	color: #FFFFFF;
+}
+#taogi-gnb .ui-controls ul li.current,
+#taogi-gnb .ui-controls ul li.current a,
+#taogi-gnb .ui-controls ul li.current a span {
+	color: #FF0000;
+}
+#taogi-gnb .ui-controls#user-console ul li a:before {
+	font-family: 'FontAwesome';
+	content: '';
+	display: inline-block;
+	vertical-align: top;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+}
+#taogi-gnb .ui-controls#user-console ul li.home a:before {
+	content: '\f015';
+}
+#taogi-gnb .ui-controls#user-console ul li.admin a:before {
+	content: '\f0e4';
+}
+#taogi-gnb .ui-controls#user-console ul li.profile a:before {
+	content: '\f007';
+}
+#taogi-gnb .ui-controls#user-console ul li.write a:before {
+	content: '\f15b';
+}
+#taogi-gnb .ui-controls#user-console ul li.register a:before {
+	content: '\f0ea';
+}
+#taogi-gnb .ui-controls#user-console ul li.login a:before {
+	content: '\f090';
+}
+#taogi-gnb .ui-controls#user-console ul li.logout a:before {
+	content: '\f08b';
 }
 #taogi-gnb .tooltip {
-	box-shadow: 0 0 3px rgba(255,255,255,0.25);
+	margin-top: -3px;
+	padding: 5px;
 }
-
+#taogi-gnb .tooltip-inner {
+	padding: 3px 8px;
+	background-color: #FFFFFF;
+	color: #000000;
+}
+#taogi-gnb .tooltip-arrow {
+	border-top-color: #FFFFFF;
+}
 
 

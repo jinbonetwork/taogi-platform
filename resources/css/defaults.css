@@ -99,6 +99,18 @@ pre, code, kbd, tt {
 	font-family: 'Monaco', 'Lucida Grande', 'Lucida Console', 'NanumGothicCoding', monospace;
 }
 
+/****************************************************************************************************
+	LAYOUT
+****************************************************************************************************/
+/* DOCUMENT */
+html,
+html body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
 /* FRAMESET */
 body.taoginet,
 body.taoginet > .frame > nav > .wrap {
@@ -116,8 +128,54 @@ body.taoginet > .frame > article {
 }
 body.taoginet > .frame > footer {
 }
+/* PLATFORM THEME */
+#taogi-net-site-main-container {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.taogi-model-wrap {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+/* LIBRARY */
+body.view .taogi-model-wrap {
+	overflow: hidden;
+	max-width: auto;
+}
+/* PLATFORM */
+body.platform #taogi-timeline-title > span {
+	display: none;
+}
+body.platform.app-admin .taogi-model-wrap article,
+body.platform.app-entry .taogi-model-wrap article,
+body.platform.app-user .taogi-model-wrap article {
+	margin: 30px auto;
+	padding: 30px;
+	border-radius: 3px;
+	box-shadow: 0 0 3px rgba(0,0,0,0.5);
+	background-color: #FFFFFF;
+}
+/* MODEL -- timelineJS */
+body.timelineJS .taogi-model-wrap {
+	padding: 1em;
+}
+/* GNB */
+#taogi-gnb-wrap {
+	overflow-y: auto;
+}
+
 
 /* FOOTER */
+
+/* COMPONENTS */
+img.portrait {
+	box-sizing: border-box;
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+}
 
 /* OVERRIDES */
 .fancybox-wrap {
@@ -129,3 +187,29 @@ body.taoginet > .frame > footer {
 	white-space: normal !important;
 	font-size: 12px !important;
 }
+
+
+/******************************************************************************
+	Document -- system page enclosure
+******************************************************************************/
+.document {
+	width: 600px;
+	margin: 0 0 0 50%;
+	transform: translateX(-50%);	
+	margin-top:60px;
+	padding: 30px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 5px #ccc;
+}
+.fancybox-inner {
+	background-color: #FFFFFF;
+}
+.fancybox-inner .document {
+	margin-top: 0;
+	background-color: transparent;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+

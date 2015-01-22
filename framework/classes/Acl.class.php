@@ -32,16 +32,21 @@ class Acl extends Objects {
 		} */
 	}
 
-	public function authorize($uid) {
+	public static function authorize($uid) {
 		$dbm = DBM::instance();
 
-		$que = "SELECT p.uid,p.level,e.eid FROM {privileges} AS p LEFT JOIN {entry} AS e ON p.eid = p.eid WHERE p.uid = ".$uid;
+		$que = "SELECT p.uid,p.level,e.eid FROM {privileges} AS p LEFT JOIN {entry} AS e ON p.eid = e.eid WHERE p.uid = ".$uid;
 		while($row = $dbm->getFetchArray($que)) {
-			$_SESSION['acl']['taogi.'.$row['eid']] = BITWISE_OWNER;
+			$_SESSION['acl']['taogi.'.$row['eid']] = $row['level'];
 		}
 	}
 
+	public static function setEntryAcl($eid,$level) {
+		$_SESSION['acl']['taogi.'.$eid] = $level;
+	}
+
 	function check($taogi_id) {
+		if($_SESSION['user']['uid'] && !$_SESSION['acl']) $this->authorize($_SESSION['user']['uid']);
 		if($taogi_id) {
 			$bitwise = $this->getCurrentPrivilege($taogi_id);
 			if($_SESSION['user']['degree'] != BITWISE_ADMINISTRATOR && $bitwise < $this->role) {
@@ -93,20 +98,20 @@ class Acl extends Objects {
 		return BITWISE_ANONYMOUS;
 	}
 
-	function getIdentity($domain) {
+	public static function getIdentity($domain) {
 		if( empty($_SESSION['identity'][$domain]) ) {
 			return null;
 		}
 		return $_SESSION['identity'][$domain];
 	}
 
-	function clearAcl() {
+	public static function clearAcl() {
 		if( isset( $_SESSION['acl'] ) ) {
 			unset($_SESSION['acl']);
 		}
 	}
 
-	function isValid($taogi_id) {
+	public static function isValid($taogi_id) {
 		if(!isset($_SESSION['acl']) ||
 			!is_array($_SESSION['acl']) ||
 			!isset($_SESSION['acl']["taogi.$taogi_id"])) {
@@ -116,12 +121,12 @@ class Acl extends Objects {
 		return true;
 	}
 
-	function imMaster() {
+	public static function imMaster() {
 		if($_SESSION['user']['degree'] == 10) return 1;
 		else return 0;
 	}
 
-	function checkAcl($eid,$role,$eq='ge') {
+	public static function checkAcl($eid,$role,$eq='ge') {
 		$permission = false;
 		switch($eq) {
 			case 'ge':

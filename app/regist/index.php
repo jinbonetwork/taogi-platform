@@ -3,8 +3,8 @@ importLibrary('auth');
 importLibrary('mail');
 $IV = array(
 	'POST' => array(
-		'email_id' => array('string', 'default' => null),
-		'email_id_confirm' => array('string', 'default' => null),
+		'email_id' => array('email', 'default' => null),
+		'email_id_confirm' => array('email', 'default' => null),
 		'name' => array('string', 'default' => null),
 		'taoginame' => array('string', 'default' => null),
 		'password' => array('string', 'default' => null),
@@ -19,6 +19,9 @@ class regist_index extends Controller {
 		$this->facebook = $facebook;
 
 		if($this->params['output'] != "xml") {
+			$this->css[] = "ui-form.css";
+			$this->script[] = 'ui-form.js';
+
 			$this->css[] = "app-regist.css";
 			$this->script[] = "app-regist.js";
 		}
@@ -30,6 +33,7 @@ class regist_index extends Controller {
 				Error("이미 로그인하셨습니다.");
 			}
 		}
+		$this->password_necessary = "necessary";
 		$context = Model_Context::instance();
 		if( !empty($this->params['email_id']) &&
 			!empty($this->params['email_id_confirm']) &&

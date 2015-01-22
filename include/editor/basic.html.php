@@ -42,11 +42,24 @@ if(!$toolbar) {
 												</div>
 												<figure class="preview"></figure>
 												<div class="wrap-inner">
+													<!--
 													<div class="field source">
 														<label for="date___SLIDE_ID___media___MEDIA_ID___media">미디어 소스</label>
-														<!--div class="text file" contenteditable="true" placeholder="소스"></div-->
 														<textarea class="text file" id="date___SLIDE_ID___media___MEDIA_ID___media" name="date[__SLIDE_ID__][media][__MEDIA_ID__][media]" placeholder="미디어 소스"></textarea>
 														<a class="upload" href=""><span>업로드</span></a>
+													</div>
+													-->
+													<!--
+													-->
+													<div class="field source mode-textarea mode-upload"><!-- future default: mode-input -->
+														<label for="date___SLIDE_ID___media___MEDIA_ID___media">미디어 소스</label>
+														<input type="text" class="text file" id="date___SLIDE_ID___media___MEDIA_ID___media_text" name="date[__SLIDE_ID__][media][__MEDIA_ID__][media]" placeholder="미디어 소스">
+														<textarea class="text file" id="date___SLIDE_ID___media___MEDIA_ID___media" name="date[__SLIDE_ID__][media][__MEDIA_ID__][media]" placeholder="미디어 소스"></textarea>
+														<a class="upload" href=""><span>업로드</span></a>
+													</div>
+													<div class="field sourcetype">
+														<label><input type="radio" class="radio use-input" checked="checked" id="date___SLIDE_ID___media___MEDIA_ID___mediamode_input" name="date[__SLIDE_ID__][media][__MEDIA_ID__][mediamode]" value="input"><span>파일/웹 주소</span></label>
+														<label><input type="radio" class="radio use-textarea" id="date___SLIDE_ID___media___MEDIA_ID___mediamode_textarea" name="date[__SLIDE_ID__][media][__MEDIA_ID__][mediamode]" value="textarea"><span>문장/소스 코드</span></label>
 													</div>
 													<div class="field thumbnail">
 														<label for="date___SLIDE_ID___media___MEDIA_ID___thumbnail">미디어 썸네일</label>

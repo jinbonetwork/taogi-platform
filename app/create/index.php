@@ -1,5 +1,5 @@
 <?php
-$Acl = "anonymous";
+$Acl = "user";
 class create_index extends Controller {
 	public function index() {
 		$this->title = "따오기 타임라인 만들기";

@@ -23,15 +23,18 @@ function pop_regist() {
 	}, 200);
 }
 
-function _pop_regist() {
-	var _url = jQuery('.register a.fancybox.ajax').attr('href').split(/\?/);
+function _pop_regist(_url) {
+	//var _url = jQuery('.register a.fancybox.ajax').attr('href').split(/\?/);
+	_url = _url || jQuery('.register a.fancybox.ajax').attr('href').split(/\?/);
 	var url = _url[0];
 	var params = '';
 	if(_url.length > 1)
 		params = _url[1];
 	params += (params ? '&' : '?')+'requestURI='+window.location.pathname;
-	jfe_load_css(base_uri+'resources/css/app-regist.css');
-	jfe_popup(url,params,base_uri+'themes/alpha/regist/style.css',base_uri+'resources/script/app-regist.js',function() { init_keyEvent(); });
+	jfe_load_css(base_uri+'resources/css/ui-form.css');
+	jQuery.getScript(base_uri+'resources/script/ui-form.js',function() {
+		jfe_popup(url,params,base_uri+'resources/css/app-regist.css',base_uri+'resources/script/app-regist.js',function() { jQuery('#join_form').profileForm({ submit: function() { return check_regist('#join_form'); } }); });
+	});
 }
 
 jQuery(document).ready(function(e){

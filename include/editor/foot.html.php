@@ -11,6 +11,7 @@
 								<label for="media_source">미디어 URL 또는 소스</label>
 							</div>
 							<div class="media-inline-form-inner">
+								<input type="hidden" id="mediamultisource" name="mediamultisource" value="">
 								<textarea class="file" id="mediasource" name="mediasource"></textarea><a class="upload" href=""><span>업로드</span></a>
 							</div>
 							<div class="media-inline-form-footer">
@@ -23,13 +24,14 @@
 				</div>
 				<div class="media-inline-form-overlay"></div>
 			</div>
-			<div id="taogi-editor-unlock">
+			<div id="taogi-editor-error">
 				<div class="wrap">
-					<h3 class="taogi-name"></h3>
-					<div class="message">타임라인의 편집을 마치시겠습니까?</div>
+					<div class="inner">
+						<h3 class="error-title"></h3>
+						<div class="error-message"></div>
+					</div>
 					<div class="button">
-						<button class="unlock">마치고 나가기</button>
-						<button class="cancel">편집화면에 머물기</button>
+						<a href="javascript://" class="icon close"><span>닫기</span></a>
 					</div>
 				</div>
 			</div>

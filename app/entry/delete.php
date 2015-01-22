@@ -15,8 +15,13 @@ class entry_delete extends Controller {
 		if(!$this->params['taogiid']) Error("수정할 타임라인을 지정하세요");
 		$this->eid = $this->params['taogiid'];
 
+		$this->user = User::getUserProfile($this->params['userid']);
+
 		$this->entry = Entry::getEntryInfoByID($this->eid,0);
-		if($this->entry['locked'] && $this->entry['locked'] != $_COOKIE[Session::getName()]) Error("다른 분이 편집중입니다. 잠시후 다시 시도해주세요.",423);
+		if($this->entry['locked'] && $this->entry['locked'] != $_COOKIE[Session::getName()]) {
+			if( $this->entry['modified'] > ( time() - 3600 ) )
+				Error("다른 분이 편집중입니다. 잠시후 다시 시도해주세요.",423);
+		}
 		if($this->entry['owner'] != $uid) Error("운영자만 삭제할 수 있습니다.");
 
 		Entry_DBM::deleteEntry($this->eid);

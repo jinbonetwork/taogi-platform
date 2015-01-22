@@ -4,7 +4,7 @@ class Auth extends Objects {
 		return self::_instance(__CLASS__);
 	}
 
-	function authenticate($email_id,$password,$authtoken) {
+	public static function authenticate($email_id,$password,$authtoken) {
 		$context = Model_Context::instance();
 		$userdb = $context->getProperty('userdatabase.*');
 		Acl::clearAcl();
@@ -65,7 +65,7 @@ class Auth extends Objects {
 		return 0;
 	}
 
-	function auth_user($row) {
+	public static function auth_user($row) {
 		$_SESSION['identity']['taogi'] = $row['uid'];
 		$_SESSION['user'] = array(
 			'uid' => $row['uid'],
@@ -80,18 +80,16 @@ class Auth extends Objects {
 			'sns_id' => $row['sns_id'],
 			'sns_site' => $row['sns_site']
 		);
-		if($row['degree'] >= BITWISE_EDITOR) {
-			Acl::authorize($row['uid']);
-		}
+		Acl::authorize($row['uid']);
 	}
 
-	function openid_user($identity,$id) {
+	public static function openid_user($identity,$id) {
 		$_SESSION['identity'][$identity] = $id;
 		$_SESSION['identity']['taogi'] = FB_ID;
 		$_SESSION['user']['uid'] = FB_ID;
 	}
 
-	function getPassword($email_id,$password) {
+	public static function getPassword($email_id,$password) {
 		$salt_len=7;
 		$algo=PW_ALGO;
 
@@ -106,7 +104,7 @@ class Auth extends Objects {
 		return $salt.$hashed;
 	}
 
-	function makeAuthtoken($password) {
+	public static function makeAuthtoken($password) {
 		if($password) return sha1('JFE'.$password);
 		else return sha1(strtolower(substr(base64_encode(rand(0x10000000, 0x70000000)), 3, 8)));
 	}

@@ -6,11 +6,43 @@ class User_DBM extends Objects {
 
 	public static function updateUser($uid,$args) {
 		$dbm = DBM::instance();
-		$que = "UPDATE {user} SET taoginame = ? WHERE uid = ?";
-		$dbm->execute($que,array("sd",
+		$que = "UPDATE {user} SET `taoginame` = ?, `display_name` = ?, `portrait` = ?, `summary` = ? WHERE uid = ?";
+		$dbm->execute($que,array("ssssd",
 			$args['taoginame'],
+			$args['display_name'],
+			$args['portrait'],
+			$args['summary'],
 			$uid
 		));
+		return true;
+	}
+
+	public static function updateUserName($uid,$name) {
+		$context = Model_Context::instance();
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+		$dbm->bind($userdb,1);
+
+		$que = "UPDATE {user} SET name = ? WHERE uid = ?";
+		$dbm->execute($que,array("sd",$name,$uid));
+		$dbm->bind($db,1);
+
+		return true;
+	}
+
+	public static function updatePassword($uid,$email_id,$password) {
+		$context = Model_Context::instance();
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+		$dbm->bind($userdb,1);
+
+		$que = "UPDATE {user} SET password = ? WHERE uid = ?";
+		$dbm->execute($que,array("sd",Auth::getPassword($email_id,$password),$uid));
+		$dbm->bind($db,1);
+
+		return true;
 	}
 
 	public static function getPrivilege($uid,$eid) {
@@ -88,5 +120,74 @@ class User_DBM extends Objects {
 			$que = "DELETE FROM {privileges} WHERE uid = ?";
 			$dbm->execute($que,array("d",$uid));
 		}
+	}
+
+	public static function makeChangeEmailToken($uid,$email_id,$password) {
+		$context = Model_Context::instance();
+
+		$token = Auth::makeAuthtoken($email_id);
+		$token_value = array(
+			'email_id' => $email_id,
+			'password' => $password,
+			'token' => $token
+		);
+
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+		$dbm->bind($userdb,1);
+
+		$que = "SELECT * FROM {userSettings} WHERE uid = ".$uid." AND name = 'changeEmailToken'";
+		$row = $dbm->getFetchArray($que);
+		if($row) {
+			$que = "UPDATE {userSettings} SET value = ? WHERE uid = ? AND name = ?";
+			$dbm->execute($que,array("sds",serialize($token_value),$uid,'changeEmailToken'));
+		} else {
+			$que = "INSERT INTO {userSettings} (uid,name,value) VALUES (?,?,?)";
+			$dbm->execute($que,array("dss",$uid,'changeEmailToken',serialize($token_value)));
+		}
+		$dbm->bind($db,1);
+
+		return $token;
+	}
+
+	public static function getChangeEmailToken($uid) {
+		$context = Model_Context::instance();
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+		$dbm->bind($userdb,1);
+		$que = "SELECT * FROM {userSettings} WHERE uid = ".$uid." AND name = 'changeEmailToken'";
+		$row = $dbm->getFetchArray($que);
+		$dbm->bind($db,1);
+		$row['value'] = unserialize($row['value']);
+		return $row;
+	}
+
+	public static function clearChangeEmailToken($uid) {
+		$context = Model_Context::instance();
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+		$dbm->bind($userdb,1);
+		$que = "DELETE FROM {userSettings} WHERE uid = ? AND name = ?";
+		$dbm->execute($que,array("ds",$uid,'changeEmailToken'));
+		$dbm->bind($db,1);
+
+		return true;
+	}
+
+	public static function updateEmailID($uid,$email_id,$password) {
+		$context = Model_Context::instance();
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+		$dbm->bind($userdb,1);
+
+		$que = "UPDATE {user} SET `email_id` = ?, `password` = ? WHERE uid = ?";
+		$dbm->execute($que,array("ssd",$email_id,Auth::getPassword($email_id,$password),$uid));
+		$dbm->bind($db,1);
+
+		return true;
 	}
 }

@@ -13,6 +13,7 @@ abstract class Controller {
 
 		$this->params = $params;
 		$this->context = Model_Context::instance();
+		$this->view_mode = "platform";
 
 		$this->user = array('uid' => (($uid = Acl::getIdentity('taogi')) ? $uid : 0));
 		if($_SESSION['user']) {
@@ -41,6 +42,10 @@ abstract class Controller {
 		global $user;
 		global $taogiid;
 
+		$this->breadcrumbs = ltrim(substr($uri->uri['appPath'],strlen(JFE_PATH)),'/');
+		if($uri->uri['appFile'] != 'index') $this->breadcrumbs .= "/".$uri->uri['appFile'];
+		$this->MyAppClass();
+
 		if(isset($this->owner) && !$this->owner) $this->owner = Acl::imMaster();
 
 		if(!$this->user) {
@@ -52,6 +57,8 @@ abstract class Controller {
 		$taogiid = $this->params['taogiid'];
 		if($taogiid) {
 			$this->permalink = "http://".$context->getProperty('service.domain')."/".implode("/",array_slice($uri->uri['fragment'],0,2));
+			$this->MyEntryClass($taogiid);
+			include_once JFE_PATH."/include/userEntryControls.php";
 		}
 
 		if($this->total_cnt) $this->PageNavigation();
@@ -307,5 +314,19 @@ abstract class Controller {
 			return true;
 
 		return false;
+	}
+
+	private function MyAppClass() {
+		$breadcrumbs = explode("/",$this->breadcrumbs);
+		$this->breadcrumbs_class = "";
+		$bcnt = @count($breadcrumbs);
+		for($i=0; $i<$bcnt; $i++) {
+			$this->breadcrumbs_class .= ($this->breadcrumbs_class ? " " : "").implode("-",array_slice($breadcrumbs,0,$i+1));
+		}
+	}
+	private function MyEntryClass($taogiid) {
+		if($taogiid) {
+			$this->entry_class = "entry-".$taogiid;
+		}
 	}
 }

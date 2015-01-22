@@ -1,36 +1,25 @@
-	<h2>회원가입<a href="<?php if($params['output'] != 'xml') print url("login",array('ssl'=>true,'attribute'=>array('requestURI'=>$params['requestURI']))); else print "javascript://\" onclick=\"poplogin()"; ?>">이미 소셜펀치회원이세요?</a></h2>
-    <form id="join_form" name="join_form" method="post" onsubmit="return check_regist(this);">
-    <input type="hidden" name="requestURI" value="<?php print $params['requestURI']; ?>" />
-    <input type="hidden" name="join_type" value="<?php print ($params['output'] == 'xml' ? 'pop' : ''); ?>" />
-    <table class="form_table">
-		<tr>
-			<td><label for="email_id">이메일 주소</label></td>
-			<td><input id="email_id" type="email" name="email_id" /></td>
-			<td>이메일 주소는 로그인시 아이디로 사용됩니다.</td>
-		</tr>
-		<tr>
-			<th><label for="email_id_confirm">이메일 주소<br />재입력</label></th>
-			<td><input id="email_id_confirm" type="email" name="email_id_confirm" /></td>
-			<td></td>
-		</tr>
-		<tr>
-			<th><label for="name">이름</label></th>
-			<td><input id="name" type="text" name="name" /></td>
-			<td></td>
-		</tr>
-		<tr>
-			<th><label for="password">비밀번호</label></th>
-			<td><input id="password" type="password" name="password" /></td>
-			<td></td>
-		</tr>
-		<tr>
-			<th><label for="password_confirm">비밀번호<br />재입력</label></th> 
-			<td><input id="password_confirm" type="password" name="password_confirm" /></td>
-			<td>암호는 한 개 이상의 특수문자, 한 개 이상의 숫자, 한 개 이상의 영문자를 포함하여 최소 8자 이상이어야 합니다.</td>
-        </tr>
-	</table>
-	<div class="form_button">
-		<input type="button" value="취  소"  class="round_7px" onclick="<?php if($params['output'] == 'xml') print "jfe_pop_close('joinus');"; else print "history.back();"; ?>" />
-		<input type="submit" value="회원가입"  class="round_7px" />
-    </div>
-    </form>
+<div id="join">
+<div class="document">
+<div class="wrap">
+	<h2>회원가입</h2>
+	<div class="ui-form-info">
+		<ul>
+			<li>따오기 TimeLine 서비스는 <a href="http://www.socialfunch.org" target="_blank">소셜펀치(SocialFunch)</a> 와 회원정보를 공유합니다.</li>
+			<li>이미 소셜펀치에 가입되어 있으신 분은 바로 <a href="<?php if($params['output'] != 'nolayout') print url("login",array('ssl'=>true,'attribute'=>array('requestURI'=>$params['requestURI']))); else print "javascript://\" onclick=\"pop_login()"; ?>">로그인</a>하시면 됩니다.</li>
+		</ul>
+	</div>
+	<form id="join_form" name="join_form" class="ui-form ui-user-form" method="post" autocomplete="off">
+		<input type="hidden" name="requestURI" value="<?php print $params['requestURI']; ?>" />
+		<input type="hidden" name="join_type" value="<?php print ($params['output'] == 'nolayout' ? 'pop' : ''); ?>" />
+<?php		include_once JFE_PATH."/include/user/forms/email_id.html.php"; ?>
+<?php		include_once JFE_PATH."/include/user/forms/profile.html.php"; ?>
+<?php		include_once JFE_PATH."/include/user/forms/name.html.php"; ?>
+<?php		include_once JFE_PATH."/include/user/forms/password.html.php"; ?>
+		<div class="buttons">
+			<button class="button join" type="submit"><span>회원가입</span></button>
+			<button class="button cancel" type="button" onclick="<?php if($params['output'] == 'nolayout') print "jfe_popup_close();"; else print "history.back();"; ?>"><span>취소</span></button>
+		</div>
+	</form>
+</div><!--/.wrap-->
+</div><!--/.document-->
+</div><!--/#join-->

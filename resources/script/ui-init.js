@@ -127,6 +127,7 @@
 		jQuery('.keepCover').imagefill({runOnce:true});
 	};
 })($catchResize);
+
 /** Execute **/
 jQuery(document).ready(function(e){
 	jQuery.getScript('/contribute/imagefill/js/jquery-imagefill.js')
@@ -137,17 +138,27 @@ jQuery(document).ready(function(e){
 			});
 		});
 
-	jQuery('[data-use-hover-class]').hover(
-		function(e){jQuery(this).addClass('hover');},
-		function(e){jQuery(this).removeClass('hover');}
+	jQuery('[data-hover-class]').hover(
+		function(e){
+			var $class = jQuery(this).attr('data-hover-class');
+			jQuery(this).addClass($class);
+		},
+		function(e){
+			var $class = jQuery(this).attr('data-hover-class');
+			jQuery(this).removeClass($class);
+		}
 	);
-	jQuery('[data-use-box-click]').on('click',function(e){
-		if(e.target.nodeName!='A') {
-			var $field = jQuery(this).attr('data-use-box-click');
-			jQuery(this).find($field+' a').trigger('click');
-			return;
+
+	jQuery('[data-click-target]').on('click',function(e){
+		var $target = jQuery(this).attr('data-click-target');
+		var $clicked = jQuery(this).attr('data-target-clicked');
+		var $href = jQuery(this).find($target).attr('href');
+		if(e.target.nodeName!='A'&&$clicked!='true') {
+			jQuery(location).attr('href',$href);
+			$clicked = 'true';
 		}
 	});
+
 	jQuery('.ui-checkbox-switch').on('click',function(e){
 		var $checkbox = jQuery(this).closest('.ui-checkbox-group').find('.ui-checkbox');
 		var $checked = jQuery(this).prop('checked');

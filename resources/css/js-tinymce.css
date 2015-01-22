@@ -1,0 +1,13 @@
+body {
+	margin: 0 1em;
+	padding: 0;
+	font-family: 'Apple SD Gothic Neo', 'Segoe UI', 'Meiryo', 'NanumGothic', 'Malgun Gothic', 'Verdana', 'Tahoma', 'Dotum', 'Gulim', sans-serif;
+	font-size: 14px;
+}
+blockquote {
+	font-family: 'Apple Myeongjo', 'NanumMyeongjo', 'Batang', serif;
+}
+pre, code, kbd, tt {
+	font-family: 'Monaco', 'Lucida Grande', 'Lucida Console', 'NanumGothicCoding', monospace;
+}
+

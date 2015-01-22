@@ -3,7 +3,7 @@
 /// All rights reserved. Licensed under the GPL.
 /// See the GNU General Public License for more details. (/documents/LICENSE, /documents/COPYRIGHT)
 class RespondJson {
-	function ResultPage($errorResult) {
+	public static function ResultPage($errorResult) {
 		if (is_array($errorResult) && count($errorResult) < 2) {
 			$errorResult = array_shift($errorResult);
 		}
@@ -24,13 +24,13 @@ class RespondJson {
 		exit;
 	}
 	
-	function PrintResult($result, $useCDATA=true) {
+	public static function PrintResult($result, $useCDATA=true) {
 		header('Content-Type: text/json; charset=utf-8');
 		print json_encode($result);
 		exit;
 	}
 	
-	function NotFoundPage($isAjaxCall = false) {
+	public static function NotFoundPage($isAjaxCall = false) {
 		RespondJson::ResultPage(-1);
 		exit;
 	}

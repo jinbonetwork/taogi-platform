@@ -124,6 +124,6 @@
 				<p id="timeline_url_structure"><code>http://taogi.net/<span id="taogi_permalink"><?php print ($user['taoginame'] ? $user['taoginame'] : $user['uid']); ?></span>/<span id="timeline_url" class="editable article" contenteditable="true" data-name="url" data-default-value="timeline"><?php print $entry['nickname']; ?></span></code></p>
 				<hr>
 				<p id="timeline_text" class="editable article" contenteditable="true" data-name="text" data-default-value="타임라인에 대한 간단한 설명"><?php print $timeline['text']; ?></p>
-				<p id="extra_author_structure"><span id="extra_author_label">작성자: </span><span id="extra_author" name="extra[author]" class="editable article" contenteditable="true" data-default-value="<?php print $user['name']; ?>"><?php print $timeline['extra']['author']; ?></span></p>
+				<p id="extra_author_structure"><span id="extra_author_label">작성자: </span><span id="extra_author" name="extra[author]" class="editable article" contenteditable="true" data-default-value="<?php print $user['name']; ?>"><?php print ($timeline['extra']['author'] ? $timeline['extra']['author'] : $user['name']); ?></span></p>
 			</fieldset>
 			<section class="slide-items" id="date" data-cid="0">

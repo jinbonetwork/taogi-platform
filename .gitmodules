@@ -6,10 +6,6 @@ url = https://github.com/jinbonetwork/taogi-timeline.git
 path = contribute/PHPMailer
 url = https://github.com/PHPMailer/PHPMailer.git
 
-[submodule "ResponsiveFilemanager"]
-path = contribute/filemanager
-url = https://github.com/trippo/ResponsiveFilemanager.git
-
 [submodule "is-loadling"]
 path = contribute/is-loading
 url = https://github.com/hekigan/is-loading.git
@@ -25,3 +21,7 @@ url = https://github.com/farhadi/html5sortable.git
 [submodule "autosize"]
 path = contribute/autosize
 url = https://github.com/jackmoore/autosize.git
+
+[submodule "jquery.actual"]
+path = contribute/jquery.actual
+url = https://github.com/dreamerslab/jquery.actual.git

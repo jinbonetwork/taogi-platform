@@ -169,6 +169,8 @@ section#feature .wrap h1#site-name {
 	overflow: hidden;
 }
 section#feature .wrap p#site-description {
+	display: none;
+	/*
 	animation: wave 4s ease-in-out infinite;
 	-webkit-animation: wave 4s ease-in-out infinite;
 	-moz-animation: wave 4s ease-in-out infinite;
@@ -185,9 +187,69 @@ section#feature .wrap p#site-description {
 	background: transparent url(../images/logo_typography.png) scroll no-repeat center center;
 	background-size: contain;
 	text-indent: -100000px;
-	overflow: hidden;
+	overflow: hidden; */
 }
-		
+section#feature .wrap ul.buttons {
+	list-style: none;
+	position: absolute;
+	bottom: 10%;
+	left: 50%;
+	width: 400px;
+	margin: 0 0 0 -200px;
+	padding: 0;
+}
+section#feature .wrap ul.buttons:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+section#feature .wrap ul.buttons li {
+	float: left;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+section#feature .wrap ul.buttons li + li {
+	float: right;
+	margin-left: 20px;
+}
+section#feature .wrap ul.buttons li a {
+	display: block;
+	width: 190px;
+	/*
+	height: 70px;
+	text-indent: -999999px;
+	*/
+	overflow: hidden;
+	background-color: #FF8888;
+	border: 3px solid #FF8888;
+	border-radius: 3px;
+	transition: border-color,background-color 0.2s linear;
+}
+section#feature .wrap ul.buttons li.join a,
+section#feature .wrap ul.buttons li a:hover {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+section#feature .wrap ul.buttons li a img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 0;
+}
+@media all and ( max-width: 480px ) {
+	section#feature .wrap ul.buttons {
+		width: 300px;
+		margin-left: -150px;
+	}
+	section#feature .wrap ul.buttons li a {
+		width: 145px;
+	}
+	section#feature .wrap ul.buttons li + li {
+		margin-left: 10px;
+	}
+}
+
 /** bella **/
 section#feature .wrap .list {
 	margin-top: 10%;
@@ -281,11 +343,10 @@ section#list {
 	background: #ED676C url(../images/wallpaper_pattern_logo-hd.png) scroll repeat left top;
 	background-size: 150px 150px;
 	*background-image: url(../images/wallpaper_pattern_logo-sd.png);
+}
+section#list div.ui-gallery * {
 	color: #FFFFFF;
 }
-section#list div.timeline-gallery ul li dd.item_title a {
-	color: #FFFFFF;
-}
-section#list div.timeline-gallery ul li.hover dd.item_title a {
-	color: #AA3300;
+section#list div.ui-gallery ul li.hover * {
+	color: #000000;
 }

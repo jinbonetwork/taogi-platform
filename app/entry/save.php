@@ -17,11 +17,17 @@ class entry_save extends Controller {
 		$data = Entry::getEntryData($this->eid,$this->entry['vid']);
 
 		if($data['editor'] != $uid || $this->entry['locked'] != $_COOKIE[Session::getName()]) {
-			$revision = true;
+			$this->revision = true;
 		}
 
 		require_once dirname(__FILE__)."/../../timeline/model/touchcarousel/config/config.php";
 
+//		$fp = fopen("/tmp/taogi_log.txt","a+");
+//		fputs($fp,$this->params['content']);
+//		fputs($fp,"\n");
+//		fputs($fp,stripslashes($this->params['content']));
+//		fputs($fp,"\n");
+//		fclose($fp);
 		$timeline = json_decode(stripslashes($this->params['content']),true);
 		if(!$timeline['timeline']['permalink']) {
 			RespondJson::ResultPage(array(-4,"타임라인 주소를 지정하세요"));
@@ -35,13 +41,14 @@ class entry_save extends Controller {
 
 		$vtimeline = validateTimeLineJS($timeline);
 
-		if($revision == true) {
+		if($this->revision == true) {
 			$this->vid = Entry_DBM::createRevision($this->eid,$uid,$vtimeline);
 			$commit = true;
 		} else if($this->params['vid']) {
 			$this->vid = $this->params['vid'];
 			if($data['timeline'] != $vtimeline || $data['subject'] != $vtimeline['timeline']['headline']) {
-				Entry_DBM::updateRevision($vid,$vtimeline);
+				$this->update = true;
+				Entry_DBM::updateRevision($this->vid,$vtimeline);
 				$commit = true;
 			}
 		}
@@ -51,7 +58,8 @@ class entry_save extends Controller {
 			$this->entry['asset'] != $vtimeline['timeline']['asset'] ||
 			$this->entry['author'] != $vtimeline['timeline']['extra']['author'] ||
 			$this->entry['era'] != $vtimeline['timeline']['era'] ||
-			$this->entry['is_public'] != $vtimeline['timeline']['extra']['published'] ) {
+			$this->entry['is_public'] != $vtimeline['timeline']['extra']['published'] ||
+			$this->entry['vid'] != $this->vid ) {
 			Entry_DBM::updateEntry($this->eid,$this->vid,$vtimeline);
 			$commit = true;
 		}

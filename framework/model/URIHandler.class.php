@@ -1,7 +1,7 @@
 <?php
 final class Model_URIHandler extends Objects {
 	public $uri, $params, $appPath;
-	public static $taogiid;
+	public $taogiid;
 	private $prefix_appArray = array('login','regist','create','admin','front','common','about','stat','api');
 	private $redirect_appArray = array('list','search','category','tag');
 	private $user_appArray = array('profile','archives','bookmarks');

@@ -1,0 +1,22 @@
+.ui-block {
+	margin-top: 10px;
+}
+
+.value.composition {
+}
+
+.value.composition.NAMETAG {
+}
+.value.composition.NAMETAG .ROLE .value-wrap-open,
+.value.composition.NAMETAG .ROLE .value-wrap-value,
+.value.composition.NAMETAG .ROLE .value-wrap-close {
+	display: none;
+}
+.value.composition.NAMETAG .ROLE:after {
+	display: inline;
+	font-family: 'FontAwesome';
+	content: '\f007';
+}
+.value.composition.NAMETAG .ROLE[data-degree="10"]:after {
+	content: '\f005';
+}

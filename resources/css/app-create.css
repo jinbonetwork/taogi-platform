@@ -150,7 +150,6 @@ section#create {
 	right: 15px;
 	width: 100%;
 	padding: 15px;
-	background-color: #FFFFFF;
 	text-align:right;
 }
 form#timeline_editor {
@@ -447,7 +446,8 @@ form#timeline_editor > .console {
 	top: 37px;
 	overflow: hidden;
 	width: 100%;
-	max-width: 500px;
+	max-width: 600px;
+	min-width: 400px;
 	max-height: 0;
 	text-align: left;
 }
@@ -584,7 +584,7 @@ fieldset.extendable.collapsed > .wrap {
 	position: absolute;
 	top: 50%;
 	left: -4px;
-	display: block;
+	display: none;
 }
 .slide-item > .field .button.article.add:before {
 	width: 30px;
@@ -612,14 +612,18 @@ fieldset.extendable.collapsed > .wrap {
 .slide-item > .field:hover .button.article.add {
 	background-color: #EEEEEE;
 }
-.slide-item > .field:hover .button.article.add:hover {
+.slide-item > .field:hover .button.article.add:before,
+.slide-item > .field:hover .button.article.add:after {
+	display: block;
+}
+.slide-item > .field .button.article.add:hover {
 	background-color: #CCCCCC;
 	cursor: pointer;
 }
-.slide-item > .field:hover .button.article.add:before {
+.slide-item > .field .button.article.add:hover:before {
 	background-color: #333333;
 }
-.slide-item > .field:hover .button.article.add:after {
+.slide-item > .field .button.article.add:hover:after {
 	border-color: transparent #333333;
 }
 fieldset:focus {
@@ -689,11 +693,38 @@ fieldset.slide legend {
 	margin: 0;
 	padding: 0 0.5em;
 	background-color: #FFFFFF;
+	color: #000000;
+}
+fieldset.slide legend:before {
+	content: '\F058';
+	font-family: 'FontAwesome';
+	display: inline-block;
+	width: 1.2em;
+	height: 1em;
+	text-align: center;
+	line-height: 1;
+}
+.slide-item.trashed fieldset.slide legend:before {
+	content: '\F00D';
+}
+fieldset.slide legend {
+	color: #000000;
+}
+fieldset.slide.collapsed legend {
+	color: #AAAAAA;
+}
+fieldset.slide legend:hover {
+	color: #666666;
+}
+fieldset.slide legend a {
+	color: inherit;
 }
 fieldset.slide .pubDate {
 	display: block;
 	margin: 0 0 1.5em 0;
 	padding: 0 0 0.5em 0;
+	position: relative;
+	z-index: 1;
 	border-bottom: 1px solid #CECFD3;
 }
 fieldset.slide .pubDate .editable,
@@ -745,6 +776,31 @@ fieldset.slide .pubDate .button:after {
 fieldset.slide .pubDate .button.datepicker:after {
 	content: '\E023'; /* CLOCK */
 	content: '\E109'; /* CALENDAR */
+}
+fieldset.slide .pubDate span.alert {
+	position: absolute;
+	z-index: 2;
+	color: #fff;
+	left: 0;
+	top: 90%;
+	background: #E2070A;
+	padding: 2px 4px;
+	font-size: 0.8em;
+	border-radius: 3px;
+}
+fieldset.slide .pubDate span.alert:before {
+	bottom: 100%;
+	left: 15px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(226, 7, 10, 0);
+	border-bottom-color: #E2070A;
+	border-width: 5px;
+	margin-left: -5px;
 }
 fieldset.slide .feature {
 	position: relative;
@@ -900,6 +956,62 @@ fieldset.slide .title-description .editor ul.toolbar li.link a:after {
 }
 fieldset.slide .title-description .editor ul.toolbar li.unlink a:after {
 	content: '\F209';
+}
+fieldset.slide .title-description .editor ul.toolbar li span.constructed {
+	position: absolute;
+	z-index: 999999999;
+	left: 0;
+	top: -30px;
+	background-color: #333333;
+	color: #FFFFFF;
+	font-size: 0.5em;
+	width: 130px;
+	border-color: #333333 transparent;
+	border-style: solid;
+	border-width: 0 6px 0 6px;
+	border-radius: 3px;
+	opacity: 0;
+	transition: opacity 0.6s;
+	-webkit-transition: opacity 0.6s;
+	-moz-transition: opacity 0.6s;
+	-ms-transition: opacity 0.6s;
+	-o-transition: opacity 0.6s;
+}
+fieldset.slide .title-description .editor ul.toolbar li span.constructed:after {
+	position: absolute;
+	z-index: 999999999;
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	pointer-events: none;
+	border-color: rgba(51, 51, 51, 0);
+	border-top-color: #333333;
+	border-width: 6px;
+	margin-left: -6px;
+}
+fieldset.slide .title-description .editor ul.toolbar li.bold span.constructed {
+	left: -53px;
+}
+fieldset.slide .title-description .editor ul.toolbar li.italic span.constructed {
+	left: -29px;
+}
+fieldset.slide .title-description .editor ul.toolbar li.underline span.constructed {
+	left: -5px;
+}
+fieldset.slide .title-description .editor ul.toolbar li.strike span.constructed {
+	left: 19px;
+}
+fieldset.slide .title-description .editor ul.toolbar li.link span.constructed {
+	left: 44px;
+}
+fieldset.slide .title-description .editor ul.toolbar li.unlink span.constructed {
+	left: 67px;
+}
+fieldset.slide .title-description .editor ul.toolbar li:hover span.constructed {
+	opacity: 1;
 }
 fieldset.slide .title-description .description {
 	min-height: inherit;
@@ -1127,7 +1239,7 @@ fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inn
 fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview {
 	float: left;
 	border: 1px solid #DDDDDD;
-	background-color: #DDDDDD;
+	background-color: #CCCCCC;
 }
 @media all and ( max-width: 880px ) {
 	fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview,
@@ -1226,10 +1338,45 @@ fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inn
 fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field a.upload span {
 	display: none;
 }
+/* legacy: 2014.12.17
 fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source {
 	height: 85px;
 	margin-top: 0;
 }
+*/
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source {
+	height: 27px;
+	margin-top: 0;
+}
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source.mode-textarea {
+	height: 59px;
+}
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source .text,
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source .upload {
+	display: none;
+}
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source.mode-input input.text,
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source.mode-input .upload,
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source.mode-upload .upload,
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source.mode-textarea textarea.text {
+	display: block;
+}
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.sourcetype {
+	height: 20px;
+	margin-top: 0;
+}
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.sourcetype label,
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.sourcetype label input,
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.sourcetype label span {
+	display: inline-block;
+	vertical-align: top;
+	height: 20px;
+	line-height: 20px;
+}
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.sourcetype label:after {
+	display: none;
+}
+/* EOT */
 fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field.source .text {
 	height: inherit;
 	resize: none;
@@ -1456,4 +1603,69 @@ fieldset.slide > .wrap > .console .button.save {
 .sortable-placeholder {
 	width:100px;
 	height:100px;
+}
+
+#taogi-editor-error {
+	position: fixed;
+	z-index: 9999999997;
+	width: 400px;
+	height: auto;
+	left: 50%;
+	height: 50%;
+	transition: opacity 0.6s;
+	-webkit-transition: opacity 0.6s;
+	-moz-transition: opacity 0.6s;
+	-ms-transition: opacity 0.6s;
+	-o-transition: opacity 0.6s;
+}
+#taogi-editor-error .wrap {
+	position: relative;
+	z-index: 9999999998;
+}
+#taogi-editor-error .wrap .inner {
+	margin: 10px;
+	padding: 15px 30px 30px 30px;
+	background: #FF6600;
+	color: #fff;
+	border-radius: 10px;
+}
+#taogi-editor-error .wrap .inner .error-title {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #fff;
+	text-align: center;
+}
+#taogi-editor-error .wrap .inner .error-message {
+	padding: 15px 8px 0 8px;
+	font-size: 0.8em;
+	text-align: justify;
+}
+#taogi-editor-error .wrap .button {
+	position: absolute;
+	z-index: 9999999999;
+	right: 0;
+	top: -12px;
+	display: inline-block;
+	background: #ff6600;
+	color: #fff;
+	border: 4px solid #ff6600;
+	line-height: 100%;
+	border-radius: 12px;
+}
+#taogi-editor-error .wrap .button .close {
+	display: inline-block;
+	color: #fff;
+	transition: all 0.6s;
+	-webkit-transition: all 0.6s;
+	-moz-transition: all 0.6s;
+	-ms-transition: all 0.6s;
+	-o-transition: all 0.6s;
+}
+#taogi-editor-error .wrap .button .close:before {
+	content: '\e014';
+}
+#taogi-editor-error .wrap .button .close:hover {
+	color: #00378F;
+}
+#taogi-editor-error .wrap .button .close span {
+	display: none;
 }

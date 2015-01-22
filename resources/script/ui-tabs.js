@@ -9,18 +9,21 @@
 			if(!$tabs.length||!$contents.length){
 				return;
 			}
+
+			$this.attr('data-index',index);
 			$tabs.addClass('buildTab_tabs').children('li').addClass('buildTab_tab');
 			$contents.addClass('buildTab_contents').children('li').addClass('buildTab_content');
-			var $default = jQuery.type($this.attr('data-tab-default'))==='string' ? jQuery($this.attr('data-tab-default')) : $this.find('li.buildTab_tab:nth-child(1),li.buildTab_content:nth-child(1)');
+
+			var $default = jQuery.type($this.attr('data-tab-default'))==='string'?jQuery($this.attr('data-tab-default')) : $this.find('li.buildTab_tab:nth-child(1),li.buildTab_content:nth-child(1)');
 			$default.addClass('current');
 
-			$tabs.find('a').each(function(index){
+			$tabs.find('a').each(function(tabIndex){
 				jQuery(this).on('click',function(e){
 					e.preventDefault();
 					$tabs.children('li').removeClass('current');
-					$tabs.children('li:nth-child('+(index+1)+')').addClass('current');
+					$tabs.children('li:nth-child('+(tabIndex+1)+')').addClass('current');
 					$contents.children('li').removeClass('current');
-					$contents.children('li:nth-child('+(index+1)+')').addClass('current');
+					$contents.children('li:nth-child('+(tabIndex+1)+')').addClass('current');
 					$catchResize.load();
 				});
 			});

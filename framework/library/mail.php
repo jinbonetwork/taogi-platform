@@ -86,4 +86,33 @@ function sendRegistMail($email_id,$name,$authtoken) {
 	}
 	return true;
 }
+
+function sendChangeMail($uid,$email_id,$name,$authtoken) {
+	$context = Model_Context::instance();
+	if (empty($email_id))
+		return array(1,'이메일을 입력하세요.');
+	if (!preg_match('/^[^@]+@([-a-zA-Z0-9]+\.)+[-a-zA-Z0-9]+$/', $email_id))
+		return array(1,'이메일 형식이 아닙니다');
+
+	$variables['title'] = $name." 님 ".$context->getProperty('service.title')." 의 로그인 E-Mail 을 수정합니다.";
+	$variables['content'] = "<p>".$context->getProperty('service.title')."는 소셜펀치(SocialFunch)와 회원 정보를 공유합니다. 로그인 E-Mail을 변경하시면 소셜펀치 로그인 E-Mail 아이디도 변경됩니다.</p>";
+	$variables['content'] .= "<p>로그인 이메일 수정을 완료하시려면, 아래 인증을 위한 링크를 클릭해주세요.</p>";
+	if($context->getProperty('service.ssl') == true) {
+		$variables['link'] = "https://".$context->getProperty('service.domain').base_uri()."login/authemail?uid=".$uid."&email_id=".rawurlencode($email_id)."&authtoken=".$authtoken;
+	} else {
+		$variables['link'] = "http://".$context->getProperty('service.domain').base_uri()."login/authemail?uid=".$uid."&email_id=".rawurlencode($email_id)."&authtoken=".$authtoken;
+	}
+	$variables['link_title'] = "로그인 E-mail 변경하기";
+	$variables['sender'] = $context->getProperty('service.senderName');
+
+	$mailMessage = makeLetter($variables);
+
+	$receiver = array();
+	$receiver[] = array('name'=>$name, 'email'=>$email_id);
+	$ret = sendEmail($context->getProperty('service.senderName'), $context->getProperty('service.senderEmail'), $receiver, $variables['title'], $mailMessage,1);
+	if($ret != true) {
+		array(1,$ret[1]);
+	}
+	return true;
+}
 ?>

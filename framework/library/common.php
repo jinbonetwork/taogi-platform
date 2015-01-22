@@ -17,11 +17,11 @@ function url($path,$opt=null) {
 	if($opt['ssl'] && $_SERVER['HTTPS'] != 'on') {
 		$context = Model_Context::instance();
 		$service = $context->getProperty('service.*');
-		if($service['ssl']) $url = "https://".(!eregi(":\/\/",$path) ? $_SERVER['HTTP_HOST'] : "");
+		if($service['ssl']) $url = "https://".(!preg_match("/:\/\//i",$path) ? $_SERVER['HTTP_HOST'] : "");
 	} else if($opt['ssl'] == false && $_SERVER['HTTPS'] == 'on') {
-		$url = (!eregi(":\/\/",$path) ? "http://".$_SERVER['HTTP_HOST'] : "");
+		$url = (!preg_match("/:\/\//i",$path) ? "http://".$_SERVER['HTTP_HOST'] : "");
 	}
-	$url .= (!eregi(":\/\/",$path) ? base_uri() : "").($path == base_uri() ? "" : $path);
+	$url .= (!preg_match("/:\/\//i",$path) ? base_uri() : "").($path == base_uri() ? "" : $path);
 	if($opt['query'])
 		$url .= "?".(is_array($opt['query']) ? http_build_query($opt['query']) : $opt['query']);
 	if(substr($url,0,2) == "//") $url = substr($url,1);

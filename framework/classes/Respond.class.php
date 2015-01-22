@@ -3,7 +3,7 @@
 /// All rights reserved. Licensed under the GPL.
 /// See the GNU General Public License for more details. (/documents/LICENSE, /documents/COPYRIGHT)
 class Respond {
-	function ResultPage($errorResult) {
+	public static function ResultPage($errorResult) {
 		if (is_array($errorResult) && count($errorResult) < 2) {
 			$errorResult = array_shift($errorResult);
 		}
@@ -23,7 +23,7 @@ class Respond {
 		exit;
 	}
 	
-	function PrintResult($result, $useCDATA=true) {
+	public static function PrintResult($result, $useCDATA=true) {
 		header('Content-Type: text/xml; charset=utf-8');
 		$xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 		$xml .= "<response>\n";
@@ -32,7 +32,7 @@ class Respond {
 		die($xml);
 	}
 	
-	function NotFoundPage($isAjaxCall = false) {
+	public static function NotFoundPage($isAjaxCall = false) {
 		if($isAjaxCall) {Respond::ResultPage(-1);exit;}
 		header('HTTP/1.1 404 Not Found');
 		header("Content-Type: text/html; charset=utf-8");
@@ -41,7 +41,7 @@ class Respond {
 		exit;
 	}
 	
-	function ForbiddenPage() {
+	public static function ForbiddenPage() {
 		header('HTTP/1.1 403 Forbidden');
 		header("Content-Type: text/html; charset=utf-8");
 		header("Connection: close");
@@ -49,29 +49,29 @@ class Respond {
 		exit;
 	}
 	
-	function MessagePage($type,$message) {
+	public static function MessagePage($type,$message) {
 		header("Content-Type: text/html; charset=utf-8");
 		include_once JFE_RESOURCE_PATH."/html/error.html.php";
 		exit;
 	}
 	
-	function AlertPage($message) {
+	public static function AlertPage($message) {
 		include_once JFE_RESOURCE_PATH."/html/alert.html.php";
 		exit;
 	}
 	
-	function ErrorPage($message=NULL, $buttonValue=NULL, $buttonLink=NULL, $isAjaxCall = false) {
+	public static function ErrorPage($message=NULL, $buttonValue=NULL, $buttonLink=NULL, $isAjaxCall = false) {
 		if($isAjaxCall) {Respond::ResultPage(-1);exit;}
 		include_once JFE_RESOURCE_PATH."/html/error.html.php";
 		exit;
 	}
 	
-	function NoticePage($message, $redirection) {
+	public static function NoticePage($message, $redirection) {
 		include_once JFE_RESOURCE_PATH."/html/alert.html.php";
 		exit;
 	}
 
-	function PrintValue($array, $useCDATA=true) {
+	public static function PrintValue($array, $useCDATA=true) {
 		$xml = '';
 		if(is_array($array)) {
 			foreach($array as $key => $value) {
@@ -94,11 +94,11 @@ class Respond {
 		return $xml;
 	}
 	
-	function escapeJSInAttribute($str) {
+	public static function escapeJSInAttribute($str) {
 		return htmlspecialchars(str_replace(array('\\', '\r', '\n', '\''), array('\\\\', '\\r', '\\n', '\\\''), $str));
 	}
 
-	function escapeCData($str) {
+	public static function escapeCData($str) {
 		return str_replace(']]>', ']]&gt;', $str);
 	}
 }

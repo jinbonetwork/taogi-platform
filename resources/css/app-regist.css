@@ -1,1 +1,11 @@
 @charset "utf-8";
+
+#join_form {
+}
+#join_form fieldset.taoginame span.focus {
+	left: 362px;
+}
+
+#join .join_success_box {
+	padding: 30px 10px;
+}

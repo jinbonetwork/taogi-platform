@@ -6,6 +6,7 @@ class entry_modify extends Controller {
 		$context = Model_Context::instance();
 		require JFE_PATH."/timeline/model/touchcarousel/config/config.php";
 
+		$this->view_mode ='edit';
 		$this->mediaconfig = $config;
 					        
 		$uid = Acl::getIdentity('taogi');
@@ -59,8 +60,7 @@ class entry_modify extends Controller {
 		$this->script[] = '../../timeline/model/touchcarousel/js/jquery.taogi.touchcarousel.js';
 		$this->script[] = '../../contribute/caret/jquery.caret.js';
 
-		$this->css[] = 'ui-controls.css';
-		$this->script[] = 'ui-controls.js';
+		/** App **/
 		$this->css[] = 'app-create.css';
 		$this->script[] = 'app-create.js';
 

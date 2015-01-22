@@ -53,6 +53,8 @@ class create_save extends Controller {
 			$this->tar_uri = $tar_uri;
 		}
 
+		Acl::setEntryAcl($this->eid,BITWISE_OWNER);
+
 		$dbm = DBM::instance();
 		$dbm->commit();
 

@@ -87,8 +87,20 @@ final class DBM extends Objects {
 	}
 
 	public function bindParam($params){
-		if(!call_user_func_array(array(&$this->_stmt, 'bind_param'), $params))
-			throw new Exception("Bind Parameter Exception : ".$this->_query." : ".$this->_mysqli->error, $this->_mysqli->errno);
+		if(version_compare(phpversion(), '5.3.0', '>=')) {
+			if(!call_user_func_array(array(&$this->_stmt, 'bind_param'), $this->makeValuesReferenced($params)))
+				throw new Exception("Bind Parameter Exception : ".$this->_query." : ".$this->_mysqli->error, $this->_mysqli->errno);
+		} else {
+			if(!call_user_func_array(array(&$this->_stmt, 'bind_param'), $params))
+				throw new Exception("Bind Parameter Exception : ".$this->_query." : ".$this->_mysqli->error, $this->_mysqli->errno);
+		}
+	}
+
+	private function makeValuesReferenced($arr) {
+		$refs = array();
+		foreach($arr as $key => $value)
+			$refs[$key] = &$arr[$key];
+		return $refs;
 	}
 
 	public function execute($query = NULL, $params = NULL){

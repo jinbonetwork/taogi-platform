@@ -114,6 +114,21 @@ a.ui-controls-switch:after {
 	display: inline-block;
 }
 /** console icons **/
+.ui-controls ul li.view a:before {
+	content: '\f06e';
+}
+.ui-controls ul li.edit a:before {
+	content: '\f044';
+}
+.ui-controls ul li.history a:before {
+	content: '\f017';
+}
+.ui-controls ul li.authors a:before {
+	content: '\f0c0';
+}
+.ui-controls ul li.leave a:before {
+	content: '\f05e';
+}
 .ui-controls ul li.public a:before {
 	content: '\f0ac';
 }
@@ -126,19 +141,10 @@ a.ui-controls-switch:after {
 .ui-controls ul li.delete a:before {
 	content: '\f1f8';
 }
-.ui-controls ul li.edit a:before {
-	content: '\f044';
-}
-.ui-controls ul li.history a:before {
-	content: '\f1da';
-}
-.ui-controls ul li.authors a:before {
-	content: '\f0c0';
-}
-.ui-controls ul li.leave a:before {
-	content: '\f05e';
-}
 .ui-controls ul li.forkable a:before {
+	content: '\f079';
+}
+.ui-controls ul li.notForkable a:before {
 	content: '\f132';
 }
 .ui-controls ul li.fork a:before {
@@ -147,22 +153,8 @@ a.ui-controls-switch:after {
 .ui-controls ul li.backup a:before {
 	content: '\f019';
 }
-.ui-controls ul li.home a:before {
-	content: '\f015';
-}
-.ui-controls ul li.profile a:before {
-	content: '\f0e4';
-}
-.ui-controls ul li.write a:before {
-	content: '\f';
-}
-.ui-controls ul li.register a:before {
-	content: '\f';
-}
-.ui-controls ul li.login a:before {
-	content: '\f';
-}
-.ui-controls ul li.logout a:before {
-	content: '\f';
+
+.ui-controls ul li.dashboard a:before {
+	content: '\f007';
 }
 

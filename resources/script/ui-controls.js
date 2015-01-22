@@ -4,12 +4,13 @@
 		this.each(function(index){
 			var $this = jQuery(this);
 			$this.find('li.status a').each(function(index){
-				jQuery(this).click(function(e){
+				jQuery(this).on('click',function(e){
 					e.preventDefault();
+					e.stopPropagation();
 					var $trigger = jQuery(this);
 					var $parent = $trigger.closest('.ui-controls');
-					var $instance = $parent.attr('data-controls-instance');
-					var $controls = jQuery('.ui-controls[data-controls-instance="'+$instance+'"]');
+					var $instance = $parent.attr('data-object-instance');
+					var $controls = jQuery('.ui-controls[data-object-instance="'+$instance+'"]');
 					var $json = $trigger.attr('href');
 					jQuery.getJSON($json)
 						.done(function(data){
@@ -37,6 +38,17 @@
 						});
 				});
 			});
+			$this.find('li.critical a').each(function(index){
+				jQuery(this).on('click',function(e){
+					if(confirm('This action cannot be undone!')) {
+						alert('done');
+					}else{
+						alert('canceled');
+						e.preventDefault();
+						e.stopPropagation();
+					}
+				});
+			});
 		});
 	};
 })(jQuery);
@@ -52,7 +64,7 @@
 				var $controls = jQuery($trigger.attr('href'));
 				var is_active = $controls.hasClass('active');
 
-				$trigger.parentsUntil('.ui-items').find('.ui-controls').removeClass('active');
+				$trigger.closest('.ui-items').find('.ui-controls').removeClass('active');
 				if(is_active) {
 					$controls.removeClass('active');
 				} else {
@@ -67,7 +79,14 @@ jQuery(document).ready(function(e){
 	jQuery('.ui-controls').buildControls();
 	jQuery('.ui-controls-switch').buildControlsSwitch();
 	jQuery('.ui-controls a[title]').tooltip();
-	jQuery('form .ui-controls[data-template="controls"] a').on('click',function(e){
+	/*
+	jQuery('.ui-controls li.overlay a').on('click',function(e){
+		e.preventDefault();
+		var $trigger = jQuery(this);
+		jfe_popup($trigger.attr('href'),'','');
+	});
+	*/
+	jQuery('.ui-controls.bulk a').on('click',function(e){
 		e.preventDefault();
 		var $trigger = jQuery(this);
 		var $form = $trigger.closest('form');

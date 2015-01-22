@@ -113,9 +113,13 @@ define( 'TWIT_ID', -2);
 define( 'OPEN_ID', -10);
 
 /** 출력용 기본값들 **/
+define('ITEMS_PER_PAGE',6);
+define('RELATIVE_TIME_COVERAGE',60*60*24); // in seconds
 define('DEFAULT_TIME_FORMAT','Y-m-d H:i:s');
-define('DEFAULT_ENTRY_IMAGE','http://act.jinbo.net/drupal/sites/default/files/images/9ABE7400.JPG');
-define('DEFAULT_USER_IMAGE','http://act.jinbo.net/drupal/sites/default/files/images/9ABE7400.JPG');
+define('DEFAULT_ENTRY_IMAGE','/resources/images/default_entry_image.png');
+define('DEFAULT_ENTRY_BACKGROUND','/resources/images/default_entry_background.jpg');
+define('DEFAULT_USER_PORTRAIT','/resources/images/default_user_portrait.png');
+define('DEFAULT_USER_BACKGROUND','/resources/images/default_user_background.jpg');
 
 /** 노드의 상태 **/
 define('NODE_STATUS_PRIVATE',0);

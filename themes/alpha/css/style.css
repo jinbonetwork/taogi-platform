@@ -90,3 +90,38 @@ i.icon-spin {
 		transform: rotate(359deg);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** unavailable elements **/
+.ui-controls.bulk,
+.ui-controls .maintenance,
+.app-entry-authors .manage.history,
+.app-user-profile .ui-form-item[data-field="portrait"],
+.app-user-profile .ui-form-item[data-field="background"],
+.app-user-profile .ui-form-item[data-field="homepage"],
+.app-user-profile .ui-form-item[data-field="twitter"],
+.app-user-profile .ui-form-item[data-field="facebook"] {
+	display: none !important;
+}

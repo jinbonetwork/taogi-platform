@@ -215,8 +215,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 
 		this.fMarkup = this.Root.find('#media_inline_form').outerHTML();
 		this.Root.find('#media_inline_form').remove();
-		this.unlockMarkup = this.Root.find('#taogi-editor-unlock').outerHTML();
-		this.Root.find('#taogi-editor-unlock').remove();
+		this.errorMarkup = this.Root.find('#taogi-editor-error').outerHTML();
+		this.Root.find('#taogi-editor-error').remove();
 		var Items = this.Root.find('fieldset.timeline_properties, .slide-item');
 		Items.each(function(index) {
 			var item = jQuery(this);
@@ -237,6 +237,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		});
 
 		this.isSorting = false;
+		this.isChanged = 0;
 
 		this.Root.find('.button.save').click(function(e) {
 			self.save();
@@ -292,12 +293,17 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				self.save();
 			}
 		});
-//		jQuery(window).bind('beforeunload', function(e) {
-//			return '현재 타임라인 편집을 마치시겠습니까?';
-//		});
+		jQuery(window).bind('beforeunload', function(e) {
+			if(self.isChanged) {
+				return '변경된 내용이 저장되지 않았어요. 그래도 이 페이지에서 나가실 건가요?';
+			}
+		});
 
 		jQuery(window).on('unload', function(e) {
 			self.unlock();
+		});
+		jQuery(window).resize(function(e) {
+			self.reSize();
 		});
 
 		this.reSize();
@@ -325,9 +331,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			}
 			var published = item.attr('attr-published');
 			if(typeof published !== 'undefined' && published !== false) {
-				obj.published = published;
+				obj.published = parseInt(published);
 			} else {
 				obj.published = -1;
+				item.attr('attr-published',-1);
 			}
 			item.find('.button.media.add').click(function(e) {
 				e.preventDefault();
@@ -425,6 +432,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
                     e.preventDefault();
                     self.MediaDialog(obj.id);
                 });
+				self.sortable(obj.id);
 			}
 			obj.item = item;
 			if(index <= self.items.length - 1) {
@@ -458,6 +466,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var f_name = jQuery(this).attr('data-name');
 				if(code == 13 && (event.ctrlKey || event.shiftKey)) {
 					event.preventDefault();
+					self.isChanged = 1;
 					if (f_name == 'text' && window.getSelection) {
 						var selection = window.getSelection(),
 							range = selection.getRangeAt(0),
@@ -498,6 +507,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					}
 				} else {
 					jQuery(this).addClass('valid').removeClass('focus').attr('data-content','');
+					self.isChanged = 1;
 				}
 			})
 			.focusin(function(event) {
@@ -535,6 +545,66 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					self.editToolBar(jQuery(this).attr('data-id'),'hide');
 				}
 			});
+
+			element.on('paste',function(e) {
+				self.handlepaste(this,e);
+				self.isChanged = 1;
+			});
+		},
+
+		/*
+		 * Strip Tag from content at pasting to editable area
+		 * handlepaste, waitforpastedata, processpaste
+		 */
+		handlepaste: function(elem, e) {
+			var savedcontent = elem.innerHTML;
+			if (e && e.clipboardData && e.clipboardData.getData) {// Webkit - get data from clipboard, put into editdiv, cleanup, then cancel event
+				if (/text\/html/.test(e.clipboardData.types)) {
+					elem.innerHTML = e.clipboardData.getData('text/html');
+				} else if (/text\/plain/.test(e.clipboardData.types)) {
+					elem.innerHTML = e.clipboardData.getData('text/plain');
+				} else {
+					elem.innerHTML = "";
+				}
+				this.waitforpastedata(elem, savedcontent);
+				if (e.preventDefault) {
+					e.stopPropagation();
+					e.preventDefault();
+				}
+				return false;
+			} else {// Everything else - empty editdiv and allow browser to paste content into it, then cleanup
+				elem.innerHTML = "";
+				this.waitforpastedata(elem, savedcontent);
+				return true;
+			}
+		},
+
+		waitforpastedata: function(elem, savedcontent) {
+			var self = this;
+			if (elem.childNodes && elem.childNodes.length > 0) {
+				this.processpaste(elem, savedcontent);
+			} else {
+				that = {
+					e: elem,
+					s: savedcontent
+				}
+				that.callself = function () {
+					self.waitforpastedata(that.e, that.s)
+				}
+				setTimeout(that.callself,20);
+			}
+		},
+
+		processpaste: function(elem, savedcontent) {
+			pasteddata = elem.innerHTML;
+			//^^Alternatively loop through dom (elem.childNodes or elem.getElementsByTagName) here
+
+			elem.innerHTML = savedcontent;
+
+			// Do whatever with gathered data;
+			var hi = jQuery('<div></div>');
+			hi.append(pasteddata);
+			elem.innerHTML += hi.text();
 		},
 
 		editToolBar: function(id,showOpt) {
@@ -544,6 +614,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var transitionEnd = this.supports.transitionEnd;
 				if(showOpt == 'show') {
 					editMenu.css('display','block');
+					this.editToolBarHandle(editMenu);
 					editMenu.css({transition: 'opacity 500ms ease-out', 'opacity':1});
 				} else {
 					editMenu.css({transition: 'opacity 500ms ease-out', 'opacity':0});
@@ -555,6 +626,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			} else {
 				if(showOpt == 'show') {
 					editMenu.css('display','block');
+					this.editToolBarHandle(editMenu);
 					editMenu.animate({'opacity':1}, 500);
 				} else {
 					editMenu.animate({'opacity':0}, 500, function() {
@@ -563,6 +635,19 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				}
 			}
 		},
+
+		/**
+		 * text editor handle
+		 **/
+        editToolBarHandle: function(toolbar) {
+			var self = this;
+			if(toolbar.data('event-init') == true) return;
+            toolbar.find('li a').bind('click.taogi',function(e) {
+				e.preventDefault();
+				var work = jQuery(this).parent().attr('data-code');
+			});
+			toolbar.data('event-init',true);
+        },
 
 		datepicker: function(element) {
 			var self = this;
@@ -591,6 +676,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					}
 					sd.text($input.val());
 					self.makeSlideTitle(sd.attr('data-id'));
+					self.isChanged = 1;
 				},
 				onClose: function() {
 					p.find('.article, .button').show();
@@ -607,9 +693,9 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			if(iText) {
 				var hs = iText.split(' ');
 				iText = iText.replace(/[\/\-]/,".");
-				if(hs[1]) {
-					iText += ":";
-				}
+//				if(hs[1]) {
+//					iText += ":";
+//				}
 				var d = taogiVMM.Date.parse(iText);
 				if(!d || d == 'Invalid Date') {
 					if(item.parent().find('span.alert').length < 1)
@@ -649,6 +735,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			this.items[idx].sDate = iText;
 			item.parent().find('span.alert').remove();
 			item.text(displayTime);
+			this.isChanged = 1;
 		},
 
 		/**
@@ -694,7 +781,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			}
 		},
 
-		checkValide: function(index) {
+		checkValid: function(index) {
 			for(var i=0; i<this.items[index].article.length; i++) {
 				if(this.items[index].article[i].item.text()) {
 					if(this.items[index].published == -1) {
@@ -706,7 +793,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			}
 			if(this.items[index].published != -1) {
 				this.items[index].published = -1;
-				this.items[index].item.removeAttr('attr-published');
+				this.items[index].item.attr('attr-published',-1);
 			}
 			return false;
 		},
@@ -732,7 +819,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					}
 				} else {
 					if(code == 13) {
-						if(this.checkValide(idx) === false) return;
+						if(this.checkValid(idx) === false) return;
 						this.collapse(this.items[idx].item);
 						this.newSlide('date_'+id);
 						this.focus(this.items[(idx+1)].article[0].item);
@@ -792,6 +879,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 
 		sortItemsById: function(id,posOpt) {
 			var sInput = jQuery('#date_'+id).find('[data-name="startDate"]');
+			if(this.checkTimeFormat(sInput) === false) return;
 			if(sInput.data('origin-startDate') == sInput.text()) {
 				return -1;
 			}
@@ -979,6 +1067,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var row = this.items[idx].item;
 			this.items[idx].published = 0;
 			row.attr('attr-published',0).addClass('trashed');
+			this.isChanged = 1;
 		},
 
 		showSlide: function(id) {
@@ -987,6 +1076,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var row = this.items[idx].item;
 			this.items[idx].published = 1;
 			row.attr('attr-published',1).removeClass('trashed');
+			this.isChanged = 1;
 		},
 
 		removeSlide: function(id) {
@@ -1038,6 +1128,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				this.itemIndex[this.items[i].id] = i;
 				this.items[i].index = i;
 			}
+			this.isChanged = 1;
 		},
 
 		/**
@@ -1068,6 +1159,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			fm.css({'display':'block'});
 			var fms = fm.children('.media-inline-form-skin');
 			var tarea = fms.find('textarea.file');
+			fm.find('#mediamultisource').attr('id',id+'_mediamultisource');
 			tarea.focus();
 			var w = fms.width();
 			var h = fms.height();
@@ -1095,7 +1187,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				self.closeMediaDialog();
 			});
 			var up = fm.find('.upload');
-			this.callfilemanager('mediasource',2);
+			this.callfilemanager(id+'_mediamultisource',2,'multi');
 			jQuery.getScript(base_uri+'contribute/autosize/jquery.autosize.min.js',function() {
 				tarea.autosize();
 			});
@@ -1114,17 +1206,17 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			jQuery('#media_inline_form').remove();
 		},
 
-		callfilemanager: function(id,type) {
+		callfilemanager: function(id,type,multi) {
 			var self = this;
 			var update = false;
 			if(id.match(/(_media|_thumbnail)/i)) {
 				var ids = id.split('_');
 				update = true;
 			}
-			var url = base_uri+'contribute/filemanager/filemanager/dialog.php?type='+type+'&subfolder=&editor=mce_0&field_id='+id+'&lang=ko_KR';
+			var url = base_uri+'contribute/filemanager/filemanager/dialog.php?type='+type+'&subfolder=&editor=mce_0&field_id='+id+'&lang=ko_KR&taogi_select_mode='+multi;
 			jQuery('#'+id).parent().find('a.upload').attr('href',url).click(function(e) {
 				e.preventDefault();
-				if(update == true) {
+				if(update == true || multi == 'multi') {
 					jQuery('#'+id).addClass('currentFileManagerTarget');
 				}
 				jQuery.fancybox.open({
@@ -1139,8 +1231,20 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						var inp = jQuery('.currentFileManagerTarget');
 						if(inp.length > 0) {
 							var ids = inp.attr('id').split('_');
-							inp.removeClass('currentFileManagerTarget');
-							self.updateMedia(ids[0],ids[1],true);
+							if(ids[1] == 'mediamultisource') {
+								var images = inp.val().split(',');
+								var ids = inp.attr('id').split('_');
+								for(var i=0; i<images.length; i++) {
+									if(images[i]) {
+										self.addMedia(ids[0],images[i]);
+									}
+								}
+								inp.removeClass('currentFileManagerTarget');
+								self.closeMediaDialog();
+							} else {
+								inp.removeClass('currentFileManagerTarget');
+								self.updateMedia(ids[0],ids[1],true);
+							}
 						}
 					}
 				});
@@ -1289,6 +1393,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				self.galleryIndex[id][uid] = index;
 			});
 			this.items[idx].galleries = n_galleries;
+			this.isChanged = 1;
 		},
 
 		addMedia: function(id,src) {
@@ -1300,6 +1405,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			if(mediaNav.length < 1) {
 				newGallery = true;
 			}
+			src = src.replace(/"/g,"'");
 			var m = taogiVMM.ExternalAPI.MediaType(src);
 			m.url = src;
 			m.uid = taogiVMM.Util.unique_ID(6);
@@ -1322,6 +1428,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			this.galleryIndex[id][m.uid] = this.items[idx].galleries.length-1;
 
 			mediaNav = this.addThumbnail(id,m,article,true);
+			this.isChanged = 1;
 		},
 
 		setFeatureId: function(id,m) {
@@ -1344,6 +1451,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				}
 			}
 			taogiVMM.ExternalAPI.pushQues();
+			this.isChanged = 1;
 		},
 
 		openMediaEditor: function(m) {
@@ -1389,7 +1497,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					'upload-tab-index': '4_1'
 				}).val(m.url).
 				parent().find('.upload').attr({ 'data-tab-index': '4-1' });
-			this.callfilemanager(id+'_'+m.uid+'_media',2);
+			this.callfilemanager(id+'_'+m.uid+'_media',2,'single');
 			/* thumbnail input */
 			container.find('.field.thumbnail > input').attr({
 					'name': id+'_'+m.uid+'_thumbnail',
@@ -1398,7 +1506,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				}).
 				val(m.thumbnail).
 				parent().find('.upload').attr({ 'data-tab-index': '5-1' });
-			this.callfilemanager(id+'_'+m.uid+'_thumbnail',1);
+			this.callfilemanager(id+'_'+m.uid+'_thumbnail',1,'single');
 			/* credit input */
 			container.find('.field.credit > input').attr({
 					'name': id+'_'+m.uid+'_credit',
@@ -1429,9 +1537,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			} else {
 				var pos = sp + eh - (self.Height - h);
 			}
-			if(pos > cS) {
-				self.scrollBody.animate({'scrollTop': pos+'px'},self.settings.sortspeed);
-			}
+			/* 2015-01-11 no scrolling at click thumbnail */
+//			if(pos > cS) {
+//				self.scrollBody.animate({'scrollTop': pos+'px'},self.settings.sortspeed);
+//			}
 
 			/* enter/tab key handle */
 			this.handleMediaEditorKeyDown(container);
@@ -1526,6 +1635,11 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			}
 		},
 
+		/**
+		 * handleMediaEditorKeyDown
+		 *   - Handling key down event at MediaEditor
+		 *   - MediaEditor is activated at click thumbnail
+		 */
 		handleMediaEditorKeyDown: function(container) {
 			var self = this;
 			container.find('input, textarea, a, button').each(function(index) {
@@ -1543,11 +1657,16 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 								if($this.hasClass('text')) {
 									var _ids = $this.attr('id').split(/_/);
 									if(_ids[2] == 'credit' || _ids[2] == 'caption') {
-										self.saveMediaAttribute(_ids[0],_ids[1],_ids[2],$this.val());
+										self.saveMediaAttribute(_ids[0],_ids[1],_ids[2],$this.val().replace(/"/g,"&quot;"));
+										$this.data('isEditing',0);
 									} else {
-										self.updateMedia(_ids[0],_ids[1],true);
+										if(code == 13 && jQuery('#'+$this.attr('id')+'mode_textarea').prop('checked')) {
+											return;
+										} else {
+											self.updateMedia(_ids[0],_ids[1],true);
+											$this.data('isEditing',0);
+										}
 									}
-									$this.data('isEditing',0);
 								}
 								var _tab = tab.split('_');
 								var tab_index = parseInt(_tab[0])+1;
@@ -1587,7 +1706,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						if($this.hasClass('text') && $this.data('isEditing') == 1) {
 							var _ids = $this.attr('id').split(/_/);
 							if(_ids[2] == 'credit' || _ids[2] == 'caption') {
-								self.saveMediaAttribute(_ids[0],_ids[1],_ids[2],$this.val());
+								self.saveMediaAttribute(_ids[0],_ids[1],_ids[2],$this.val().replace(/"/g,"&quot;"));
 							} else {
 								self.updateMedia(_ids[0],_ids[1],true);
 							}
@@ -1680,6 +1799,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					taogiVMM.attachElement('#'+m.uid,mediaElem);
 				}
 			}
+			this.isChanged = 1;
 			taogiVMM.ExternalAPI.pushQues();
 		},
 
@@ -1694,6 +1814,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			if(this.items[idx].galleries[gidx].featured == 1) {
 				jQuery('#'+uid+"_thumb").attr(at);
 			}
+			this.isChanged = 1;
 		},
 
 		setThumbWidth: function(thumbnail,uid,m) {
@@ -1742,6 +1863,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 
 			this.items[idx].galleries.remove(gidx);
 			delete this.galleryIndex[id][uid];
+			this.isChanged = 1;
 
 			var n_f_uid = '';
 			if(this.items[idx].galleries.length > 0) {
@@ -1925,13 +2047,30 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			timelineJSON.timeline.date = []
 			timelineJSON.timeline.era = {};
 			timelineJSON.timeline.extra = {};
+
+			if(this.Root.find('span.alert').length > 0) {
+				var ao = this.Root.find('span.alert');
+				var cao = ao.closest('.slide-item');
+				this.saveError('입력값 오류','수정되지 않은 오류가 있습니다.',cao.attr('data-id'));
+				if(cao.length > 0) {
+					var c = cao.find('fieldset.extendable');
+					if(c.hasClass('collapsed')){
+						this.uncollapse(cao);
+					}
+					this.focus(ao.parent().find('.editable'));
+				}
+				return false;
+			}
+
 			timelineJSON.timeline.headline = jQuery.trim(jQuery('.timeline_properties #timeline_headline').text());
 			if(!timelineJSON.timeline.headline) {
+				this.saveError('입력값 오류','타임라인 제목을 입력하세요','');
 				return this.checkField('.timeline_properties #timeline_headline','타임라인 제목을 입력하세요');
 			}
 			timelineJSON.timeline.era.headline = timelineJSON.timeline.headline;
 			timelineJSON.timeline.text = jQuery.trim(jQuery('.timeline_properties #timeline_text').html());
 			if(!timelineJSON.timeline.text) {
+				this.saveError('입력값 오류','타임라인에 대한 간단한 설명을 입력하세요','');
 				return this.checkField('.timeline_properties #timeline_text','타임라인에 대한 간단한 설명을 입력하세요');
 			}
 
@@ -1939,29 +2078,35 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 
 			timelineJSON.timeline.extra.author = jQuery.trim(jQuery('.timeline_properties #extra_author').text());
 			for(var i=1; i<this.items.length; i++) {
+				if(this.checkValid(i) == false) continue;
 				if(!this.items[i].item.find('legend.article a').text()) continue;
+				if(this.checkTimeFormat(this.items[i].item.find('[data-name="startDate"]')) == false) {
+					this.focus(this.items[i].item.find('[data-name="startDate"]'));
+					this.saveError('입력값 오류','잘못된 날짜 형식입니다.',this.items[i].id);
+					return;
+				}
 				var $this = this.items[i].item;
 				var item = {};
 				item.startDate = this.items[i].sDate;
-				item.headline = jQuery.trim(this.items[i].item.find('[data-name="headline"]').html());
-				item.text = jQuery.trim(this.items[i].item.find('[data-name="text"]').html());
+				item.headline = jQuery.trim(this.items[i].item.find('[data-name="headline"]').html().replace(/"/g,"&quot;"));
+				item.text = jQuery.trim(this.items[i].item.find('[data-name="text"]').html()).replace(/"/g,"&quot;");
 				item.published = this.items[i].published;
 				if(this.items[i].featured >= 0) {
 					item.asset = {};
-					item.asset.media = this.items[i].galleries[this.items[i].featured].url;
-					item.asset.caption = this.items[i].galleries[this.items[i].featured].caption;
-					item.asset.credit = this.items[i].galleries[this.items[i].featured].credit;
-					item.asset.thumbnail = this.items[i].galleries[this.items[i].featured].thumbnail;
+					item.asset.media = this.setAdjustForJson(this.items[i].galleries[this.items[i].featured].url);
+					item.asset.caption = this.setAdjustForJson(this.items[i].galleries[this.items[i].featured].caption);
+					item.asset.credit = this.setAdjustForJson(this.items[i].galleries[this.items[i].featured].credit);
+					item.asset.thumbnail = this.setAdjustForJson(this.items[i].galleries[this.items[i].featured].thumbnail);
 					item.asset.featured = this.items[i].galleries[this.items[i].featured].featured;
 				}
 				if(this.items[i].galleries.length > 0) {
 					item.media = [];
 					for(var j=0; j<this.items[i].galleries.length; j++) {
 						var media = {};
-						media.media = this.items[i].galleries[j].url;
-						media.caption = this.items[i].galleries[j].caption;
-						media.credit = this.items[i].galleries[j].credit;
-						media.thumbnail = this.items[i].galleries[j].thumbnail;
+						media.media = this.setAdjustForJson(this.items[i].galleries[j].url);
+						media.caption = this.setAdjustForJson(this.items[i].galleries[j].caption);
+						media.credit = this.setAdjustForJson(this.items[i].galleries[j].credit);
+						media.thumbnail = this.setAdjustForJson(this.items[i].galleries[j].thumbnail);
 						media.featured = this.items[i].galleries[j].featured;
 						media.gid = this.items[i].galleries[j].uid;
 						item.media.push(media);
@@ -1970,14 +2115,15 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				item.unique = this.items[i].id;
 				timelineJSON.timeline.date.push(item);
 			}
+			var replaceURI = false;
 			if(this.Root.find('#eid').val() != '') {
 				var url = base_uri + jQuery.trim(jQuery('.timeline_properties #taogi_permalink').text())+"/"+jQuery('#nickname').val()+"/save";
 				if(this.Root.find('#vid').val())
 					url = url + '?vid='+this.Root.find('#vid').val();
 			} else {
 				var url = base_uri + "create/save";
+				replaceURI = true;
 			}
-			console.log(url);
 			timelineJSON.timeline.extra.published = this.Root.find('input#is_public').val();
 			jQuery.ajaxSettings.traditional = true;
 			jQuery.ajax({
@@ -2008,7 +2154,19 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						var t_uri = json.tar_uri;
 						self.Root.find('#eid').val(eid);
 						self.Root.find('#vid').val(vid);
+						if(self.Root.find('#nickname').val() != nickname) {
+							replaceURI = true;
+						}
 						self.Root.find('#nickname').val(nickname);
+						if(replaceURI) {
+							if (window.history.replaceState) {
+								window.history.pushState(null, '따오기 타임라인:'+jQuery('#timeline_headline').text(), base_uri + jQuery.trim(jQuery('.timeline_properties #taogi_permalink').text())+"/"+jQuery('#nickname').val()+"/modify");
+							}
+							if(self.settings.hasGNB) {
+								self.updateGNB();
+							}
+						}
+						self.isChanged = 0;
 						if(s_uri && t_uri) {
 							self.replaceMediaUri(s_uri,t_uri);
 						}
@@ -2028,6 +2186,43 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			jQuery(selector).addClass('focus').attr('error-content',message);
 			this.focus(jQuery(selector));
 			return false;
+		},
+
+		setAdjustForJson: function(value) {
+			var out = '';
+			if(typeof(value) == 'undefined') return out;
+			if(typeof(value) == 'none') return out;
+			if(typeof(value) == undefined) return out;
+			if(!value) return out;
+			out = jQuery.trim(value).replace(/"/g,"&quot;");
+			return out;
+		},
+
+		/*
+		 * show Error Message when error occurring at saving Content
+		 */
+		saveError: function(title,message,scroll_id) {
+			var self = this;
+			var markup = jQuery(this.errorMarkup);
+			markup.find('h3.error-title').text(title);
+			markup.find('div.error-message').text(message);
+			markup.find('.close').attr('data-target',markup.attr('id'));
+			jQuery('body').append(markup);
+			markup.css({'left': parseInt((this.Width - markup.width())/2)+'px', 'top': parseInt((this.Height - markup.height())/2)+'px'});
+			markup.find('.close').bind('click.taogi',function(e) {
+				e.preventDefault();
+				var id = jQuery(this).attr('data-target');
+				jQuery('#'+id).remove();
+			});
+			setTimeout(function() {
+				markup.css('opacity',0);
+				setTimeout(function() {
+					markup.remove();
+				},600);
+			},2000);
+			if(scroll_id) {
+				this.scrollTo(scroll_id);
+			}
 		},
 
 		replaceMediaUri: function(s_uri,t_uri) {
@@ -2063,6 +2258,35 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					});
 				});
 			}
+		},
+
+		updateGNB: function() {
+			var self = this;
+			var url = base_uri + jQuery.trim(jQuery('.timeline_properties #taogi_permalink').text())+"/"+jQuery('#nickname').val()+"/gnb";
+			jQuery.ajax({
+				url:  url,
+				type: 'GET',
+				contentType: 'application/x-www-form-urlencoded',
+				beforeSend: function() {
+					jfe_Block_onRequest('헤더정보를 수정하고 있습니다. 잠시만 기다려주세요.');
+				},
+				success: function(json) {
+					jfe_unBlock_afterRequest();
+					var error = parseInt(json.error);
+					var message = json.message;
+					if(!error) {
+						jQuery('#'+self.settings.hasGNB).replaceWith(message);
+					} else {
+						alert(message);
+						return false;
+					}
+				},
+				error: function(jqXHR, textStatus, errors) {
+					jfe_unBlock_afterRequest();
+					alert(errors);
+					return false;
+				}
+			});
 		},
 
 		updateStatus: function() {
@@ -2184,6 +2408,7 @@ jQuery(document).ready(function(e){
 	jQuery('#timeline_editor').taogiEditor({
 		scrollBody: '.taogi-model-wrap',
 		sortspeed: 600,
+		hasGNB: 'taogi-gnb',
 		configure : 'taogi-create-menu-bar'
 	});
 

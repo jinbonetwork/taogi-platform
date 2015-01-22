@@ -2,39 +2,36 @@
 $Acl = "owner";
 class authors_index extends Interface_Entry {
 	public function index() {
+		// Objects
 		$context = Model_Context::instance();
+		$this->user = User::getUserProfile(Acl::getIdentity('taogi'));
+		$this->entry = Entry::getEntryProfile($this->params['taogiid']);
+		$this->authors = User::getUserProfiles(Entry::getEditors($this->params['taogiid']));
 
 		// Page
-		$this->title = "따오기 편집그룹 관리";
-
-		// Objects
-		$uid = Acl::getIdentity('taogi');
-		$this->user = User::getUser($uid,1);
-		$this->entry = Entry::getEntryInfoByID($this->params['taogiid'],1);
-		foreach(User_DBM::getEditors($this->entry['eid']) as $author) {
-			$this->authorList[] = array_merge($author,User::getUser($author['uid'],1));
-		}
+		$this->title = $this->entry['subject']." -- 편집그룹 관리";
+		$this->description = $this->entry['summary'];
 
 		// Views
-		$this->entryProfile = new Markup_Profile($this->entry);
-		$this->authorControls = new Markup_Controls('selectedEntryAuthors','user','uid');
-		$this->authorTable = new Markup_Table('entryAuthors','user','uid');
-		$this->authorGallery = new Markup_Gallery('entryAuthors','user','uid');
-		$this->authorSearchForm = new Markup_Form('entryAuthorSearch','user','uid');
+		require_once JFE_PATH.'/include/userEntryControls.php';
+		require_once JFE_PATH.'/include/entryAuthorControls.php';
 
-		// Resources
-		$this->css[] = 'ui-init.css';
-		$this->script[] = 'ui-init.js';
-		$this->css[] = 'ui-controls.css';
-		$this->script[] = 'ui-controls.js';
+		require_once JFE_PATH.'/include/entryEcard.php';
+		$this->css[] = 'ui-ecard.css';
+		$this->script[] = 'ui-ecard.js';
+
 		$this->css[] = 'ui-tabs.css';
 		$this->script[] = 'ui-tabs.js';
 
+		require_once JFE_PATH.'/include/entryAuthorTable.php';
 		$this->css[] = 'ui-table.css';
 		$this->script[] = 'ui-table.js';
-		$this->css[] = 'ui-gallery.css';
-		$this->script[] = 'ui-galelry.js';
 
+		require_once JFE_PATH.'/include/entryAuthorGallery.php';
+		$this->css[] = 'ui-gallery.css';
+		$this->script[] = 'ui-gallery.js';
+
+		// Resources - app
 		$this->css[] = 'app-entry.css';
 		$this->script[] = 'app-entry.js';
 		$this->css[] = 'app-entry-authors.css';
