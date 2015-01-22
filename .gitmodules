@@ -1,0 +1,21 @@
+[submodule "timeline"]
+	path = timeline
+	url = https://github.com/jinbonetwork/taogi-timeline.git
+[submodule "contribute/PHPMailer"]
+	path = contribute/PHPMailer
+	url = https://github.com/PHPMailer/PHPMailer.git
+[submodule "contribute/html5sortable"]
+	path = contribute/html5sortable
+	url = https://github.com/farhadi/html5sortable.git
+[submodule "contribute/autosize"]
+	path = contribute/autosize
+	url = https://github.com/jackmoore/autosize.git
+[submodule "contribute/jquery.actual"]
+	path = contribute/jquery.actual
+	url = https://github.com/dreamerslab/jquery.actual.git
+[submodule "contribute/is-loading"]
+	path = contribute/is-loading
+	url = https://github.com/hekigan/is-loading.git
+[submodule "resources/js/fancyBox"]
+	path = resources/js/fancyBox
+	url = https://github.com/fancyapps/fancyBox.git
