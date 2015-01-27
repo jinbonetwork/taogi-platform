@@ -149,71 +149,49 @@ section#feature .wrap {
 	50%		{ -o-transform: translateY(-20px); }
 	100%	{ -o-transform: translateY(0); }
 }
-section#feature .wrap h1#site-name {
+section#feature .wrap #splash {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+section#feature #splash h1 {
 	animation: wave 5s ease-in-out infinite;
 	-webkit-animation: wave 5s ease-in-out infinite;
 	-moz-animation: wave 5s ease-in-out infinite;
 	-ms-animation: wave 5s ease-in-out infinite;
 	-o-animation: wave 5s ease-in-out infinite;
-	position: absolute;
-	top: 0;
-	left: 0;
 	max-width: 320px;
 	width: 80%;
 	height: 320px;
-	margin: 0;
+	margin: 0 auto 1em auto;
 	padding: 0;
 	background: transparent url(../images/logo_eyecatch.png) scroll no-repeat center center;
 	background-size: contain;
 	text-indent: -10000px;
 	overflow: hidden;
 }
-section#feature .wrap p#site-description {
-	display: none;
-	/*
-	animation: wave 4s ease-in-out infinite;
-	-webkit-animation: wave 4s ease-in-out infinite;
-	-moz-animation: wave 4s ease-in-out infinite;
-	-ms-animation: wave 4s ease-in-out infinite;
-	-o-animation: wave 4s ease-in-out infinite;
-	position: absolute;
-	bottom: 15px;
-	right: 15px;
-	max-width: 200px;
-	width: 40%;
-	height: 200px;
-	margin: 0;
-	padding: 0;
-	background: transparent url(../images/logo_typography.png) scroll no-repeat center center;
-	background-size: contain;
-	text-indent: -100000px;
-	overflow: hidden; */
-}
-section#feature .wrap ul.buttons {
+section#feature #splash ul.buttons {
 	list-style: none;
-	position: absolute;
-	bottom: 10%;
-	left: 50%;
 	width: 400px;
-	margin: 0 0 0 -200px;
+	margin: 0 auto;
 	padding: 0;
 }
-section#feature .wrap ul.buttons:after {
+section#feature #splash ul.buttons:after {
 	content: '';
 	display: block;
 	clear: both;
 }
-section#feature .wrap ul.buttons li {
+section#feature #splash ul.buttons li {
 	float: left;
 	display: block;
 	margin: 0;
 	padding: 0;
 }
-section#feature .wrap ul.buttons li + li {
+section#feature #splash ul.buttons li + li {
 	float: right;
 	margin-left: 20px;
 }
-section#feature .wrap ul.buttons li a {
+section#feature #splash ul.buttons li a {
 	display: block;
 	width: 190px;
 	/*
@@ -226,38 +204,28 @@ section#feature .wrap ul.buttons li a {
 	border-radius: 3px;
 	transition: border-color,background-color 0.2s linear;
 }
-section#feature .wrap ul.buttons li.join a,
-section#feature .wrap ul.buttons li a:hover {
+section#feature #splash ul.buttons li.join a,
+section#feature #splash ul.buttons li a:hover {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
-section#feature .wrap ul.buttons li a img {
+section#feature #splash ul.buttons li a img {
 	display: block;
 	width: 100%;
 	height: auto;
 	border: 0;
 }
 @media all and ( max-width: 480px ) {
-	section#feature .wrap ul.buttons {
+	section#feature #splash ul.buttons {
 		width: 300px;
 		margin-left: -150px;
 	}
-	section#feature .wrap ul.buttons li a {
+	section#feature #splash ul.buttons li a {
 		width: 145px;
 	}
-	section#feature .wrap ul.buttons li + li {
+	section#feature #splash ul.buttons li + li {
 		margin-left: 10px;
 	}
-}
-
-/** bella **/
-section#feature .wrap .list {
-	margin-top: 10%;
-	text-align: initial;
-	color: white;
-	line-height: 1;
-	position: absolute;
-	left: 15%;
 }
 
 /******************************************************************************

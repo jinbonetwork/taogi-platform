@@ -77,7 +77,7 @@ a.icon:after {
 	display: inline-block;
 	line-height: 1;
 	vertical-align: top;
-	font-family: 'Glyphicons Halflings';
+	font-family: 'FontAwesome';
 	font-size: inherit;
 }
 a.icon:before {
@@ -88,19 +88,19 @@ a.icon:after {
 }
 a.icon.show:before,
 a.icon.show:after {
-	content: '\e013';
+	content: '\F058';
 }
 a.icon.hide:before,
 a.icon.hide:after {
-	content: '\e090';
+	content: '\F05E';
 }
 a.icon.remove:before,
 a.icon.remove:after {
-	content: '\e014';
+	content: '\F00D';
 }
 a.icon.remove.trash:before,
 a.icon.remove.trash:after {
-	content: '\e020';
+	content: '\F014';
 }
 a.icon:after {
 	display: none;
@@ -115,7 +115,7 @@ a.icon.remove:hover {
 	color: #FF0000;
 }
 a.icon.close:after {
-	content: '\e014';
+	content: '\F00D';
 }
 a.icon.close:hover {
 }
@@ -231,7 +231,7 @@ form#timeline_editor > .console {
 }
 #taogi-create-menu-bar ul.menu li.icon .button:before {
 	content: '';
-	font-family: 'Foundation Icons';
+	font-family: 'FontAwesome';
 	display: block;
 	width: 28px;
 	height: 28px;
@@ -295,17 +295,14 @@ form#timeline_editor > .console {
     border-color: #00164E;
 }
 #taogi-create-menu-bar ul.menu li.save.status-publish .button:before {
-	content: '\f20a';
-}
-#taogi-create-menu-bar ul.menu li.save.status-publish .button:hover:before {
-	content: '\f16a';
+	content: '\F13E';
 }
 #taogi-create-menu-bar ul.menu li.save.status-publish .button:hover,
 #taogi-create-menu-bar ul.menu li.save.status-publish .button:focus,
 #taogi-create-menu-bar ul.menu li.save.status-publish .button:active,
 #taogi-create-menu-bar ul.menu li.save.status-publish .button.active {
-    background-color: #E2070A;
-    border-color: #BE0203;
+    background-color: #60849C;
+    border-color: #454C5E;
 }
 #taogi-create-menu-bar ul.menu li.save.status-publish .button.disable:before {
 	content: '\f20a' !important;
@@ -315,8 +312,8 @@ form#timeline_editor > .console {
 #taogi-create-menu-bar ul.menu li.save.status-publish .button.disable:focus,
 #taogi-create-menu-bar ul.menu li.save.status-publish .button.disable:active,
 #taogi-create-menu-bar ul.menu li.save.status-publish .button.disable.active {
-    background-color: #60849C;
-    border-color: #454C5E;
+    background-color: #E2070A;
+    border-color: #BE0203;
 }
 #taogi-create-menu-bar ul.menu li.save .status-notice {
 	position: absolute;
@@ -365,17 +362,14 @@ form#timeline_editor > .console {
     border-color: #BE0203;
 }
 #taogi-create-menu-bar ul.menu li.save.status-draft .button:before {
-	content: '\f16a';
-}
-#taogi-create-menu-bar ul.menu li.save.status-draft .button:hover:before {
-	content: '\f20a';
+	content: '\F023';
 }
 #taogi-create-menu-bar ul.menu li.save.status-draft .button:hover,
 #taogi-create-menu-bar ul.menu li.save.status-draft .button:focus,
 #taogi-create-menu-bar ul.menu li.save.status-draft .button:active,
 #taogi-create-menu-bar ul.menu li.save.status-draft .button.active {
-    background-color: #00378F;
-    border-color: #00164E;
+    background-color: #BF7B7E;
+    border-color: #9E6262;
 }
 #taogi-create-menu-bar ul.menu li.save.status-draft .button.disable:before {
 	content: '\f16a' !important;
@@ -385,8 +379,8 @@ form#timeline_editor > .console {
 #taogi-create-menu-bar ul.menu li.save.status-draft .button.disable:focus,
 #taogi-create-menu-bar ul.menu li.save.status-draft .button.disable:active,
 #taogi-create-menu-bar ul.menu li.save.status-draft .button.disable.active {
-    background-color: #BF7B7E;
-    border-color: #9E6262;
+    background-color: #00378F;
+    border-color: #00164E;
 }
 /** Preview **/
 #taogi-create-menu-bar ul.menu li.preview .button {
@@ -395,7 +389,7 @@ form#timeline_editor > .console {
     border-color: #4cae4c;
 }
 #taogi-create-menu-bar ul.menu li.preview .button:before {
-	content: '\f147';
+	content: '\F0AC';
 }
 #taogi-create-menu-bar ul.menu li.preview .button:hover,
 #taogi-create-menu-bar ul.menu li.preview .button:focus,
@@ -596,8 +590,8 @@ fieldset.extendable.collapsed > .wrap {
 	border-radius: 3px;
 	background-color: #EEEEEE;
 	font-size: 16px;
-	font-family: 'Glyphicons Halflings';
-	content: '\E081';
+	font-family: 'FontAwesome';
+	content: '\F055';
 	color: #FFFFFF;
 }
 .slide-item > .field .button.article.add:after {
@@ -749,7 +743,7 @@ fieldset.slide .pubDate .button {
 	line-height: 30px;
 	text-align: center;
 	font-size: 20px;
-	font-family: 'Glyphicons Halflings';
+	font-family: 'FontAwesome';
 	text-indent: -10000px;
 	overflow: hidden;
 	border: 0;
@@ -774,8 +768,8 @@ fieldset.slide .pubDate .button:after {
 	text-indent: 0;
 }
 fieldset.slide .pubDate .button.datepicker:after {
-	content: '\E023'; /* CLOCK */
-	content: '\E109'; /* CALENDAR */
+	content: '\F017'; /* CLOCK */
+	content: '\F073'; /* CALENDAR */
 }
 fieldset.slide .pubDate span.alert {
 	position: absolute;
@@ -820,28 +814,29 @@ fieldset.slide .feature .figure {
 	height: inherit;
 }
 fieldset.slide .feature .button.add {
-	position: relative;
+	position: absolute;
+	top: 50%;
+	left: 50%;
 	display: block;
-	width: 100%;
-	height: 100%;
-	line-height: 200px;
-	margin: 0;
+	width: 100px;
+	height: 100px;
+	margin: -50px 0 0 -50px;
 	padding: 0;
 	border: 0;
 	outline: 0;
 	background-color: transparent;
 	cursor: pointer;
-	text-align: center;
-	text-indent: 20px;
 }
 fieldset.slide .feature .button.add span {
 	display: none;
 }
 fieldset.slide .feature .button.add:before,
 fieldset.slide .feature .button.add:after {
-	position: relative;
-	display: inline;
-	font-family: 'Glyphicons Halflings';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: block;
+	font-family: 'FontAwesome';
 	color: #CCCCCC;	
 }
 fieldset.slide .feature .button.add:hover:before,
@@ -849,15 +844,25 @@ fieldset.slide .feature .button.add:hover:after {
 	color: #999999;
 }
 fieldset.slide .feature .button.add:before {
-	content: '\e060';
-	font-size: 60px;
+	content: '\F03E';
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	margin: -30px 0 0 -30px;
+	padding: 0;
+	font-size: 50px;
 }
 fieldset.slide .feature .button.add:after {
-	content: '+';
+	content: '\F067';
+	width: 22px;
+	height: 22px;
+	text-align: center;
+	line-height: 25px;
+	margin: -32px 0 0 14px;
+	padding: 0;
 	font-size: 20px;
-	top: -43px;
-	left: -16px;
-	border: 0.2em solid #FFFFFF;
+	border-radius: 22px;
 	background-color: #FFFFFF;
 
 }
@@ -917,8 +922,8 @@ fieldset.slide .title-description .editor ul.toolbar li {
 	height: 24px;
 	line-height: 24px;
 	text-align: center;
-	font-size: 18px;
-	font-family: 'Foundation Icons';
+	font-size: 13px;
+	font-family: 'FontAwesome';
 }
 fieldset.slide .title-description .editor ul.toolbar li a {
 	color: #999999;
@@ -940,22 +945,22 @@ fieldset.slide .title-description .editor ul.toolbar li a span {
 	display: none;
 }
 fieldset.slide .title-description .editor ul.toolbar li.bold a:after {
-	content: '\F11C';
+	content: '\F032';
 }
 fieldset.slide .title-description .editor ul.toolbar li.italic a:after {
-	content: '\F15F';
+	content: '\F033';
 }
 fieldset.slide .title-description .editor ul.toolbar li.underline a:after {
-	content: '\F207';
+	content: '\F0CD';
 }
 fieldset.slide .title-description .editor ul.toolbar li.strike a:after {
-	content: '\F1F0';
+	content: '\F0CC';
 }
 fieldset.slide .title-description .editor ul.toolbar li.link a:after {
-	content: '\F165';
+	content: '\F0C1';
 }
 fieldset.slide .title-description .editor ul.toolbar li.unlink a:after {
-	content: '\F209';
+	content: '\F127';
 }
 fieldset.slide .title-description .editor ul.toolbar li span.constructed {
 	position: absolute;
@@ -1117,8 +1122,8 @@ fieldset.slide .media-nav ul.thumbnails li.add a span {
 }
 fieldset.slide .media-nav ul.thumbnails li.add a:after {
 	display: inline;
-	content: '\E081';
-	font-family: 'Glyphicons Halflings';
+	content: '\F055';
+	font-family: 'FontAwesome';
 	font-size: 32px;
 }
 fieldset.slide .media-nav ul.thumbnails li:hover {
@@ -1319,7 +1324,7 @@ fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inn
 	text-align: center;
 	background-color: #FFFFFF;
 	box-shadow: 0 0 1px #999999;
-	font-family: 'Glyphicons Halflings';
+	font-family: 'FontAwesome';
 	font-size: 16px;
 	color: #999999;
 }
@@ -1333,7 +1338,7 @@ fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inn
 	line-height: inherit;
 	text-align: inherit;
 	font-family: inherit;
-	content: '\E060';
+	content: '\F0EE';
 }
 fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner .field a.upload span {
 	display: none;
@@ -1484,7 +1489,7 @@ fieldset.slide > .wrap > .console .button.save {
 	text-align: center;
 	background-color: #FFFFFF;
 	box-shadow: 0 0 5px #999999;
-	font-family: 'Glyphicons Halflings';
+	font-family: 'FontAwesome';
 	font-size: 20px;
 	color: #999999;
 	opacity: 0.5;
@@ -1496,7 +1501,7 @@ fieldset.slide > .wrap > .console .button.save {
 	line-height: inherit;
 	text-align: inherit;
 	font-family: inherit;
-	content: '\E060';
+	content: '\F0EE';
 }
 .media-inline-form-skin .media-inline-form-inner .upload span {
 	display:none;
@@ -1661,7 +1666,7 @@ fieldset.slide > .wrap > .console .button.save {
 	-o-transition: all 0.6s;
 }
 #taogi-editor-error .wrap .button .close:before {
-	content: '\e014';
+	content: '\F00D';
 }
 #taogi-editor-error .wrap .button .close:hover {
 	color: #00378F;

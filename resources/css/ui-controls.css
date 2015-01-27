@@ -6,7 +6,7 @@ a.ui-controls-switch span {
 	display: none;
 }
 a.ui-controls-switch:after {
-	font-family: 'fontAwesome';
+	font-family: 'FontAwesome';
 	content: '\f013';
 	display: block;
 	width: 16px;

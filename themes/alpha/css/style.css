@@ -39,8 +39,8 @@ i.icon-refresh:after {
 	line-height: 3em;
 	margin: 1em auto;
 	padding: 0;	
-	font-family: 'Glyphicons Halflings';
-	content: '\E031';
+	font-family: 'FontAwesome';
+	content: '\F021';
 	color: black;
 }
 i.icon-spin {

@@ -7,25 +7,16 @@
 <section id="feature" class="stage">
 	<div class="wrap">
 		<div class="inner-wrap">
-			<h1 id="site-name" class="keepCenter" data-on-scroll-fade-scroller=".taogi-model-wrap">따오기 타임라인</h1>
-			<p id="site-description" class="" data-on-scroll-fade-scroller=".taogi-model-wrap"></p>
-			<ul class="buttons">
-				<li class="create"><a href="/create"><img src="/themes/alpha/images/front-button-create.svg" alt="타임라인 만들기"></a></li>
-				<li class="join"><a href="/regist"><img src="/themes/alpha/images/front-button-join.svg" alt="회원가입하기"></a></li>
-			</ul>
-<!--
-			<ul class="list">
-				<li>쌍용자동차</li>
-				<li>인터넷 실명제 위헌!</li>
-				<li>진보넷 15년 타임라인</li>
-				<li>진보넷 2012년 활동 </li>
-				<li>프랑스 내전 - 파리꼬뮨</li>
-				<li>국정원, 도감청의 역사 </li>
-				<li>세월호는 왜</li>
-				<li>그리고 당신의 타임라인...</li>
-			</ul> -->
-		</div>
-	</div>
+			<div id="splash" class="keepCenter">
+				<h1 id="site-name" data-on-scroll-fade-scroller=".taogi-model-wrap">따오기 타임라인</h1>
+				<!--p id="site-description" class="" data-on-scroll-fade-scroller=".taogi-model-wrap"></p-->
+				<ul class="buttons">
+					<li class="create"><a href="/create"><img src="/themes/alpha/images/front-button-create.svg" alt="타임라인 만들기"></a></li>
+					<li class="join"><a href="/regist"><img src="/themes/alpha/images/front-button-join.svg" alt="회원가입하기"></a></li>
+				</ul>
+			</div><!--/#splash-->
+		</div><!--/.inner-wrap-->
+	</div><!--/.wrap-->
 </section>
 <section id="about" class="stage">
 	<div class="wrap">
