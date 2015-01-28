@@ -245,7 +245,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 
 		if(this.settings.configure) {
 			this.configure = jQuery('#'+this.settings.configure);
-			this.callapsedHandler(this.configure);
+			this.collapsedHandler(this.configure);
 			this.spectrum(this.configure);
 			this.configure.find('.status-publish .button').mouseenter(function(e) {
 				var m = jQuery(this).parent().find('.status-draft-notice');
@@ -378,7 +378,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				obj2.item = item2;
 				obj.media.push(obj2);
 			});
-			self.callapsedHandler(item);
+			self.collapsedHandler(item);
 			self.galleryIndex[obj.id] = {};
 			item.find('.console .hide').attr('data-id',obj.id).click(function(e) {
 				self.hideSlide(obj.id);
@@ -741,7 +741,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		/**
 		 * TOGGLE FIELDSET
 		 **/
-		callapsedHandler: function(element) {
+		collapsedHandler: function(element) {
 			var self = this;
 			element.find('fieldset.extendable > legend > a').on('click',function(e){
 				if(jQuery(this).parent().parent().hasClass('collapsed')){
@@ -2371,7 +2371,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 	jQuery.fn.taogiEditor.defaults = {
 		scrollBody: '.taogi-model-wrap',
 		sortspeed: 500,
-		configure: 'extra_form'
+		configure: 'editor_config_advanced'
 	}
 
 	jQuery.fn.taogiEditor.setttings = {};
@@ -2381,18 +2381,18 @@ jQuery(document).ready(function(e){
 // BEGIN CODE
 	/* static menu-bar */
 	jQuery('#taogi-create-menu-bar .menu li').each(function(index) {
-		var self = this;
-		var sm = jQuery(this).find('.submenu');
-		if(sm.length > 0) {
-			jQuery(this).find('.button').click(function(e) {
-				if(parseInt(sm.css('max-height')) == 0 || sm.is(':hidden')) {
-					sm.taogiSlideDown(500,'ease-out');
-					jQuery(self).siblings().find('.submenu').taogiSlideUp(500,'ease-out');
-				} else {
-					sm.taogiSlideUp(500,'ease-out');
-				}
-			});
-		}
+		var $this = jQuery(this);
+		var $button = jQuery(this).find('[data-submenu]');
+		$button.on('click',function(e){
+			var $submenu_class = 'mode-'+$button.attr('data-submenu');
+			jQuery('body').toggleClass($submenu_class);
+		});
+	});
+
+	jQuery('#taogi-create-menu-bar .menu li.preview .button').on('click',function(e){
+		var $button = jQuery(this);
+		var $target = window.location.href.replace(/\/(modify|create)\/?$/,'');
+		window.open($target);
 	});
 
 
@@ -2409,7 +2409,7 @@ jQuery(document).ready(function(e){
 		scrollBody: '.taogi-model-wrap',
 		sortspeed: 600,
 		hasGNB: 'taogi-gnb',
-		configure : 'taogi-create-menu-bar'
+		configure: 'taogi-create-menu-bar'
 	});
 
 // END CODE

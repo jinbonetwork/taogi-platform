@@ -1,0 +1,81 @@
+<div id="editor_config_advanced" class="inner collapsed">
+<form name="timeline_extra" class="wrap" onsubmit="return false;">
+	<fieldset id="editor_config_advanced_timeline" class="column">
+		<legend>전체 타임라인</legend>
+		<div class="wrap">
+			<div class="field">
+				<label for="extra_theme_background">전체 배경색</label>
+				<input class="color" type="text" id="extra_theme_background" name="extra[theme][background]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_canvas">타임라인 배경색</label>
+				<input class="color" type="text" id="extra_theme_canvas" name="extra[theme][canvas]" value="">
+			</div>
+		</div>
+	</fieldset>
+	<fieldset id="editor_config_advanced_cover" class="column">
+		<legend>표지 설정</legend>
+		<div class="wrap">
+			<div class="field">
+				<label for="asset_media">표지 그림 주소</label>
+				<input class="file" type="text" id="asset_media" name="asset[media]" value="<?php print $timeline['asset']['media']; ?>"><a class="upload" href="">업로드</a>
+			</div>
+			<div class="field">
+				<label for="asset_credit">표지 그림 출처</label>
+				<input type="text" id="asset_credit" name="asset[credit]" value="<?php print $timeline['asset']['author']; ?>">
+			</div>
+			<div class="field">
+				<label for="asset_caption">표지 그림 설명</label>
+				<input type="text" id="asset_caption" name="asset[caption]" value="<?php print $timeline['asset']['caption']; ?>">
+			</div>
+			<div class="field">
+				<label for="extra_theme_cover_background">표지 배경색</label>
+				<input class="color" type="text" id="extra_theme_cover_background" name="extra[theme][cover][background]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_cover_subject_font-family">표지 제목 글자 모양</label>
+				<input type="text" id="extra_theme_cover_subject_font-family" name="extra[theme][cover][subject][font-family]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_cover_subject_color">표지 제목 글자 색</label>
+				<input class="color" type="text" id="extra_theme_cover_subject_font-family" name="extra[theme][cover][subject][color]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_cover_summary_font-family">표지 본문 글자 모양</label>
+				<input type="text" id="extra_theme_cover_summary_font-family" name="extra[theme][cover][summary][font-family]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_cover_summary_color">표지 본문 글자 색</label>
+				<input class="color" type="text" id="extra_theme_cover_summary_font-family" name="extra[theme][cover][summary][color]" value="">
+			</div>
+			<input type="hidden" name="extra[template]" value="touchcarousel">
+		</div>
+	</fieldset>
+	<fieldset id="editor_config_advanced_slide" class="column">
+		<legend>슬라이드</legend>
+		<div class="wrap">
+			<div class="field">
+				<label for="extra_theme_post_background">슬라이드 배경색</label>
+				<input class="color" type="text" id="extra_theme_post_background" name="extra[theme][post][background]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_post_font-family">슬라이드 제목 글자 모양</label>
+				<input type="text" id="extra_theme_post_subject_font-family" name="extra[theme][post][subject][font-family]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_post_subject_color">슬라이드 제목 글자 색</label>
+				<input class="color" type="text" id="extra_theme_post_subject_font-family" name="extra[theme][post][subject][color]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_post_summary_font-family">슬라이드 본문 글자 모양</label>
+				<input type="text" id="extra_theme_post_summary_font-family" name="extra[theme][post][summary][font-family]" value="">
+			</div>
+			<div class="field">
+				<label for="extra_theme_post_summary_color">슬라이드 본문 글자 색</label>
+				<input class="color" type="text" id="extra_theme_post_summary_font-family" name="extra[theme][post][summary][color]" value="">
+			</div>
+		</div>
+	</fieldset>
+</form>
+</div>
+
