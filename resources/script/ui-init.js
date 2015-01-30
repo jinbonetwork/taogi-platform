@@ -138,6 +138,19 @@ jQuery(document).ready(function(e){
 			});
 		});
 
+	jQuery('img[src$="default_entry_image.png"]').each(function(index){
+		var $this = jQuery(this);
+		var $container = $this.parent();
+		$container.addClass('default_image_container default_entry_image_container');
+	});
+
+	jQuery('img[src$="default_user_portrait.png"]').each(function(index){
+		var $this = jQuery(this);
+		var $container = $this.parent();
+		$container.addClass('default_image_container default_user_portrait_container');
+	});
+
+
 	jQuery('[data-hover-class]').hover(
 		function(e){
 			var $class = jQuery(this).attr('data-hover-class');

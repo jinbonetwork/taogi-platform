@@ -6,6 +6,8 @@ function getUserVcard($user) {
 	if(empty($user)) {
 		return;
 	}
+	$user['PORTRAITTAG'] = $user['PORTRAITTAG']?"<div class='PORTRAITTAG'>{$user['PORTRAITTAG']}</div>":'';
+
 	$markup = <<<EOT
 <div class="ui-block ui-vcard">
 	<div class="wrap">

@@ -28,8 +28,8 @@ section#create {
 	text-align:right;
 }
 #taogi-create-editor {
-	transition: transform 0.3s linear;
-	-webkit-transition: transform 0.3s linear;
+	transition: transform 0.2s linear;
+	-webkit-transition: transform 0.2s linear;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -763,6 +763,7 @@ fieldset.slide legend:before {
 }
 fieldset.slide legend {
 	color: #000000;
+	white-space: nowrap;
 }
 fieldset.slide.collapsed legend {
 	color: #AAAAAA;

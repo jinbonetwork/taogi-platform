@@ -171,11 +171,6 @@ body.timelineJS .taogi-model-wrap {
 /* FOOTER */
 
 /* COMPONENTS */
-img.portrait {
-	box-sizing: border-box;
-	border: 1px solid #CCCCCC;
-	background-color: #FFFFFF;
-}
 
 /* OVERRIDES */
 .fancybox-wrap {

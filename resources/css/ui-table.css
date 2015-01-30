@@ -71,21 +71,48 @@ table.ui-table th > *,
 table.ui-table td > * {
 	box-sizing: border-box;
 }
-table.ui-table td > img {
-	position: absolute;
+table.ui-table td > .COVERTAG,
+table.ui-table td > .PORTRAITTAG {
+	position: relative;
+	top: 0;
+	left: 0;
+	float: left;
 	width: 32px;
 	height: 32px;
+	margin: 0;
+	padding: 0 !important;
+	overflow: hidden;
+}
+table.ui-table td > .COVERTAG:after,
+table.ui-table td > .PORTRAITTAG:after {
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 24px;
+	margin: -16px 0 0 -16px;
+}
+table.ui-table td > .COVERTAG img,
+table.ui-table td > .PORTRAITTAG img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 32px;
 }
 table.ui-table th.ui-checkbox-switch-container,
 table.ui-table td.ui-checkbox-container {
 	width: 30px;
 	min-width: 0;
 }
-table.ui-table td > img + div,
-table.ui-table td > img + div + div,
-table.ui-table td > img + div + div + div {
+table.ui-table td > .COVERTAG + div,
+table.ui-table td > .COVERTAG + div + div,
+table.ui-table td > .COVERTAG + div + div + div,
+table.ui-table td > .PORTRAITTAG + div,
+table.ui-table td > .PORTRAITTAG + div + div,
+table.ui-table td > .PORTRAITTAG + div + div + div {
 	padding-left: 40px;
-}table.ui-table th.general,
+}
+table.ui-table th.general,
 table.ui-table td.general {
 	width: 160px;
 }
