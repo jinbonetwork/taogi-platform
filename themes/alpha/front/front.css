@@ -168,7 +168,19 @@ section#feature #splash h1 {
 	background: transparent url(../images/logo_eyecatch.png) scroll no-repeat center center;
 	background-size: contain;
 	text-indent: -10000px;
-	overflow: hidden;
+
+	position: relative;
+}
+section#feature #splash h1:after {
+	display: block;
+	content: '';
+	background: transparent url(../images/alpha-beta.png) scroll no-repeat right top;
+	width: 100%;
+	height: 118px;
+	position: absolute;
+	top: 42px;
+	right: -60px;
+	background-size: contain;
 }
 section#feature #splash ul.buttons {
 	list-style: none;
