@@ -268,11 +268,16 @@ class entry_index extends Interface_Entry {
 				}
 			}
 		}
-		if($lessSource){
-			$cssSource = $less->compile("html#taogi-net{{$lessSource}}");
-			$this->header .= "<style>{$cssSource}</style>";
+		if($lessSource||$this->extra_css){
+			if($lessSource){
+				$cssSource = $less->compile("html#taogi-net{{$lessSource}}");
+				$this->header .= "<style>{$cssSource}</style>";
+			}
+			if($this->extra_css){
+				$this->css[] = "../..{$this->extra_css}";
+			}
+			$this->header .= "<script>jQuery('html').attr('id','taogi-net');</script>";
 		}
-		$this->css[] = "../..{$this->extra_css}";
 	}
 }
 ?>

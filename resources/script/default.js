@@ -1,13 +1,11 @@
 var $window;
 var $document;
-var $html;
 var $body;
 var $catchResize = {}; // callback array for resize event
 
 jQuery(document).ready(function(e){
 	$window = jQuery(window);
 	$document = jQuery(document);
-	$html = jQuery('html').attr('id','taogi-net');
 	$body = jQuery('body');
 	$container = jQuery('.taogi-model-wrap article');
 
