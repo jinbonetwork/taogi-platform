@@ -23,6 +23,14 @@ var spectrumOptions = {
 	showInitial: true,
 	showInput: true
 };
+var fancyboxFilemanagerOptions = {
+	width		: 900,
+	height		: 600,
+	type		: 'iframe',
+	fitToView	: true,
+	autoSize	: false,
+	autoResize	: true
+};
 
 Array.prototype.insert = function(index) {
 	this.splice.apply(this, [index, 0].concat(
@@ -736,7 +744,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var iText = item.text();
 			if(iText) {
 				var hs = iText.split(' ');
-				iText = iText.replace(/[\/\-]/,".");
+				iText = iText.replace(/[\/\-,]/g,".");
+				console.log(iText);
 //				if(hs[1]) {
 //					iText += ":";
 //				}
@@ -1253,17 +1262,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var url = base_uri+'contribute/filemanager/filemanager/dialog.php?type='+type+'&subfolder=&editor=mce_0&field_id='+id+'&lang=ko_KR&taogi_select_mode='+multi;
 			jQuery('#'+id).parent().find('a.upload').attr('href',url).click(function(e) {
 				e.preventDefault();
-				if(update == true || multi == 'multi') {
-					jQuery('#'+id).addClass('currentFileManagerTarget');
-				}
-				jQuery.fancybox.open({
-					width		: 900,
-					height		: 600,
-					type		: 'iframe',
+				var options = jQuery.extend({},fancyboxFilemanagerOptions,{
 					href		: url,
-					fitToView	: true,
-					autoSize	: false,
-					autoResize	: true,
 					afterClose	: function() {
 						var inp = jQuery('.currentFileManagerTarget');
 						if(inp.length > 0) {
@@ -1285,6 +1285,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						}
 					}
 				});
+				if(update == true || multi == 'multi') {
+					jQuery('#'+id).addClass('currentFileManagerTarget');
+				}
+				jQuery.fancybox.open(options);
 			});
 		},
 
@@ -2485,6 +2489,20 @@ jQuery(document).ready(function(e){
 		$content.siblings().removeClass('active');
 		$content.addClass('active');
 
+	});
+	jQuery('a.cover_background_image_uploader').on('click',function(e){
+		e.preventDefault();
+		var $trigger = jQuery(this);
+		var options = jQuery.extend({},fancyboxFilemanagerOptions,{
+			href: $trigger.attr('href')
+		});
+		console.log(options);
+		jQuery.fancybox.open(options);
+	});
+	jQuery('input.cover_background_image').on('change',function(e){
+		var $this = jQuery(this);
+		var $parent = $this.closest('.field');
+		$parent.find('.cover_background_image_uploader img').attr('src',$this.val());
 	});
 	jQuery('input.color').spectrum(spectrumOptions);
 	jQuery('.preset input').on('change',function(e){

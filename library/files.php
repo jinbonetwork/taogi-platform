@@ -27,6 +27,26 @@ function delTree($dir) {
 	return rmdir($dir); 
 }
 
+function _readdir($path){
+	if(!file_exists($path)){
+		return;
+	}
+	$dir = opendir($path);
+	$items = array();
+	while(($file = readdir($dir)) !== false){
+		if($file=='.'||$file=='..'){
+			continue;
+		}
+		$items[$file] = array(
+			'name' => $file,
+			'path' => $path,
+			'type' => (is_dir($path.'/'.$file)?'dir':'file'),
+			'items' => (is_dir($path.'/'.$file)?_readdir($path.'/'.$file):null),
+		);
+	}
+	return $items;
+}
+
 function getEntryExtraCssPath($eid){
 	return getEntryAttachedPath($eid)."/style.css";
 }

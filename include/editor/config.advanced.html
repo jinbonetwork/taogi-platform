@@ -1,29 +1,8 @@
-<?php
-function getdir($path){
-	if(!file_exists($path)){
-		return;
-	}
-	$dir = opendir($path);
-	$items = array();
-	while(($file = readdir($dir)) !== false){
-		if($file=='.'||$file=='..'){
-			continue;
-		}
-		$items[$file] = array(
-			'name' => $file,
-			'path' => $path,
-			'type' => (is_dir($path.'/'.$file)?'dir':'file'),
-			'items' => (is_dir($path.'/'.$file)?getdir($path.'/'.$file):null),
-		);
-	}
-	return $items;
-}
-
-$template = isset($timeline['extra']['template'])?$timeline['extra']['template']:DEFAULT_TEMPLATE;
-
-?>
 <div id="editor_config_exterior" class="inner collapsed">
 <form name="timeline_extra" class="wrap" onsubmit="return false;">
+	<?php
+		$template = isset($timeline['extra']['template'])?$timeline['extra']['template']:DEFAULT_TEMPLATE;
+	?>
 	<input type="hidden" name="extra[template]" value="<?php echo $template; ?>">
 	<ul class="tabs">
 		<li class="tab"><a href="#editor_config_exterior_preset"><span>프리셋</span></a></li>
@@ -35,7 +14,8 @@ $template = isset($timeline['extra']['template'])?$timeline['extra']['template']
 		<div class="help"><p>미리 준비된 값을 기본설정/고급설정 항목에 입력합니다.</p></div>
 		<div class="wrap">
 <?php
-	$presets = getdir(JFE_PRESET_PATH);
+	require_once JFE_PATH.'/library/files.php';
+	$presets = _readdir(JFE_PRESET_PATH);
 	if(empty($presets)){
 		echo 'No presets';
 	}else{
@@ -77,8 +57,9 @@ PRESET;
 			<legend>앞표지</legend>
 			<div class="wrap">
 				<div class="field block">
-					<label for="asset_cover_image">배경 그림</label>
-					<input class="file" type="text" id="asset_cover_background_image" name="asset[cover_background_image]" value="<?php print $timeline['asset']['cover_background_image']; ?>">
+					<label for="asset_cover_background_image_uploader">배경 그림</label>
+					<a class="cover_background_image_uploader" id="asset_cover_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_cover_background_image&lang=ko_KR&taogi_select_mode='; ?>"><img src="<?php echo ($timeline['asset']['cover_background_image']?$timeline['asset']['cover_background_image']:DEFAULT_COVER_IMAGE); ?>"></a>
+					<input class="cover_background_image" type="hidden" id="asset_cover_background_image" name="asset[cover_background_image]" value="<?php print $timeline['asset']['cover_background_image']; ?>">
 				</div>
 				<div class="field inline">
 					<label for="extra_cover_background_color">배경 색깔</label>
@@ -115,8 +96,9 @@ PRESET;
 			<legend>뒷표지</legend>
 			<div class="wrap">
 				<div class="field block">
-					<label for="asset_back_background_image">배경 그림</label>
-					<input class="file" type="text" id="asset_back_background_image" name="asset[back_background_image]" value="<?php print $timeline['asset']['back_background_image']; ?>">
+					<label for="asset_back_background_image_uploader">배경 그림</label>
+					<a class="cover_background_image_uploader" id="asset_back_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_back_background_image&lang=ko_KR&taogi_select_mode='; ?>"><img src="<?php echo ($timeline['asset']['back_background_image']?$timeline['asset']['back_background_image']:DEFAULT_COVER_IMAGE); ?>"></a>
+					<input class="cover_background_image" type="hidden" id="asset_back_background_image" name="asset[back_background_image]" value="<?php print $timeline['asset']['back_background_image']; ?>">
 				</div>
 				<div class="field inline">
 					<label for="extra_back_background_color">배경 색깔</label>

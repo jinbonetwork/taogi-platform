@@ -31,7 +31,7 @@ define('JFE_CLASS_PATH', JFE_PATH.'/framework/classes');
 define('JFE_LIB_PATH', JFE_PATH.'/framework/library');
 define('JFE_RESOURCE_URI', JFE_URI.'resources');
 define('JFE_RESOURCE_PATH', JFE_PATH.'/resources');
-define('JFE_CONTRIBUTE_URI', JFE_URI.'contrib');
+define('JFE_CONTRIBUTE_URI', JFE_URI.'contribute');
 define('JFE_CONTRIBUTE_PATH', JFE_PATH.'/contribute');
 define('JFE_DATA_URI', JFE_URI.'files');
 define('JFE_DATA_PATH', JFE_PATH.'/files');
@@ -123,6 +123,9 @@ define('DEFAULT_ENTRY_IMAGE','/resources/images/default_entry_image.png');
 define('DEFAULT_ENTRY_BACKGROUND','/resources/images/default_entry_background.jpg');
 define('DEFAULT_USER_PORTRAIT','/resources/images/default_user_portrait.png');
 define('DEFAULT_USER_BACKGROUND','/resources/images/default_user_background.jpg');
+
+/** 편집화면 기본값들  **/
+define('DEFAULT_COVER_IMAGE','/resources/images/default_cover_image.png');
 
 /** 노드의 상태 **/
 define('NODE_STATUS_PRIVATE',0);

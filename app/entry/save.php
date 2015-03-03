@@ -23,10 +23,10 @@ class entry_save extends Controller {
 
 		require_once dirname(__FILE__)."/../../timeline/model/touchcarousel/config/config.php";
 
-//		$fp = fopen("/tmp/taogi_log.txt","a+");
-//		fputs($fp,$this->params['content']);
-//		fputs($fp,"\n");
-//		fclose($fp);
+		$fp = fopen("/tmp/taogi_log.txt","a+");
+		fputs($fp,$this->params['content']);
+		fputs($fp,"\n");
+		fclose($fp);
 		$this->params['content'] = preg_replace(array('/\x5C(?!(\x5C|\x6e|\x74))/u', '/\x5C\x5C/u'), array('','\\'), $this->params['content']);
 //		$timeline = json_decode(stripslashes($this->params['content']),true);
 		$timeline = json_decode($this->params['content'],true);
