@@ -19,3 +19,9 @@
 [submodule "resources/js/fancyBox"]
 	path = resources/js/fancyBox
 	url = https://github.com/fancyapps/fancyBox.git
+[submodule "contribute/medium-editor"]
+	path = contribute/medium-editor
+	url = https://github.com/daviferreira/medium-editor.git
+[submodule "contribute/lessphp"]
+	path = contribute/lessphp
+	url = https://github.com/leafo/lessphp.git

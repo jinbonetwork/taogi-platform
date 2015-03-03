@@ -36,6 +36,9 @@ define('JFE_CONTRIBUTE_PATH', JFE_PATH.'/contribute');
 define('JFE_DATA_URI', JFE_URI.'files');
 define('JFE_DATA_PATH', JFE_PATH.'/files');
 
+define('JFE_PRESET_URI',JFE_URI.'presets');
+define('JFE_PRESET_PATH',JFE_PATH.'/presets');
+
 define('JFE_APP_PATH', JFE_PATH.'/app/');
 define('JFE_API_PATH', JFE_PATH.'/app/api');
 

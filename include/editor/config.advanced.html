@@ -1,81 +1,153 @@
-<div id="editor_config_advanced" class="inner collapsed">
+<?php
+function getdir($path){
+	if(!file_exists($path)){
+		return;
+	}
+	$dir = opendir($path);
+	$items = array();
+	while(($file = readdir($dir)) !== false){
+		if($file=='.'||$file=='..'){
+			continue;
+		}
+		$items[$file] = array(
+			'name' => $file,
+			'path' => $path,
+			'type' => (is_dir($path.'/'.$file)?'dir':'file'),
+			'items' => (is_dir($path.'/'.$file)?getdir($path.'/'.$file):null),
+		);
+	}
+	return $items;
+}
+
+$template = isset($timeline['extra']['template'])?$timeline['extra']['template']:DEFAULT_TEMPLATE;
+
+?>
+<div id="editor_config_exterior" class="inner collapsed">
 <form name="timeline_extra" class="wrap" onsubmit="return false;">
-	<fieldset id="editor_config_advanced_timeline" class="column">
-		<legend>전체 타임라인</legend>
+	<input type="hidden" name="extra[template]" value="<?php echo $template; ?>">
+	<ul class="tabs">
+		<li class="tab"><a href="#editor_config_exterior_preset"><span>프리셋</span></a></li>
+		<li class="tab active"><a href="#editor_config_exterior_basic"><span>기본설정</span></a></li>
+		<li class="tab"><a href="#editor_config_exterior_advanced"><span>고급설정</span></a></li>
+	</ul>
+	<fieldset id="editor_config_exterior_preset" class="column">
+		<legend>프리셋</legend>
+		<div class="help"><p>미리 준비된 값을 기본설정/고급설정 항목에 입력합니다.</p></div>
 		<div class="wrap">
-			<div class="field">
-				<label for="extra_theme_background">전체 배경색</label>
-				<input class="color" type="text" id="extra_theme_background" name="extra[theme][background]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_canvas">타임라인 배경색</label>
-				<input class="color" type="text" id="extra_theme_canvas" name="extra[theme][canvas]" value="">
-			</div>
+<?php
+	$presets = getdir(JFE_PRESET_PATH);
+	if(empty($presets)){
+		echo 'No presets';
+	}else{
+		echo "<ul class='presets'>".PHP_EOL;
+		foreach($presets as $preset){
+			if($preset['type']=='dir'){
+				$in_use = $timeline['extra']['preset']==$preset['name']?true:false;
+				$directory = JFE_PRESET_URI."/{$preset['name']}/";
+				$preset = array_merge($preset,array(
+					'active' => ($in_use?' active':''),
+					'checked' => ($in_use?' checked="checked"':''),
+					'directory' => $directory,
+					'screenshot' => $directory.'screenshot.png',
+					'settings' => $directory.'settings.json',
+					'stylesheet' => $directory.'style.css',
+				));
+				echo <<<PRESET
+
+<li id='preset-{$preset['name']}' class='preset {$preset['active']}' data-name='{$preset['name']}' data-directory='{$preset['directory']}' data-settings='{$preset['settings']}' data-stylesheet='{$preset['stylesheet']}'>
+	<label for='preset-{$preset['name']}-check'>
+		<img src='{$preset['screenshot']}'>
+		<span>{$preset['name']}</span>
+		<input id='preset-{$preset['name']}-check' type='radio' name='extra[preset]' value='{$preset['name']}' {$preset['checked']}>
+	</label>
+</li>
+
+PRESET;
+			}
+		}
+		echo "</ul><!--/.presets-->".PHP_EOL;
+	}
+?>
 		</div>
 	</fieldset>
-	<fieldset id="editor_config_advanced_cover" class="column">
-		<legend>표지 설정</legend>
+	<fieldset id="editor_config_exterior_basic" class="column active">
+		<legend>기본 설정</legend>
+		<div class="help"><p>항목을 수정한 뒤 모양을 확인하려면 저장해야 합니다.</p></div>
+		<div id="editor_config_exterior_basic_cover" class="row">
+			<legend>앞표지</legend>
+			<div class="wrap">
+				<div class="field block">
+					<label for="asset_cover_image">배경 그림</label>
+					<input class="file" type="text" id="asset_cover_background_image" name="asset[cover_background_image]" value="<?php print $timeline['asset']['cover_background_image']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_cover_background_color">배경 색깔</label>
+					<input class="color" type="text" id="extra_cover_background_color" name="extra[cover_background_color]" value="<?php echo $timeline['extra']['cover_background_color']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_cover_title_color">제목 글자 색깔</label>
+					<input class="color" type="text" id="extra_cover_title_color" name="extra[cover_title_color]" value="<?php echo $timeline['extra']['cover_title_color']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_cover_body_color">본문 글자 색깔</label>
+					<input class="color" type="text" id="extra_cover_body_color" name="extra[cover_body_color]" value="<?php echo $timeline['extra']['cover_body_color']; ?>">
+				</div>
+			</div><!--/.wrap-->
+		</div><!--/.row-->
+		<div id="editor_config_exterior_basic_slide" class="row">
+			<legend>슬라이드</legend>
+			<div class="wrap">
+				<div class="field inline">
+					<label for="extra_slide_background_color">배경 색깔</label>
+					<input class="color" type="text" id="extra_slide_background_color" name="extra[slide_background_color]" value="<?php echo $timeline['extra']['slide_background_color']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_slide_title_color">제목 글자 색깔</label>
+					<input class="color" type="text" id="extra_slide_title_color" name="extra[slide_title_color]" value="<?php echo $timeline['extra']['slide_title_color']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_slide_body_color">본문 글자 색깔</label>
+					<input class="color" type="text" id="extra_slide_body_color" name="extra[slide_body_color]" value="<?php echo $timeline['extra']['slide_body_color']; ?>">
+				</div>
+			</div><!--/.wrap-->
+		</div><!--/.row-->
+		<div id="editor_config_exterior_basic_back" class="row">
+			<legend>뒷표지</legend>
+			<div class="wrap">
+				<div class="field block">
+					<label for="asset_back_background_image">배경 그림</label>
+					<input class="file" type="text" id="asset_back_background_image" name="asset[back_background_image]" value="<?php print $timeline['asset']['back_background_image']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_back_background_color">배경 색깔</label>
+					<input class="color" type="text" id="extra_back_background_color" name="extra[back_background_color]" value="<?php echo $timeline['extra']['back_background_color']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_back_title_color">제목 글자 색깔</label>
+					<input class="color" type="text" id="extra_back_title_color" name="extra[back_title_color]" value="<?php echo $timeline['extra']['back_title_color']; ?>">
+				</div>
+				<div class="field inline">
+					<label for="extra_back_body_color">본문 글자 색깔</label>
+					<input class="color" type="text" id="extra_back_body_color" name="extra[back_body_color]" value="<?php echo $timeline['extra']['back_body_color']; ?>">
+				</div>
+			</div><!--/.wrap-->
+		</div><!--/.row-->
+	</fieldset><!--/#editor_config_exterior_basic-->
+	<fieldset id="editor_config_exterior_advanced" class="column">
+		<legend>고급 설정</legend>
+		<div class="help"><p>주의: 이 항목에서 잘못된 값을 저장하면 오동작을 일으킬 수 있습니다.</p></div>
 		<div class="wrap">
-			<div class="field">
-				<label for="asset_media">표지 그림 주소</label>
-				<input class="file" type="text" id="asset_media" name="asset[media]" value="<?php print $timeline['asset']['media']; ?>"><a class="upload" href="">업로드</a>
-			</div>
-			<div class="field">
-				<label for="asset_credit">표지 그림 출처</label>
-				<input type="text" id="asset_credit" name="asset[credit]" value="<?php print $timeline['asset']['author']; ?>">
-			</div>
-			<div class="field">
-				<label for="asset_caption">표지 그림 설명</label>
-				<input type="text" id="asset_caption" name="asset[caption]" value="<?php print $timeline['asset']['caption']; ?>">
-			</div>
-			<div class="field">
-				<label for="extra_theme_cover_background">표지 배경색</label>
-				<input class="color" type="text" id="extra_theme_cover_background" name="extra[theme][cover][background]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_cover_subject_font-family">표지 제목 글자 모양</label>
-				<input type="text" id="extra_theme_cover_subject_font-family" name="extra[theme][cover][subject][font-family]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_cover_subject_color">표지 제목 글자 색</label>
-				<input class="color" type="text" id="extra_theme_cover_subject_font-family" name="extra[theme][cover][subject][color]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_cover_summary_font-family">표지 본문 글자 모양</label>
-				<input type="text" id="extra_theme_cover_summary_font-family" name="extra[theme][cover][summary][font-family]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_cover_summary_color">표지 본문 글자 색</label>
-				<input class="color" type="text" id="extra_theme_cover_summary_font-family" name="extra[theme][cover][summary][color]" value="">
-			</div>
-			<input type="hidden" name="extra[template]" value="touchcarousel">
-		</div>
-	</fieldset>
-	<fieldset id="editor_config_advanced_slide" class="column">
-		<legend>슬라이드</legend>
-		<div class="wrap">
-			<div class="field">
-				<label for="extra_theme_post_background">슬라이드 배경색</label>
-				<input class="color" type="text" id="extra_theme_post_background" name="extra[theme][post][background]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_post_font-family">슬라이드 제목 글자 모양</label>
-				<input type="text" id="extra_theme_post_subject_font-family" name="extra[theme][post][subject][font-family]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_post_subject_color">슬라이드 제목 글자 색</label>
-				<input class="color" type="text" id="extra_theme_post_subject_font-family" name="extra[theme][post][subject][color]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_post_summary_font-family">슬라이드 본문 글자 모양</label>
-				<input type="text" id="extra_theme_post_summary_font-family" name="extra[theme][post][summary][font-family]" value="">
-			</div>
-			<div class="field">
-				<label for="extra_theme_post_summary_color">슬라이드 본문 글자 색</label>
-				<input class="color" type="text" id="extra_theme_post_summary_font-family" name="extra[theme][post][summary][color]" value="">
-			</div>
-		</div>
-	</fieldset>
+			<label>CSS 코드</label>
+			<textarea class="code" id="extra_css" name="extra[css]"><?php
+				if($eid){
+					require_once JFE_PATH."/library/files.php";
+					echo htmlspecialchars(_file_get_contents(getEntryExtraCssPath($eid)));
+				}else{
+					echo $eid;
+				}
+			?></textarea>
+		</div><!--/.wrap-->
+	</fieldset><!--/#editor_config_exterior_advanced-->
 </form>
 </div>
 

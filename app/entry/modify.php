@@ -54,6 +54,11 @@ class entry_modify extends Controller {
 		$this->js[] = 'bgrins-spectrum-9619bb4/spectrum.css';
 		$this->js[] = 'bgrins-spectrum-9619bb4/spectrum.js';
 
+		/* Medium-style Rich Editor */
+		$this->css[] = '../../contribute/medium-editor/dist/css/medium-editor.css';
+		$this->css[] = '../../contribute/medium-editor/dist/css/themes/default.css';
+		$this->script[] = '../../contribute/medium-editor/dist/js/medium-editor.js';
+
 		/* Local */
 		$this->css[] = '../../timeline/resources/css/media.css';
 //		$this->css[] = 'create.css';

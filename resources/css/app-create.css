@@ -36,11 +36,11 @@ section#create {
 	width: 100%;
 	height: 100%;
 }
-body.mode-editor_config_advanced #taogi-create-editor {
+body.mode-editor_config_exterior #taogi-create-editor {
 	transform: translateX(-300px);
 	-webkit-transform: translateX(-300px);
 }
-#editor_config_advanced_wrap,
+#editor_config_exterior_wrap,
 #timeline_editor_wrap {
 	position: absolute;
 	top: 0;
@@ -48,7 +48,7 @@ body.mode-editor_config_advanced #taogi-create-editor {
 	overflow-x: hidden;
 	overflow-y: auto;
 }
-#editor_config_advanced_wrap {
+#editor_config_exterior_wrap {
 	z-index: 2;
 	left: 100%;
 	width: 300px;
@@ -58,7 +58,7 @@ body.mode-editor_config_advanced #taogi-create-editor {
 	left: 0;
 	width: 100%;
 }
-#editor_config_advanced,
+#editor_config_exterior,
 #timeline_editor {
 	margin: 60px auto 0 auto !important;
 	padding: 0 15px 15px 15px !important;
@@ -68,22 +68,7 @@ body.mode-editor_config_advanced #taogi-create-editor {
 }
 
 /******************************************************************************
-*	Advanced general
-******************************************************************************/
-#editor_config_advanced_wrap {
-	background-color: #EEEEEE;
-	box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-}
-#editor_config_advanced .wrap {
-}
-#editor_config_advanced .wrap:after {
-	content: '';
-	display: block;
-	clear: both;
-}
-
-/******************************************************************************
-*	Editor general
+*	Editor
 ******************************************************************************/
 #timeline_editor > .console {
 	display: none;
@@ -950,6 +935,7 @@ fieldset.slide .title-description .editor {
 	margin: 15px 0 30px 0;
 	overflow-y: show;
 }
+/*
 fieldset.slide .title-description .editor ul.toolbar {
 	display: none;
 	opacity: 0;
@@ -1079,6 +1065,7 @@ fieldset.slide .title-description .editor ul.toolbar li.unlink span.constructed 
 fieldset.slide .title-description .editor ul.toolbar li:hover span.constructed {
 	opacity: 1;
 }
+*/
 fieldset.slide .title-description .description {
 	min-height: inherit;
 	line-height: 1.4;
@@ -1090,6 +1077,25 @@ fieldset.slide .title-description .description p {
 }
 fieldset.slide .title-description .description p+p {
 	margin-top: 1em;
+}
+fieldset.slide .title-description .description b,
+fieldset.slide .title-description .description strong {
+	font-weight: bold;
+}
+fieldset.slide .title-description .description i,
+fieldset.slide .title-description .description em {
+	font-style: italic;
+}
+fieldset.slide .title-description .description u {
+	text-decoration: underline;
+}
+fieldset.slide .title-description .description s,
+fieldset.slide .title-description .description strike {
+	text-decoration: line-through;
+}
+fieldset.slide .title-description .description b,
+fieldset.slide .title-description .description strong {
+	font-weight: bold;
 }
 .slide-item fieldset.slide .field.console a.icon.show {
 	display: none;
@@ -1734,4 +1740,168 @@ fieldset.slide > .wrap > .console .button.save {
 }
 #taogi-editor-error .wrap .button .close span {
 	display: none;
+}
+
+/******************************************************************************
+*	Advanced
+******************************************************************************/
+#editor_config_exterior_wrap {
+	background-color: #EEEEEE;
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+#editor_config_exterior {
+}
+#editor_config_exterior .wrap {
+}
+#editor_config_exterior .wrap:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+#editor_config_exterior ul.tabs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#editor_config_exterior ul.tabs:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+#editor_config_exterior ul.tabs li.tab {
+	opacity: 0.5;
+	float: left;
+	min-width: 3.5em;
+	margin: 0;
+	padding: 0;
+}
+#editor_config_exterior ul.tabs li.tab.active {
+	opacity: 1;
+}
+#editor_config_exterior ul.tabs li.tab + li.tab {
+	margin-left: 0.5em;
+}
+#editor_config_exterior ul.tabs li.tab a {
+	display: block;
+	height: 1.5em;
+	margin: 0;
+	padding: 0 0.25em;
+	color: #666666;
+	font-size: 13px;
+}
+#editor_config_exterior ul.tabs li.tab a:before {
+	content: '\F105';
+	display: block;
+	float: left;
+	width: 1em;
+	text-align: center;
+	font-family: 'FontAwesome';
+}
+#editor_config_exterior ul.tabs li.tab a:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+#editor_config_exterior ul.tabs li.tab a:hover:before {
+	content: '\F107';
+}
+#editor_config_exterior ul.tabs li.tab.active a:before,
+#editor_config_exterior ul.tabs li.tab.active a:hover:before {
+	content: '\F103';
+	font-weight: normal;
+}
+#editor_config_exterior fieldset {
+	display: none;
+	padding: 0;
+}
+#editor_config_exterior fieldset.active {
+	display: block;
+}
+#editor_config_exterior fieldset > legend {
+	display: none;
+}
+#editor_config_exterior fieldset .help {
+	font-size: 12px;
+	color: red;
+}
+#editor_config_exterior fieldset > .wrap {
+	margin-top: 1em;
+}
+#editor_config_exterior fieldset .field {
+	margin-top: 1em;
+}
+#editor_config_exterior fieldset .field.inline {
+	display: inline-block;
+	vertical-align: top;
+	min-width: 30%;
+}
+#editor_config_exterior_preset ul.presets {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#editor_config_exterior_preset ul.presets li.preset {
+	margin: 0;
+	padding: 0;
+}
+#editor_config_exterior_preset ul.presets li.preset label {
+	position: relative;
+	display: block;
+}
+#editor_config_exterior_preset ul.presets li.preset label img {
+	box-sizing: border-box;
+	position: relative;
+	z-index: 2;
+	display: block;
+	width: 100%;
+	height: auto;
+}
+#editor_config_exterior_preset ul.presets li.preset.current label img {
+	border: 2px solid red;
+}
+#editor_config_exterior_preset ul.presets li.preset label span {
+	position: relative;
+	display: block;
+	text-align: center;
+}
+#editor_config_exterior_preset ul.presets li.preset label input {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	display: block;
+}
+#editor_config_exterior_basic .row {
+	margin-top: 1em;
+}
+#editor_config_exterior_basic .row:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+#editor_config_exterior_advanced textarea#extra_css {
+	resize: none;
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	height: 20em;
+	margin: 0;
+	padding: 0.1em;
+	font-size: 11px;
+	font-family: monospace;
+	white-space: pre;
+}
+
+/******************************************************************************
+	Richeditor
+******************************************************************************/
+body.taogi-net .medium-editor-toolbar li button {
+	min-width: 30px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+	font-size: 14px;
+}
+body.taogi-net .medium-toolbar-arrow-under:after {
+	top: 30px;
 }

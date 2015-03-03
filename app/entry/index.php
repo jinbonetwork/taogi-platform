@@ -1,6 +1,7 @@
 <?php
 class entry_index extends Interface_Entry {
 	public function index() {
+		require_once JFE_PATH.'/library/files.php';
 		require_once JFE_PATH.'/include/userEntryControls.php';
 
 		global $uri;
@@ -8,6 +9,7 @@ class entry_index extends Interface_Entry {
 		$this->timelineConfig = $context->getProperty('timeline.*');
 		$this->getEntryInfo();
 		$this->extra = Entry::getEntryExtra($this->entry['eid']);
+		$this->extra_css = getEntryExtraCssURL($this->entry['eid']);
 		$this->view_mode ='view';
 
 		if(!$this->entry['is_public']) {
@@ -64,6 +66,32 @@ class entry_index extends Interface_Entry {
 		if($this->params['skinname']) $this->skinname = $this->params['skinname'];
 		if(!$this->skinname || !file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname))
 			$this->skinname = 'default';
+
+		$this->exterior = array(
+			'raw' => json_decode(file_get_contents($this->entry['json']))->timeline,
+			'templates' => array(
+				'asset__cover_background_image',
+				'extra__cover_background_color',
+				'extra__cover_title_color',
+				'extra__cover_body_color',
+				'extra__slide_background_color',
+				'extra__slide_title_color',
+				'extra__slide_body_color',
+				'asset__back_background_image',
+				'extra__back_background_color',
+				'extra__back_title_color',
+				'extra__back_body_color',
+			),
+			'filtered' => array(
+			),
+		);
+		foreach($this->exterior['templates'] as $scope_field){
+			list($scope,$field) = explode('__',$scope_field);
+			$value = $this->exterior['raw']->$scope->$field;
+			if($value){
+				$this->exterior['filtered'][$scope_field] = $value;
+			}
+		}
 
 		$this->source = $this->getJsonURI();
 		$eval_str = '$'."this->".$this->model."();";
@@ -191,6 +219,60 @@ class entry_index extends Interface_Entry {
 		if(file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname."/script.js")) {
 			$this->header .= "\t<script type=\"text/javascript\" src=\"".TAOGI_SOURCE_URI."/model/".$this->model."/skin/".$this->skinname."/script.js\"></script>\n";
 		}
+
+		if($this->preset){
+			$preset_css = JFE_PRESET_URI.'/'.$this->model.'/'.$this->preset.'/style.css';
+			$this->header .= "\t<link id='preset-{$this->preset}-style' rel='stylesheet' href='{$preset_css}'>".PHP_EOL;
+		}
+
+
+		require_once JFE_CONTRIBUTE_PATH."/lessphp/lessc.inc.php";
+		$less = new lessc;
+		$lessSource = '';
+		foreach($this->exterior['filtered'] as $selector => $property){
+			if($property){
+				switch($selector){
+					case 'asset__cover_background_image':
+						$lessSource .= ".touchcarousel-item.cover.front section.article { background: url({$property}) scroll repeat center center; background-size: cover; }";
+					break;
+					case 'extra__cover_background_color':
+						$lessSource .= ".touchcarousel-item.cover.front section.article { background-color: {$property}; }";
+					break;
+					case 'extra__cover_title_color':
+						$lessSource .= ".touchcarousel-item.cover.front section.article h1.title { color: {$property}; }";
+					break;
+					case 'extra__cover_body_color':
+						$lessSource .= ".touchcarousel-item.cover.front section.article .description, .touchcarousel-item.cover.front section.article .meta { color: {$property}; }";
+					break;
+					case 'extra__slide_background_color':
+						$lessSource .= ".touchcarousel-item section.article { background-color: {$property}; }";
+					break;
+					case 'extra__slide_title_color':
+						$lessSource .= ".touchcarousel-item section.article .title { color: {$property}; }";
+					break;
+					case 'extra__slide_body_color':
+						$lessSource .= ".touchcarousel-item section.article .description, .touchcarousel-item section.article .meta { color: {$property}; }";
+					break;
+					case 'asset__back_background_image':
+						$lessSource .= ".touchcarousel-item.cover.back section.article { background: url({$property}) scroll repeat center center; background-size: cover; }";
+					break;
+					case 'extra__back_background_color':
+						$lessSource .= ".touchcarousel-item.cover.back section.article { background-color: {$property}; }";
+					break;
+					case 'extra__back_title_color':
+						$lessSource .= ".touchcarousel-item.cover.back section.article h1.title { color: {$property}; }";
+					break;
+					case 'extra__back_body_color':
+						$lessSource .= ".touchcarousel-item.cover.back section.article .description, .touchcarousel-item.cover.back section.article .meta { color: {$property}; }";
+					break;
+				}
+			}
+		}
+		if($lessSource){
+			$cssSource = $less->compile("html#taogi-net{{$lessSource}}");
+			$this->header .= "<style>{$cssSource}</style>";
+		}
+		$this->css[] = "../..{$this->extra_css}";
 	}
 }
 ?>

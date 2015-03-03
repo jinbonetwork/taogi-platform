@@ -1,9 +1,11 @@
 <?php
+/*
 if(!$toolbar) {
 	$fp = fopen(dirname(__FILE__)."/toolbar.html.php","r");
 	$toolbar = fread($fp,filesize(dirname(__FILE__)."/toolbar.html.php"));
 	fclose($fp);
 }
+*/
 ?>
 				<div class="slide-item" id="date___SLIDE_ID__" data-id="">
 					<fieldset class="slide extendable"><!--슬라이드 하나 당 필드셋 하나-->
@@ -20,7 +22,7 @@ if(!$toolbar) {
 							<div class="title-description">
 								<h2 class="title editable article" contenteditable="true" data-name="headline" data-default-value="제목"></h2>
 								<div class="editor">
-<?php print $toolbar; ?>
+<?php /* print $toolbar; */ ?>
 									<div class="description editable article" contenteditable="true" data-name="text" data-default-value="본문"></div>
 								</div>
 							</div>

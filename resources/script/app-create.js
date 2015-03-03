@@ -1,3 +1,29 @@
+var richeditor = [];
+var richeditorOptions = {
+	//anchorInputPlaceholder: 'Type a link',
+	buttons: ['bold','italic','underline','strikethrough','anchor'],
+	diffLeft: 0,
+	diffTop: -10,
+	updateOnEmptySelection: false,
+	firstHeader: 'h1',
+	secondHeader: 'h2',
+	delay: 1000,
+	targetBlank: true	
+};
+var spectrumOptions = {
+	chooseText: '선택',
+	cancelText: '취소',
+	preferredFormat: 'hex',
+	allowEmpty: true,
+	//showAlpha: true,
+	showPalette: true,
+	palette: [['black','white','gray','red','green','blue','gold']],
+	hideAfterPaletteSelect: true,
+	showSelectionPalette: true,
+	showInitial: true,
+	showInput: true
+};
+
 Array.prototype.insert = function(index) {
 	this.splice.apply(this, [index, 0].concat(
 		Array.prototype.slice.call(arguments, 1)));
@@ -468,6 +494,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					event.preventDefault();
 					self.isChanged = 1;
 					if (f_name == 'text' && window.getSelection) {
+						/*
 						var selection = window.getSelection(),
 							range = selection.getRangeAt(0),
 							br = document.createElement("br"),
@@ -481,6 +508,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						selection.removeAllRanges();
 						selection.addRange(range);
 						return false;
+						*/
 					}				
 				} else if(code == 9 || code == 13) {
 					event.preventDefault();
@@ -519,7 +547,15 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					jQuery(this).data('origin-startDate',jQuery(this).text());
 				}
 				if(data_name == 'text') {
-					self.editToolBar(jQuery(this).attr('data-id'),'show');
+					//self.editToolBar(jQuery(this).attr('data-id'),'show');
+					if(typeof jQuery(this).attr('id')=='undefined'){
+						var rid = 'rid-'+jQuery(this).closest('.slide-item').attr('id');
+						jQuery(this).attr('id',rid);
+					}
+					if(typeof richeditor[jQuery(this).attr('id')]=='undefined'){
+						richeditor[jQuery(this).attr('id')] = new MediumEditor('#'+jQuery(this).attr('id'),richeditorOptions);
+						console.log('RICHEDITOR: ['+jQuery(this).attr('id')+'] activated');
+					}
 				}
 			})
 			.focusout(function(event) {
@@ -542,7 +578,11 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					}
 				}
 				if(f_name == 'text') {
-					self.editToolBar(jQuery(this).attr('data-id'),'hide');
+					//self.editToolBar(jQuery(this).attr('data-id'),'hide');
+					/*
+					delete richeditor[jQuery(this).attr('id')];
+					console.log('RICHEDITOR: ['+jQuery(this).attr('id')+'] deactivated');
+					*/
 				}
 			});
 
@@ -608,6 +648,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		},
 
 		editToolBar: function(id,showOpt) {
+			/*
 			var editMenu = jQuery('#date_'+id).find('.toolbar');
 			if(this._useWebkitTransition == true) {
 				var transition = this.supports.transition.toLowerCase();
@@ -634,12 +675,14 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					});
 				}
 			}
+			*/
 		},
 
 		/**
 		 * text editor handle
 		 **/
         editToolBarHandle: function(toolbar) {
+			/*
 			var self = this;
 			if(toolbar.data('event-init') == true) return;
             toolbar.find('li a').bind('click.taogi',function(e) {
@@ -647,6 +690,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var work = jQuery(this).parent().attr('data-code');
 			});
 			toolbar.data('event-init',true);
+			*/
         },
 
 		datepicker: function(element) {
@@ -759,6 +803,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var f = a.parent().parent();
 			f.children('.wrap').css('display','none');
 			f.addClass('collapsed');
+
+			var rid = jQuery(this).find('.editable.article').attr('id');
+			delete richeditor[rid];
+			console.log('RICHEDITOR: ['+rid+'] deactivated');
 		},
 
 		uncollapse: function(element) {
@@ -841,7 +889,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		focus: function(item) {
 			var val = item.html();
 			if(!val) val = item.val();
-			if(val) item.caret(-1);
+			//if(val) item.caret(-1);
 			else item.focus();
 			item.data('isEditing',1);
 		},
@@ -1135,18 +1183,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 * color picker : this function require jquery-ui
 		 **/
 		spectrum: function(element) {
-			element.find('input.color').spectrum({
-				chooseText: '선택',
-				cancelText: '취소',
-				preferredFormat: 'hex',
-				allowEmpty: true,
-				//showAlpha: true,
-				showPalette: true,
-				palette: [ [ 'black', 'white', 'gray', 'red', 'green', 'blue', 'gold' ] ],
-				showSelectionPalette: true,
-				showInitial: true,
-				showInput: true
-			});
+			element.find('input.color').spectrum(spectrumOptions);
 		},
 
 		/**
@@ -2046,6 +2083,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			timelineJSON.timeline = {};
 			timelineJSON.timeline.date = []
 			timelineJSON.timeline.era = {};
+			timelineJSON.timeline.asset = {};
 			timelineJSON.timeline.extra = {};
 
 			if(this.Root.find('span.alert').length > 0) {
@@ -2115,6 +2153,26 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				item.unique = this.items[i].id;
 				timelineJSON.timeline.date.push(item);
 			}
+
+			if(true){
+				timelineJSON.timeline.asset.cover_background_image = jQuery('#asset_cover_background_image').val();
+				timelineJSON.timeline.extra.cover_background_color = jQuery('#extra_cover_background_color').val();
+				timelineJSON.timeline.extra.cover_title_color = jQuery('#extra_cover_title_color').val();
+				timelineJSON.timeline.extra.cover_body_color = jQuery('#extra_cover_body_color').val();
+
+				timelineJSON.timeline.extra.slide_background_color = jQuery('#extra_slide_background_color').val();
+				timelineJSON.timeline.extra.slide_title_color = jQuery('#extra_slide_title_color').val();
+				timelineJSON.timeline.extra.slide_body_color = jQuery('#extra_slide_body_color').val();
+
+				timelineJSON.timeline.asset.back_background_image = jQuery('#asset_back_background_image').val();
+				timelineJSON.timeline.extra.back_background_color = jQuery('#extra_back_background_color').val();
+				timelineJSON.timeline.extra.back_title_color = jQuery('#extra_back_title_color').val();
+				timelineJSON.timeline.extra.back_body_color = jQuery('#extra_back_body_color').val();
+
+				timelineJSON.timeline.extra.css = jQuery('#extra_css').val();
+				//console.log(timelineJSON);
+			}
+
 			var replaceURI = false;
 			if(this.Root.find('#eid').val() != '') {
 				var url = base_uri + jQuery.trim(jQuery('.timeline_properties #taogi_permalink').text())+"/"+jQuery('#nickname').val()+"/save";
@@ -2124,6 +2182,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var url = base_uri + "create/save";
 				replaceURI = true;
 			}
+
 			timelineJSON.timeline.extra.published = this.Root.find('input#is_public').val();
 			jQuery.ajaxSettings.traditional = true;
 			jQuery.ajax({
@@ -2384,6 +2443,7 @@ jQuery(document).ready(function(e){
 		var $this = jQuery(this);
 		var $button = jQuery(this).find('[data-submenu]');
 		$button.on('click',function(e){
+			e.preventDefault();
 			var $submenu_class = 'mode-'+$button.attr('data-submenu');
 			jQuery('body').toggleClass($submenu_class);
 		});
@@ -2391,7 +2451,7 @@ jQuery(document).ready(function(e){
 
 	jQuery('#taogi-create-menu-bar .menu li.preview .button').on('click',function(e){
 		var $button = jQuery(this);
-		var $target = window.location.href.replace(/\/(modify|create)\/?$/,'');
+		var $target = window.location.href.replace(/\/(modify|create)[^\/]*$/,'');
 		window.open($target);
 	});
 
@@ -2412,5 +2472,76 @@ jQuery(document).ready(function(e){
 		configure: 'taogi-create-menu-bar'
 	});
 
+
+	jQuery('#editor_config_exterior .tabs a').on('click',function(e){
+		e.preventDefault();
+		var $trigger = jQuery(this);
+		var $tab = $trigger.closest('.tab');
+		var $content = jQuery($trigger.attr('href'));
+
+		$tab.siblings().removeClass('active');
+		$tab.addClass('active');
+
+		$content.siblings().removeClass('active');
+		$content.addClass('active');
+
+	});
+	jQuery('input.color').spectrum(spectrumOptions);
+	jQuery('.preset input').on('change',function(e){
+		$trigger = jQuery(this);
+		$preset = jQuery(this).closest('.preset');
+
+		if($trigger.prop('checked')!='checked'){
+			if(!confirm('이 프리셋을 적용하면 기존 모양 설정을 덮어씁니다. 진행하시겠습니까?')){
+				$trigger.prop('checked','');
+				return;
+			}
+
+			$preset.addClass('current');
+
+			if($preset.attr('data-settings')!=''){
+				var l1,d1,l2,d2,l3,d3;
+				jQuery.getJSON($preset.attr('data-settings'))
+					.done(function(data){
+						jQuery.each(data,function(l1,d1){
+							jQuery.each(d1,function(l2,d2){
+								if(l2=='background_image'){
+									l3 = 'asset['+l1+'_'+l2+']';
+									d3 = $preset.attr('data-directory')+d2;
+									jQuery('input[name="'+l3+'"]').val(d3);
+								}else{
+									l3 = 'extra['+l1+'_'+l2+']';
+									d3 = d2;
+									jQuery('input[name="'+l3+'"]').spectrum('set',d3);
+								}
+								console.log('PRESET: '+$preset.attr('data-name')+' => '+l3+' updated. ('+d3+')');
+							});
+						});
+					})
+					.fail(function(data){
+						console.log('PRESET: '+$preset.attr('data-name')+' has no settings'+data);
+					})
+					.always(function(data){
+					});
+			}
+
+			if($preset.attr('data-stylesheet')!=''){
+				var sl;
+				jQuery.ajax($preset.attr('data-stylesheet'))
+					.done(function(data){
+						sl = 'extra[css]';	
+						jQuery('textarea[name="'+sl+'"]').val(data);
+						console.log('PRESET: '+$preset.attr('data-name')+' => '+sl+' updated. ('+data+')');
+					})
+					.fail(function(data){
+						console.log('PRESET: '+$preset.attr('data-name')+' has no stylesheet => '+data);
+					})
+					.always(function(data){
+					});
+			}
+		}else{
+			$preset.removeClass('current');
+		}
+	});
 // END CODE
 });

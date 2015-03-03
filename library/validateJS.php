@@ -33,6 +33,11 @@ function validateTimeLineJS($json) {
 		}
 		$rJSON['timeline']['date'][] = $item;
 	}
+	if(is_array($json['timeline']['extra'])) {
+		foreach($json['timeline']['extra'] as $k => $v) {
+			$rJSON['timeline']['extra'][$k] = $v;
+		}
+	}
 	if(!$rJSON['timeline']['startDate'] || $rJSON['timeline']['startDate'] == 'null')
 		$rJSON['timeline']['startDate'] = $rJSON['timeline']['date'][0]['startDate'];
 

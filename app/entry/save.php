@@ -1,6 +1,7 @@
 <?php
 import('library.validateJS');
 import('library.getJson');
+import('library.files');
 $Acl = "editor";
 class entry_save extends Controller {
 	public function index() {
@@ -25,10 +26,10 @@ class entry_save extends Controller {
 //		$fp = fopen("/tmp/taogi_log.txt","a+");
 //		fputs($fp,$this->params['content']);
 //		fputs($fp,"\n");
-//		fputs($fp,stripslashes($this->params['content']));
-//		fputs($fp,"\n");
 //		fclose($fp);
-		$timeline = json_decode(stripslashes($this->params['content']),true);
+		$this->params['content'] = preg_replace(array('/\x5C(?!(\x5C|\x6e|\x74))/u', '/\x5C\x5C/u'), array('','\\'), $this->params['content']);
+//		$timeline = json_decode(stripslashes($this->params['content']),true);
+		$timeline = json_decode($this->params['content'],true);
 		if(!$timeline['timeline']['permalink']) {
 			RespondJson::ResultPage(array(-4,"타임라인 주소를 지정하세요"));
 		}
@@ -38,6 +39,16 @@ class entry_save extends Controller {
 
 		$_entry = Entry::searchByNickname($uid,$timeline['timeline']['permalink']);
 		if($_entry && ($_entry['eid'] != $this->eid)) RespondJson::ResultPage(array(-2,"다른 타임라인에서 사용하는 주소입니다."));
+
+		$cssPath = getEntryExtraCssPath($_entry['eid']);
+		$cssContent = $timeline['timeline']['extra']['css'];
+		if($cssContent){
+			_file_put_contents($cssPath,$cssContent);
+			$timeline['timeline']['extra']['css'] = '';
+		}else{
+			if(file_exists($cssPath))
+				unlink($cssPath);
+		}
 
 		$vtimeline = validateTimeLineJS($timeline);
 

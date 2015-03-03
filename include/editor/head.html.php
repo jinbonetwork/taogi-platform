@@ -28,12 +28,12 @@
 				<button class="button" title="미리보기"><span>미리보기</span></button>
 			</li>
 			<li class="configure in-group right">
-				<a href="#" class="button" title="모양설정" data-submenu="editor_config_advanced" data-submenu-container="editor_config_advanced_wrap"><span>모양설정</span></a>
+				<a href="#" class="button" title="모양설정" data-submenu="editor_config_exterior" data-submenu-container="editor_config_exterior_wrap"><span>모양설정</span></a>
 			</li>
 		</ul>
 	</div>
 	<div id="taogi-create-editor">
-		<div id="editor_config_advanced_wrap" class="wrap">
+		<div id="editor_config_exterior_wrap" class="wrap">
 			<?php require_once dirname(__FILE__).'/config.advanced.html'; ?>
 		</div>
 		<div id="timeline_editor_wrap" class="wrap">
