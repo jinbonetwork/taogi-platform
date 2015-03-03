@@ -2497,6 +2497,7 @@ jQuery(document).ready(function(e){
 				return;
 			}
 
+			$preset.siblings().removeClass('current');
 			$preset.addClass('current');
 
 			if($preset.attr('data-settings')!=''){
