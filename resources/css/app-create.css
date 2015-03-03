@@ -458,6 +458,9 @@ a.icon.labeled span {
     background-color: #5bc0de;
     border-color: #46b8da;
 }
+body.mode-editor_config_exterior #taogi-create-menu-bar ul.menu li.configure .button {
+	box-shadow: inset 3px 3px 3px rgba(0,0,0,0.3);
+}
 #taogi-create-menu-bar ul.menu li.configure .button:hover,
 #taogi-create-menu-bar ul.menu li.configure .button:focus,
 #taogi-create-menu-bar ul.menu li.configure .button:active,
@@ -1746,8 +1749,8 @@ fieldset.slide > .wrap > .console .button.save {
 *	Advanced
 ******************************************************************************/
 #editor_config_exterior_wrap {
-	background-color: #EEEEEE;
-	box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+	background-color: #F0F0F0;
+	box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
 }
 #editor_config_exterior {
 }

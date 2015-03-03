@@ -2507,7 +2507,7 @@ jQuery(document).ready(function(e){
 							jQuery.each(d1,function(l2,d2){
 								if(l2=='background_image'){
 									l3 = 'asset['+l1+'_'+l2+']';
-									d3 = $preset.attr('data-directory')+d2;
+									d3 = d2!=''?$preset.attr('data-directory')+d2:'';
 									jQuery('input[name="'+l3+'"]').val(d3);
 								}else{
 									l3 = 'extra['+l1+'_'+l2+']';

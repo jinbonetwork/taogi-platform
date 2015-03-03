@@ -1,0 +1,19 @@
+{
+	"cover": {
+		"background_image": "",
+		"background_color": "",
+		"title_color": "",
+		"body_color": ""
+	},
+	"slide": {
+		"background_color": "",
+		"title_color": "",
+		"body_color": ""
+	},
+	"back": {
+		"background_image": "",
+		"background_color": "",
+		"title_color": "",
+		"body_color": ""
+	}
+}

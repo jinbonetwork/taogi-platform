@@ -68,7 +68,7 @@ class entry_index extends Interface_Entry {
 			$this->skinname = 'default';
 
 		$this->exterior = array(
-			'raw' => json_decode(file_get_contents($this->entry['json']))->timeline,
+			'raw' => json_decode($this->entry['timeline'])->timeline,
 			'templates' => array(
 				'asset__cover_background_image',
 				'extra__cover_background_color',
