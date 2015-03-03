@@ -1,36 +1,4 @@
 var richeditor = [];
-var richeditorOptions = {
-	//anchorInputPlaceholder: 'Type a link',
-	buttons: ['bold','italic','underline','strikethrough','anchor'],
-	diffLeft: 0,
-	diffTop: -10,
-	updateOnEmptySelection: false,
-	firstHeader: 'h1',
-	secondHeader: 'h2',
-	delay: 1000,
-	targetBlank: true	
-};
-var spectrumOptions = {
-	chooseText: '선택',
-	cancelText: '취소',
-	preferredFormat: 'hex',
-	allowEmpty: true,
-	//showAlpha: true,
-	showPalette: true,
-	palette: [['black','white','gray','red','green','blue','gold']],
-	hideAfterPaletteSelect: true,
-	showSelectionPalette: true,
-	showInitial: true,
-	showInput: true
-};
-var fancyboxFilemanagerOptions = {
-	width		: 900,
-	height		: 600,
-	type		: 'iframe',
-	fitToView	: true,
-	autoSize	: false,
-	autoResize	: true
-};
 
 Array.prototype.insert = function(index) {
 	this.splice.apply(this, [index, 0].concat(
@@ -277,47 +245,13 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			self.save();
 		});
 
+		if(this.settings.menubar) {
+			this.menubar = jQuery('#'+this.settings.menubar);
+			this.iniMenuBar();
+		}
 		if(this.settings.configure) {
 			this.configure = jQuery('#'+this.settings.configure);
-			this.collapsedHandler(this.configure);
-			this.spectrum(this.configure);
-			this.configure.find('.status-publish .button').mouseenter(function(e) {
-				var m = jQuery(this).parent().find('.status-draft-notice');
-				if(m.length < 1) {
-					var m = jQuery('<div class="status-notice status-draft-notice">'+jQuery(this).attr('data-title')+'</div>');
-					m.appendTo(jQuery(this).parent());
-				}
-				m.css({ 'top' : (jQuery(this).height()+10)+'px', 'opacity' : 1 });
-			})
-			.mouseleave(function(e) {
-				jQuery(this).parent().find('.status-draft-notice').remove();
-			})
-			.click(function(e) {
-				self.configure.find('.status-publish').removeClass('is-public');
-				self.configure.find('.status-draft').removeClass('is-public');
-				self.Root.find('input#is_public').val('0');
-				self.updateStatus();
-			});
-			this.configure.find('.status-draft .button').mouseenter(function(e) {
-				var m = jQuery(this).parent().find('.status-publish-notice');
-				if(m.length < 1) {
-					var m = jQuery('<div class="status-notice status-publish-notice">'+jQuery(this).attr('data-title')+'</div>');
-					m.appendTo(jQuery(this).parent());
-				}
-				m.css({ 'top' : (jQuery(this).height()+10)+'px', 'opacity' : 1 });
-			})
-			.mouseleave(function(e) {
-				jQuery(this).parent().find('.status-publish-notice').remove();
-			})
-			.click(function(e) {
-				self.configure.find('.status-publish').addClass('is-public');
-				self.configure.find('.status-draft').addClass('is-public');
-				self.Root.find('input#is_public').val('2');
-				self.save();
-			});
-			this.configure.find('.status-keep .button').click(function(e) {
-				self.save();
-			});
+			this.configureSetting();
 		}
 
 		jQuery(document).keydown(function(event) {
@@ -348,6 +282,61 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		reSize: function() {
 			this.Width = jQuery(window).width();
 			this.Height = jQuery(window).height();
+		},
+
+		iniMenuBar: function() {
+			var self = this;
+			this.collapsedHandler(this.menubar);
+			this.menubar.find('.status-publish .button').mouseenter(function(e) {
+				var m = jQuery(this).parent().find('.status-draft-notice');
+				if(m.length < 1) {
+					var m = jQuery('<div class="status-notice status-draft-notice">'+jQuery(this).attr('data-title')+'</div>');
+					m.appendTo(jQuery(this).parent());
+				}
+				m.css({ 'top' : (jQuery(this).height()+10)+'px', 'opacity' : 1 });
+			})
+			.mouseleave(function(e) {
+				jQuery(this).parent().find('.status-draft-notice').remove();
+			})
+			.click(function(e) {
+				self.menubar.find('.status-publish').removeClass('is-public');
+				self.menubar.find('.status-draft').removeClass('is-public');
+				self.Root.find('input#is_public').val('0');
+				self.updateStatus();
+			});
+			this.menubar.find('.status-draft .button').mouseenter(function(e) {
+				var m = jQuery(this).parent().find('.status-publish-notice');
+				if(m.length < 1) {
+					var m = jQuery('<div class="status-notice status-publish-notice">'+jQuery(this).attr('data-title')+'</div>');
+					m.appendTo(jQuery(this).parent());
+				}
+				m.css({ 'top' : (jQuery(this).height()+10)+'px', 'opacity' : 1 });
+			})
+			.mouseleave(function(e) {
+				jQuery(this).parent().find('.status-publish-notice').remove();
+			})
+			.click(function(e) {
+				self.menubar.find('.status-publish').addClass('is-public');
+				self.menubar.find('.status-draft').addClass('is-public');
+				self.Root.find('input#is_public').val('2');
+				self.save();
+			});
+			this.menubar.find('.status-keep .button').click(function(e) {
+				self.save();
+			});
+			this.menubar.find('[data-submenu]').each(function() {
+				var $button = jQuery(this);
+				$button.on('click',function(e){
+					e.preventDefault();
+					var $submenu_class = 'mode-'+jQuery(this).attr('data-submenu');
+					jQuery('body').toggleClass($submenu_class);
+				});
+			});
+			this.menubar.find('.preview .button').on('click',function(e){
+				var $button = jQuery(this);
+				var $target = window.location.href.replace(/\/(modify|create)[^\/]*$/,'');
+				window.open($target);
+			});
 		},
 
 		addItem: function(item,index,preload) {
@@ -561,7 +550,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						jQuery(this).attr('id',rid);
 					}
 					if(typeof richeditor[jQuery(this).attr('id')]=='undefined'){
-						richeditor[jQuery(this).attr('id')] = new MediumEditor('#'+jQuery(this).attr('id'),richeditorOptions);
+						richeditor[jQuery(this).attr('id')] = new MediumEditor('#'+jQuery(this).attr('id'),self.settings.richeditorOptions);
 						console.log('RICHEDITOR: ['+jQuery(this).attr('id')+'] activated');
 					}
 				}
@@ -1192,7 +1181,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 * color picker : this function require jquery-ui
 		 **/
 		spectrum: function(element) {
-			element.find('input.color').spectrum(spectrumOptions);
+			element.find('input.color').spectrum(this.settings.spectrumOptions);
 		},
 
 		/**
@@ -1262,7 +1251,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var url = base_uri+'contribute/filemanager/filemanager/dialog.php?type='+type+'&subfolder=&editor=mce_0&field_id='+id+'&lang=ko_KR&taogi_select_mode='+multi;
 			jQuery('#'+id).parent().find('a.upload').attr('href',url).click(function(e) {
 				e.preventDefault();
-				var options = jQuery.extend({},fancyboxFilemanagerOptions,{
+				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
 					href		: url,
 					afterClose	: function() {
 						var inp = jQuery('.currentFileManagerTarget');
@@ -2422,6 +2411,109 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 //					alert('오류 '+errors);
 				}
 			});
+		},
+
+		configureSetting: function() {
+			var self = this;
+			this.configure.find('.tabs a').on('click',function(e){
+				e.preventDefault();
+				var $trigger = jQuery(this);
+				var $tab = $trigger.closest('.tab');
+				var $content = jQuery($trigger.attr('href'));
+
+				$tab.siblings().removeClass('active');
+				$tab.addClass('active');
+
+				$content.siblings().removeClass('active');
+				$content.addClass('active');
+			});
+
+			this.configureBasic();
+			this.configurePreset();
+			this.configureAdvanced();
+		},
+
+		configureBasic: function() {
+			var self = this;
+			var $basicEditor = this.configure.find('#'+this.settings.configure+'_basic');
+			$basicEditor.find('a.cover_background_image_uploader').on('click',function(e){
+				e.preventDefault();
+				var $trigger = jQuery(this);
+				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
+					href: $trigger.attr('href'),
+					afterClose  : function() {
+						var inp = $trigger.next('input.cover_background_image');
+						$trigger.find('img').attr('src',inp.val());
+					}
+				});
+				jQuery.fancybox.open(options);
+			});
+			this.spectrum($basicEditor);
+		},
+
+		configurePreset: function() {
+			var self = this;
+			var $presetEditor = this.configure.find('#'+this.settings.configure+'_preset');
+			$presetEditor.find('.preset input').on('change',function(e){
+				$trigger = jQuery(this);
+				$preset = jQuery(this).closest('.preset');
+
+				if($trigger.prop('checked')!='checked'){
+					if(!confirm('이 프리셋을 적용하면 기존 모양 설정을 덮어씁니다. 진행하시겠습니까?')){
+						$trigger.prop('checked','');
+						return;
+					}
+
+					$preset.siblings().removeClass('current');
+					$preset.addClass('current');
+
+					if($preset.attr('data-settings')!=''){
+						var l1,d1,l2,d2,l3,d3;
+						jQuery.getJSON($preset.attr('data-settings'))
+							.done(function(data){
+								jQuery.each(data,function(l1,d1){
+									jQuery.each(d1,function(l2,d2){
+										if(l2=='background_image'){
+											l3 = 'asset['+l1+'_'+l2+']';
+											d3 = d2!=''?$preset.attr('data-directory')+d2:'';
+											jQuery('input[name="'+l3+'"]').val(d3);
+										}else{
+											l3 = 'extra['+l1+'_'+l2+']';
+											d3 = d2;
+											jQuery('input[name="'+l3+'"]').spectrum('set',d3);
+										}
+										console.log('PRESET: '+$preset.attr('data-name')+' => '+l3+' updated. ('+d3+')');
+									});
+								});
+							})
+							.fail(function(data){
+								console.log('PRESET: '+$preset.attr('data-name')+' has no settings'+data);
+							})
+							.always(function(data){
+							});
+					}
+
+					if($preset.attr('data-stylesheet')!=''){
+						var sl;
+						jQuery.ajax($preset.attr('data-stylesheet'))
+							.done(function(data){
+								sl = 'extra[css]';	
+								jQuery('textarea[name="'+sl+'"]').val(data);
+								console.log('PRESET: '+$preset.attr('data-name')+' => '+sl+' updated. ('+data+')');
+							})
+							.fail(function(data){
+								console.log('PRESET: '+$preset.attr('data-name')+' has no stylesheet => '+data);
+							})
+							.always(function(data){
+							});
+					}
+				}else{
+					$preset.removeClass('current');
+				}
+			});
+		},
+
+		configureAdvanced: function() {
 		}
 	}
 
@@ -2434,7 +2526,40 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 	jQuery.fn.taogiEditor.defaults = {
 		scrollBody: '.taogi-model-wrap',
 		sortspeed: 500,
-		configure: 'editor_config_advanced'
+		menubar: 'editor_config_advanced',
+		configure: 'editor_config_exterior',
+		richeditorOptions: {
+			//anchorInputPlaceholder: 'Type a link',
+			buttons: ['bold','italic','underline','strikethrough','anchor'],
+			diffLeft: 0,
+			diffTop: -10,
+			updateOnEmptySelection: false,
+			firstHeader: 'h1',
+			secondHeader: 'h2',
+			delay: 1000,
+			targetBlank: true	
+		},
+		fancyboxFilemanagerOptions: {
+			width       : 900,
+			height      : 600,
+			type        : 'iframe',
+			fitToView   : true,
+			autoSize    : false,
+			autoResize  : true
+		},
+	 	spectrumOptions: {
+			chooseText: '선택',
+			cancelText: '취소',
+			preferredFormat: 'hex',
+			allowEmpty: true,
+			//showAlpha: true,
+			showPalette: true,
+			palette: [['black','white','gray','red','green','blue','gold']],
+			hideAfterPaletteSelect: true,
+			showSelectionPalette: true,
+			showInitial: true,
+			showInput: true
+		}
 	}
 
 	jQuery.fn.taogiEditor.setttings = {};
@@ -2442,23 +2567,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 
 jQuery(document).ready(function(e){
 // BEGIN CODE
-	/* static menu-bar */
-	jQuery('#taogi-create-menu-bar .menu li').each(function(index) {
-		var $this = jQuery(this);
-		var $button = jQuery(this).find('[data-submenu]');
-		$button.on('click',function(e){
-			e.preventDefault();
-			var $submenu_class = 'mode-'+$button.attr('data-submenu');
-			jQuery('body').toggleClass($submenu_class);
-		});
-	});
-
-	jQuery('#taogi-create-menu-bar .menu li.preview .button').on('click',function(e){
-		var $button = jQuery(this);
-		var $target = window.location.href.replace(/\/(modify|create)[^\/]*$/,'');
-		window.open($target);
-	});
-
 
 	/***********************************************************************************************
 	 * INIT
@@ -2473,94 +2581,9 @@ jQuery(document).ready(function(e){
 		scrollBody: '.taogi-model-wrap',
 		sortspeed: 600,
 		hasGNB: 'taogi-gnb',
-		configure: 'taogi-create-menu-bar'
+		menubar: 'taogi-create-menu-bar',
+		configure: 'editor_config_exterior'
 	});
 
-
-	jQuery('#editor_config_exterior .tabs a').on('click',function(e){
-		e.preventDefault();
-		var $trigger = jQuery(this);
-		var $tab = $trigger.closest('.tab');
-		var $content = jQuery($trigger.attr('href'));
-
-		$tab.siblings().removeClass('active');
-		$tab.addClass('active');
-
-		$content.siblings().removeClass('active');
-		$content.addClass('active');
-
-	});
-	jQuery('a.cover_background_image_uploader').on('click',function(e){
-		e.preventDefault();
-		var $trigger = jQuery(this);
-		var options = jQuery.extend({},fancyboxFilemanagerOptions,{
-			href: $trigger.attr('href')
-		});
-		console.log(options);
-		jQuery.fancybox.open(options);
-	});
-	jQuery('input.cover_background_image').on('change',function(e){
-		var $this = jQuery(this);
-		var $parent = $this.closest('.field');
-		$parent.find('.cover_background_image_uploader img').attr('src',$this.val());
-	});
-	jQuery('input.color').spectrum(spectrumOptions);
-	jQuery('.preset input').on('change',function(e){
-		$trigger = jQuery(this);
-		$preset = jQuery(this).closest('.preset');
-
-		if($trigger.prop('checked')!='checked'){
-			if(!confirm('이 프리셋을 적용하면 기존 모양 설정을 덮어씁니다. 진행하시겠습니까?')){
-				$trigger.prop('checked','');
-				return;
-			}
-
-			$preset.siblings().removeClass('current');
-			$preset.addClass('current');
-
-			if($preset.attr('data-settings')!=''){
-				var l1,d1,l2,d2,l3,d3;
-				jQuery.getJSON($preset.attr('data-settings'))
-					.done(function(data){
-						jQuery.each(data,function(l1,d1){
-							jQuery.each(d1,function(l2,d2){
-								if(l2=='background_image'){
-									l3 = 'asset['+l1+'_'+l2+']';
-									d3 = d2!=''?$preset.attr('data-directory')+d2:'';
-									jQuery('input[name="'+l3+'"]').val(d3);
-								}else{
-									l3 = 'extra['+l1+'_'+l2+']';
-									d3 = d2;
-									jQuery('input[name="'+l3+'"]').spectrum('set',d3);
-								}
-								console.log('PRESET: '+$preset.attr('data-name')+' => '+l3+' updated. ('+d3+')');
-							});
-						});
-					})
-					.fail(function(data){
-						console.log('PRESET: '+$preset.attr('data-name')+' has no settings'+data);
-					})
-					.always(function(data){
-					});
-			}
-
-			if($preset.attr('data-stylesheet')!=''){
-				var sl;
-				jQuery.ajax($preset.attr('data-stylesheet'))
-					.done(function(data){
-						sl = 'extra[css]';	
-						jQuery('textarea[name="'+sl+'"]').val(data);
-						console.log('PRESET: '+$preset.attr('data-name')+' => '+sl+' updated. ('+data+')');
-					})
-					.fail(function(data){
-						console.log('PRESET: '+$preset.attr('data-name')+' has no stylesheet => '+data);
-					})
-					.always(function(data){
-					});
-			}
-		}else{
-			$preset.removeClass('current');
-		}
-	});
 // END CODE
 });
