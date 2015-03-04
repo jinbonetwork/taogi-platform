@@ -186,7 +186,7 @@ abstract class Controller {
 				Respond::NotFoundPage();
 			}
 			if($this->params['output'] == "nolayout") {
-				header("Content-Type:text/html; charset='utf-8'");
+				header("Content-Type:text/html; charset=utf-8");
 				echo $content;
 			} else {
 				/**

@@ -1882,6 +1882,51 @@ fieldset.slide > .wrap > .console .button.save {
 	display: block;
 	clear: both;
 }
+#editor_config_exterior_basic .asset_cover_background_image_wrap {
+	position: relative;
+}
+#editor_config_exterior_basic a.asset_cover_background_image_uploader {
+	position: relative;
+	z-index: 1;
+	display: block;
+	width: 100%;
+}
+#editor_config_exterior_basic a.asset_cover_background_image_uploader img {
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 1px;
+	border: 1px solid #000000;
+}
+#editor_config_exterior_basic a.asset_cover_background_image_remover {
+	opacity: 0.3;
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	right: 0;
+	display: block;
+}
+#editor_config_exterior_basic a.asset_cover_background_image_remover:hover {
+	opacity: 1;
+}
+#editor_config_exterior_basic a.asset_cover_background_image_remover:before {
+	font-family: 'FontAwesome';
+	content: '\F00D';
+	display: block;
+	width: 32px;
+	height: 32px;
+	text-align: center;
+	line-height: 32px;
+	margin: 0;
+	padding: 0;
+	font-size: 28px;
+	color: #FF0000;
+}
+#editor_config_exterior_basic a.asset_cover_background_image_remover span {
+	display: none;
+}
 #editor_config_exterior_advanced textarea#extra_css {
 	resize: none;
 	box-sizing: border-box;

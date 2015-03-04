@@ -18,14 +18,14 @@ class RespondJson {
 			$error = 0;
 		else if ($error === false)
 			$error = 1;
-		header('Content-Type: text/json; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 		$repond = array('error'=>$error, 'message'=>$errorMsg);
 		print json_encode($repond);
 		exit;
 	}
 	
 	public static function PrintResult($result, $useCDATA=true) {
-		header('Content-Type: text/json; charset=utf-8');
+		header('Content-Type: application/json; charset=utf-8');
 		print json_encode($result);
 		exit;
 	}

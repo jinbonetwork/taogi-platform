@@ -9,7 +9,6 @@ class entry_index extends Interface_Entry {
 		$this->timelineConfig = $context->getProperty('timeline.*');
 		$this->getEntryInfo();
 		$this->extra = Entry::getEntryExtra($this->entry['eid']);
-		$this->extra_css = getEntryExtraCssURL($this->entry['eid']);
 		$this->view_mode ='view';
 
 		if(!$this->entry['is_public']) {
@@ -27,6 +26,7 @@ class entry_index extends Interface_Entry {
 			$this->entry['vid'] = $this->params['vid'];
 		}
 
+		$revision = Entry::getEntryData($this->entry['eid'],$this->entry['vid']); 
 		if($this->mode != 'revision') {
 			if(!$this->entry['is_public']) {
 				if($_SESSION['acl']['taogi.'.$this->entry['eid']] < BITWISE_EDITOR) {
@@ -34,7 +34,6 @@ class entry_index extends Interface_Entry {
 				}
 			}
 			if(!($json_path = $this->getJsonPath())) {
-				$revision = Entry::getEntryData($this->entry['eid'],$this->entry['vid']); 
 				if($revision) {
 					$this->entry = array_merge($this->entry,$revision);
 					if($this->entry['is_public']) {
@@ -49,7 +48,6 @@ class entry_index extends Interface_Entry {
 				}
 			}
 		} else {
-			$revision = Entry::getEntryData($this->entry['eid'],$this->entry['vid']); 
 			if($revision) {
 				$this->entry = array_merge($this->entry,$revision);
 			} else {
@@ -67,8 +65,9 @@ class entry_index extends Interface_Entry {
 		if(!$this->skinname || !file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname))
 			$this->skinname = 'default';
 
+		$this->source = $this->getJsonURI();
 		$this->exterior = array(
-			'raw' => json_decode($this->entry['timeline'])->timeline,
+			'raw' => json_decode(file_get_contents($this->source))->timeline,
 			'templates' => array(
 				'asset__cover_background_image',
 				'extra__cover_background_color',
@@ -84,16 +83,24 @@ class entry_index extends Interface_Entry {
 			),
 			'filtered' => array(
 			),
+			'css' => getEntryExtraCssURL($this->entry['eid']),
 		);
 		foreach($this->exterior['templates'] as $scope_field){
 			list($scope,$field) = explode('__',$scope_field);
 			$value = $this->exterior['raw']->$scope->$field;
 			if($value){
+				if($scope=='asset'){
+					$url = explode('/',$value);
+					$url[count($url)-1] = rawurlencode($url[count($url)-1]);
+					$value = implode('/',$url);
+				}
 				$this->exterior['filtered'][$scope_field] = $value;
 			}
 		}
 
-		$this->source = $this->getJsonURI();
+		$header_last_modified = gmdate('D, d M Y H:i:s',$revision['modified']);
+		header("Last-Modified: {$header_last_modified} GMT",true,200);
+
 		$eval_str = '$'."this->".$this->model."();";
 		eval($eval_str);
 	}
@@ -233,7 +240,7 @@ class entry_index extends Interface_Entry {
 			if($property){
 				switch($selector){
 					case 'asset__cover_background_image':
-						$lessSource .= ".touchcarousel-item.cover.front section.article { background: url({$property}) scroll repeat center center; background-size: cover; }";
+						$lessSource .= ".touchcarousel-item.cover.front section.article { background: transparent url('{$property}') scroll repeat center center; background-size: cover; }";
 					break;
 					case 'extra__cover_background_color':
 						$lessSource .= ".touchcarousel-item.cover.front section.article { background-color: {$property}; }";
@@ -254,7 +261,7 @@ class entry_index extends Interface_Entry {
 						$lessSource .= ".touchcarousel-item section.article .description, .touchcarousel-item section.article .meta { color: {$property}; }";
 					break;
 					case 'asset__back_background_image':
-						$lessSource .= ".touchcarousel-item.cover.back section.article { background: url({$property}) scroll repeat center center; background-size: cover; }";
+						$lessSource .= ".touchcarousel-item.cover.back section.article { background: transparent url('{$property}') scroll repeat center center; background-size: cover; }";
 					break;
 					case 'extra__back_background_color':
 						$lessSource .= ".touchcarousel-item.cover.back section.article { background-color: {$property}; }";
@@ -268,13 +275,13 @@ class entry_index extends Interface_Entry {
 				}
 			}
 		}
-		if($lessSource||$this->extra_css){
+		if($lessSource||$this->exterior['css']){
 			if($lessSource){
 				$cssSource = $less->compile("html#taogi-net{{$lessSource}}");
 				$this->header .= "<style>{$cssSource}</style>";
 			}
-			if($this->extra_css){
-				$this->css[] = "../..{$this->extra_css}";
+			if($this->exterior['css']){
+				$this->css[] = "../..{$this->exterior['css']}";
 			}
 			$this->header .= "<script>jQuery('html').attr('id','taogi-net');</script>";
 		}

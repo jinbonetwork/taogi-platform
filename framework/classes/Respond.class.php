@@ -18,13 +18,13 @@ class Respond {
 			$error = 0;
 		else if ($error === false)
 			$error = 1;
-		header('Content-Type: text/xml; charset=utf-8');
+		header('Content-Type: application/xml; charset=utf-8');
 		print ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<response>\n<error>$error</error>\n<message><![CDATA[$errorMsg]]></message></response>");
 		exit;
 	}
 	
 	public static function PrintResult($result, $useCDATA=true) {
-		header('Content-Type: text/xml; charset=utf-8');
+		header('Content-Type: application/xml; charset=utf-8');
 		$xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 		$xml .= "<response>\n";
 		$xml .= Respond::PrintValue($result, $useCDATA);

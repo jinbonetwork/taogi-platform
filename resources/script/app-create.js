@@ -1,5 +1,3 @@
-var richeditor = [];
-
 Array.prototype.insert = function(index) {
 	this.splice.apply(this, [index, 0].concat(
 		Array.prototype.slice.call(arguments, 1)));
@@ -536,23 +534,17 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				}
 			})
 			.focusin(function(event) {
-				if(jQuery(this).data('isEditing') !== 1) {
-					jQuery(this).data('isEditing',1);
+				var $this = jQuery(this);
+				if($this.data('isEditing') !== 1) {
+					$this.data('isEditing',1);
 				}
-				var data_name = jQuery(this).attr('data-name');
+				var data_name = $this.attr('data-name');
 				if(data_name == 'startDate') {
-					jQuery(this).data('origin-startDate',jQuery(this).text());
+					$this.data('origin-startDate',$this.text());
 				}
 				if(data_name == 'text') {
-					//self.editToolBar(jQuery(this).attr('data-id'),'show');
-					if(typeof jQuery(this).attr('id')=='undefined'){
-						var rid = 'rid-'+jQuery(this).closest('.slide-item').attr('id');
-						jQuery(this).attr('id',rid);
-					}
-					if(typeof richeditor[jQuery(this).attr('id')]=='undefined'){
-						richeditor[jQuery(this).attr('id')] = new MediumEditor('#'+jQuery(this).attr('id'),self.settings.richeditorOptions);
-						console.log('RICHEDITOR: ['+jQuery(this).attr('id')+'] activated');
-					}
+					/* init richEditor */
+					self.editToolBar($this);
 				}
 			})
 			.focusout(function(event) {
@@ -575,11 +567,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					}
 				}
 				if(f_name == 'text') {
-					//self.editToolBar(jQuery(this).attr('data-id'),'hide');
-					/*
-					delete richeditor[jQuery(this).attr('id')];
-					console.log('RICHEDITOR: ['+jQuery(this).attr('id')+'] deactivated');
-					*/
 				}
 			});
 
@@ -644,51 +631,34 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			elem.innerHTML += hi.text();
 		},
 
-		editToolBar: function(id,showOpt) {
-			/*
-			var editMenu = jQuery('#date_'+id).find('.toolbar');
-			if(this._useWebkitTransition == true) {
-				var transition = this.supports.transition.toLowerCase();
-				var transitionEnd = this.supports.transitionEnd;
-				if(showOpt == 'show') {
-					editMenu.css('display','block');
-					this.editToolBarHandle(editMenu);
-					editMenu.css({transition: 'opacity 500ms ease-out', 'opacity':1});
-				} else {
-					editMenu.css({transition: 'opacity 500ms ease-out', 'opacity':0});
-					editMenu.bind(transitionEnd,function() {
-						jQuery(this).css('display','none');
-						jQuery(this).unbind(transitionEnd);
-					});
-				}
-			} else {
-				if(showOpt == 'show') {
-					editMenu.css('display','block');
-					this.editToolBarHandle(editMenu);
-					editMenu.animate({'opacity':1}, 500);
-				} else {
-					editMenu.animate({'opacity':0}, 500, function() {
-						jQuery(this).css('display','none');
-					});
-				}
-			}
-			*/
-		},
-
 		/**
 		 * text editor handle
 		 **/
-        editToolBarHandle: function(toolbar) {
-			/*
+		editToolBar: function(element) {
 			var self = this;
-			if(toolbar.data('event-init') == true) return;
-            toolbar.find('li a').bind('click.taogi',function(e) {
-				e.preventDefault();
-				var work = jQuery(this).parent().attr('data-code');
+			if(typeof element.attr('id')=='undefined'){
+				var rid = 'rid-'+element.attr('data-id')+'-'+element.attr('data-index');
+				element.attr('id',rid);
+			}
+			var richeditor = element.data('richeditor');
+			if(typeof richeditor == 'undefined') {
+				richeditor = new MediumEditor('#'+element.attr('id'),this.settings.richeditorOptions);
+				element.data('richeditor',richeditor);
+				element.addClass('richeditor');
+			}
+		},
+
+		/**
+		 * text editor destroy
+		 **/
+		disableEditToolBar: function(element) {
+			if(element.hasClass('richeditor')) {
+				element.removeData('richeditor');
+			}
+			element.find('.richeditor').each(function() {
+				jQuery(this).removeData('richeditor');
 			});
-			toolbar.data('event-init',true);
-			*/
-        },
+		},
 
 		datepicker: function(element) {
 			var self = this;
@@ -734,7 +704,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			if(iText) {
 				var hs = iText.split(' ');
 				iText = iText.replace(/[\/\-,]/g,".");
-				console.log(iText);
 //				if(hs[1]) {
 //					iText += ":";
 //				}
@@ -800,11 +769,11 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			a.children('.hide').css('display','none');
 			var f = a.parent().parent();
 			f.children('.wrap').css('display','none');
-			f.addClass('collapsed');
 
-			var rid = jQuery(this).find('.editable.article').attr('id');
-			delete richeditor[rid];
-			console.log('RICHEDITOR: ['+rid+'] deactivated');
+			/* remove richeditor */
+			this.disableEditToolBar(element);
+
+			f.addClass('collapsed');
 		},
 
 		uncollapse: function(element) {
@@ -2436,19 +2405,39 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		configureBasic: function() {
 			var self = this;
 			var $basicEditor = this.configure.find('#'+this.settings.configure+'_basic');
-			$basicEditor.find('a.cover_background_image_uploader').on('click',function(e){
+			this.spectrum($basicEditor);
+			$basicEditor.find('a.asset_cover_background_image_uploader').on('click',function(e){
 				e.preventDefault();
 				var $trigger = jQuery(this);
+				var $field = $trigger.closest('.field');
+				var $input = $field.find('input.asset_cover_background_image');
 				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
 					href: $trigger.attr('href'),
 					afterClose  : function() {
-						var inp = $trigger.next('input.cover_background_image');
-						$trigger.find('img').attr('src',inp.val());
+						$input.trigger('change');
 					}
 				});
 				jQuery.fancybox.open(options);
 			});
-			this.spectrum($basicEditor);
+			$basicEditor.find('a.asset_cover_background_image_remover').on('click',function(e){
+				e.preventDefault();
+				var $trigger = jQuery(this);
+				var $field = $trigger.closest('.field');
+				var $input = $field.find('input.asset_cover_background_image');
+				if(confirm('이미지를 삭제합니다.')){
+					$input.val('');
+					$input.trigger('change');
+				}
+			});
+			$basicEditor.find('input.asset_cover_background_image').on('change',function(e){
+				var $input = jQuery(this);
+				var $field = $input.closest('.field');
+				var $image = $field.find('a.asset_cover_background_image_uploader img');
+				var $source = $input.val();
+
+				$source = $source?$source:$input.attr('data-empty');
+				$image.attr('src',$source);
+			});
 		},
 
 		configurePreset: function() {
@@ -2468,20 +2457,25 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					$preset.addClass('current');
 
 					if($preset.attr('data-settings')!=''){
-						var l1,d1,l2,d2,l3,d3;
+						var l1,d1,l2,d2,l3,d3,selector;
 						jQuery.getJSON($preset.attr('data-settings'))
 							.done(function(data){
 								jQuery.each(data,function(l1,d1){
 									jQuery.each(d1,function(l2,d2){
 										if(l2=='background_image'){
 											l3 = 'asset['+l1+'_'+l2+']';
+											selector = 'input[name="'+l3+'"]';
+											field = jQuery(selector);
 											d3 = d2!=''?$preset.attr('data-directory')+d2:'';
-											jQuery('input[name="'+l3+'"]').val(d3);
+											field.val(d3);
 										}else{
 											l3 = 'extra['+l1+'_'+l2+']';
+											selector = 'input[name="'+l3+'"]';
+											field = jQuery(selector);
 											d3 = d2;
-											jQuery('input[name="'+l3+'"]').spectrum('set',d3);
+											field.spectrum('set',d3);
 										}
+										field.trigger('change');
 										console.log('PRESET: '+$preset.attr('data-name')+' => '+l3+' updated. ('+d3+')');
 									});
 								});
