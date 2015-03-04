@@ -2530,7 +2530,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			updateOnEmptySelection: false,
 			firstHeader: 'h1',
 			secondHeader: 'h2',
-			delay: 1000,
 			targetBlank: true	
 		},
 		fancyboxFilemanagerOptions: {
