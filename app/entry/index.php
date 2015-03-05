@@ -261,10 +261,10 @@ EXTRA__COVER_BACKGROUND_COLOR;
 					case 'extra__cover_title_color':
 						$lessSource .= <<<EXTRA__COVER_TITLE_COLOR
 
-							.touchcarousel-item.cover.front section.article h1.title {
+							.touchcarousel-item.cover.front section.article .title {
 								color: {$property};
 							}
-							.touchcarousel-item.cover.front section.article p.description {
+							.touchcarousel-item.cover.front section.article .description {
 								border-top-color: {$property};
 							}
 
@@ -274,7 +274,8 @@ EXTRA__COVER_TITLE_COLOR;
 						$lessSource .= <<<EXTRA__COVER_BODY_COLOR
 
 							.touchcarousel-item.cover.front section.article .description,
-							.touchcarousel-item.cover.front section.article .meta,
+							.touchcarousel-item.cover.front section.article .author,
+							.touchcarousel-item.cover.front section.article .pubdate,
 							.touchcarousel-item.cover.front section.article .social a {
 								color: {$property};
 							}
@@ -334,7 +335,7 @@ EXTRA__BACK_BACKGROUND_COLOR;
 					case 'extra__back_title_color':
 						$lessSource .= <<<EXTRA__BACK_TITLE_COLOR
 
-							.touchcarousel-item.cover.back section.article h1.title {
+							.touchcarousel-item.cover.back section.article .title {
 								color: {$property};
 							}
 
@@ -344,11 +345,12 @@ EXTRA__BACK_TITLE_COLOR;
 						$lessSource .= <<<EXTRA__BACK_BODY_COLOR
 
 							.touchcarousel-item.cover.back section.article .description,
-							.touchcarousel-item.cover.back section.article .meta,
+							.touchcarousel-item.cover.back section.article .author,
+							.touchcarousel-item.cover.back section.article .pubdate,
 							.touchcarousel-item.cover.back section.article .social a {
 								color: {$property};
 							}
-							.touchcarousel-item.cover.back section.article p.description {
+							.touchcarousel-item.cover.back section.article .description {
 								border-bottom-color: {$property};
 							}
 
