@@ -303,8 +303,11 @@ EXTRA__SLIDE_TITLE_COLOR;
 						$lessSource .= <<<EXTRA__SLIDE_BODY_COLOR
 
 							.touchcarousel-item section.article .description,
-							.touchcarousel-item section.article .meta {
+							.touchcarousel-item section.article .pubdate {
 								color: {$property};
+							}
+							.touchcarousel-item section.article .pubdate {
+								border-bottom-color: {$property};
 							}
 
 EXTRA__SLIDE_BODY_COLOR;
