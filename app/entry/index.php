@@ -240,37 +240,114 @@ class entry_index extends Interface_Entry {
 			if($property){
 				switch($selector){
 					case 'asset__cover_background_image':
-						$lessSource .= ".touchcarousel-item.cover.front section.article { background: transparent url('{$property}') scroll repeat center center; background-size: cover; }";
+						$lessSource .= <<<ASSET__COVER_BACKGROUND_IMAGE
+
+							.touchcarousel-item.cover.front section.article {
+								background: transparent url('{$property}') scroll repeat center center;
+								background-size: cover;
+							}
+
+ASSET__COVER_BACKGROUND_IMAGE;
 					break;
 					case 'extra__cover_background_color':
-						$lessSource .= ".touchcarousel-item.cover.front section.article { background-color: {$property}; }";
+						$lessSource .= <<<EXTRA__COVER_BACKGROUND_COLOR
+
+							.touchcarousel-item.cover.front section.article {
+								background-color: {$property};
+							}
+
+EXTRA__COVER_BACKGROUND_COLOR;
 					break;
 					case 'extra__cover_title_color':
-						$lessSource .= ".touchcarousel-item.cover.front section.article h1.title { color: {$property}; }";
+						$lessSource .= <<<EXTRA__COVER_TITLE_COLOR
+
+							.touchcarousel-item.cover.front section.article h1.title {
+								color: {$property};
+							}
+							.touchcarousel-item.cover.front section.article p.description {
+								border-top-color: {$property};
+							}
+
+EXTRA__COVER_TITLE_COLOR;
 					break;
 					case 'extra__cover_body_color':
-						$lessSource .= ".touchcarousel-item.cover.front section.article .description, .touchcarousel-item.cover.front section.article .meta { color: {$property}; }";
+						$lessSource .= <<<EXTRA__COVER_BODY_COLOR
+
+							.touchcarousel-item.cover.front section.article .description,
+							.touchcarousel-item.cover.front section.article .meta {
+								color: {$property};
+							}
+
+EXTRA__COVER_BODY_COLOR;
 					break;
 					case 'extra__slide_background_color':
-						$lessSource .= ".touchcarousel-item section.article { background-color: {$property}; }";
+						$lessSource .= <<<EXTRA__SLIDE_BACKGROUND_COLOR
+
+							.touchcarousel-item section.article {
+								background-color: {$property};
+							}
+
+EXTRA__SLIDE_BACKGROUND_COLOR;
 					break;
 					case 'extra__slide_title_color':
-						$lessSource .= ".touchcarousel-item section.article .title { color: {$property}; }";
+						$lessSource .= <<<EXTRA__SLIDE_TITLE_COLOR
+
+							.touchcarousel-item section.article .title {
+								color: {$property};
+							}
+
+EXTRA__SLIDE_TITLE_COLOR;
 					break;
 					case 'extra__slide_body_color':
-						$lessSource .= ".touchcarousel-item section.article .description, .touchcarousel-item section.article .meta { color: {$property}; }";
+						$lessSource .= <<<EXTRA__SLIDE_BODY_COLOR
+
+							.touchcarousel-item section.article .description,
+							.touchcarousel-item section.article .meta {
+								color: {$property};
+							}
+
+EXTRA__SLIDE_BODY_COLOR;
 					break;
 					case 'asset__back_background_image':
-						$lessSource .= ".touchcarousel-item.cover.back section.article { background: transparent url('{$property}') scroll repeat center center; background-size: cover; }";
+						$lessSource .= <<<ASSET__BACK_BACKGROUND_IMAGE
+						
+							.touchcarousel-item.cover.back section.article {
+								background: transparent url('{$property}') scroll repeat center center;
+								background-size: cover;
+							}
+
+ASSET__BACK_BACKGROUND_IMAGE;
 					break;
 					case 'extra__back_background_color':
-						$lessSource .= ".touchcarousel-item.cover.back section.article { background-color: {$property}; }";
+						$lessSource .= <<<EXTRA__BACK_BACKGROUND_COLOR
+
+							.touchcarousel-item.cover.back section.article {
+								background-color: {$property};
+							}
+
+EXTRA__BACK_BACKGROUND_COLOR;
 					break;
 					case 'extra__back_title_color':
-						$lessSource .= ".touchcarousel-item.cover.back section.article h1.title { color: {$property}; }";
+						$lessSource .= <<<EXTRA__BACK_TITLE_COLOR
+
+							.touchcarousel-item.cover.back section.article h1.title {
+								color: {$property};
+							}
+
+EXTRA__BACK_TITLE_COLOR;
 					break;
 					case 'extra__back_body_color':
-						$lessSource .= ".touchcarousel-item.cover.back section.article .description, .touchcarousel-item.cover.back section.article .meta { color: {$property}; }";
+						$lessSource .= <<<EXTRA__BACK_BODY_COLOR
+
+							.touchcarousel-item.cover.back section.article .description,
+							.touchcarousel-item.cover.back section.article .meta {
+								color: {$property};
+							}
+							.touchcarousel-item.cover.back section.article p.description {
+								border-bottom-color: {$property};
+							}
+
+EXTRA__BACK_BODY_COLOR;
 					break;
 				}
 			}
