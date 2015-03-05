@@ -274,7 +274,8 @@ EXTRA__COVER_TITLE_COLOR;
 						$lessSource .= <<<EXTRA__COVER_BODY_COLOR
 
 							.touchcarousel-item.cover.front section.article .description,
-							.touchcarousel-item.cover.front section.article .meta {
+							.touchcarousel-item.cover.front section.article .meta,
+							.touchcarousel-item.cover.front section.article .social a {
 								color: {$property};
 							}
 
@@ -340,7 +341,8 @@ EXTRA__BACK_TITLE_COLOR;
 						$lessSource .= <<<EXTRA__BACK_BODY_COLOR
 
 							.touchcarousel-item.cover.back section.article .description,
-							.touchcarousel-item.cover.back section.article .meta {
+							.touchcarousel-item.cover.back section.article .meta,
+							.touchcarousel-item.cover.back section.article .social a {
 								color: {$property};
 							}
 							.touchcarousel-item.cover.back section.article p.description {
