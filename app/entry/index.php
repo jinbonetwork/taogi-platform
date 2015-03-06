@@ -65,9 +65,10 @@ class entry_index extends Interface_Entry {
 		if(!$this->skinname || !file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname))
 			$this->skinname = 'default';
 
+		$this->entry['modified'] = $revision['modified'];
 		$this->source = $this->getJsonURI();
+		$this->json = json_decode(file_get_contents($this->source),true);
 		$this->exterior = array(
-			'raw' => json_decode(file_get_contents($this->source))->timeline,
 			'templates' => array(
 				'asset__cover_background_image',
 				'extra__cover_background_color',
@@ -87,7 +88,8 @@ class entry_index extends Interface_Entry {
 		);
 		foreach($this->exterior['templates'] as $scope_field){
 			list($scope,$field) = explode('__',$scope_field);
-			$value = $this->exterior['raw']->$scope->$field;
+			//$value = $this->exterior['json']->$scope->$field;
+			$value = $this->json['timeline'][$scope][$field];
 			if($value){
 				if($scope=='asset'){
 					$url = explode('/',$value);
@@ -98,7 +100,7 @@ class entry_index extends Interface_Entry {
 			}
 		}
 
-		$header_last_modified = gmdate('D, d M Y H:i:s',$revision['modified']);
+		$header_last_modified = gmdate('D, d M Y H:i:s',$this->entry['modified']);
 		header("Last-Modified: {$header_last_modified} GMT",true,200);
 
 		$eval_str = '$'."this->".$this->model."();";
@@ -159,22 +161,26 @@ class entry_index extends Interface_Entry {
 		if(file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname."/style.css"))
 			$this->header .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".TAOGI_SOURCE_URI."/model/".$this->model."/skin/".$this->skinname."/style.css\" />\n";
 
-		$this->header .= "\t<script type=\"text/javascript\">// <![CDATA[
-		var timeline_config = {
-			width:      '".$this->params['width']."',
-			height:     '".$this->params['height']."',
-			source:     '".$this->source."',
-			embed_id:   'timeline-embed',
-			start_at_end: ".$this->params['start_at_end'].",
-			start_at_slide: '".$this->params['start_at_slide']."',
-			start_zoom_adjust: '". $this->params['start_zoom_adjust']."',
-			hash_bookmark:".$this->params['hash_bookmark'].",
-			font:'".$this->params['font']."',
-			debug:".$this->params['debug'].",
-			lang: '".$this->params['lang']."',
-			maptype: '".$this->params['maptype']."',
-		}
-	// ]]></script>\n";
+		$this->header .= <<<TIMELINECONFIG
+
+			<script type="text/javascript">
+				var timeline_config = {
+					width: '{$this->params['width']}',
+					height: '{$this->params['height']}',
+					source: '{$this->source}',
+					embed_id: 'timeline-embed',
+					start_at_end: {$this->params['start_at_end']},
+					start_at_slide: '{$this->params['start_at_slide']}',
+					start_zoom_adjust: '{$this->params['start_zoom_adjust']}',
+					hash_bookmark: {$this->params['hash_bookmark']},
+					font: '{$this->params['font']}',
+					debug: {$this->params['debug']},
+					lang: '{$this->params['lang']}',
+					maptype: '{$this->params['maptype']}'
+				};	
+			</script>
+
+TIMELINECONFIG;
 	}
 
 	public function touchcarousel() {
@@ -362,13 +368,25 @@ EXTRA__BACK_BODY_COLOR;
 		if($lessSource||$this->exterior['css']){
 			if($lessSource){
 				$cssSource = $less->compile("html#taogi-net{{$lessSource}}");
-				$this->header .= "<style>{$cssSource}</style>";
+				$this->header .= "<style>{$cssSource}</style>".PHP_EOL;
 			}
 			if($this->exterior['css']){
 				$this->css[] = "../..{$this->exterior['css']}";
 			}
-			$this->header .= "<script>jQuery('html').attr('id','taogi-net');</script>";
+			$this->header .= "<script>jQuery('html').attr('id','taogi-net');</script>".PHP_EOL;
 		}
+
+		$this->header .= Template::printSocialMetaTags(array(
+			'type' => 'article',
+			'title' => $this->json['timeline']['headline'],
+			'url' => Entry::getEntryLink($this->params['taogiid']),
+			'author' => User::getUserLink($this->params['userid']),
+			'published_time' => $this->entry['published'],
+			'modified_time' => $this->entry['modified'],
+			'description' => $this->json['timeline']['text'],
+			'image' => $this->exterior['filtered']['asset__cover_background_image'],
+			'echo' => false,
+		));
 	}
 }
 ?>
