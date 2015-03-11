@@ -30,6 +30,9 @@ if($_SESSION['current']['mode'] == 'entry_edit') {
 	$root_folder = 'user';
 	$eid = Acl::getIdentity('taogi');
 }
+$fp = fopen("/tmp/taogi_log.txt","a+");
+fputs($fp,$_SESSION['current']['mode']." ".$root_folder." ".$eid."\n");
+fclose($fp);
 if(!$eid) {
 	Respond::NotFoundPage();
 }

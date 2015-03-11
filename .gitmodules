@@ -25,3 +25,6 @@
 [submodule "contribute/lessphp"]
 	path = contribute/lessphp
 	url = https://github.com/leafo/lessphp.git
+[submodule "contribute/cropper"]
+	path = contribute/cropper
+	url = https://github.com/fengyuanchen/cropper.git

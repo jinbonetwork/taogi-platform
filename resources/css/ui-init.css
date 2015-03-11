@@ -21,26 +21,43 @@
 	content: '\f005';
 }
 
+.PORTRAITTAG,
+.COVERTAG {
+	position: relative;
+	width: inherit;
+	height: inherit;
+}
+.PORTRAITTAG img,
+.COVERTAG img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	display: block;
+	width: 100%;
+	height: auto;
+}
 .default_image_container:after {
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	transform: translate(-50%,-50%);
 	display: block;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	text-align: center;
-	line-height: 100px;
-	margin: -50px 0 0 -50px;
+	line-height: 80px;
+	margin: 0;
 	padding: 0;
 	font-family: 'FontAwesome';
 	font-size: 80px;
 	color: #000000;
 	text-shadow: 0 0 5px #FFFFFF;
 }
-.default_image_container.default_entry_image_container:after {
+.default_image_container.default_entry_image:after {
 	content: '\F017';
 }
-.default_image_container.default_user_portrait_container:after {
+.default_image_container.default_user_portrait:after {
 	content: '\F007';
 }
 

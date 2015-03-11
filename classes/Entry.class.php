@@ -183,7 +183,7 @@ class Entry extends Objects {
 			$entry['excerpt'] = Filter::getExcerpt($entry['summary']);
 			$entry['permalink'] = self::getEntryLink($entry);
 			$entry['image'] = self::getEntryImage($entry);
-			$entry['COVERTAG'] = $entry['image']?"<img class=\"cover\" src=\"{$entry['image']}\">":'';
+			$entry['COVERTAG'] = $entry['image']?"<div class='COVERTAG".($entry['image']==DEFAULT_ENTRY_IMAGE?' default_entry_image default_image_container':'')."'><img class=\"cover\" src=\"{$entry['image']}\"></div>":'';
 			$entry['background'] = self::getEntryBackground($entry);
 			$entry['created_absolute'] = Filter::getAbsoluteTime($entry['published']);
 			$entry['created_relative'] = ((time()-$entry['published'])>RELATIVE_TIME_COVERAGE)?$entry['created_absolute']:Filter::getRelativeTime($entry['published']);

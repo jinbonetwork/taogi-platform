@@ -132,7 +132,7 @@ class User extends Objects {
 		$user['BACKGROUND'] = self::getUserBackground($user);
 
 		$user['NAMETAG'] = "<span class=\"NAMETAG value composition\">".($user['degree']?"<span class=\"ROLE value part\" data-degree=\"{$user['degree']}\"><span class=\"value-wrap-open\">(</span><span class=\"value-wrap-value\">{$user['ROLE']}</span><span class=\"value-wrap-close\">)</span></span>":'')."<span class=\"DISPLAY_NAME value part\">".$user['DISPLAY_NAME']."</span></span>";
-		$user['PORTRAITTAG'] = '<img src="'.$user['PORTRAIT'].'" class="portrait keepRatio" data-width="1" data-height="1">';
+		$user['PORTRAITTAG'] = '<div class="PORTRAITTAG'.($user['PORTRAIT']==DEFAULT_USER_PORTRAIT?' default_user_portrait default_image_container':'').'"><img src="'.$user['PORTRAIT'].'"></div>';
 
 		return $user;
 	}

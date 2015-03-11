@@ -89,14 +89,9 @@ table.ui-table td > .PORTRAITTAG:after {
 	height: 32px;
 	line-height: 32px;
 	font-size: 24px;
-	margin: -16px 0 0 -16px;
 }
 table.ui-table td > .COVERTAG img,
 table.ui-table td > .PORTRAITTAG img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: block;
 	width: 32px;
 }
 table.ui-table th.ui-checkbox-switch-container,

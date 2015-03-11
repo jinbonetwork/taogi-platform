@@ -35,3 +35,7 @@ jQuery(function() {
 		submit : function() { return check_profile('#userProfile'); }
 	});
 });
+
+jQuery(document).ready(function(e){
+
+});

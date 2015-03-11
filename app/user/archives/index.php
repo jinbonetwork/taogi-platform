@@ -9,6 +9,10 @@ class archives_index extends Controller {
 		$this->title = $this->user['DISPLAY_NAME'];
 		$this->description = $this->user['summary'];
 
+		/* FancyBox */
+		$this->js[] = 'fancyBox/source/jquery.fancybox.css';
+		$this->js[] = 'fancyBox/source/jquery.fancybox.pack.js';
+
 		// Views
 		require_once JFE_PATH.'/include/userVcard.php';
 		$this->css[] = 'ui-vcard.css';

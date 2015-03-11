@@ -18,6 +18,7 @@
 			</ul>
 		</div>
 	</div>
+	<!--
 	<div class="ui-form-item ui-form-item-image float" data-field="portrait">
 		<label class="ui-form-item-label">초상화</label>
 		<div class="ui-form-item-control ui-form-item-control-image">
@@ -69,8 +70,9 @@
 			<input id="facebook" type="text" class="ui-text-form" name="facebook" value="<?php print $user['facebook']; ?>" placeholder="account" />
 		</div>
 	</div>
+	-->
 	<div class="ui-form-item" data-field="summary">
-		<label class="ui-form-item-label" for="summary">자기소개</label>
+		<label class="ui-form-item-label" for="summary">소개</label>
 		<div class="ui-form-item-control">
 			<textarea id="summary" name="summary" placeholder="간단한 소갯말"><?php print $user['summary']; ?></textarea>
 		</div>

@@ -34,7 +34,7 @@ EOT;
 <tr data-index="{$index}" data-eid="{$entry['eid']}">
 	$checkbox
 	<td class="item_title key name">
-		<div class="COVERTAG">{$entry['COVERTAG']}</div>
+		{$entry['COVERTAG']}
 		<div class="subject value"><a href="{$entry['permalink']}">{$entry['subject']}</a></div>
 		<div class="excerpt detail">{$entry['excerpt']}</div>
 		$controls_switch

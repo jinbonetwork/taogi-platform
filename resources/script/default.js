@@ -2,7 +2,14 @@ var $window;
 var $document;
 var $body;
 var $catchResize = {}; // callback array for resize event
-
+var fancyboxFilemanagerOptions = {
+	width       : 900,
+	height      : 600,
+	type        : 'iframe',
+	fitToView   : true,
+	autoSize    : false,
+	autoResize  : true
+};
 jQuery(document).ready(function(e){
 	$window = jQuery(window);
 	$document = jQuery(document);
@@ -11,6 +18,22 @@ jQuery(document).ready(function(e){
 
 
 });
+
+//-----------------------------------------------------------------------------
+//	Utilities
+//-----------------------------------------------------------------------------
+Object.prototype.join = function(glue,separator){
+	var object = this;
+	if(glue=='undefined'){
+		glue = '=';
+	}
+	if(separator=='undefined'){
+		separator = '&';
+	}
+	return jQuery.map(Object.getOwnPropertyNames(object),function(key){
+		return [key,object[key]].join(glue)
+	}).join(separator);
+};
 
 //-----------------------------------------------------------------------------
 //	Core

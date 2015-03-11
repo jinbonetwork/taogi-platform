@@ -115,6 +115,7 @@ i.icon-spin {
 
 
 /** unavailable elements **/
+/*
 .ui-controls.bulk,
 .ui-controls .maintenance,
 .app-entry-authors .manage.history,
@@ -125,3 +126,4 @@ i.icon-spin {
 .app-user-profile .ui-form-item[data-field="facebook"] {
 	display: none !important;
 }
+*/

@@ -34,8 +34,8 @@ EOT;
 		$markup[] = <<<EOT
 <li class="ui-item" data-index="{$index}" data-uid="{$user['uid']}" data-hover-class="hover" data-click-target=".item_title a">
 	<dl>
-		<dt class="keepRatio item_image" data-width="1" data-height="1">
-			<a class="keepCover" href="{$user['dashboard_link']}"><img src="{$user['PORTRAIT']}"></a>
+		<dt class="item_image">
+			<a href="{$user['dashboard_link']}">{$user['PORTRAITTAG']}</a>
 			$checkbox
 			$controls_switch
 		</dt>

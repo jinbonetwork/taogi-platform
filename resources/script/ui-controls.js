@@ -44,8 +44,8 @@
 						alert('done');
 					}else{
 						alert('canceled');
-						e.preventDefault();
 						e.stopPropagation();
+						e.preventDefault();
 					}
 				});
 			});
@@ -76,6 +76,12 @@
 })(jQuery);
 
 jQuery(document).ready(function(e){
+	jQuery('.ui-checkbox').each(function(index){
+		var $this = jQuery(this);
+		$this.on('click',function(e){
+			e.stopPropagation();
+		});
+	});
 	jQuery('.ui-controls').buildControls();
 	jQuery('.ui-controls-switch').buildControlsSwitch();
 	jQuery('.ui-controls a[title]').tooltip();

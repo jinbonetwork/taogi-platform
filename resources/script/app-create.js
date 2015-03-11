@@ -2413,7 +2413,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var $input = $field.find('input.asset_cover_background_image');
 				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
 					href: $trigger.attr('href'),
-					afterClose  : function() {
+					afterClose  : function(){
 						$input.trigger('change');
 					}
 				});
@@ -2532,14 +2532,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			secondHeader: 'h2',
 			targetBlank: true	
 		},
-		fancyboxFilemanagerOptions: {
-			width       : 900,
-			height      : 600,
-			type        : 'iframe',
-			fitToView   : true,
-			autoSize    : false,
-			autoResize  : true
-		},
+		fancyboxFilemanagerOptions: fancyboxFilemanagerOptions,
 	 	spectrumOptions: {
 			chooseText: '선택',
 			cancelText: '취소',

@@ -38,7 +38,7 @@ EOT;
 <tr data-index="{$index}" data-vid="{$revision['vid']}">
 	$checkbox
 	<td class="item_title key title">
-		<div class="COVERTAG">{$revision['COVERTAG']}</div>
+		{$revision['COVERTAG']}
 		<div class="subject value"><a href="{$revision['permalink']}?vid={$revision['vid']}">{$revision['subject']}</a><span class="vid value sub">(#{$revision['vid']})</span></div>
 		<div class="excerpt detail">{$entry['excerpt']}</div>
 		$controls_switch

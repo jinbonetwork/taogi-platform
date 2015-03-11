@@ -41,7 +41,7 @@ EOT;
 <tr data-index="{$index}" data-eid="{$user['uid']}">
 	$checkbox
 	<td class="item_title key name">
-		<div class="PORTRAITTAG">{$user['PORTRAITTAG']}</div>
+		{$user['PORTRAITTAG']}
 		<div class="NAMETAG value"><a href="{$user['dashboard_link']}">{$user['NAMETAG']}</a> ({$user['email_id']})</div>
 		<div class="excerpt detail">{$user['excerpt']}</div>
 		$controls_switch
