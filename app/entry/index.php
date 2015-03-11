@@ -70,7 +70,7 @@ class entry_index extends Interface_Entry {
 		if($this->entry['timeline']) {
 			$this->json = $this->entry['timeline'];
 		} else {
-			if(!preg_match("/^http:\/\//",$this->source) && file_exists($this->source)) 
+			if(!preg_match("/^http:\/\//i",$this->source) && file_exists($this->source)) 
 				$this->json = json_decode(file_get_contents($this->source),true);
 		}
 		$this->exterior = array(

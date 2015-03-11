@@ -24,6 +24,7 @@ jQuery(document).ready(function(e){
 			console.log('VCARD: new user '+self.context+' => '+$value);
 			$value = $value!=''?$value:self.attr('data-preview-default');
 
+			/*
 			jQuery.ajax({
 				type: "POST",
 				url: base_uri+"",
@@ -58,6 +59,7 @@ jQuery(document).ready(function(e){
 			})
 			.always(function(){
 			});
+			*/
 		});
 
 		self.uploader.on('click',function(e){
