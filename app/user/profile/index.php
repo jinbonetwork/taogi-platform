@@ -15,8 +15,8 @@ class profile_index extends Controller {
 
 		/* Cropper */
 		if($_SESSION['user']['uid']==$this->user['uid']){
-			$this->css[] = '../../contribute/cropper/dist/cropper.min.css';
-			$this->js[] = '../../contribute/cropper/dist/cropper.min.js';
+			//$this->css[] = '../../contribute/cropper/dist/cropper.min.css';
+			//$this->js[] = '../../contribute/cropper/dist/cropper.min.js';
 		}
 
 		// Views
