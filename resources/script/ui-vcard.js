@@ -11,6 +11,7 @@ jQuery(document).ready(function(e){
 			remover: self.find('.remover')
 		});
 
+		/*
 		self.input.on('change',function(e){
 			var $value = jQuery(this).val();
 			var $statement;
@@ -24,7 +25,6 @@ jQuery(document).ready(function(e){
 			console.log('VCARD: new user '+self.context+' => '+$value);
 			$value = $value!=''?$value:self.attr('data-preview-default');
 
-			/*
 			jQuery.ajax({
 				type: "POST",
 				url: base_uri+"",
@@ -59,8 +59,8 @@ jQuery(document).ready(function(e){
 			})
 			.always(function(){
 			});
-			*/
 		});
+		*/
 
 		self.uploader.on('click',function(e){
 			e.preventDefault();

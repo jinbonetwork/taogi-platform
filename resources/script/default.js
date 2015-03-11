@@ -22,6 +22,7 @@ jQuery(document).ready(function(e){
 //-----------------------------------------------------------------------------
 //	Utilities
 //-----------------------------------------------------------------------------
+/*
 Object.prototype.join = function(glue,separator){
 	var object = this;
 	if(glue=='undefined'){
@@ -34,6 +35,7 @@ Object.prototype.join = function(glue,separator){
 		return [key,object[key]].join(glue)
 	}).join(separator);
 };
+*/
 
 //-----------------------------------------------------------------------------
 //	Core
