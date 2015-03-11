@@ -68,7 +68,7 @@ class entry_index extends Interface_Entry {
 		$this->entry['modified'] = $revision['modified'];
 		$this->source = $this->getJsonURI();
 		if($this->entry['timeline']) {
-			$this->json = $this->entry['timeline'];
+			$this->json = json_decode($this->entry['timeline'],true);
 		} else {
 			if(!preg_match("/^http:\/\//i",$this->source) && file_exists($this->source)) 
 				$this->json = json_decode(file_get_contents($this->source),true);
