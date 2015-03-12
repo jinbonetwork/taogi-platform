@@ -57,59 +57,45 @@ class entry_index extends Interface_Entry {
 
 		if($this->extra['model']) $this->model = $this->extra['model'];
 		if($this->params['model']) $this->model = $this->params['model'];
-		if(!$this->model || !file_exists(TAOGI_SOURCE_PATH."/model/".$this->model))
+		if(!$this->model || !file_exists(TAOGI_SOURCE_PATH."/model/".$this->model)){
 			$this->model = $this->timelineConfig['default_model'];
+		}
 
 		if($this->extra['skinname']) $this->skinname = $this->extra['skinname'];
 		if($this->params['skinname']) $this->skinname = $this->params['skinname'];
-		if(!$this->skinname || !file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname))
+		if(!$this->skinname || !file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname)){
 			$this->skinname = 'default';
-
-		$this->entry['modified'] = $revision['modified'];
-		$this->source = $this->getJsonURI();
-		if($this->entry['timeline']) {
-			$this->json = json_decode($this->entry['timeline'],true);
-		} else {
-			if(!preg_match("/^http:\/\//i",$this->source) && file_exists($this->source)) 
-				$this->json = json_decode(file_get_contents($this->source),true);
-		}
-		$this->exterior = array(
-			'templates' => array(
-				'asset__cover_background_image',
-				'extra__cover_background_color',
-				'extra__cover_title_color',
-				'extra__cover_body_color',
-				'extra__slide_background_color',
-				'extra__slide_title_color',
-				'extra__slide_body_color',
-				'asset__back_background_image',
-				'extra__back_background_color',
-				'extra__back_title_color',
-				'extra__back_body_color',
-			),
-			'filtered' => array(
-			),
-			'css' => getEntryExtraCssURL($this->entry['eid']),
-		);
-		foreach($this->exterior['templates'] as $scope_field){
-			list($scope,$field) = explode('__',$scope_field);
-			//$value = $this->exterior['json']->$scope->$field;
-			$value = $this->json['timeline'][$scope][$field];
-			if($value){
-				if($scope=='asset'){
-					$url = explode('/',$value);
-					$url[count($url)-1] = rawurlencode($url[count($url)-1]);
-					$value = implode('/',$url);
-				}
-				$this->exterior['filtered'][$scope_field] = $value;
-			}
 		}
 
-		$header_last_modified = gmdate('D, d M Y H:i:s',$this->entry['modified']);
-		header("Last-Modified: {$header_last_modified} GMT",true,200);
+		$this->sendHeader('last-modified');
+		eval("\$this->{$this->model}();");
+		$this->header .= Template::getSocialMetaTags(array(
+			'type' => 'article',
+			'title' => $this->json['timeline']['headline'],
+			'url' => Entry::getEntryLink($this->params['taogiid']),
+			'author' => User::getUserLink($this->params['userid']),
+			'published_time' => $this->entry['published'],
+			'modified_time' => $this->entry['modified'],
+			'description' => $this->json['timeline']['text'],
+			'image' => $this->exterior['filtered']['asset__cover_background_image'],
+		));
+		$this->header .= Template::getExteriorHeaderTags($this);
+	}
 
-		$eval_str = '$'."this->".$this->model."();";
-		eval($eval_str);
+	public function sendHeader($message){
+		switch($message){
+			case 'last-modified':
+				$this->entry['modified'] = $revision['modified'];
+				$last_modified = gmdate('D, d M Y H:i:s',$this->entry['modified']);
+				$header = array("Last-Modified: {$last_modified} GMT",true,200);
+			break;
+		}
+		if(is_string($header)){
+			header($header);
+		}else if(is_array($header)){
+			$header[0] = "'{$header[0]}'";
+			eval("header(".implode(",",$header).");");
+		}
 	}
 
 	public function fb() {
@@ -237,161 +223,6 @@ TIMELINECONFIG;
 		if(file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname."/script.js")) {
 			$this->header .= "\t<script type=\"text/javascript\" src=\"".TAOGI_SOURCE_URI."/model/".$this->model."/skin/".$this->skinname."/script.js\"></script>\n";
 		}
-
-		if($this->preset){
-			$preset_css = JFE_PRESET_URI.'/'.$this->model.'/'.$this->preset.'/style.css';
-			$this->header .= "\t<link id='preset-{$this->preset}-style' rel='stylesheet' href='{$preset_css}'>".PHP_EOL;
-		}
-
-
-		require_once JFE_CONTRIBUTE_PATH."/lessphp/lessc.inc.php";
-		$less = new lessc;
-		$lessSource = '';
-		foreach($this->exterior['filtered'] as $selector => $property){
-			if($property){
-				switch($selector){
-					case 'asset__cover_background_image':
-						$lessSource .= <<<ASSET__COVER_BACKGROUND_IMAGE
-
-							.touchcarousel-item.cover.front section.article {
-								background: transparent url('{$property}') scroll repeat center center;
-								background-size: cover;
-							}
-
-ASSET__COVER_BACKGROUND_IMAGE;
-					break;
-					case 'extra__cover_background_color':
-						$lessSource .= <<<EXTRA__COVER_BACKGROUND_COLOR
-
-							.touchcarousel-item.cover.front section.article {
-								background-color: {$property};
-							}
-
-EXTRA__COVER_BACKGROUND_COLOR;
-					break;
-					case 'extra__cover_title_color':
-						$lessSource .= <<<EXTRA__COVER_TITLE_COLOR
-
-							.touchcarousel-item.cover.front section.article .title {
-								color: {$property};
-							}
-							.touchcarousel-item.cover.front section.article .description {
-								border-top-color: {$property};
-							}
-
-EXTRA__COVER_TITLE_COLOR;
-					break;
-					case 'extra__cover_body_color':
-						$lessSource .= <<<EXTRA__COVER_BODY_COLOR
-
-							.touchcarousel-item.cover.front section.article .description,
-							.touchcarousel-item.cover.front section.article .author,
-							.touchcarousel-item.cover.front section.article .pubdate,
-							.touchcarousel-item.cover.front section.article .social a {
-								color: {$property};
-							}
-
-EXTRA__COVER_BODY_COLOR;
-					break;
-					case 'extra__slide_background_color':
-						$lessSource .= <<<EXTRA__SLIDE_BACKGROUND_COLOR
-
-							.touchcarousel-item section.article {
-								background-color: {$property};
-							}
-
-EXTRA__SLIDE_BACKGROUND_COLOR;
-					break;
-					case 'extra__slide_title_color':
-						$lessSource .= <<<EXTRA__SLIDE_TITLE_COLOR
-
-							.touchcarousel-item section.article .title {
-								color: {$property};
-							}
-
-EXTRA__SLIDE_TITLE_COLOR;
-					break;
-					case 'extra__slide_body_color':
-						$lessSource .= <<<EXTRA__SLIDE_BODY_COLOR
-
-							.touchcarousel-item section.article .description,
-							.touchcarousel-item section.article .pubdate {
-								color: {$property};
-							}
-							.touchcarousel-item section.article .pubdate {
-								border-bottom-color: {$property};
-							}
-
-EXTRA__SLIDE_BODY_COLOR;
-					break;
-					case 'asset__back_background_image':
-						$lessSource .= <<<ASSET__BACK_BACKGROUND_IMAGE
-						
-							.touchcarousel-item.cover.back section.article {
-								background: transparent url('{$property}') scroll repeat center center;
-								background-size: cover;
-							}
-
-ASSET__BACK_BACKGROUND_IMAGE;
-					break;
-					case 'extra__back_background_color':
-						$lessSource .= <<<EXTRA__BACK_BACKGROUND_COLOR
-
-							.touchcarousel-item.cover.back section.article {
-								background-color: {$property};
-							}
-
-EXTRA__BACK_BACKGROUND_COLOR;
-					break;
-					case 'extra__back_title_color':
-						$lessSource .= <<<EXTRA__BACK_TITLE_COLOR
-
-							.touchcarousel-item.cover.back section.article .title {
-								color: {$property};
-							}
-
-EXTRA__BACK_TITLE_COLOR;
-					break;
-					case 'extra__back_body_color':
-						$lessSource .= <<<EXTRA__BACK_BODY_COLOR
-
-							.touchcarousel-item.cover.back section.article .description,
-							.touchcarousel-item.cover.back section.article .author,
-							.touchcarousel-item.cover.back section.article .pubdate,
-							.touchcarousel-item.cover.back section.article .social a {
-								color: {$property};
-							}
-							.touchcarousel-item.cover.back section.article .description {
-								border-bottom-color: {$property};
-							}
-
-EXTRA__BACK_BODY_COLOR;
-					break;
-				}
-			}
-		}
-		if($lessSource||$this->exterior['css']){
-			if($lessSource){
-				$cssSource = $less->compile("html#taogi-net{{$lessSource}}");
-				$this->header .= "<style>{$cssSource}</style>".PHP_EOL;
-			}
-			if($this->exterior['css']){
-				$this->css[] = "../..{$this->exterior['css']}";
-			}
-			$this->header .= "<script>jQuery('html').attr('id','taogi-net');</script>".PHP_EOL;
-		}
-
-		$this->header .= Template::printSocialMetaTags(array(
-			'type' => 'article',
-			'title' => $this->json['timeline']['headline'],
-			'url' => Entry::getEntryLink($this->params['taogiid']),
-			'author' => User::getUserLink($this->params['userid']),
-			'published_time' => $this->entry['published'],
-			'modified_time' => $this->entry['modified'],
-			'description' => $this->json['timeline']['text'],
-			'image' => $this->exterior['filtered']['asset__cover_background_image'],
-			'echo' => false,
-		));
 	}
 }
 ?>

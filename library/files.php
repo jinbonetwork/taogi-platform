@@ -71,7 +71,6 @@ function getEntryExtraCssURL($eid){
 		$cache = str_replace('.css','.min.css',$file);
 		if(!file_exists($cache)||filemtime($file)>filemtime($cache)){
 			$source = file_get_contents($file);	
-			$source = "html#taogi-net{{$source}}";
 			$content = $less->compile($source);
 			file_put_contents($cache,$content);
 		}

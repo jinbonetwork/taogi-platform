@@ -1150,7 +1150,16 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 * color picker : this function require jquery-ui
 		 **/
 		spectrum: function(element) {
-			element.find('input.color').spectrum(this.settings.spectrumOptions);
+			var self = this;
+			element.find('input.color').each(function(index){
+				var $this = jQuery(this);
+				var options = self.settings.spectrumOptions;
+				
+				if($this.attr('id').search('background_color')){
+					options.showAlpha = true;
+				}
+				jQuery(this).spectrum(options);
+			});
 		},
 
 		/**
@@ -2534,17 +2543,20 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		},
 		fancyboxFilemanagerOptions: fancyboxFilemanagerOptions,
 	 	spectrumOptions: {
-			chooseText: '선택',
-			cancelText: '취소',
-			preferredFormat: 'hex',
+			//preferredFormat: 'none',
 			allowEmpty: true,
-			//showAlpha: true,
-			showPalette: true,
-			palette: [['black','white','gray','red','green','blue','gold']],
-			hideAfterPaletteSelect: true,
-			showSelectionPalette: true,
 			showInitial: true,
-			showInput: true
+			showInput: true,
+			//showAlpha: true,
+
+			showPalette: true,
+			palette: [['black','white','rgba(0,0,0,0.5)','rgba(255,255,255,0.5)']],
+			showSelectionPalette: true,
+			maxSelectionSize: 2,
+			hideAfterPaletteSelect: true,
+
+			chooseText: '선택',
+			cancelText: '취소'
 		}
 	}
 
