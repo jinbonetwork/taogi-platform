@@ -24,6 +24,9 @@ class create_index extends Controller {
 		/* jQuery UI - datepicker - i18n */
 		//$this->js[] = 'jquery-ui-1.10.4/ui/i18n/jquery.ui.datepicker-ko.js';
 
+		/* Require library for Ace Editor */
+		$this->js[] = '../../contribute/ace/demo/kitchen-sink/require.js';
+
 		/* FancyBox */
 		$this->js[] = 'fancyBox/source/jquery.fancybox.css';
 		$this->js[] = 'fancyBox/source/jquery.fancybox.pack.js';

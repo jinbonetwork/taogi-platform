@@ -29,7 +29,7 @@ section#create {
 }
 #taogi-create-editor {
 	transition: transform 0.2s linear;
-	-webkit-transition: transform 0.2s linear;
+	-webkit-transition: -webkit-transform 0.2s linear;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1774,7 +1774,7 @@ fieldset.slide > .wrap > .console .button.save {
 #editor_config_exterior ul.tabs li.tab {
 	opacity: 0.5;
 	float: left;
-	min-width: 3.5em;
+	min-width: 4em;
 	margin: 0;
 	padding: 0;
 }
@@ -1791,6 +1791,7 @@ fieldset.slide > .wrap > .console .button.save {
 	padding: 0 0.25em;
 	color: #666666;
 	font-size: 13px;
+	white-space: nowrap;
 }
 #editor_config_exterior ul.tabs li.tab a:before {
 	content: '\F105';

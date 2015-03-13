@@ -11,56 +11,46 @@ jQuery(document).ready(function(e){
 			remover: self.find('.remover')
 		});
 
-		/*
 		self.input.on('change',function(e){
-			var $value = jQuery(this).val();
-			var $statement;
-			var $class;
-			var $classActionScope;
-			var $classActionCode;
-			var $classActionStatement;
+			self.value = jQuery(this).val();
+			console.log('VCARD: new user '+self.context+' => '+self.value);
 
-			$class = 'default_image_container default_user_'+self.context;
-			$classActionCode = $value!=''?'remove':'add';
-			console.log('VCARD: new user '+self.context+' => '+$value);
-			$value = $value!=''?$value:self.attr('data-preview-default');
+			self.classString = 'default_image_container default_user_'+self.context;
+			self.classActionCode = self.value!=''?'remove':'add';
+			self.value = self.value!=''?self.value:self.attr('data-preview-default');
 
 			jQuery.ajax({
 				type: "POST",
 				url: base_uri+"",
-				data: {
-					uid: self.uid,
-					file: $value,
-					crop: (self.context=='portrait'?1:0)
-				}.join()
+				data: "uid="+self.uid+"&file="+self.value+"&crop="+(self.context=='portrait'?1:0)
 			})
-			.done(function(data,stat,jqXHR){
+			//.done(function(data,stat,jqXHR){
+			.always(function(data,stat,jqXHR){
 				switch(self.attr('data-preview-property')){
 					case 'src':
-						$statement = $value;
-						$classActionScope = 'parent';
+						self.statement = self.value;
+						self.classActionScope = 'parent';
 					break;
 					case 'style':
-						$statement = 'background-image:url("'+$value+'")';
-						$classActionScope = '';
+						self.statement = 'background-image:url("'+self.value+'")';
+						self.classActionScope = '';
 					break;
 				}
-				console.log('VCARD: filtered user '+self.context+' => '+$value);
+				console.log('VCARD: filtered user '+self.context+' => '+self.value);
 
-				$classActionStatement = 'self.preview.'+($classActionScope!=''?$classActionScope+'().':'')+$classActionCode+'Class("'+$class+'");';
-				console.log('VCARD: class action => '+$classActionStatement);
+				self.classActionStatement = 'self.preview.'+(self.classActionScope!=''?self.classActionScope+'().':'')+self.classActionCode+'Class("'+self.classString+'");';
+				console.log('VCARD: class action => '+self.classActionStatement);
 
-				eval($classActionStatement);
-				self.preview.attr(self.attr('data-preview-property'),$statement);
-				console.log('VCARD: set user '+self.context+' => '+$value);
+				eval(self.classActionStatement);
+				self.preview.attr(self.attr('data-preview-property'),self.statement);
+				console.log('VCARD: set user '+self.context+' => '+self.value);
 			})
 			.fail(function(jqXHR,stat,error){
 				alert('error!');
-			})
-			.always(function(){
+			//})
+			//.always(function(){
 			});
 		});
-		*/
 
 		self.uploader.on('click',function(e){
 			e.preventDefault();

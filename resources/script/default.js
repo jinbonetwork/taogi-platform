@@ -20,24 +20,6 @@ jQuery(document).ready(function(e){
 });
 
 //-----------------------------------------------------------------------------
-//	Utilities
-//-----------------------------------------------------------------------------
-/*
-Object.prototype.join = function(glue,separator){
-	var object = this;
-	if(glue=='undefined'){
-		glue = '=';
-	}
-	if(separator=='undefined'){
-		separator = '&';
-	}
-	return jQuery.map(Object.getOwnPropertyNames(object),function(key){
-		return [key,object[key]].join(glue)
-	}).join(separator);
-};
-*/
-
-//-----------------------------------------------------------------------------
 //	Core
 //-----------------------------------------------------------------------------
 function jfe_Block_onRequest(message,element) {

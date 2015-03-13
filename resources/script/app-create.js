@@ -1155,7 +1155,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var $this = jQuery(this);
 				var options = self.settings.spectrumOptions;
 				
-				if($this.attr('id').search('background_color')){
+				if($this.attr('id').search('background\_color')>0){
 					options.showAlpha = true;
 				}
 				jQuery(this).spectrum(options);
@@ -2516,7 +2516,9 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			});
 		},
 
-		configureAdvanced: function() {
+		configureAdvanced: function(){
+			var extra_css = ace.editor('extra_css');
+			extra_css.getSession().setMode('ace/mode/css');
 		}
 	}
 
@@ -2543,18 +2545,30 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		},
 		fancyboxFilemanagerOptions: fancyboxFilemanagerOptions,
 	 	spectrumOptions: {
-			//preferredFormat: 'none',
+			containerClassName: 'colorpicker-container',
+			replacerClassName: 'colorpicker-replacer',
+
+			preferredFormat: 'rgb',
 			allowEmpty: true,
 			showInitial: true,
 			showInput: true,
 			//showAlpha: true,
 
 			showPalette: true,
-			palette: [['black','white','rgba(0,0,0,0.5)','rgba(255,255,255,0.5)']],
 			showSelectionPalette: true,
-			maxSelectionSize: 2,
+			maxSelectionSize: 1,
+			//showPaletteOnly: true,
+			//togglePaletteOnly: true,
+			//togglePaletteMoreText: '고급 옵션 펴기',
+			//togglePaletteLessText: '고급 옵션 닫기',
+			palette: [
+				['black','white'],
+				['rgba(0,0,0,0.5)','rgba(255,255,255,0.5)']
+			],
 			hideAfterPaletteSelect: true,
 
+			clickoutFiresChange: true,
+			showButtons: true,
 			chooseText: '선택',
 			cancelText: '취소'
 		}
