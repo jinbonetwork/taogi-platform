@@ -1229,7 +1229,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var url = base_uri+'contribute/filemanager/filemanager/dialog.php?type='+type+'&subfolder=&editor=mce_0&field_id='+id+'&lang=ko_KR&taogi_select_mode='+multi;
 			jQuery('#'+id).parent().find('a.upload').attr('href',url).click(function(e) {
 				e.preventDefault();
-				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
+				var options = jQuery.extend({},self.settings.fancyboxOptions,{
 					href		: url,
 					afterClose	: function() {
 						var inp = jQuery('.currentFileManagerTarget');
@@ -2420,7 +2420,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var $trigger = jQuery(this);
 				var $field = $trigger.closest('.field');
 				var $input = $field.find('input.asset_cover_background_image');
-				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
+				var options = jQuery.extend({},self.settings.fancyboxOptions,{
 					href: $trigger.attr('href'),
 					afterClose  : function(){
 						$input.trigger('change');
@@ -2517,8 +2517,37 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		},
 
 		configureAdvanced: function(){
-			var extra_css = ace.editor('extra_css');
-			extra_css.getSession().setMode('ace/mode/css');
+			var self = this;
+			var $extra_css = self.configure.find('#extra_css');
+
+			$extra_css.opener = self.configure.find('#extra_css_editor');
+			$extra_css.opener.on('click',function(e){
+				var $trigger = jQuery(this);
+				var options = jQuery.extend({},self.settings.fancyboxOptions,{
+					type: 'ajax',
+					href: base_uri+'include/editor/config.advanced.extra.css.html',
+					beforeShow: function(){
+						$extra_css.editor = ace.edit('extra_css_dummy');
+						$extra_css.editor.setValue($extra_css.val());
+						$extra_css.editor.setTheme('ace/theme/dawn');
+						$extra_css.editor.getSession().setMode('ace/mode/css');
+
+						$extra_css.button = {
+							save: jQuery('#extra_css_editor .button.save').on('click',function(e){
+								jQuery('#taogi-create-menu-bar .menu .save .button').trigger('click');
+							}),
+							preview: jQuery('#extra_css_editor .button.preview').on('click',function(e){
+								jQuery('#taogi-create-menu-bar .menu .preview .button').trigger('click');
+							})
+						};
+					},
+					beforeClose: function(){
+						$extra_css.val($extra_css.editor.getValue());
+					}
+				});
+
+				jQuery.fancybox.open(options);
+			});
 		}
 	}
 
@@ -2543,7 +2572,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			secondHeader: 'h2',
 			targetBlank: true	
 		},
-		fancyboxFilemanagerOptions: fancyboxFilemanagerOptions,
+		fancyboxOptions: fancyboxOptions,
 	 	spectrumOptions: {
 			containerClassName: 'colorpicker-container',
 			replacerClassName: 'colorpicker-replacer',

@@ -188,10 +188,13 @@ body.timelineJS .taogi-model-wrap {
 	Document -- system page enclosure
 ******************************************************************************/
 .document {
-	width: 600px;
-	margin: 0 0 0 50%;
+	position: absolute;
+	top: 0;
+	left: 50%;
 	transform: translateX(-50%);	
-	margin-top:60px;
+	-webkit-transform: translateX(-50%);
+	width: 600px;
+	margin: 0;
 	padding: 30px;
 	background: #fff;
 	border-radius: 10px;

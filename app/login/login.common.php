@@ -1,7 +1,7 @@
 <?php
 $fb_user = $facebook->getUser();
 ?>
-<div id="login">
+<div id="login" class="<?php print $params['output']; ?>">
 <div class="document">
 <div class="wrap">
 <h2>로그인</h2>

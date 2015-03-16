@@ -219,6 +219,7 @@ TIMELINECONFIG;
 
 		$this->header .= "\t<script type=\"text/javascript\">\n\t\tvar TaogiLanguagePack='".$this->taogi_language->json_url(TAOGI_SOURCE_URI."/model/".$this->model)."';\n\t\t</script>\n";
 		$this->header .= "\t<script type=\"text/javascript\" src=\"".TAOGI_SOURCE_URI."/model/".$this->model."/js/jquery.easing.1.3.js\"></script>\n";
+		$this->header .= "\t<script type=\"text/javascript\" src=\"".TAOGI_SOURCE_URI."/resources/jquery-mousewheel/jquery.mousewheel.min.js\"></script>\n";
 		$this->header .= "\t<script type=\"text/javascript\" src=\"".TAOGI_SOURCE_URI."/model/".$this->model."/js/jquery.taogi.touchcarousel.js\"></script>\n";
 		if(file_exists(TAOGI_SOURCE_PATH."/model/".$this->model."/skin/".$this->skinname."/script.js")) {
 			$this->header .= "\t<script type=\"text/javascript\" src=\"".TAOGI_SOURCE_URI."/model/".$this->model."/skin/".$this->skinname."/script.js\"></script>\n";

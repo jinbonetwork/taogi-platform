@@ -34,7 +34,7 @@ class profile_save extends Controller {
 			if($this->params['email_id'] != $this->params['email_id_confirm']) {
 				RespondJson::ResultPage(array(-1,"이메일 아이디가 서로 일치하지 않습니다."));
 			}
-			if($this->prams['password']) {
+			if($this->params['password']) {
 				if($this->params['password'] != $this->params['password_confirm']) {
 					RespondJson::ResultPage(array(-2,"변경하시려는 비밀번호가 서로 일치하지 않습니다."));
 				}

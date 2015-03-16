@@ -24,6 +24,8 @@ class profile_index extends Controller {
 		require_once JFE_PATH.'/include/userVcard.php';
 		$this->css[] = 'ui-vcard.css';
 		$this->script[] = 'ui-vcard.js';
+		$this->css[] = '../../contribute/cropper/dist/cropper.min.css';
+		$this->script[] = '../../contribute/cropper/dist/cropper.min.js';
 
 		require_once JFE_PATH.'/include/userTabs.php';
 		$this->css[] = 'ui-tabs.css';

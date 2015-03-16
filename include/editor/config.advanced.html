@@ -125,15 +125,20 @@ PRESET;
 		<legend>고급 설정</legend>
 		<div class="help"><p>주의: 이 항목에서 잘못된 값을 저장하면 오동작을 일으킬 수 있습니다.</p></div>
 		<div class="wrap">
-			<label>CSS 코드</label>
-			<textarea class="code" id="extra_css" name="extra[css]"><?php
-				if($eid){
-					require_once JFE_PATH."/library/files.php";
-					echo htmlspecialchars(_file_get_contents(getEntryExtraCssPath($eid)));
-				}else{
-					echo $eid;
-				}
-			?></textarea>
+			<label>CSS 코드 </label>
+			<div class="extra_css_wrap">
+				<textarea id="extra_css" name="extra[css]"><?php
+					if($eid){
+						require_once JFE_PATH."/library/files.php";
+						echo htmlspecialchars(_file_get_contents(getEntryExtraCssPath($eid)));
+					}else{
+						echo $eid;
+					}
+				?></textarea>
+			</div>
+			<div class="buttons">
+				<a id="extra_css_editor" class="button" href="javascript://" data-dummy-id="extra_css_dummy" data-origin-id="extra_css"><span>편집기 사용</span></a>
+			</div>
 		</div><!--/.wrap-->
 	</fieldset><!--/#editor_config_exterior_advanced-->
 </form>

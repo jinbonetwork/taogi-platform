@@ -1940,6 +1940,13 @@ fieldset.slide > .wrap > .console .button.save {
 	font-family: monospace;
 	white-space: pre;
 }
+textarea#extra_css_dummy {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
 
 /******************************************************************************
 	Richeditor
@@ -1954,3 +1961,4 @@ body.taogi-net .medium-editor-toolbar li button {
 body.taogi-net .medium-toolbar-arrow-under:after {
 	top: 30px;
 }
+

@@ -15,46 +15,71 @@ jQuery(document).ready(function(e){
 			self.value = jQuery(this).val();
 			console.log('VCARD: new user '+self.context+' => '+self.value);
 
-			self.classString = 'default_image_container default_user_'+self.context;
-			self.classActionCode = self.value!=''?'remove':'add';
-			self.value = self.value!=''?self.value:self.attr('data-preview-default');
-
-			jQuery.ajax({
-				type: "POST",
-				url: base_uri+"",
-				data: "uid="+self.uid+"&file="+self.value+"&crop="+(self.context=='portrait'?1:0)
-			})
-			//.done(function(data,stat,jqXHR){
-			.always(function(data,stat,jqXHR){
-				switch(self.attr('data-preview-property')){
-					case 'src':
-						self.statement = self.value;
-						self.classActionScope = 'parent';
-					break;
-					case 'style':
-						self.statement = 'background-image:url("'+self.value+'")';
-						self.classActionScope = '';
-					break;
+			if(self.value==''){
+				self.value = self.attr('data-preview-default');
+				self.update();
+			}else{
+				if(self.context=='portrait'){
+					var dummy = jQuery(new Image()).attr({
+						id: 'updatedPortraitDummy',
+						style: 'display:none;',
+						src: self.value
+					});
+					dummy.appendTo('body');
+					dummy.on('load',function(e){
+						if(dummy.width()!=dummy.height()){
+							self.crop();
+						}
+						dummy.remove();
+					});
+				}else{
+					self.update();
 				}
-				console.log('VCARD: filtered user '+self.context+' => '+self.value);
-
-				self.classActionStatement = 'self.preview.'+(self.classActionScope!=''?self.classActionScope+'().':'')+self.classActionCode+'Class("'+self.classString+'");';
-				console.log('VCARD: class action => '+self.classActionStatement);
-
-				eval(self.classActionStatement);
-				self.preview.attr(self.attr('data-preview-property'),self.statement);
-				console.log('VCARD: set user '+self.context+' => '+self.value);
-			})
-			.fail(function(jqXHR,stat,error){
-				alert('error!');
-			//})
-			//.always(function(){
-			});
+			}
 		});
+
+		self.crop = function(){
+			var options = jQuery.extend({},fancyboxOptions,{
+				type: 'ajax',
+				href: base_uri+'include/user/forms/profile.cropper.html',
+				beforeShow: function(){
+					var options = jQuery.extend({},cropperOptions,{
+						crop: function(data){
+						}
+					});
+					jQuery('#cropperImage').attr('src',self.value).cropper(options);
+				}
+			});
+			jQuery.fancybox.open(options);
+		};
+
+		self.update = function(){
+			console.log('VCARD: filtered user '+self.context+' => '+self.value);
+
+			switch(self.attr('data-preview-property')){
+				case 'src':
+					self.statement = self.value;
+					self.classActionScope = 'parent';
+				break;
+				case 'style':
+					self.statement = 'background-image:url("'+self.value+'")';
+					self.classActionScope = '';
+				break;
+			}
+			self.classString = 'default_image_container default_user_'+self.context;
+			self.classActionCode = self.value!=self.attr('data-preview-default')?'remove':'add';
+			self.classActionStatement = 'self.preview.'+(self.classActionScope!=''?self.classActionScope+'().':'')+self.classActionCode+'Class("'+self.classString+'");';
+			console.log('VCARD: class action => '+self.classActionStatement);
+
+			eval(self.classActionStatement);
+			self.preview.attr(self.attr('data-preview-property'),self.statement);
+			console.log('VCARD: set user '+self.context+' => '+self.value);
+		};
 
 		self.uploader.on('click',function(e){
 			e.preventDefault();
-			var options = jQuery.extend({},fancyboxFilemanagerOptions,{
+			var options = jQuery.extend({},fancyboxOptions,{
+				type: 'iframe',
 				href: self.uploader.attr('href'),
 				afterClose: function(){
 					self.input.trigger('change');

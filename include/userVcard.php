@@ -17,6 +17,9 @@ function getUserVcard($user) {
 	$userBackgroundController;
 
 	if($_SESSION['user']['uid']==$user['uid'] && $uri->params['controller']['uri']=='/app/user/profile'){
+		//$this->css[] = '../../contribute/cropper/dist/cropper.min.css';
+		//$this->script[] = '../../contribute/cropper/dist/cropper.min.js';
+
 		$userIdInput = "<input type='hidden' id='userIdInput' name='uid' value='{$user['uid']}'>".PHP_EOL;
 
 		$userPortraitInput = "<input type='hidden' id='userPortraitInput' class='userImageInput' name='portrait' value='".$user['PORTRAIT']."'>".PHP_EOL;

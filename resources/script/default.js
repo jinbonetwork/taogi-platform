@@ -2,13 +2,37 @@ var $window;
 var $document;
 var $body;
 var $catchResize = {}; // callback array for resize event
-var fancyboxFilemanagerOptions = {
+var fancyboxOptions = {
 	width       : 900,
 	height      : 600,
 	type        : 'iframe',
 	fitToView   : true,
 	autoSize    : false,
 	autoResize  : true
+};
+var cropperOptions = {
+	aspectRatio: 1/1,
+	minContainerWidth: 300,
+	minContainerHeight: 300,
+	minCropBoxWidth: 10,
+	minCropBoxHeight: 10,
+	strict: true,
+	checkImageOrigin: false,
+	autoCrop: true,
+	autoCropArea: 1,
+	dragCrop: true,
+	movable: true,
+	resizable: true,
+	zoomable: true,
+	mouseWheelZoom: false,
+	touchDragZoom: false,
+	rotatable: true,
+	responsive: true,
+	modal: true,
+	guides: true,
+	highlight: true,
+	background: false,
+	preview: '#cropperImagePreview',
 };
 jQuery(document).ready(function(e){
 	$window = jQuery(window);
