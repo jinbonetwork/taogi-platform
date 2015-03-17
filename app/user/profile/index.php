@@ -21,6 +21,7 @@ class profile_index extends Controller {
 
 		// Views
 		$_SESSION['current'] = array('mode'=>'profile');
+
 		require_once JFE_PATH.'/include/userVcard.php';
 		$this->css[] = 'ui-vcard.css';
 		$this->script[] = 'ui-vcard.js';

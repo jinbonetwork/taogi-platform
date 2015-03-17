@@ -480,8 +480,9 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 **/
 		editorKeyEvent: function(element) {
 			var self = this;
-			if(!element.html())
+			if(!element.html()) {
 				element.attr('data-content',element.attr('data-default-value'));
+			}
 			element.keydown(function(event) {
 				var code = event.charCode || event.keyCode;
 				var f_name = jQuery(this).attr('data-name');
@@ -489,7 +490,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					event.preventDefault();
 					self.isChanged = 1;
 					if (f_name == 'text' && window.getSelection) {
-						/*
 						var selection = window.getSelection(),
 							range = selection.getRangeAt(0),
 							br = document.createElement("br"),
@@ -503,7 +503,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						selection.removeAllRanges();
 						selection.addRange(range);
 						return false;
-						*/
 					}				
 				} else if(code == 9 || code == 13) {
 					event.preventDefault();
@@ -581,7 +580,15 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 * handlepaste, waitforpastedata, processpaste
 		 */
 		handlepaste: function(elem, e) {
-			var savedcontent = elem.innerHTML;
+			if(elem.childNodes.length > 0) {
+				if(jQuery(elem).text()) {
+					var savedcontent = elem.childNodes[0].innerHTML;
+				} else {
+					var savedcontent = '';
+				}
+			} else {
+				var savedcontent = '';
+			}
 			if (e && e.clipboardData && e.clipboardData.getData) {// Webkit - get data from clipboard, put into editdiv, cleanup, then cancel event
 				if (/text\/html/.test(e.clipboardData.types)) {
 					elem.innerHTML = e.clipboardData.getData('text/html');
@@ -715,8 +722,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				} else {
 					var dTime = this.setRealTime(item,d,iText);
 				}
+				return true;
+			} else {
+				return false;
 			}
-			return true;
 		},
 
 		setRealTime: function(item,d,iText) {
@@ -993,7 +1002,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					} else {
 						var spos = (posOpt == 2 ? scrollPos.top : topos.top) + Math.round((self.Height - h)/2);
 					}
-					trace("spos : "+spos);
 					this.scrollBody.animate({'scrollTop': spos+'px'},self.settings.sortspeed);
 				}
 			} else if(from < to) {
@@ -1452,7 +1460,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			fm.thumb = 1;
 			var mediaElem = this.createFigureElement(fm);
 			if(mediaElem) {
-				if(fm.type == 'image' || fm.type == 'instagram') {
+				if(fm.type == 'image') {
 					taogiVMM.alignattachElement('#'+fm.uid, mediaElem, '#'+fm.uid+(fm.thumb ? ' .feature_image' : ''), (fm.thumb ? 1 : 0));
 				} else {
 					taogiVMM.attachElement('#'+fm.uid,mediaElem);
@@ -1561,7 +1569,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				container.find('.preview').html('').append(figure);
 				var mediaElem = self.createFigureElement(m);
 				if(mediaElem) {
-					if(m.type == 'image' || m.type == 'instagram') {
+					if(m.type == 'image') {
 						taogiVMM.alignattachElement('#'+m.uid, mediaElem, '#'+m.uid+(m.thumb ? ' .feature_image' : ''), (m.thumb ? 1 : 0));
 					} else {
 						taogiVMM.attachElement('#'+m.uid,mediaElem);
@@ -1801,7 +1809,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			jQuery('#'+m.uid+'_editor .preview').html('').append(figure);
 			var mediaElem = this.createFigureElement(m);
 			if(mediaElem) {
-				if(m.type == 'image' || m.type == 'instagram') {
+				if(m.type == 'image') {
 					taogiVMM.alignattachElement('#'+m.uid, mediaElem, '#'+m.uid+(m.thumb ? ' .feature_image' : ''), (m.thumb ? 1 : 0));
 				} else {
 					taogiVMM.attachElement('#'+m.uid,mediaElem);
@@ -1934,9 +1942,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				jQuery('#'+m.uid).addClass((m.thumb ? 'thumb-flickr taogi_buildGallery' : 'flickr')).html(loading_message);
 				taogiVMM.ExternalAPI.flickr.get(m);
 			} else if(m.type == "instagram") {
-				jQuery('#'+m.uid).addClass('taogi_buildGallery');
-				mediaElem = "<img src='"+taogiVMM.ExternalAPI.instagram.get(m)+"' class='feature_image' />";
-				if(m.credit) mediaElem += "<h5 class='caption'>"+m.caption+"</h5>";
+				jQuery('#'+m.uid).addClass((m.thumb ? 'thumb-' : '')+'instagram').html(loading_message);
+				taogiVMM.ExternalAPI.instagram.get(m);
 			} else if(m.type == "youtube") {
 				jQuery('#'+m.uid).addClass((m.thumb ? 'thumb-youtube taogi_buildGallery taogi-icon-player' : 'youtube'));
 				vw = this.resolutionOfVideo(m);
@@ -2036,6 +2043,9 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 							m.id = './library/api.php?type=proxy&taogiauth=ACA20D8B4F7B63D8639C7824AC458D3A53F7E275&skip_referer=1&url='+encodeURIComponent(m.id);
 						}
 						mediaElem = '<img src="'+m.id+'" alt="'+m.caption+' '+m.credit+'" />';
+						break;
+					case 'instagram':
+						mediaElem = '<img src="'+taogiVMM.ExternalAPI.instagram.getThumb(m)+'" alt="'+m.caption+' '+m.credit+'" />';
 						break;
 					default:
 						mediaElem = '<span>'+(m.caption ? m.caption : m.credit)+'</span>';
@@ -2141,7 +2151,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				timelineJSON.timeline.extra.back_body_color = jQuery('#extra_back_body_color').val();
 
 				timelineJSON.timeline.extra.css = jQuery('#extra_css').val();
-				//console.log(timelineJSON);
 			}
 
 			var replaceURI = false;
@@ -2570,6 +2579,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			updateOnEmptySelection: false,
 			firstHeader: 'h1',
 			secondHeader: 'h2',
+			cleanPastedHTML: true,
 			targetBlank: true	
 		},
 		fancyboxOptions: fancyboxOptions,

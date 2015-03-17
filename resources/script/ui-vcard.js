@@ -29,8 +29,10 @@ jQuery(document).ready(function(e){
 					dummy.on('load',function(e){
 						if(dummy.width()!=dummy.height()){
 							self.crop();
+							dummy.remove();
+						}else{
+							self.update();
 						}
-						dummy.remove();
 					});
 				}else{
 					self.update();
@@ -44,10 +46,34 @@ jQuery(document).ready(function(e){
 				href: base_uri+'include/user/forms/profile.cropper.html',
 				beforeShow: function(){
 					var options = jQuery.extend({},cropperOptions,{
-						crop: function(data){
-						}
 					});
-					jQuery('#cropperImage').attr('src',self.value).cropper(options);
+
+					self.cropper = jQuery('#cropper');
+					self.cropper.image = self.cropper.find('#cropperImage').attr('src',self.value).cropper(options);
+					self.cropper.save = self.cropper.find('.button.save').on('click',function(e){
+						self.cropper.data = jQuery.extend({},self.cropper.image.cropper('getData'),{
+							mode: 'portrait',
+							origin: self.value,
+						});
+						var url = base_uri+'common/crop?'+decodeURIComponent(jQuery.param(self.cropper.data));
+						console.log('CROP: query -- '+url);
+						jQuery.ajax(url,{
+							dataType: 'json',
+							success: function(data,textStatus,jqXHR){
+								console.log(data);
+								console.log('CROP: '+textStatus+' -- '+self.value+' => '+data.cropped);
+								self.input.val(data.cropped).trigger('change');
+								jQuery.fancybox.close();
+							},
+							error: function(jqXHR,textStatus,errorThrown){
+								console.log('CROP: '+textStatus+' -- '+errorThrown);
+								jQuery.fancybox.close();
+							},
+							complete: function(jqXHR,textStatus){
+								//console.log(jqXHR);
+							}
+						});
+					});
 				}
 			});
 			jQuery.fancybox.open(options);
@@ -90,8 +116,7 @@ jQuery(document).ready(function(e){
 
 		self.remover.on('click',function(e){
 			e.preventDefault();
-			self.input.val('');
-			self.input.trigger('change');
+			self.input.val('').trigger('change');
 		});
 	});
 });

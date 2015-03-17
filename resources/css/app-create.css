@@ -717,7 +717,7 @@ fieldset.timeline_properties hr {
 fieldset.timeline_properties hr:after {
 	display: none;
 }
-fieldset.timeline_properties p#timeline_text {
+fieldset.timeline_properties div#timeline_text {
 }
 fieldset.timeline_properties #extra_author_structure {
 	margin-top: 30px;
@@ -1315,6 +1315,10 @@ fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview 
 	float: left;
 	border: 1px solid #DDDDDD;
 	background-color: #CCCCCC;
+}
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview .figure.instagram {
+	height: 100%;
+	overflow-y: auto;
 }
 @media all and ( max-width: 880px ) {
 	fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview,

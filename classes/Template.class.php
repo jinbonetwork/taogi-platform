@@ -5,6 +5,23 @@ class Template extends Objects {
 		return self::_instance(__CLASS__);
 	}
 
+	public static function getGeneralHeader(){
+		$base_uri = base_uri(); 
+		$taogi = json_encode(array(
+			'portrait' => array(
+				'width' => PORTRAIT_WIDTH,
+				'height' => PORTRAIT_HEIGHT,
+			),
+		));
+		$markup = "
+			<script>
+				var base_uri = '{$base_uri}';
+				var taogi = {$taogi};
+			</script>
+		";
+		return $markup;
+	}
+
 	public static function buildSocialMetaTags($attributes=array()){
 		$tags = array();
 		$defaults = array(

@@ -91,7 +91,7 @@ abstract class Controller {
 				 **/
 //				$this->javascripts .= $this->jsHtml(JFE_RESOURCE_URI."/script/jquery.min.js");
 				$this->javascripts .= $this->initJs($this->initscript);
-				$this->javascripts .= "\t<script type='text/javascript'>\n\t\tvar base_uri = '".base_uri()."';\n\t</script>\n";
+				$this->javascripts .= Template::getGeneralHeader();
 				$this->javascripts .= $this->jsHtml(JFE_RESOURCE_URI."/script/default.js");
 				$this->stylesheets .= $this->cssHtml(JFE_RESOURCE_URI."/css/defaults.css");
 				if($this->layout == "admin")

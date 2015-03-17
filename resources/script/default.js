@@ -11,7 +11,7 @@ var fancyboxOptions = {
 	autoResize  : true
 };
 var cropperOptions = {
-	aspectRatio: 1/1,
+	aspectRatio: taogi.portrait.width/taogi.portrait.height,
 	minContainerWidth: 300,
 	minContainerHeight: 300,
 	minCropBoxWidth: 10,
