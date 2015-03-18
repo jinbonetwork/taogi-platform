@@ -1,6 +1,5 @@
 <?php
-require_once JFE_CONTRIBUTE_PATH.'/Image/autoload.php';
-use Gregwar\Image\Image;
+require_once JFE_CONTRIBUTE_PATH.'/SimpleImage/src/abeautifulsite/SimpleImage.php';
 
 class common_crop extends Controller {
 	public $uid;
@@ -44,18 +43,21 @@ class common_crop extends Controller {
 					$path[count($path)-1] = PORTRAIT_FILENAME;
 					$crop->width = PORTRAIT_WIDTH;
 					$crop->height = PORTRAIT_HEIGHT;
+					$crop->quality = PORTRAIT_QUALITY;
+					$crop->format = PORTRAIT_FORMAT;
 					$crop->destination = implode('/',$path);
 				break;
-				case 'item':
+				default:
+					$crop->quality = THUMBNAIL_QUALITY;
+					$crop->format = THUMBNAIL_FORMAT;
 					$crop->destination = $crop->origin.THUMBNAIL_FILENAME;
 				break;
 			}
 
 			try{
-				
-				$image = Image::open($crop->origin);
+				$image = new abeautifulsite\SimpleImage($crop->origin);
 
-				//$image->exif(); // strip EXIF data
+				$image->save(); // strip EXIF data
 
 				if($crop->rotate){
 					$image->rotate($crop->rotate);
@@ -67,19 +69,17 @@ class common_crop extends Controller {
 					$image->resize($crop->width,$crop->height);
 				}
 
-				if($crop->destination){
-					$image->save($crop->destination);
+				if($crop->destination!=$crop->origin){
+					$image->save($crop->destination,$crop->quality,$crop->format);
 				}else{
-					$image->save($crop->origin);
+					$image->save($crop->origin,$crop->quality,$crop->format);
 				}
 
 				$crop->cropped = str_replace(JFE_PATH,'',$crop->destination);
 				$result = (array) $crop;
-				//print_r($crop);
 			}catch(Exception $e){
 				$result['error'] = $e->getMessage();
 			}
-					
 		}else{
 			$result['error'] = 'invalid command.';
 		}

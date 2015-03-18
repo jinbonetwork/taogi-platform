@@ -127,8 +127,16 @@ define('DEFAULT_USER_BACKGROUND','/resources/images/default_user_background.jpg'
 /** 초상화 기본값 **/
 define('PORTRAIT_WIDTH',300);
 define('PORTRAIT_HEIGHT',300);
+define('PORTRAIT_QUALITY',100);
+define('PORTRAIT_FORMAT','png');
 define('PORTRAIT_FILENAME','portrait.png');
-define('THUMBNAIL_FILENAME','thumbnail.png');
+
+/** 갤러리 썸네일 기본값 **/
+define('THUMBNAIL_WIDTH',150);
+define('THUMBNAIL_HEIGHT',150);
+define('THUMBNAIL_QUALITY',100);
+define('THUMBNAIL_FORMAT','png');
+define('THUMBNAIL_FILENAME','portrait.png');
 
 /** 편집화면 기본값들  **/
 define('DEFAULT_COVER_IMAGE','/resources/images/default_cover_image.png');

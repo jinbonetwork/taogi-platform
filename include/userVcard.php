@@ -25,12 +25,12 @@ function getUserVcard($user) {
 		$userPortraitInput = "<input type='hidden' id='userPortraitInput' class='userImageInput' name='portrait' value='".$user['PORTRAIT']."'>".PHP_EOL;
 		$userPortraitUploader = "<a class='uploader' href='".JFE_CONTRIBUTE_URI."/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=userPortraitInput&lang=ko_KR&taogi_select_mode='><span>초상화 업로드</span></a>";
 		$userPortraitRemover = "<a class='remover' href='#'><span>초상화 삭제</span></a>";
-		$userPortraitController = "<div class='userImageController' id='userPortraitController' data-preview-selector='#userPortraitPreview' data-preview-property='src' data-preview-default='".DEFAULT_USER_PORTRAIT."'>{$userPortraitInput}{$userPortraitUploader}{$userPortraitRemover}</div>";
+		$userPortraitController = "<div class='userImageController' id='userPortraitController' data-display-selector='#userPortraitPreview' data-display-property='src' data-display-default='".DEFAULT_USER_PORTRAIT."' data-file-width='".PORTRAIT_WIDTH."' data-file-height='".PORTRAIT_HEIGHT."'>{$userPortraitInput}{$userPortraitUploader}{$userPortraitRemover}</div>";
 
 		$userBackgroundInput = "<input type='hidden' id='userBackgroundInput' class='userImageInput' name='background' value='".$user['BACKGROUND']."'>".PHP_EOL;
 		$userBackgroundUploader = "<a class='uploader' href='".JFE_CONTRIBUTE_URI."/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=userBackgroundInput&lang=ko_KR&taogi_select_mode='><span>배경그림 업로드</span></a>";
 		$userBackgroundRemover = "<a class='remover' href='#userBackgroundInput'><span>배경그림 삭제</span></a>";
-		$userBackgroundController = "<div class='userImageController' id='userBackgroundController' data-preview-selector='#userBackgroundPreview' data-preview-property='style' data-preview-default='".DEFAULT_USER_BACKGROUND."'>{$userBackgroundInput}{$userBackgroundUploader}{$userBackgroundRemover}</div>";
+		$userBackgroundController = "<div class='userImageController' id='userBackgroundController' data-display-selector='#userBackgroundPreview' data-display-property='style' data-display-default='".DEFAULT_USER_BACKGROUND."'>{$userBackgroundInput}{$userBackgroundUploader}{$userBackgroundRemover}</div>";
 
 		$userPortraitTagPattern = array(
 			'img ' => 'img id="userPortraitPreview" ',
