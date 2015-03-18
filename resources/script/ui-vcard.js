@@ -4,7 +4,7 @@ jQuery(document).ready(function(e){
 		var uid = jQuery('#userIdInput').val();
 		var context = jQuery(this).find('.userImageInput').attr('name');
 		var self = userImageController[context] = {
-			env: 'test',
+			env: 'product', // product, test, ...
 			uid: uid,
 			context: context,
 
@@ -22,17 +22,20 @@ jQuery(document).ready(function(e){
 		};
 
 		self.action = {
+			error: null,
+
 			preserve: function(){
 				self.legacy = self.input.val();
 				console.log('VCARD: preserve user '+self.context+' -- '+self.legacy);
 			},
 
 			restore: function(){
-				self.input.val(self.legacy);
+				self.value = self.input.val(self.legacy).val();
 				console.log('VCARD: restore user '+self.context+' -- '+self.legacy);
 			},
 
 			process: function(){
+				self.action.error = null;
 				if(self.value!=''&&self.value!=self.display.placeholder&&self.display.width&&self.display.height){
 					var dummy = jQuery(new Image()).attr({
 						id: 'userImageDummy',
@@ -54,6 +57,7 @@ jQuery(document).ready(function(e){
 			},
 
 			crop: function(doUpdate){
+				self.action.error = 'crop'; // all cases except successful crop are considered as errors
 				doUpdate = doUpdate || false;
 				var options = jQuery.extend({},fancyboxOptions,{
 					type: 'ajax',
@@ -77,12 +81,12 @@ jQuery(document).ready(function(e){
 									console.log('CROP: '+textStatus+' -- '+self.value+' => '+data.cropped);
 									self.value = data.cropped;
 									self.input.val(self.value);
+									self.action.error = null;
 								},
 								error: function(jqXHR,textStatus,errorThrown){
 									var message = textStatus+' -- '+errorThrown;
 									console.log('CROP: '+message);
 									alert(message);
-									self.action.restore();
 								},
 								complete: function(jqXHR,textStatus){
 									//console.log(jqXHR);
@@ -101,38 +105,59 @@ jQuery(document).ready(function(e){
 			},
 
 			update: function(){
-				self.query = {
-					context: self.context,
-					value: self.value
-				};
-				var url = base_uri+'common/update?'+decodeURIComponent(jQuery.param(self.query));
-				console.log('VCARD: update query -- '+url);
-				//$body.isLoading({position:'overlay'});
-				if(self.env=='product'){
-					jQuery.ajax(url,{
-						dataType: 'json',
-						success: function(data,textStatus,jqXHR){
-							console.log('VCARD: '+data.result);
-						},
-						error: function(jqXHR,textStatus,errorThrown){
-							var message = textStatus+' ('+errorThrown+')';
-							console.log('VCARD: '+message);
-							alert(message);
-							if(self.legacy!=self.value){
-								self.action.restore();
-							}
-						},
-						complete: function(jqXHR,textStatus){
-							console.log('VCARD: update query '+textStatus);
-							//console.log(jqXHR);
-						}
-					});
+				if(self.action.error){
+					console.log('VCARD: skip update query -- '+self.action.error+' error');
+					self.action.display();
+				}else{
+					self.query = {
+						context: 'user_'+self.context,
+						value: self.value
+					};
+					var url = base_uri+'common/update?'+decodeURIComponent(jQuery.param(self.query));
+					console.log('VCARD: update query -- '+url);
+					//$body.isLoading({position:'overlay'});
+					switch(self.env){
+						case 'product':
+							var result;
+							var message;
+							jQuery.ajax(url,{
+								dataType: 'json',
+								success: function(data,textStatus,jqXHR){
+									result = data.result?textStatus:'error';
+									message = 'update '+result+' -- '+data.message;
+									switch(result){
+										default:
+										break;
+										case 'error':
+											alert(message);
+											self.action.error = 'update (server)';
+										break;
+									}
+								},
+								error: function(jqXHR,textStatus,errorThrown){
+									message = 'update '+textStatus+' -- '+errorThrown;
+									alert(message);
+									self.action.error = 'update (client)';
+								},
+								complete: function(jqXHR,textStatus){
+									console.log('VCARD: '+message);
+									self.action.display();
+								}
+							});
+						break;
+						default:
+							console.log('VCARD: skip update query -- '+self.env+'');
+							self.action.display();
+						break;
+					}
 				}
-				self.action.display();
 			},
 
 			display: function(){
-				self.display.valueFiltered = self.value!=''?self.value:self.display.placeholder;
+				if(self.action.error){
+					self.action.restore();
+				}
+				self.display.valueFiltered = self.value==''?self.display.placeholder:self.value;
 				self.display.valueSuffixed = self.display.valueFiltered+'?v='+(new Date()).getTime();
 				console.log('VCARD: filtered user '+self.context+' => '+self.display.valueFiltered);
 
@@ -148,12 +173,15 @@ jQuery(document).ready(function(e){
 				}
 				self.display.attr(self.display.property,self.display.statement);
 
-				self.display.evaluationMethod = self.display.valueFiltered!=self.display.placeholder?'remove':'add';
+				self.display.evaluationMethod = self.display.valueFiltered==self.display.placeholder?'add':'remove';
 				self.display.evaluationStatement = 'self.display.'+(self.display.evaluationScope!=''?self.display.evaluationScope+'().':'')+self.display.evaluationMethod+'Class("'+self.display.evaluationValue+'");';
 				console.log('VCARD: class evaluation => '+self.display.evaluationStatement);
 				eval(self.display.evaluationStatement);
 
 				console.log('VCARD: set user '+self.context+' => '+self.display.valueSuffixed);
+				if(self.action.error){
+					console.log('VCARD: process failed -- '+self.action.error+' error');
+				}
 			}
 		};
 
