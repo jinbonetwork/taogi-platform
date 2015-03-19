@@ -1,5 +1,5 @@
 <?php
-function getEntryAuthorTable($entry,$users) {
+function getEntryInvitesTable($entry,$users) {
 	if(empty($users)) {
 		return PAGE_NOT_FOUND;
 	}
@@ -66,8 +66,8 @@ EOT;
 <thead>
 <tr>
 	$checkbox_switch
-	<th class="item_title key name">편집자 이름</th>
-	<th class="item_joined general date">가입일</th>
+	<th class="item_title key name">초대자 이름</th>
+	<th class="item_joined general date">초대일</th>
 	<th class="item_updated general date">최근 편집일</th>
 </tr>
 </thead>

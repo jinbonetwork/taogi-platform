@@ -20,6 +20,7 @@ class User extends Objects {
 	}
 
 	public static function filter($user) {
+		$user['extra'] = json_decode(base64_decode($user['extra']),true);
 		return $user;
 	}
 	
@@ -65,7 +66,7 @@ class User extends Objects {
 		if(empty($user)) {
 			return;
 		}
-		$background = $user['background'];
+		$background = $user['extra']['background'];
 		if(!$background) {
 			$background = DEFAULT_USER_BACKGROUND;
 		}

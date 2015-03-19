@@ -45,6 +45,44 @@ class User_DBM extends Objects {
 		return true;
 	}
 
+	public static function updateUserField($uid,$field,$value) {
+		$context = Model_Context::instance();
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+//		$dbm->bind($userdb,1);
+
+		$que = "UPDATE {user} SET {$field} = ? WHERE uid = ?";
+		$dbm->execute($que,array("sd",$value,$uid));
+//		$dbm->bind($db,1);
+
+		return true;
+	}
+
+	public static function updateUserExtra($uid,$field,$value) {
+		$context = Model_Context::instance();
+		$dbm = DBM::instance();
+		$userdb = $context->getProperty('userdatabase.*');
+		$db = $context->getProperty('database.*');
+//		$dbm->bind($userdb,1);
+
+		$user = User::getUser($uid);
+		if(!is_array($user['extra']))
+			$extra = json_decode(base64_decode($user['extra']),true);
+		$extra[$field] = $value;
+		$extra = base64_encode(json_encode($extra));
+		
+		$que = "UPDATE {user} SET extra = ? WHERE uid = ?";
+		$fp = fopen("/tmp/taogi.log","a+");
+		fputs($fp,$que."\n");
+		fputs($fp,$uid." ".$extra."\n");
+		fclose($fp);
+		$dbm->execute($que,array("sd",$extra,$uid));
+//		$dbm->bind($db,1);
+
+		return true;
+	}
+
 	public static function getPrivilege($uid,$eid) {
 		$dbm = DBM::instance();
 		$que = "SELECT * FROM {privileges} WHERE uid = ".$uid." AND eid = ".$eid;

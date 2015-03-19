@@ -1,4 +1,5 @@
 <?php
+import('library.files');
 require_once JFE_CONTRIBUTE_PATH.'/SimpleImage/src/abeautifulsite/SimpleImage.php';
 
 class common_crop extends Controller {
@@ -39,13 +40,20 @@ class common_crop extends Controller {
 
 			switch($crop->context){
 				case 'portrait':
+					/*
 					$path = explode('/',$crop->origin);
 					$path[count($path)-1] = PORTRAIT_FILENAME;
+					$crop->destination = implode('/',$path);
+					*/
+					//$path = explode('/',getUserAttachedPath($uid));
+					$path = getUserAttachedPath($this->uid);
+
 					$crop->width = PORTRAIT_WIDTH;
 					$crop->height = PORTRAIT_HEIGHT;
 					$crop->quality = PORTRAIT_QUALITY;
 					$crop->format = PORTRAIT_FORMAT;
-					$crop->destination = implode('/',$path);
+					$crop->destination = $path.'/files/'.PORTRAIT_FILENAME;
+					$crop->thumbnail_destination = $path.'/thumbs/'.PORTRAIT_FILENAME;
 				break;
 				default:
 					$crop->quality = THUMBNAIL_QUALITY;
@@ -73,6 +81,11 @@ class common_crop extends Controller {
 					$image->save($crop->destination,$crop->quality,$crop->format);
 				}else{
 					$image->save($crop->origin,$crop->quality,$crop->format);
+				}
+
+				if($crop->thumbnail_destination){
+					$image->resize(THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT);
+					$image->save($crop->thumbnail_destination);
 				}
 
 				$crop->cropped = str_replace(JFE_PATH,'',$crop->destination);

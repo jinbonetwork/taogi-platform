@@ -14,6 +14,7 @@ CREATE TABLE `taogi_user` (
 
 	`reg_date`		int(10) default 0,
 	`last_login`	int(10) default 0,
+	`extra`			text,
 
 	KEY `TAOGINAME` (`taoginame`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

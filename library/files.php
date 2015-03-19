@@ -1,16 +1,26 @@
 <?php
+function getUserAttachedPath($uid){
+	return JFE_DATA_PATH."/attach/user/".($uid% 16)."/".$uid;
+}
+function getUserAttachedTmpPath($uid){
+	return JFE_DATA_PATH."/attach/user/tmp/".$_COOKIE[Session::getName()];
+}
+function getUserAttachedURI($uid) {
+	return JFE_DATA_URI."/attach/user/".($uid% 16)."/".$uid;
+}
+function getUserAttachedTmpURI() {
+	return JFE_DATA_URI."/attach/user/tmp/".$_COOKIE[Session::getName()];
+}
+
 function getEntryAttachedPath($eid) {
 	return JFE_DATA_PATH."/attach/entry/".($eid% 16)."/".$eid;
 }
-
 function getEntryAttachedTmpPath() {
 	return JFE_DATA_PATH."/attach/entry/tmp/".$_COOKIE[Session::getName()];
 }
-
 function getEntryAttachedURI($eid) {
 	return JFE_DATA_URI."/attach/entry/".($eid% 16)."/".$eid;
 }
-
 function getEntryAttachedTmpURI() {
 	return JFE_DATA_URI."/attach/entry/tmp/".$_COOKIE[Session::getName()];
 }
