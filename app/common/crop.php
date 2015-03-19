@@ -65,7 +65,7 @@ class common_crop extends Controller {
 			try{
 				$image = new abeautifulsite\SimpleImage($crop->origin);
 
-				$image->save(); // strip EXIF data
+				//$image->save(); // strip EXIF data
 
 				if($crop->rotate){
 					$image->rotate($crop->rotate);
@@ -84,8 +84,11 @@ class common_crop extends Controller {
 				}
 
 				if($crop->thumbnail_destination){
+					/*
 					$image->resize(THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT);
 					$image->save($crop->thumbnail_destination);
+					*/
+					unlink($crop->thumbnail_destination);
 				}
 
 				$crop->cropped = str_replace(JFE_PATH,'',$crop->destination);
