@@ -11,11 +11,8 @@ var fancyboxOptions = {
 	autoResize  : true
 };
 var cropperOptions = {
-	aspectRatio: taogi.portrait.width/taogi.portrait.height,
-	minContainerWidth: 300,
-	minContainerHeight: 300,
-	minCropBoxWidth: 10,
-	minCropBoxHeight: 10,
+	minCropBoxWidth: 64,
+	minCropBoxHeight: 64,
 	strict: true,
 	checkImageOrigin: false,
 	autoCrop: true,
@@ -23,16 +20,15 @@ var cropperOptions = {
 	dragCrop: true,
 	movable: true,
 	resizable: true,
-	zoomable: true,
+	zoomable: false,
+	rotatable: false,
 	mouseWheelZoom: false,
 	touchDragZoom: false,
-	rotatable: true,
 	responsive: true,
 	modal: true,
 	guides: true,
 	highlight: true,
 	background: false,
-	preview: '#cropperImagePreview',
 };
 jQuery(document).ready(function(e){
 	$window = jQuery(window);

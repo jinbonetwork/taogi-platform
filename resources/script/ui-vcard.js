@@ -1,3 +1,5 @@
+
+
 var userImageController = {};
 jQuery(document).ready(function(e){
 	jQuery('.userImageController').each(function(index){
@@ -56,6 +58,80 @@ jQuery(document).ready(function(e){
 				}
 			},
 
+			buildCropper: function(options){
+				var options = jQuery.extend({},cropperOptions,{
+					src: self.value,
+					aspectRatio: taogi.portrait.width/taogi.portrait.height,
+					minContainerWidth: taogi.portrait.width,
+					minContainerHeight: taogi.portrait.height,
+					wrap: '.cropperWrap',
+					canvas: '.cropperCanvas',
+					preview: '.cropperPreview',
+					save: '.button.save'
+				});
+
+				self.cropper = jQuery('.cropper');
+				jQuery.extend(self.cropper,{
+					wrap: self.cropper.find(options.wrap),
+					canvas: self.cropper.find(options.canvas),
+					preview: self.cropper.find(options.preview),
+					save: self.cropper.find(options.save)
+				});
+				
+				self.cropper.canvas.image = self.cropper.canvas.find('img').attr('src',options.src);
+				self.cropper.canvas.width = self.cropper.canvas.image.width();
+				self.cropper.canvas.height = self.cropper.canvas.image.height();
+				self.cropper.canvas.aspectRatio = self.cropper.canvas.width/self.cropper.canvas.height;
+				self.cropper.canvas.css({
+					'width': options.canvasWidth,
+					'height': options.canvasHeight
+				});
+
+				self.cropper.preview.image = self.cropper.preview.find('img').attr('src',options.src);
+				self.cropper.preview.width = options.previewWidth || 150;
+				self.cropper.preview.aspectRatio = (typeof options.aspectRatio=='undefined')?self.cropper.canvas.aspectRatio:options.aspectRatio;
+				self.cropper.preview.height = options.previewHeight || self.cropper.preview.width*self.cropper.preview.aspectRatio;
+				self.cropper.preview.css({
+					'width': options.previewWidth,
+					'height': options.previewHeight
+				});
+
+				self.cropper.save.on('click',function(e){
+					self.cropper.trigger('save');
+				});
+
+				self.cropper.on('save',function(e){
+					self.cropper.data = self.cropper.canvas.image.cropper('getData');
+					jQuery.extend(self.cropper.data,{
+						context: self.context,
+						origin: self.value
+					});
+					var url = base_uri+'common/crop?'+decodeURIComponent(jQuery.param(self.cropper.data));
+					console.log('CROP: query -- '+url);
+					self.cropper.isLoading({position:'overlay'});
+					jQuery.ajax(url,{
+						dataType: 'json',
+						success: function(data,textStatus,jqXHR){
+							console.log('CROP: '+textStatus+' -- '+self.value+' => '+data.cropped);
+							self.value = data.cropped;
+							self.input.val(self.value);
+							self.action.error = null;
+						},
+						error: function(jqXHR,textStatus,errorThrown){
+							var message = textStatus+' -- '+errorThrown;
+							console.log('CROP: '+message);
+							alert(message);
+						},
+						complete: function(jqXHR,textStatus){
+							//console.log(jqXHR);
+							jQuery.fancybox.close();
+						}
+					});
+				});
+
+				self.cropper.canvas.image.cropper(options);
+			},
+
 			crop: function(doUpdate){
 				self.action.error = 'crop'; // all cases except successful crop are considered as errors
 				doUpdate = doUpdate || false;
@@ -63,37 +139,7 @@ jQuery(document).ready(function(e){
 					type: 'ajax',
 					href: base_uri+'include/user/forms/profile.cropper.html',
 					beforeShow: function(){
-						var options = jQuery.extend({},cropperOptions,{
-						});
-						self.cropper = jQuery('#cropper');
-						self.cropper.image = self.cropper.find('#cropperImage').attr('src',self.value).cropper(options);
-						self.cropper.save = self.cropper.find('.button.save').on('click',function(e){
-							self.cropper.data = jQuery.extend({},self.cropper.image.cropper('getData'),{
-								mode: 'portrait',
-								origin: self.value,
-							});
-							var url = base_uri+'common/crop?'+decodeURIComponent(jQuery.param(self.cropper.data));
-							console.log('CROP: query -- '+url);
-							self.cropper.isLoading({position:'overlay'});
-							jQuery.ajax(url,{
-								dataType: 'json',
-								success: function(data,textStatus,jqXHR){
-									console.log('CROP: '+textStatus+' -- '+self.value+' => '+data.cropped);
-									self.value = data.cropped;
-									self.input.val(self.value);
-									self.action.error = null;
-								},
-								error: function(jqXHR,textStatus,errorThrown){
-									var message = textStatus+' -- '+errorThrown;
-									console.log('CROP: '+message);
-									alert(message);
-								},
-								complete: function(jqXHR,textStatus){
-									//console.log(jqXHR);
-									jQuery.fancybox.close();
-								}
-							});
-						});
+						self.action.buildCropper();
 					},
 					afterClose: function(){
 						if(doUpdate){

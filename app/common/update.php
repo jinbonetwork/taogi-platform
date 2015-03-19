@@ -7,10 +7,10 @@ class common_update extends Controller {
 		$this->contentType = 'json';
 
 		if($this->uid<1){
-			$result = 0;
+			$result = false;
 			$message = 'access denied';
 		}else if(!isset($this->params['value'])){
-			$result = 0;
+			$result = false;
 			$message = 'value field is required';
 		}else{
 			switch($this->params['context']){
@@ -21,7 +21,7 @@ class common_update extends Controller {
 				default:
 				break;
 			}
-			$result = 1;
+			$result = true;
 			$message = 'saved';
 		}
 		

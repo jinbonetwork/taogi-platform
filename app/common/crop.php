@@ -11,7 +11,7 @@ class common_crop extends Controller {
 
 		if(
 			$this->uid>0
-			&& isset($this->params['mode'])
+			&& isset($this->params['context'])
 			&& isset($this->params['origin'])
 			&& isset($this->params['x'])
 			&& isset($this->params['y'])
@@ -28,7 +28,7 @@ class common_crop extends Controller {
 			}
 
 			$crop = (object) array(
-				'mode' => $this->params['mode'],
+				'context' => $this->params['context'],
 				'origin' => $this->param['origin'],
 				'x1' => $this->params['x'],
 				'y1' => $this->params['y'],
@@ -37,7 +37,7 @@ class common_crop extends Controller {
 				'rotate' => $this->params['rotate'],
 			);
 
-			switch($crop->mode){
+			switch($crop->context){
 				case 'portrait':
 					$path = explode('/',$crop->origin);
 					$path[count($path)-1] = PORTRAIT_FILENAME;
