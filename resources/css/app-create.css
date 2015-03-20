@@ -1896,14 +1896,22 @@ fieldset.slide > .wrap > .console .button.save {
 	display: block;
 	width: 100%;
 }
-#editor_config_exterior_basic a.asset_cover_background_image_uploader img {
+#editor_config_exterior_basic .asset_cover_background_image_preview {
 	box-sizing: border-box;
 	display: block;
 	width: 100%;
-	height: auto;
-	margin: 0;
-	padding: 1px;
-	border: 1px solid #000000;
+	height: 150px;
+	outline: 1px solid #000000;
+	border: 1px solid #FFFFFF;
+	background-color: #FFFFFF;
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+#editor_config_exterior_basic .asset_cover_background_image_preview.placeholder {
+	background-repeat: repeat;
+	background-size: auto;
 }
 #editor_config_exterior_basic a.asset_cover_background_image_remover {
 	opacity: 0.3;

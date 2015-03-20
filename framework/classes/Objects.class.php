@@ -12,5 +12,6 @@ abstract class Objects {
 		return self::$instances[$className];
 	}
 
-	abstract public static function instance();
+	public static function instance() {
+	}
 }

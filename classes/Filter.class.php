@@ -46,6 +46,7 @@ class Filter extends Objects {
 			return;
 		}
 
+		$string = strip_tags($string);
 		$words = explode(' ',$string);
 		if(count($words)>$length) {
 			$chopped = array_slice($words,0,$length);

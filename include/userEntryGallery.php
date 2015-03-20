@@ -35,7 +35,7 @@ EOT;
 <li class="ui-item" data-index="{$index}" data-eid="{$entry['eid']}" data-hover-class="hover" data-click-target=".item_title a">
 	<dl>
 		<dt class="keepRatio item_image" data-width="16" data-height="10">
-			<a href="{$entry['permalink']}">{$entry['COVERTAG']}</a>
+			<a href="{$entry['permalink']}">{$entry['COVERFRONTTAG']}</a>
 			$checkbox
 			$controls_switch
 		</dt>

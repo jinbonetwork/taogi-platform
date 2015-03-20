@@ -23,8 +23,9 @@ class profile_index extends Controller {
 		$_SESSION['current'] = array('mode'=>'profile');
 
 		require_once JFE_PATH.'/include/userVcard.php';
-		$this->css[] = 'ui-vcard.css';
-		$this->script[] = 'ui-vcard.js';
+		$this->css[] = 'ui-hcard.css';
+		$this->css[] = 'ui-image-controller.css';
+		$this->script[] = 'ui-hcard.js';
 		$this->css[] = '../../contribute/cropper/dist/cropper.min.css';
 		$this->script[] = '../../contribute/cropper/dist/cropper.min.js';
 

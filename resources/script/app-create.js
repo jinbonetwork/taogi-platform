@@ -2450,12 +2450,18 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			$basicEditor.find('input.asset_cover_background_image').on('change',function(e){
 				var $input = jQuery(this);
 				var $field = $input.closest('.field');
-				var $image = $field.find('a.asset_cover_background_image_uploader img');
+				var $preview = $field.find('.asset_cover_background_image_preview');
 				var $source = $input.val();
 
-				$source = $source?$source:$input.attr('data-empty');
-				$image.attr('src',$source);
-			});
+				$source = $source?$source:$input.attr('data-placeholder');
+				$preview.css({'background-image':"url('"+$source+"')"});
+
+				if($source==$input.attr('data-placeholder')){
+					$preview.addClass('placeholder');
+				}else{
+					$preview.removeClass('placeholder');
+				}
+			}).trigger('change');
 		},
 
 		configurePreset: function() {

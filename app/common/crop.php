@@ -63,24 +63,24 @@ class common_crop extends Controller {
 			}
 
 			try{
-				$image = new abeautifulsite\SimpleImage($crop->origin);
+				$simpleimage = new abeautifulsite\SimpleImage($crop->origin);
 
 				//$image->save(); // strip EXIF data
 
 				if($crop->rotate){
-					$image->rotate($crop->rotate);
+					$simpleimage->rotate($crop->rotate);
 				}
 
-				$image->crop($crop->x1,$crop->y1,$crop->x2,$crop->y2);
+				$simpleimage->crop($crop->x1,$crop->y1,$crop->x2,$crop->y2);
 
 				if($crop->width&&$crop->height){
-					$image->resize($crop->width,$crop->height);
+					$simpleimage->resize($crop->width,$crop->height);
 				}
 
 				if($crop->destination!=$crop->origin){
-					$image->save($crop->destination,$crop->quality,$crop->format);
+					$simpleimage->save((string)($crop->destination),$crop->quality,$crop->format);
 				}else{
-					$image->save($crop->origin,$crop->quality,$crop->format);
+					$simpleimage->save((string)($crop->origin),$crop->quality,$crop->format);
 				}
 
 				if($crop->thumbnail_destination){

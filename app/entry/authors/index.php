@@ -17,8 +17,8 @@ class authors_index extends Interface_Entry {
 		require_once JFE_PATH.'/include/entryAuthorControls.php';
 
 		require_once JFE_PATH.'/include/entryEcard.php';
-		$this->css[] = 'ui-ecard.css';
-		$this->script[] = 'ui-ecard.js';
+		$this->css[] = 'ui-hcard.css';
+		$this->script[] = 'ui-hcard.js';
 
 		$this->css[] = 'ui-tabs.css';
 		$this->script[] = 'ui-tabs.js';

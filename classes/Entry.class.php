@@ -28,7 +28,7 @@ class Entry extends Objects {
 				$context->setProperty('entry.'.$eid,$entry);
 			}
 		}
-		return $entry;
+		return self::filter($entry);
 	}
 
 	public static function getEntryData($eid,$vid) {
@@ -100,32 +100,22 @@ class Entry extends Objects {
 		return $link;
 	}
 
-	public static function getEntryImage($entry) {
-		if(is_numeric($entry)) {
-			$context = Model_Context::instance();
-			$entry = Entry::getEntryInfoByID($entry,1);
+	public static function getEntryCoverFront($entry) {
+		$image;
+		if(isset($entry['asset']['cover_background_image'])) {
+			$image = $entry['asset']['cover_background_image'];
 		}
-		if(isset($entry['asset']['media'])) {
-			$image = $entry['asset']['media'];
-		}
-		if(!$image) {
-			$image = DEFAULT_ENTRY_IMAGE;
-		}
+		$image = $image?:IMAGE_PLACEHOLDER;
 		return $image;
 	}
 
-	public static function getEntryBackground($entry) {
-		if(is_numeric($entry)) {
-			$context = Model_Context::instance();
-			$entry = Entry::getEntryInfoByID($entry,1);
+	public static function getEntryCoverBack($entry) {
+		$image;
+		if(isset($entry['asset']['back_background_image'])) {
+			$image = $entry['asset']['back_background_image'];
 		}
-		if(isset($entry['asset']['media'])) {
-			$background = $entry['asset']['media'];
-		}
-		if(!$background) {
-			$background = DEFAULT_ENTRY_BACKGROUND;
-		}
-		return $background;
+		$image = $image?:IMAGE_PLACEHOLDER;
+		return $image;
 	}
 
 	public static function getEditors($entry) {
@@ -153,6 +143,14 @@ class Entry extends Objects {
 	//-----------------------------------------------------------------------------------
 	//	Filters
 	//-----------------------------------------------------------------------------------
+	public static function filter($entry){
+		if(!is_array($entry['asset'])||!is_array($entry['era'])){
+			$entry = self::fetchEntry($entry);
+		}
+
+		return $entry;
+	}
+
 	public static function getEntryProfile($entry) {
 		if(is_numeric($entry)) {
 			$context = Model_Context::instance();
@@ -182,9 +180,10 @@ class Entry extends Objects {
 
 			$entry['excerpt'] = Filter::getExcerpt($entry['summary']);
 			$entry['permalink'] = self::getEntryLink($entry);
-			$entry['image'] = self::getEntryImage($entry);
-			$entry['COVERTAG'] = $entry['image']?"<div class='COVERTAG".($entry['image']==DEFAULT_ENTRY_IMAGE?' default_entry_image default_image_container':'')."'><img class=\"cover\" src=\"{$entry['image']}\"></div>":'';
-			$entry['background'] = self::getEntryBackground($entry);
+			$entry['COVERFRONT'] = self::getEntryCoverFront($entry);
+			$entry['COVERFRONTTAG'] = "<div class=\"COVERFRONTTAG IMAGETAG".($entry['asset']['cover_background_image']==''?' default_entry_image default_image_container':'')."\" style=\"background-image:url('{$entry['COVERFRONT']}')\"></div>";
+			$entry['COVERBACK'] = self::getEntryCoverBack($entry);
+			$entry['COVERBACKTAG'] = "<div class=\"COVERBACKTAG IMAGETAG".($entry['asset']['back_background_image']==''?' default_entry_background default_image_container':'')."\" style=\"background-image:url('{$entry['COVERBACK']}')\"></div>";
 			$entry['created_absolute'] = Filter::getAbsoluteTime($entry['published']);
 			$entry['created_relative'] = ((time()-$entry['published'])>RELATIVE_TIME_COVERAGE)?$entry['created_absolute']:Filter::getRelativeTime($entry['published']);
 			$entry['updated_absolute'] = Filter::getAbsoluteTime($entry['modified']);

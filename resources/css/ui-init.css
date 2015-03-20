@@ -21,24 +21,20 @@
 	content: '\f005';
 }
 
-.PORTRAITTAG,
-.COVERTAG {
+.IMAGETAG {
 	position: relative;
+	display: block;
 	width: inherit;
 	height: inherit;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	background-position: center center;
+	background-size: cover;
 }
-.PORTRAITTAG img,
-.COVERTAG img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-	-webkit-transform: translate(-50%,-50%);
-	display: block;
-	width: 100%;
-	height: auto;
+.IMAGETAG img {
+	display: none;
 }
-.default_image_container:after {
+.IMAGETAG.default_image_container:after {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -56,10 +52,10 @@
 	color: #000000;
 	text-shadow: 0 0 5px #FFFFFF;
 }
-.default_image_container.default_entry_image:after {
+.IMAGETAG.default_image_container.default_entry_image:after {
 	content: '\F017';
 }
-.default_image_container.default_user_portrait:after {
+.IMAGETAG.default_image_container.default_user_portrait:after {
 	content: '\F007';
 }
 

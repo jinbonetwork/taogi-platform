@@ -59,10 +59,10 @@ PRESET;
 				<div class="field block">
 					<label for="asset_cover_background_image_uploader">배경 그림</label>
 					<div class="asset_cover_background_image_wrap">
-						<a class="asset_cover_background_image_uploader" id="asset_cover_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_cover_background_image&lang=ko_KR&taogi_select_mode='; ?>"><img class="asset_cover_background_image_preview" id="asset_cover_background_image_preview" src="<?php echo ($timeline['asset']['cover_background_image']?$timeline['asset']['cover_background_image']:DEFAULT_COVER_IMAGE); ?>"></a>
+						<a class="asset_cover_background_image_uploader" id="asset_cover_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_cover_background_image&lang=ko_KR&taogi_select_mode='; ?>"><div class="asset_cover_background_image_preview" id="asset_cover_background_image_preview"></div></a>
 						<a class="asset_cover_background_image_remover" id="asset_cover_background_image_remover" href="#asset_cover_background_image_preview"><span>이미지 삭제</span></a>
 					</div>
-					<input class="asset_cover_background_image" type="hidden" id="asset_cover_background_image" name="asset[cover_background_image]" value="<?php print $timeline['asset']['cover_background_image']; ?>" data-empty="<?php echo DEFAULT_COVER_IMAGE; ?>">
+					<input class="asset_cover_background_image" type="hidden" id="asset_cover_background_image" name="asset[cover_background_image]" value="<?php print $timeline['asset']['cover_background_image']; ?>" data-placeholder="<?php echo TRANSPARENT_PLACEHOLDER; ?>">
 				</div>
 				<div class="field inline">
 					<label for="extra_cover_background_color">배경 색깔</label>
@@ -101,10 +101,10 @@ PRESET;
 				<div class="field block">
 					<label for="asset_back_background_image_uploader">배경 그림</label>
 					<div class="asset_cover_background_image_wrap">
-						<a class="asset_cover_background_image_uploader" id="asset_back_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_back_background_image&lang=ko_KR&taogi_select_mode='; ?>"><img class="asset_cover_background_image_preview" id="asset_back_background_image_preview" src="<?php echo ($timeline['asset']['back_background_image']?$timeline['asset']['back_background_image']:DEFAULT_COVER_IMAGE); ?>"></a>
+						<a class="asset_cover_background_image_uploader" id="asset_back_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_back_background_image&lang=ko_KR&taogi_select_mode='; ?>"><div class="asset_cover_background_image_preview" id="asset_back_background_image_preview"></div></a>
 						<a class="asset_cover_background_image_remover" id="asset_back_background_image_remover" href="#asset_back_background_image_preview"><span>이미지 삭제</span></a>
 					</div>
-					<input class="asset_cover_background_image" type="hidden" id="asset_back_background_image" name="asset[back_background_image]" value="<?php print $timeline['asset']['back_background_image']; ?>" data-empty="<?php echo DEFAULT_COVER_IMAGE; ?>">
+					<input class="asset_cover_background_image" type="hidden" id="asset_back_background_image" name="asset[back_background_image]" value="<?php print $timeline['asset']['back_background_image']; ?>" data-placeholder="<?php echo TRANSPARENT_PLACEHOLDER; ?>">
 				</div>
 				<div class="field inline">
 					<label for="extra_back_background_color">배경 색깔</label>

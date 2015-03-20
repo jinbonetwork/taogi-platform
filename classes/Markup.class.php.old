@@ -263,7 +263,7 @@ class Markup {
 			$image = $entry['asset']['media'];
 		}
 		if(!$image) {
-			$image = DEFAULT_ENTRY_IMAGE;
+			$image = DEFAULT_ENTRY_COVER;
 		}
 		return $image;
 	}

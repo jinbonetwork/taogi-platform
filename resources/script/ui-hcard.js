@@ -1,5 +1,3 @@
-
-
 var userImageController = {};
 jQuery(document).ready(function(e){
 	jQuery('.userImageController').each(function(index){

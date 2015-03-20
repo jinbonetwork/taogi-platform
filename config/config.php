@@ -119,10 +119,6 @@ define( 'OPEN_ID', -10);
 define('ITEMS_PER_PAGE',6);
 define('RELATIVE_TIME_COVERAGE',60*60*24); // in seconds
 define('DEFAULT_TIME_FORMAT','Y-m-d H:i:s');
-define('DEFAULT_ENTRY_IMAGE','/resources/images/default_entry_image.png');
-define('DEFAULT_ENTRY_BACKGROUND','/resources/images/default_entry_background.jpg');
-define('DEFAULT_USER_PORTRAIT','/resources/images/default_user_portrait.png');
-define('DEFAULT_USER_BACKGROUND','/resources/images/default_user_background.jpg');
 
 /** 초상화 기본값 **/
 define('PORTRAIT_WIDTH',300);
@@ -136,10 +132,11 @@ define('THUMBNAIL_WIDTH',150);
 define('THUMBNAIL_HEIGHT',150);
 define('THUMBNAIL_QUALITY',100);
 define('THUMBNAIL_FORMAT','png');
-define('THUMBNAIL_FILENAME','portrait.png');
+define('THUMBNAIL_FILENAME','thumbnail.png');
 
 /** 편집화면 기본값들  **/
-define('DEFAULT_COVER_IMAGE','/resources/images/default_cover_image.png');
+define('IMAGE_PLACEHOLDER','/resources/images/z.png');
+define('TRANSPARENT_PLACEHOLDER','/resources/images/t.png');
 
 /** 노드의 상태 **/
 define('NODE_STATUS_PRIVATE',0);

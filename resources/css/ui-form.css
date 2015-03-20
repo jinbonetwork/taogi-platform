@@ -257,7 +257,7 @@ ol.ui-form-item-help {
 	height: 110px;
 	border-radius: 3px;
 	overflow: hidden;
-	background: transparent url(/resources/images/background_pattern_transparent-tile.png) scroll repeat top left;
+	background: transparent url(/resources/images/t.png) scroll repeat top left;
 }
 .ui-form-item-image-preview {
 	position: absolute;
