@@ -137,6 +137,10 @@ define('THUMBNAIL_FILENAME','thumbnail.png');
 /** 편집화면 기본값들  **/
 define('IMAGE_PLACEHOLDER','/resources/images/z.png');
 define('TRANSPARENT_PLACEHOLDER','/resources/images/t.png');
+define('DEFAULT_USER_PORTRAIT',IMAGE_PLACEHOLDER);
+define('DEFAULT_USER_BACKGROUND',IMAGE_PLACEHOLDER);
+define('DEFAULT_ENTRY_COVER_FRONT',IMAGE_PLACEHOLDER);
+define('DEFAULT_ENTRY_COVER_BACK',IMAGE_PLACEHOLDER);
 
 /** 노드의 상태 **/
 define('NODE_STATUS_PRIVATE',0);

@@ -105,7 +105,7 @@ class Entry extends Objects {
 		if(isset($entry['asset']['cover_background_image'])) {
 			$image = $entry['asset']['cover_background_image'];
 		}
-		$image = $image?:IMAGE_PLACEHOLDER;
+		$image = $image?:DEFAULT_ENTRY_COVER_FRONT;
 		return $image;
 	}
 
@@ -114,7 +114,7 @@ class Entry extends Objects {
 		if(isset($entry['asset']['back_background_image'])) {
 			$image = $entry['asset']['back_background_image'];
 		}
-		$image = $image?:IMAGE_PLACEHOLDER;
+		$image = $image?:DEFAULT_ENTRY_COVER_BACK;
 		return $image;
 	}
 
@@ -181,9 +181,9 @@ class Entry extends Objects {
 			$entry['excerpt'] = Filter::getExcerpt($entry['summary']);
 			$entry['permalink'] = self::getEntryLink($entry);
 			$entry['COVERFRONT'] = self::getEntryCoverFront($entry);
-			$entry['COVERFRONTTAG'] = "<div class=\"COVERFRONTTAG IMAGETAG".($entry['asset']['cover_background_image']==''?' default_entry_image default_image_container':'')."\" style=\"background-image:url('{$entry['COVERFRONT']}')\"></div>";
+			$entry['COVERFRONTTAG'] = "<div class=\"COVERFRONTTAG IMAGETAG".($entry['COVERFRONT']==DEFAULT_ENTRY_COVER_FRONT?' default_entry_image default_image_container':'')."\" style=\"background-image:url('{$entry['COVERFRONT']}')\"></div>";
 			$entry['COVERBACK'] = self::getEntryCoverBack($entry);
-			$entry['COVERBACKTAG'] = "<div class=\"COVERBACKTAG IMAGETAG".($entry['asset']['back_background_image']==''?' default_entry_background default_image_container':'')."\" style=\"background-image:url('{$entry['COVERBACK']}')\"></div>";
+			$entry['COVERBACKTAG'] = "<div class=\"COVERBACKTAG IMAGETAG".($entry['COVERBACK']==DEFAULT_ENTRY_COVER_BACK?' default_entry_background default_image_container':'')."\" style=\"background-image:url('{$entry['COVERBACK']}')\"></div>";
 			$entry['created_absolute'] = Filter::getAbsoluteTime($entry['published']);
 			$entry['created_relative'] = ((time()-$entry['published'])>RELATIVE_TIME_COVERAGE)?$entry['created_absolute']:Filter::getRelativeTime($entry['published']);
 			$entry['updated_absolute'] = Filter::getAbsoluteTime($entry['modified']);

@@ -71,8 +71,13 @@ table.ui-table th > *,
 table.ui-table td > * {
 	box-sizing: border-box;
 }
+table.ui-table th > div,
+table.ui-table td > div {
+	min-height: 1em;
+}
 table.ui-table td > .IMAGETAG {
 	position: absolute;
+	display: block;
 	width: 32px;
 	height: 32px;
 	margin: 0;
@@ -90,13 +95,10 @@ table.ui-table td.ui-checkbox-container {
 	width: 30px;
 	min-width: 0;
 }
-table.ui-table td > .COVERFRONTTAG + div,
-table.ui-table td > .COVERFRONTTAG + div + div,
-table.ui-table td > .COVERFRONTTAG + div + div + div,
-table.ui-table td > .PORTRAITTAG + div,
-table.ui-table td > .PORTRAITTAG + div + div,
-table.ui-table td > .PORTRAITTAG + div + div + div {
-	padding-left: 40px;
+table.ui-table td > .IMAGETAG + div,
+table.ui-table td > .IMAGETAG + div + div,
+table.ui-table td > .IMAGETAG + div + div + div {
+	margin-left: 40px;
 }
 table.ui-table th.general,
 table.ui-table td.general {

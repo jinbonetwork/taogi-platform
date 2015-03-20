@@ -17,6 +17,7 @@ a.ui-controls-switch:after {
 
 /** Console **/
 .ui-controls {
+	min-height: 0 !important;
 	margin: 0;
 	padding: 0;	
 }

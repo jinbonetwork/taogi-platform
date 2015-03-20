@@ -45,7 +45,7 @@ class User extends Objects {
 		if(empty($user)) {
 			return;
 		}
-		$image = $user['portrait']?:IMAGE_PLACEHOLDER;
+		$image = $user['portrait']?:DEFAULT_USER_PORTRAIT;
 
 		return $image;
 	}
@@ -58,7 +58,10 @@ class User extends Objects {
 		if(empty($user)) {
 			return;
 		}
-		$background = $user['extra']['background']?:IMAGE_PLACEHOLDER;
+		if(isset($user['extra']['background'])){
+			$background = $user['extra']['background'];
+		}
+		$background = $background?:DEFAULT_USER_BACKGROUND;
 
 		return $background;
 	}
@@ -121,9 +124,9 @@ class User extends Objects {
 		$user['NAMETAG'] = "<span class=\"NAMETAG value composition\">".($user['degree']?"<span class=\"ROLE value part\" data-degree=\"{$user['degree']}\"><span class=\"value-wrap-open\">(</span><span class=\"value-wrap-value\">{$user['ROLE']}</span><span class=\"value-wrap-close\">)</span></span>":'')."<span class=\"DISPLAY_NAME value part\">".$user['DISPLAY_NAME']."</span></span>";
 
 		$user['PORTRAIT'] = self::getUserPortrait($user);
-		$user['PORTRAITTAG'] = "<div class=\"PORTRAITTAG IMAGETAG".($user['portrait']==''?' default_user_portrait default_image_container':'')."\" style=\"background-image:url('{$user['PORTRAIT']}')\"></div>";
+		$user['PORTRAITTAG'] = "<div class=\"PORTRAITTAG IMAGETAG".($user['PORTRAIT']==DEFAULT_USER_PORTRAIT?' default_user_portrait default_image_container':'')."\" style=\"background-image:url('{$user['PORTRAIT']}')\"></div>";
 		$user['BACKGROUND'] = self::getUserBackground($user);
-		$user['BACKGROUNDTAG'] = "<div class=\"BACKGROUNDTAG IMAGETAG".($user['asset']['background']==''?' default_user_background default_image_container':'')."\" style=\"background-image:url('{$user['BACKGROUND']}')\"></div>";
+		$user['BACKGROUNDTAG'] = "<div class=\"BACKGROUNDTAG IMAGETAG".($user['BACKGROUND']==DEFAULT_USER_BACKGROUND?' default_user_background default_image_container':'')."\" style=\"background-image:url('{$user['BACKGROUND']}')\"></div>";
 
 		return $user;
 	}
