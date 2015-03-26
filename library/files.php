@@ -1,4 +1,6 @@
 <?php
+require_once dirname(__FILE__).'/../classes/Image.class.php';
+
 function getUserAttachedPath($uid){
 	return JFE_DATA_PATH."/attach/user/".($uid% 16)."/".$uid;
 }
@@ -107,5 +109,11 @@ function _file_get_contents($file){
 		$content = file_get_contents($file);
 	}
 	return $content;
+}
+
+function jfe_purge($file){
+	Image::init(dirname(__FILE__).'/../',false);
+	$result = Image::removeImageset($file);
+	return $result;
 }
 ?>

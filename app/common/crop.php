@@ -8,7 +8,7 @@ class common_crop extends Controller {
 	public function index(){
 		$this->uid = Acl::getIdentity('taogi');
 		$this->contentType = 'json';
-		$result = array();
+		$crop = (object) array('log'=>array());
 
 		if(
 			$this->uid>0
@@ -20,86 +20,82 @@ class common_crop extends Controller {
 			&& isset($this->params['height'])
 			&& isset($this->params['rotate'])
 		){
-			if(strpos($this->params['origin'],'http')===0){
-				$domain = 'http'.(Platform::getProperty('service.ssl')==true?'s':'').'://'.Platform::getProperty('service.domain');
-				$this->param['origin'] = str_replace($domain,'',$this->params['origin']);
-			}
-			if(!strpos($this->param['origin'],JFE_PATH)){
-				$this->param['origin'] = JFE_PATH.$this->param['origin'];
-			}
+			$indexes = Image::getImageIndexes($this->params['origin']);
 
-			$crop = (object) array(
-				'context' => $this->params['context'],
-				'origin' => $this->param['origin'],
+			$crop = (object) array_merge((array)$crop,array(
+				'context' => (string) $this->params['context'],
+				'origin' => (string) $indexes['original']['filepath'],
+				'destination' => (string) $indexes['original']['filepath'],
 				'x1' => $this->params['x'],
 				'y1' => $this->params['y'],
 				'x2' => $this->params['x']+$this->params['width'],
 				'y2' => $this->params['y']+$this->params['height'],
 				'rotate' => $this->params['rotate'],
-			);
+				'width' => $indexes['small']['width'],
+				'height' => $indexes['small']['height'],
+				'quality' => $indexes['small']['quality'],
+				'format' => $indexes['small']['format'],
+				'cleanup' => true,
+			));
 
 			switch($crop->context){
 				case 'portrait':
-					/*
-					$path = explode('/',$crop->origin);
-					$path[count($path)-1] = PORTRAIT_FILENAME;
-					$crop->destination = implode('/',$path);
-					*/
-					//$path = explode('/',getUserAttachedPath($uid));
-					$path = getUserAttachedPath($this->uid);
-
-					$crop->width = PORTRAIT_WIDTH;
-					$crop->height = PORTRAIT_HEIGHT;
-					$crop->quality = PORTRAIT_QUALITY;
-					$crop->format = PORTRAIT_FORMAT;
-					$crop->destination = $path.'/files/'.PORTRAIT_FILENAME;
-					$crop->thumbnail_destination = $path.'/thumbs/'.PORTRAIT_FILENAME;
-				break;
-				default:
-					$crop->quality = THUMBNAIL_QUALITY;
-					$crop->format = THUMBNAIL_FORMAT;
-					$crop->destination = $crop->origin.THUMBNAIL_FILENAME;
+					$crop = (object) array_merge((array)$crop,$indexes['portrait'],array(
+						'destination' => $indexes['original']['dirpath'].'/'.$indexes['portrait']['filename'],
+					));
 				break;
 			}
 
 			try{
 				$simpleimage = new abeautifulsite\SimpleImage($crop->origin);
-
-				//$image->save(); // strip EXIF data
+				$crop->log[] = "loaded: {$crop->origin}";
 
 				if($crop->rotate){
 					$simpleimage->rotate($crop->rotate);
+					$crop->log[] = "rotated: {$crop->rotate} degree";
 				}
 
 				$simpleimage->crop($crop->x1,$crop->y1,$crop->x2,$crop->y2);
+				$crop->log[] = "cropped: {$crop->x1}, {$crop->y1}, {$crop->x2}, {$crop->y2}";
 
 				if($crop->width&&$crop->height){
 					$simpleimage->resize($crop->width,$crop->height);
+					$crop->log[] = "resized: {$crop->width}x{$crop->height}";
 				}
 
-				if($crop->destination!=$crop->origin){
-					$simpleimage->save((string)($crop->destination),$crop->quality,$crop->format);
-				}else{
-					$simpleimage->save((string)($crop->origin),$crop->quality,$crop->format);
-				}
+				$simpleimage->save($crop->destination,$crop->quality,$crop->format);
+				$crop->log[] = "saved: {$crop->destination}, {$crop->quality}, {$crop->format}";
 
-				if($crop->thumbnail_destination){
-					/*
-					$image->resize(THUMBNAIL_WIDTH,THUMBNAIL_HEIGHT);
-					$image->save($crop->thumbnail_destination);
-					*/
-					unlink($crop->thumbnail_destination);
+				if($crop->cleanup){
+					$t_indexes = Image::getImageIndexes($crop->destination);
+					foreach($t_indexes as $t_size => $t_value){
+						if(file_exists($t_indexes[$t_size]['filepath'])){
+							if($t_size=='original'||$t_size=='portrait'){
+								continue;
+							}else{
+								try{
+									unlink($t_indexes[$t_size]['filepath']);
+									$crop->log[] = "thumbnail deleted: {$t_indexes[$t_size]['filepath']}";
+								}catch(Exception $unlink_result){
+									$crop->log[] = "thumbnail deletion failed: ".$unlink_result->getMessage();
+								}
+							}
+						}
+					}
+
 				}
 
 				$crop->cropped = str_replace(JFE_PATH,'',$crop->destination);
-				$result = (array) $crop;
+				$crop->log[] = "done: {$crop->origin} => {$crop->cropped}";
 			}catch(Exception $e){
-				$result['error'] = $e->getMessage();
+				$crop->log[] = "error: ".$e->getMessage();
 			}
 		}else{
-			$result['error'] = 'invalid command.';
+			$crop->log[] = "error: invalid command.";
 		}
 		
+		$result = (array) $crop;
+		header('Content-type:application/json');
 		echo json_encode($result);
 		exit;
 	}

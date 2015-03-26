@@ -1,7 +1,6 @@
 <?php
 define('__JFE__',true);
 define('ROOT','.');
-
 /**
  * @brief 필요한 설정 파일들 include
  **/

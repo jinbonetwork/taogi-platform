@@ -1,5 +1,5 @@
 <?php
-$Acl = "owner";
+$Acl = "editor";
 class authors_index extends Interface_Entry {
 	public function index() {
 		// Objects
@@ -11,6 +11,8 @@ class authors_index extends Interface_Entry {
 		// Page
 		$this->title = $this->entry['subject']." -- 편집그룹 관리";
 		$this->description = $this->entry['summary'];
+
+		$this->base_uri = "http://".$context->getProperty('service.domain').base_uri();
 
 		// Views
 		require_once JFE_PATH.'/include/userEntryControls.php';
@@ -30,6 +32,9 @@ class authors_index extends Interface_Entry {
 		require_once JFE_PATH.'/include/entryAuthorGallery.php';
 		$this->css[] = 'ui-gallery.css';
 		$this->script[] = 'ui-gallery.js';
+
+		$this->css[] = 'ui-form.css';
+		$this->script[] = 'wysiwyg_editor.js';
 
 		// Resources - app
 		$this->css[] = 'app-entry.css';

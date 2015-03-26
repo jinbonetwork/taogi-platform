@@ -135,7 +135,7 @@ jQuery(document).ready(function(e){
 				doUpdate = doUpdate || false;
 				var options = jQuery.extend({},fancyboxOptions,{
 					type: 'ajax',
-					href: base_uri+'include/user/forms/profile.cropper.html',
+					href: base_uri+'include/cropper.html',
 					beforeShow: function(){
 						self.action.buildCropper();
 					},

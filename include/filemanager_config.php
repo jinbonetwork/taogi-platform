@@ -1,4 +1,5 @@
-<?
+<?php
+
 define('ROOT',dirname(rtrim(dirname(__FILE__),"/")));
 $_tmp_base = strtok(ltrim(substr($_SERVER['SCRIPT_FILENAME'],strlen(ROOT)),"/"),"/");
 $_tmp_path = explode("/",ltrim($_SERVER['SCRIPT_NAME'],"/"));
@@ -36,3 +37,6 @@ fclose($fp);
 if(!$eid) {
 	Respond::NotFoundPage();
 }
+
+require_once ROOT.'/library/files.php';
+?>

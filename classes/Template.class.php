@@ -1,4 +1,5 @@
 <?php
+require_once JFE_PATH.'/config/options.php';
 class Template extends Objects {
 	
 	public static function instance(){
@@ -6,11 +7,12 @@ class Template extends Objects {
 	}
 
 	public static function getGeneralHeader(){
+		global $imageIndexes;
 		$base_uri = base_uri(); 
 		$taogi = json_encode(array(
 			'portrait' => array(
-				'width' => PORTRAIT_WIDTH,
-				'height' => PORTRAIT_HEIGHT,
+				'width' => $imageIndexes['portrait']['width'],
+				'height' => $imageIndexes['portrait']['height'],
 			),
 		));
 		$markup = "

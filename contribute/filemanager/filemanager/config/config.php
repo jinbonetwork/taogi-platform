@@ -1,6 +1,7 @@
 <?php
 define("TAOGI_FILEMANAGER_ROOT","../../..");
 require_once dirname(__FILE__)."/../".TAOGI_FILEMANAGER_ROOT."/include/filemanager_config.php";
+require_once dirname(__FILE__)."/../".TAOGI_FILEMANAGER_ROOT."/config/options.php";
 mb_internal_encoding('UTF-8');
 if(is_numeric($eid)) {
 	$folder = (int)($eid % 16);
@@ -92,8 +93,8 @@ $transliteration 	= FALSE; //active or deactive the transliteration (mean conver
 // set maximum pixel width and/or maximum pixel height for all images
 // If you set a maximum width or height, oversized images are converted to those limits. Images smaller than the limit(s) are unaffected
 // if you don't need a limit set both to 0
-$image_max_width  = 0;
-$image_max_height = 0;
+$image_max_width  = $imageIndexes['original']['width'];
+$image_max_height = $imageIndexes['original']['height'];
 
 //Automatic resizing //
 // If you set $image_resizing to TRUE the script converts all uploaded images exactly to image_resizing_width x image_resizing_height dimension

@@ -1736,6 +1736,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		buildThumbnail: function(id,uid) {
 			var thumbnail = jQuery('#t_'+uid);
 			var src = thumbnail.attr('href');
+
 			var m = taogiVMM.ExternalAPI.MediaType(src);
             m.url = src;
 			m.uid = uid;
@@ -2042,7 +2043,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						if(m.use_proxy) {
 							m.id = './library/api.php?type=proxy&taogiauth=ACA20D8B4F7B63D8639C7824AC458D3A53F7E275&skip_referer=1&url='+encodeURIComponent(m.id);
 						}
-						mediaElem = '<img src="'+m.id+'" alt="'+m.caption+' '+m.credit+'" />';
+						var host_match = new RegExp("^http(s)?:\/\/"+window.location.hostname+"\/(.*)\.(jpeg|jpg|gif|bmp|png)$");
+						var src = m.id;
+						if(src.match(host_match)) src += "?s=small";
+						mediaElem = '<img src="'+src+'" alt="'+m.caption+' '+m.credit+'" />';
 						break;
 					case 'instagram':
 						mediaElem = '<img src="'+taogiVMM.ExternalAPI.instagram.getThumb(m)+'" alt="'+m.caption+' '+m.credit+'" />';

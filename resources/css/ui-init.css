@@ -31,6 +31,9 @@
 	background-position: center center;
 	background-size: cover;
 }
+.IMAGETAG.BACKGROUNDTAG {
+	background-color: #000000;
+}
 .IMAGETAG img {
 	display: none;
 }
@@ -52,7 +55,7 @@
 	color: #000000;
 	text-shadow: 0 0 5px #FFFFFF;
 }
-.IMAGETAG.default_image_container.default_entry_image:after {
+.IMAGETAG.default_image_container.default_entry_cover_front:after {
 	content: '\F017';
 }
 .IMAGETAG.default_image_container.default_user_portrait:after {

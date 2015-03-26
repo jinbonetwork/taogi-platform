@@ -101,21 +101,25 @@ class Entry extends Objects {
 	}
 
 	public static function getEntryCoverFront($entry) {
-		$image;
+		$images = array();
+		$image = '';
 		if(isset($entry['asset']['cover_background_image'])) {
 			$image = $entry['asset']['cover_background_image'];
 		}
-		$image = $image?:DEFAULT_ENTRY_COVER_FRONT;
-		return $image;
+		$image = $image?$image:DEFAULT_ENTRY_COVER_FRONT;
+		$imageset = Image::getImageset($image,DEFAULT_ENTRY_COVER_FRONT);
+		return $imageset;
 	}
 
 	public static function getEntryCoverBack($entry) {
-		$image;
+		$images = array();
+		$image = '';
 		if(isset($entry['asset']['back_background_image'])) {
 			$image = $entry['asset']['back_background_image'];
 		}
-		$image = $image?:DEFAULT_ENTRY_COVER_BACK;
-		return $image;
+		$image = $image?$image:DEFAULT_ENTRY_COVER_BACK;
+		$imageset = Image::getImageset($image,DEFAULT_ENTRY_COVER_BACK);
+		return $imageset;
 	}
 
 	public static function getEditors($entry) {
@@ -180,10 +184,12 @@ class Entry extends Objects {
 
 			$entry['excerpt'] = Filter::getExcerpt($entry['summary']);
 			$entry['permalink'] = self::getEntryLink($entry);
+
 			$entry['COVERFRONT'] = self::getEntryCoverFront($entry);
-			$entry['COVERFRONTTAG'] = "<div class=\"COVERFRONTTAG IMAGETAG".($entry['COVERFRONT']==DEFAULT_ENTRY_COVER_FRONT?' default_entry_image default_image_container':'')."\" style=\"background-image:url('{$entry['COVERFRONT']}')\"></div>";
+			$entry['COVERFRONT']['CLASS'] = "COVERFRONTTAG IMAGETAG ".($entry['COVERFRONT']['original']==DEFAULT_ENTRY_COVER_FRONT?' default_entry_cover_front default_entry_image default_image_container':'');
 			$entry['COVERBACK'] = self::getEntryCoverBack($entry);
-			$entry['COVERBACKTAG'] = "<div class=\"COVERBACKTAG IMAGETAG".($entry['COVERBACK']==DEFAULT_ENTRY_COVER_BACK?' default_entry_background default_image_container':'')."\" style=\"background-image:url('{$entry['COVERBACK']}')\"></div>";
+			$entry['COVERBACK']['CLASS'] = "COVERBACKTAG IMAGETAG ".($entry['COVERBACK']['original']==DEFAULT_ENTRY_COVER_BACK?' default_entry_cover_back default_entry_image default_image_container':'');
+
 			$entry['created_absolute'] = Filter::getAbsoluteTime($entry['published']);
 			$entry['created_relative'] = ((time()-$entry['published'])>RELATIVE_TIME_COVERAGE)?$entry['created_absolute']:Filter::getRelativeTime($entry['published']);
 			$entry['updated_absolute'] = Filter::getAbsoluteTime($entry['modified']);

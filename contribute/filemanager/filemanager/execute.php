@@ -67,7 +67,10 @@ if (isset($_GET['action']))
         case 'delete_file':
             if ($delete_files){
                 unlink($path);
+				jfe_purge($path);
+
                 if (file_exists($path_thumb)) unlink($path_thumb);
+				jfe_purge($path_thumb);
 		    
         		$info=pathinfo($path);
         		if ($relative_image_creation){
@@ -78,6 +81,7 @@ if (isset($_GET['action']))
             			if (file_exists($info['dirname']."/".$path.$relative_image_creation_name_to_prepend[$k].$info['filename'].$relative_image_creation_name_to_append[$k].".".$info['extension']))
                         {
             			    unlink($info['dirname']."/".$path.$relative_image_creation_name_to_prepend[$k].$info['filename'].$relative_image_creation_name_to_append[$k].".".$info['extension']);
+            			    jfe_purge($info['dirname']."/".$path.$relative_image_creation_name_to_prepend[$k].$info['filename'].$relative_image_creation_name_to_append[$k].".".$info['extension']);
             			}
         		    }
         		}
@@ -92,6 +96,7 @@ if (isset($_GET['action']))
             			if (file_exists($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension']))
                         {
             			    unlink($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension']);
+            			    jfe_purge($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension']);
             			}
         		    }
         		}
