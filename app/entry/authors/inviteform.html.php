@@ -30,7 +30,7 @@ ob_end_clean();
 				</div><!--/.main-fixed-footer-->
 			</div><!--/.wrap-->
 		</fieldset>
-		<fieldset class="ui-form">
+		<fieldset class="fields ui-form buttons">
 			<button type="submit" class="submit">초대하기</button>
 		</fieldset>
 	</form>
