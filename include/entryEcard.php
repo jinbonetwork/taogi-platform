@@ -6,9 +6,9 @@ function getEntryEcard($entry){
 <div class="ui-block ui-ecard ui-hcard">
 	<div class="ui-hcard-wrap">
 		{$entry['COVERBACK']['TAG']}	
-		<h1 class="ui-hcard-title subject">{$entry['subject']}</h1>
+		<h1 class="ui-hcard-title subject"><div class="wrap">{$entry['subject']}</div></h1>
 		{$entry['COVERFRONT']['TAG']}	
-		<div class="ui-hcard-description summary">{$entry['summary']}</div>
+		<div class="ui-hcard-description summary"><div class="wrap">{$entry['summary']}</div></div>
 	</div>
 </div><!--/.ui-ecard-->
 EOT;

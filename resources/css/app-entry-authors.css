@@ -71,3 +71,12 @@
 #invite-form-wrap form fieldset.fields .main-fixed-footer {
 	margin-top: 20px;
 }
+#invitation-content .wrap {
+	padding: 2em;
+	border: 1px solid #999999;
+	background-color: #FDFDFD;
+}
+#invitation-content .wrap:hover,
+#invitation-content .wrap:focus {
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

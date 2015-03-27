@@ -2,6 +2,42 @@ var $window;
 var $document;
 var $body;
 var $catchResize = {}; // callback array for resize event
+var tinymceOptions = {
+	language: 'ko_KR',
+	theme: "modern",
+	/*
+	toolbar: [
+		"undo redo",
+		"bold italic underline",
+		"styleselect forecolor backcolor",
+		"alignleft aligncenter alignright alignjustify",
+		"bullist numlist outdent indent",
+		"link unlink",
+		"image media filemanager",
+		"preview code fullscreen"
+	].join(' | '),
+	*/
+	toolbar: [
+		"bold italic underline",
+		"forecolor backcolor",
+		"bullist numlist outdent indent",
+		"link unlink image media filemanager"
+	].join(' | '),
+	/*
+	plugins: [ 
+		"advlist autolink autoresize link image lists charmap print preview hr anchor pagebreak spellchecker",
+		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+		"save table contextmenu directionality emoticons template paste textcolor filemanager"
+	]
+	*/
+	plugins: [ 
+		"autoresize link image lists charmap hr pagebreak",
+		"searchreplace insertdatetime media",
+		"table contextmenu paste textcolor filemanager"
+	],
+	menubar: false,
+	image_advtab: true
+};
 var fancyboxOptions = {
 	width       : 900,
 	height      : 600,

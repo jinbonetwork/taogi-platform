@@ -122,7 +122,7 @@ $ellipsis_title_after_first_row = TRUE;
 //Permissions configuration
 //******************
 $delete_files	 = TRUE;
-$create_folders	 = TRUE;
+$create_folders	 = FALSE; // taogi
 $delete_folders	 = TRUE;
 $upload_files	 = TRUE;
 $rename_files	 = TRUE;

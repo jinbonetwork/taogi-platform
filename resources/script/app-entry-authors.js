@@ -70,12 +70,15 @@ function check_invite(TheForm) {
 
 jQuery(document).ready(function(e){
 	if(jQuery('#content').length > 0) {
+		/*
 		var plugins = [
 			"link image lists charmap hr pagebreak",
 			"searchreplace insertdatetime media",
 			"table contextmenu paste textcolor filemanager"
 		];
 		Load_Wysiwyg_Editor('content',null,plugins);
+		*/
+		Load_Wysiwyg_Editor('content');
 	}
 
 	jQuery('form#invite-form input#email').keyup(function(e) {

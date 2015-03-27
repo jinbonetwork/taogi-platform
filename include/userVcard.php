@@ -52,9 +52,9 @@ function getUserVcard($user) {
 	<div class="ui-hcard-wrap">
 		{$userIdInput}
 		{$user['BACKGROUND']['TAG']}
-		<h1 class="ui-hcard-title DISPLAY_NAME">{$user['DISPLAY_NAME']}</h1>
+		<h1 class="ui-hcard-title DISPLAY_NAME"><div class="wrap">{$user['DISPLAY_NAME']}</div></h1>
 		{$user['PORTRAIT']['TAG']}
-		<div class="ui-hcard-description summary">{$user['summary']}</div>
+		<div class="ui-hcard-description summary"><div class="wrap">{$user['summary']}</div></div>
 	</div>
 </div><!--/.ui-vcard-->
 VCARD;
