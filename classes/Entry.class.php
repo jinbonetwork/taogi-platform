@@ -63,8 +63,8 @@ class Entry extends Objects {
 
 	public static function fetchEntry($entry) {
 		if($entry) {
-			$entry['asset'] = unserialize($entry['asset']);
-			$entry['era'] = unserialize($entry['era']);
+			$entry['asset'] = @unserialize($entry['asset']);
+			$entry['era'] = @unserialize($entry['era']);
 		}
 		return $entry;
 	}

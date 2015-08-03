@@ -489,11 +489,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				if(code == 13 && (event.ctrlKey || event.shiftKey)) {
 //					event.preventDefault();
 					self.isChanged = 1;
-<<<<<<< HEAD
-/*					if (f_name == 'text' && window.getSelection) {
-=======
+/*
 					if (f_name == 'text' && window.getSelection) {
->>>>>>> f840e81ad989a3612389cc96683ef485abc1951e
 						var selection = window.getSelection(),
 							range = selection.getRangeAt(0),
 							br = document.createElement("br"),
@@ -507,11 +504,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						selection.removeAllRanges();
 						selection.addRange(range);
 						return false;
-<<<<<<< HEAD
-					}*/				
-=======
-					}				
->>>>>>> f840e81ad989a3612389cc96683ef485abc1951e
+					} */
 				} else if(code == 9 || code == 13) {
 					event.preventDefault();
 					if(!jQuery.trim(jQuery(this).html())) {
