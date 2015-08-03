@@ -1,7 +1,7 @@
 	<div id="user-profile_'<?php print $user['uid']; ?>" class="app-user app-user-profile">
 		<div id="user-profile-vcard" class="block vcard-container">
-<?php		print getUserVcard($user);
-			print getUserTabs($user,'profile');
+<?php		print $vcard;
+			print $tabs;
 ?>
 		</div><!--/#user-profile-vcard-->
 		<div id="user-profile-userinfo" class="block userinfo">
@@ -24,8 +24,8 @@
 				</div>
 				<div id="email_new" class="ui-form-block collapse_container">
 					<div class="wrap">
-<?php					include_once JFE_PATH."/include/user/forms/email_id.html.php"; ?>
-<?php					include_once JFE_PATH."/include/user/forms/password.html.php"; ?>
+						<?php print $email_form;?>
+						<?php print $password_form;?>
 						<div class="buttons">
 							<button class="button apply" type="submit"><span>인증메일발송</span></button>
 							<button class="button cancel toggle" type="button"><span>취소</span></button>
@@ -35,8 +35,8 @@
 			</form>
 			<form id="userProfile" name="userProfile" class="ui-form ui-user-form" action="<?php print User::getUserLink($user['uid']); ?>/profile/save" method="post" autocomplete="off">
 				<input type="hidden" id="c_taoginame" name="c_taoginame" value="<?php print $user['taoginame']; ?>" />
-<?php			include_once JFE_PATH."/include/user/forms/name.html.php"; ?>
-<?php			include_once JFE_PATH."/include/user/forms/profile.html.php"; ?>
+				<?php print $name_form;?>
+				<?php print $profile_form;?>
 				<div class="buttons">
 					<button class="button save" type="submit"><span>저장하기</span></button>
 				</div>

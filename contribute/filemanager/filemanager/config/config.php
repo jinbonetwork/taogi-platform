@@ -1,7 +1,8 @@
 <?php
 define("TAOGI_FILEMANAGER_ROOT","../../..");
 require_once dirname(__FILE__)."/../".TAOGI_FILEMANAGER_ROOT."/include/filemanager_config.php";
-require_once dirname(__FILE__)."/../".TAOGI_FILEMANAGER_ROOT."/config/options.php";
+$context = Model_Context::instance();
+$imageIndexes = $context->getOptions('imageIndexes');
 mb_internal_encoding('UTF-8');
 if(is_numeric($eid)) {
 	$folder = (int)($eid % 16);

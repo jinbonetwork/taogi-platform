@@ -35,46 +35,18 @@ class entry_modify extends Controller {
 		}
 		$_SESSION['current'] = array('mode'=>'entry_edit','eid'=>$this->eid);
 
-		/* jQuery - DateTimePicker */
-		$this->js[] = 'datetimepicker/jquery.datetimepicker.css';
-		$this->js[] = 'datetimepicker/jquery.datetimepicker.js';
-
-		/* jQuery UI */
-		$this->js[] = 'jquery-ui-1.10.4/themes/base/jquery-ui.css';
-		$this->js[] = 'jquery-ui-1.10.4/ui/minified/jquery-ui.min.js';
-		
-		/* jQuery UI - datepicker - i18n */
-		//$this->js[] = 'jquery-ui-1.10.4/ui/i18n/jquery.ui.datepicker-ko.js';
-
-		/* Ace Editor */
-		$this->js[] = '../../contribute/ace/src-min-noconflict/ace.js';
-
-		/* FancyBox */
-		$this->js[] = 'fancyBox/source/jquery.fancybox.css';
-		$this->js[] = 'fancyBox/source/jquery.fancybox.pack.js';
-
-		/* Spectrum Color Picker */
-		$this->js[] = 'bgrins-spectrum-9619bb4/spectrum.css';
-		$this->js[] = 'bgrins-spectrum-9619bb4/spectrum.js';
-
-		/* Medium-style Rich Editor */
-		$this->css[] = '../../contribute/medium-editor/dist/css/medium-editor.css';
-		$this->css[] = '../../contribute/medium-editor/dist/css/themes/default.css';
-		$this->script[] = '../../contribute/medium-editor/dist/js/medium-editor.js';
-
 		/* Local */
-		$this->css[] = '../../timeline/resources/css/media.css';
-//		$this->css[] = 'create.css';
-		$this->script[] = '../../timeline/model/touchcarousel/js/jquery.taogi.touchcarousel.js';
-		$this->script[] = '../../contribute/caret/jquery.caret.js';
+		View_Resource::addCssURI(JFE_URI."timeline/resources/css/media.css",-1);
+		View_Resource::addJsURI(JFE_URI."timeline/model/touchcarousel/js/jquery.taogi.touchcarousel.js",-1);
 
-		/** App **/
-		$this->css[] = 'app-create.css';
-		$this->script[] = 'app-create.js';
+		importResource("taogi-app-modify");
 
-		/* UI */
-//		$this->script[] = 'app-entry-modify.js';
-		$this->css[] = 'app-entry-modify.css';
+		$this->editor_title = '따오기 타임라인 수정하기';
+		$this->presets = PresetManager::getList('touchcarousel',$this->timeline['extra']['preset']);
+		$this->extraCss = htmlspecialchars(_file_get_contents(getEntryExtraCssPath($this->eid)));
+		$this->editor_header = Component::get('entry/editor/head',get_object_vars($this));
+		$this->editor_basic = Component::get('entry/editor/basic',array());
+		$this->editor_footer = Component::get('entry/editor/foot',array());
 	}
 
 	public function make_attr($item) {

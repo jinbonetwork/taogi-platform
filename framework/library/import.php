@@ -42,4 +42,8 @@ function importView($name) {
 	global $__requireLibrary;
 	importLibrary("view.".$name);
 }
+
+function importResource($key) {
+	View_Resource::addResource($key);
+}
 ?>

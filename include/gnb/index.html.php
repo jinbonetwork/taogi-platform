@@ -1,3 +1,6 @@
+<?php
+importResource('taogi-gnb');
+?>
 <div id="taogi-gnb">
 	<div id="taogi-gnb-wrap">
 		<div id="taogi-gnb-header">
@@ -72,7 +75,9 @@
 	}
 	if(is_timeline()) {
 		if(user_logged_in()) {
-			echo getUserEntryControls($entry,array('context'=>'entrySidebar','class'=>array('list','icon','label',)));
+			importResource('taogi-ui-forms');
+			importResource('taogi-ui-controls');
+			print Component::get('user/entry/control',array('entry'=>$entry,'instance'=>0,'options'=>array('context'=>'entrySidebar','class'=>array('list','icon','label'))));
 		}
 	}
 ?>

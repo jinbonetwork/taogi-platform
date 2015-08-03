@@ -18,18 +18,26 @@ class authors_invite extends Interface_Entry {
 		switch($this->params['act']) {
 			case 'invite':
 				$this->regist();
+				$this->lists();
 				break;
 			case 'delete':
 				$this->delete();
+				$this->lists();
 				break;
 			case 'list':
 			default:
 				$this->lists();
 				break;
 		}
+		$this->result = array('error'=>0,'message'=>$this->inviteTable);
+		header('Content-type:application/json; charset=utf-8');
+		echo json_encode($this->result);
+		exit;
 	}
 
 	public function lists() {
+		$this->inviters = Entry_Invite::getList($this->entry['eid']);
+		$this->inviteTable = Component::get("entry/invite/table",array('entry'=>$this->entry,'inviters'=>$this->inviters));
 	}
 
 	public function regist() {
@@ -78,6 +86,8 @@ class authors_invite extends Interface_Entry {
 			);
 		}
 		Entry_Invite::add($invite);
+
+		$dbm = DBM::instance();
 		$dbm->commit();
 	}
 

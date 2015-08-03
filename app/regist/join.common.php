@@ -11,10 +11,10 @@
 	<form id="join_form" name="join_form" class="ui-form ui-user-form" method="post" autocomplete="off">
 		<input type="hidden" name="requestURI" value="<?php print $params['requestURI']; ?>" />
 		<input type="hidden" name="join_type" value="<?php print ($params['output'] == 'nolayout' ? 'pop' : ''); ?>" />
-<?php		include_once JFE_PATH."/include/user/forms/email_id.html.php"; ?>
-<?php		include_once JFE_PATH."/include/user/forms/profile.html.php"; ?>
-<?php		include_once JFE_PATH."/include/user/forms/name.html.php"; ?>
-<?php		include_once JFE_PATH."/include/user/forms/password.html.php"; ?>
+			<?php print $email_form;?>
+			<?php print $profile_form;?>
+			<?php print $name_form;?>
+			<?php print $password_form;?>
 		<div class="buttons">
 			<button class="button join" type="submit"><span>회원가입</span></button>
 			<button class="button cancel" type="button" onclick="<?php if($params['output'] == 'nolayout') print "jfe_popup_close();"; else print "history.back();"; ?>"><span>취소</span></button>

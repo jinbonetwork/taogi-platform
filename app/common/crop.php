@@ -1,6 +1,6 @@
 <?php
 import('library.files');
-require_once JFE_CONTRIBUTE_PATH.'/SimpleImage/src/abeautifulsite/SimpleImage.php';
+import('contribute.SimpleImage.src.abeautifulsite.SimpleImage');
 
 class common_crop extends Controller {
 	public $uid;

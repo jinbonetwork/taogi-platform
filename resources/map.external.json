@@ -1,0 +1,51 @@
+{
+	"html5":{
+		"js":["/resources/js/html5.js"],
+		"css":[],
+		"deps":[]
+	},
+	
+	"jquery":{
+		"js":["/resources/js/jquery-1.11.0.min.js"],
+		"css":[],
+		"deps":[]
+	},
+
+	"jquery-ui":{
+		"js":["/resources/js/jquery-ui-1.10.4/ui/jquery-ui.js"],
+		"css":["/resources/js/jquery-ui-1.10.4/themes/base/jquery-ui.css"],
+		"deps":["jquery"]
+	},
+	"jquery-bootstrap-tooltip":{
+		"js":["/resources/js/jquery-bootstrap-tooltip/jquery-bootstrap-tooltip.js"],
+		"css":["/resources/js/jquery-bootstrap-tooltip/jquery-bootstrap-tooltip.css"],
+		"deps":["jquery"]
+	},
+
+	"fancybox":{
+		"js":[
+			"/resources/js/fancybox/source/jquery.fancybox.js",
+			"/resources/js/fancybox/source/jquery.fancybox.pack.js"
+		],
+		"css":["/resources/js/fancybox/source/jquery.fancybox.css"],
+		"deps":["jquery"]
+	},
+
+	"datetimepicker":{
+		"js":["/resources/js/datetimepicker/jquery.datetimepicker.js"],
+		"css":["/resources/js/datetimepicker/jquery.datetimepicker.css"],
+		"deps":["jquery"]
+	},
+	"bgrins-spectrum":{
+		"js":["/resources/js/bgrins-spectrum-9619bb4/spectrum.js"],
+		"css":["/resources/js/bgrins-spectrum-9619bb4/spectrum.css"],
+		"deps":["jquery"]
+	},
+
+	"datatables":{
+		"js":["/resources/js/datatables/jquery.dataTables.min.js"],
+		"css":["/resources/js/datatables/jquery.dataTables.min.css"],
+		"deps":["jquery"]
+	}
+}
+

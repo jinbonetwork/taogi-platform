@@ -41,6 +41,9 @@
   color: #FFFFFF;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
+.ui-hcard.ui-block .ui-hcard-title .wrap a {
+  color: #fff;
+}
 .ui-hcard.ui-block .ui-hcard-image {
   position: absolute;
   z-index: 3;
@@ -64,6 +67,9 @@
 .ui-hcard.ui-block .ui-hcard-description .wrap {
   margin-left: 200px;
   font-size: 13px;
+}
+.ui-hcard.ui-block .ui-hcard-description .wrap a {
+  color: #000;
 }
 @media all and (max-width: 800px) {
   .ui-hcard.ui-block .ui-hcard-background {

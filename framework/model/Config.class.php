@@ -35,5 +35,33 @@ final class Model_Config extends Objects {
 			}
 		}
 	}
+
+	public function readOption() {
+		$context = Model_Context::instance();
+		$options = $context->getProperty('options.*');
+		if(!$options) {
+			if(file_exists(JFE_PATH."/config/options.php")) {
+				@include(JFE_PATH."/config/options.php");
+				if($options && is_array($options)) {
+					foreach($options as $k => $v) {
+						$context->setProperty('options.'.$k,$v);
+					}
+				}
+			}
+		}
+	}
+
+	public function readResourceMap() {
+		if(!$this->resoure_map) {
+			$map_file = JFE_PATH."/config/resources.map.json";
+			if(file_exists($map_file)) {
+				$fp = fopen($map_file,"r");
+				$json = trim(fread($fp,filesize($map_file)));
+				fclose($fp);
+				$this->resoure_map = json_decode($json,true);
+			}
+		}
+		return $this->resoure_map;
+	}
 }
 ?>

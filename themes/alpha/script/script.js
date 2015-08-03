@@ -13,7 +13,7 @@ function _pop_login() {
 		params = _url[1];
 
 	params += (params ? '&' : '?')+'requestURI='+window.location.pathname;
-	jfe_popup(url,params,base_uri+'resources/css/app-login.css',base_uri+'resources/script/app-login.js',function() { jQuery('#email_id').focus(); });
+	jfe_app_popup(url,params,'taogi-app-login',function() { jQuery('#email_id').focus(); });
 }
 
 function pop_regist() {
@@ -31,10 +31,8 @@ function _pop_regist(_url) {
 	if(_url.length > 1)
 		params = _url[1];
 	params += (params ? '&' : '?')+'requestURI='+window.location.pathname;
-	jfe_load_css(base_uri+'resources/css/ui-form.css');
-	jQuery.getScript(base_uri+'resources/script/ui-form.js',function() {
-		jfe_popup(url,params,base_uri+'resources/css/app-regist.css',base_uri+'resources/script/app-regist.js',function() { jQuery('#join_form').profileForm({ submit: function() { return check_regist('#join_form'); } }); });
-	});
+
+	jfe_app_popup(url,params,'taogi-app-regist',function() { jQuery('#join_form').profileForm({ submit: function() { return check_regist('#join_form'); } }); });
 }
 
 jQuery(document).ready(function(e){
@@ -75,15 +73,21 @@ jQuery(document).ready(function(e){
 		return false;
 	});
 
-	jQuery('.login a.fancybox.ajax').click(function(e) {
-		e.preventDefault();
-		_pop_login();
-	});
+	if(!jQuery('.login a.fancybox.ajax').data('login-event')) {
+		jQuery('.login a.fancybox.ajax').click(function(e) {
+			e.preventDefault();
+			_pop_login();
+		})
+		.data('login-event',true);
+	}
 
-	jQuery('.register a.fancybox.ajax').click(function(e) {
-		e.preventDefault();
-		_pop_regist();
-	});
+	if(!jQuery('.register a.fancybox.ajax').data('regist-event')) {
+		jQuery('.register a.fancybox.ajax').click(function(e) {
+			e.preventDefault();
+			_pop_regist();
+		})
+		.data('regist-event',true);
+	}
 
 	jQuery('.logout a').click(function(e) {
 		e.preventDefault();

@@ -1,5 +1,4 @@
 <?php
-require_once JFE_PATH.'/config/options.php';
 class Template extends Objects {
 	
 	public static function instance(){
@@ -7,7 +6,8 @@ class Template extends Objects {
 	}
 
 	public static function getGeneralHeader(){
-		global $imageIndexes;
+		$context = Model_Context::instance();
+		$imageIndexes = $context->getOptions('imageIndexes');
 		$base_uri = base_uri(); 
 		$taogi = json_encode(array(
 			'portrait' => array(
@@ -15,13 +15,9 @@ class Template extends Objects {
 				'height' => $imageIndexes['portrait']['height'],
 			),
 		));
-		$markup = "
-			<script>
-				var base_uri = '{$base_uri}';
-				var taogi = {$taogi};
-			</script>
-		";
-		return $markup;
+		$markup = "var base_uri = '{$base_uri}';
+		var taogi = {$taogi};";
+		View_Resource::addScriptSource($markup,-10000);
 	}
 
 	public static function buildSocialMetaTags($attributes=array()){

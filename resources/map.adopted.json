@@ -1,0 +1,12 @@
+{
+	"taogi-tinymce":{
+		"js":["/resources/script/lib-tinymce.js"],
+		"css":["/resources/css/lib-tinymce.css"],
+		"deps":["tinymce"]
+	},
+	"taogi-filemanager":{
+		"js":[],
+		"css":["/resources/css/lib-filemanager.css"],
+		"deps":["filemanager"]
+	}
+}

@@ -27,6 +27,18 @@ class Model_Context extends Objects {
 		else return $defaultValue;
 	}
 
+	public function getOptions($key='') {
+		if(!$this->getProperty('options.*')) {
+			$config = Model_Config::instance();
+			$config->readOption();
+		}
+		if($key) {
+			return $this->getProperty('options.'.$key);
+		} else {
+			return $this->getProperty('options.*');
+		}
+	}
+
 	public function getAll() {
 		return $this->__property;
 	}

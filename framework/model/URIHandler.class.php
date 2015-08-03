@@ -20,7 +20,7 @@ final class Model_URIHandler extends Objects {
 	}
 
 	private function __URIinterpreter() {
-		global $service;
+		global $context;
 
 		$uri = parse_url(($_SERVER['HTTPS'] == 'on' ? "https" : "http")."://".$_SERVER['HTTP_HOST'].str_replace('index.php', '', $_SERVER['REQUEST_URI']));
 		if($uri) {
@@ -37,29 +37,18 @@ final class Model_URIHandler extends Objects {
 		$uri['input'] = ltrim(substr($uri['fullpath'],strlen($uri['root'])));
 		$path = strtok($uri['input'], '/');
 		if(in_array($path,array('resources','plugins','themes','files'))) {
-			$part = ltrim(rtrim($uri['input']), '/');
-			$part = (($qpos = strpos($part, '?')) !== false) ? substr($part, 0, $qpos) : $part;
-			if(!$_GET['s'] && file_exists($part)) {
-				require_once JFE_LIB_PATH.'/file.php';
-				dumpWithEtag($part);
+			$use_filehandler = $context->getProperty('service.use_filehandler');
+			if($use_filehandler) {
+				include_once $use_filehandler;
 				exit;
-			} else {
-				if($path == 'files') {
+			}
+			else {
+				$part = ltrim(rtrim($uri['input']), '/');
+				$part = (($qpos = strpos($part, '?')) !== false) ? substr($part, 0, $qpos) : $part;
+				if(file_exists($part)) {
 					require_once JFE_LIB_PATH.'/file.php';
-					$part = rawurldecode($part);
-					if($_GET['s']) {
-						$i_indexes = Image::getImageIndexes($part);
-						$part = $i_indexes[$_GET['s']]['filepath'];
-					}
-					if(file_exists($part)) {
-						dumpWithEtag($part);
-						exit;
-					}
-					if(Image::checkImage(JFE_PATH."/".$part)) {
-						dumpWithEtag($part);
-						exit;
-					}
-					header("HTTP/1.0 404 Not Found");exit;
+					dumpWithEtag($part);
+					exit;
 				} else {
 					header("HTTP/1.0 404 Not Found");exit;
 				}
@@ -89,51 +78,30 @@ final class Model_URIHandler extends Objects {
 				header("HTTP/1.0 404 Not Found");exit;
 			}
 		} else {
-//			$user_type = 'normal';
-//			$user_profile = false;
-//			if($uri['fragment'][0] == 'user') {
-//				if($uri['fragment'][2] == 'profile') {
-//					$uri['appType'] = $uri['fragment'][2];
-//					$__input = explode("/",rtrim($uri['input'],"/"));
-//					$_input = "/user";
-//					for($i=3; $i<@count($__input); $i++) {
-//						$_input .= "/".$__input[$i];
-//					}
-//					$pathPart = JFE_APP_PATH.ltrim(rtrim(strtok(strstr($_input,'/'), '?'), '/'),'/');
-//					$user_profile = true;
-//				} else {
-//					array_splice($uri['fragment'],0,3);
-//				}
-//			} else {
-//				$user_type = 'nickname';
-//				array_splice($uri['fragment'],0,2);
-//			}
-//			if(!$user_profile) {
-				if (isset($uri['fragment'][0]) && file_exists(JFE_APP_PATH."/".$uri['fragment'][0])) {
-					$uri['appType'] = $uri['fragment'][0];
-					if($uri['appType'] == 'api') $uri['appType'] = '_api';
+			if (isset($uri['fragment'][0]) && file_exists(JFE_APP_PATH."/".$uri['fragment'][0])) {
+				$uri['appType'] = $uri['fragment'][0];
+				if($uri['appType'] == 'api') $uri['appType'] = '_api';
+			} else {
+				if(isset($uri['fragment'][0]) && (@count($uri['fragment']) == 1 || in_array($uri['fragment'][1],$this->user_appArray))) {
+					$uri['appType'] = 'user';
+					$__input = explode("/",rtrim(strtok($uri['input'],'?'),"/"));
+					$uri['input'] = 'user/'.implode("/",array_slice($__input,0,1));
+					$pathPart = JFE_APP_PATH."user";
+					for($i=1; $i<@count($__input); $i++) {
+						$uri['input'] .= "/".$__input[$i];
+						$pathPart .= "/".$__input[$i];
+					}
 				} else {
-					if(isset($uri['fragment'][0]) && (@count($uri['fragment']) == 1 || in_array($uri['fragment'][1],$this->user_appArray))) {
-						$uri['appType'] = 'user';
-						$__input = explode("/",rtrim(strtok($uri['input'],'?'),"/"));
-						$uri['input'] = 'user/'.implode("/",array_slice($__input,0,1));
-						$pathPart = JFE_APP_PATH."user";
-						for($i=1; $i<@count($__input); $i++) {
-							$uri['input'] .= "/".$__input[$i];
-							$pathPart .= "/".$__input[$i];
-						}
-					} else {
-						$uri['appType'] = 'entry';
-						$__input = explode("/",rtrim(strtok($uri['input'],'?'),"/"));
-						$uri['input'] = implode("/",array_slice($__input,0,2))."/entry";
-						$pathPart = JFE_APP_PATH."entry";
-						for($i=2; $i<@count($__input); $i++) {
-							$uri['input'] .= "/".$__input[$i];
-							$pathPart .= "/".$__input[$i];
-						}
+					$uri['appType'] = 'entry';
+					$__input = explode("/",rtrim(strtok($uri['input'],'?'),"/"));
+					$uri['input'] = implode("/",array_slice($__input,0,2))."/entry";
+					$pathPart = JFE_APP_PATH."entry";
+					for($i=2; $i<@count($__input); $i++) {
+						$uri['input'] .= "/".$__input[$i];
+						$pathPart .= "/".$__input[$i];
 					}
 				}
-//			}
+			}
 			if(!$pathPart)
 				$pathPart = JFE_APP_PATH.ltrim(rtrim(strtok(strstr($uri['input'],'/'), '?'), '/'),'/');
 		}

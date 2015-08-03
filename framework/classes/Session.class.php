@@ -22,7 +22,7 @@ final class Session {
 			if( !is_null(self::$context->getProperty('service.session_cookie'))) {
 				self::$sessionName = self::$context->getProperty('service.session_cookie');
 			} else {
-				self::$sessionName = 'SFSSESSION'.self::$context->getProperty('service.domain');
+				self::$sessionName = 'TGSESSION'.self::$context->getProperty('service.domain');
 				self::$sessionName = preg_replace( '/[^a-zA-Z0-9]/', '', self::$sessionName );
 			}
 		}
@@ -59,8 +59,8 @@ final class Session {
 
 	public static function set() {
 		if(is_null(self::$mc)) self::initialize();
-		if( !empty($_GET['SFSESSION']) ) {
-			$id = $_GET['SFSESSION'];
+		if( !empty($_GET['TGSESSION']) ) {
+			$id = $_GET['TGSESSION'];
 			$_COOKIE[session_name()] = $id;
 		} else if ( !empty($_COOKIE[session_name()]) ) {
 			$id = $_COOKIE[session_name()];

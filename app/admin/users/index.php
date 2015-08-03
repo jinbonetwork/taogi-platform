@@ -11,27 +11,14 @@ class users_index extends Controller {
 		#$this->description = $this->user['summary'];
 
 		// Views
-		require_once JFE_PATH.'/include/userVcard.php';
-		$this->css[] = 'ui-hcard.css';
-		$this->script[] = 'ui-hcard.js';
-
-		require_once JFE_PATH.'/include/adminTabs.php';
-		$this->css[] = 'ui-tabs.css';
-		$this->script[] = 'ui-tabs.js';
-
-		require_once JFE_PATH.'/include/adminUserControls.php';
-
-		require_once JFE_PATH.'/include/adminUserTable.php';
-		$this->css[] = 'ui-table.css';
-		$this->script[] = 'ui-table.js';
 
 		// Resources - app
-		$this->css[] = 'app-admin.css';
-		$this->script[] = 'app-admin.js';
-		$this->css[] = 'app-admin-users.css';
-		$this->script[] = 'app-admin-users.js';
+		importResource('taogi-app-admin-users');
+
+		$this->vcard = Component::get('user/vcard',array('user'=>$this->admin));
+		$this->tabs = Component::get('admin/tabs',array('current'=>'users'));
+		$this->userEntries = Component::get('admin/user/table',array('users'=>$this->users));
+		$this->controls = Component::get('admin/user/controls',array('admin'=>$this->admin));
 	}
-
-
 }
 ?>

@@ -12,23 +12,12 @@ class admin_index extends Controller {
 		#$this->description = $this->user['summary'];
 
 		// Views
-		require_once JFE_PATH.'/include/userVcard.php';
-		$this->css[] = 'ui-hcard.css';
-		$this->script[] = 'ui-hcard.js';
-
-		require_once JFE_PATH.'/include/adminTabs.php';
-		$this->css[] = 'ui-tabs.css';
-		$this->script[] = 'ui-tabs.js';
-
-		require_once JFE_PATH.'/include/adminEntryTable.php';
-		require_once JFE_PATH.'/include/adminUserTable.php';
-		$this->css[] = 'ui-table.css';
-		$this->script[] = 'ui-table.js';
 
 		// Resources - app
-		$this->css[] = 'app-admin.css';
-		$this->script[] = 'app-admin.js';
-	}
+		importResource('taogi-app-admin');
 
+		$this->vcard = Component::get('user/vcard',array('user'=>$this->admin));
+		$this->tabs = Component::get('admin/tabs',array('current'=>'dashboard'));
+	}
 }
 ?>

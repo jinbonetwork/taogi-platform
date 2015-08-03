@@ -6,10 +6,14 @@ class Entry_Invite extends Objects {
 
 	public static function getList($eid,$limit=0,$page=0) {
 		$dbm = DBM::instance();
-		$que = "SELECT * FROM {invite} WHERE eid = ".$eid." ORDER BY id ASC".Filter::buildLimitClause($limit,$page);
+		$que = "SELECT * FROM {invite} WHERE eid = ".$eid." ORDER BY id ASC".Filter::buildLimitClause(($limit ? $limit : -1),$page);
 		$lists = array();
 		while($row = $dbm->getFetchArray($que)) {
-			$lists[] = Entry::fetchEntry($row);
+			$row = Entry::fetchEntry($row);
+			if($row['uid']) {
+				$row = User::getUserProfile($row);
+			}
+			$lists[] = $row;
 		}
 		return $lists;
 	}
@@ -18,6 +22,9 @@ class Entry_Invite extends Objects {
 		$dbm = DBM::instance();
 		$que = "SELECT * FROM {invite} WHERE eid = ".$eid." AND email_id = '".$email."'";
 		$row = $dbm->getFetchArray($que);
+		if($row['uid']) {
+			$row = User::getUserProfile($row);
+		}
 		return $row;
 	}
 
@@ -25,6 +32,9 @@ class Entry_Invite extends Objects {
 		$dbm = DBM::instance();
 		$que = "SELECT * FROM {invite} WHERE eid = ".$eid." AND id = ".$id;
 		$row = $dbm->getFetchArray($que);
+		if($row['uid']) {
+			$row = User::getUserProfile($row);
+		}
 		return $row;
 	}
 

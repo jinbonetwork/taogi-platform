@@ -169,6 +169,7 @@ CREATE TABLE `taogi_invite` (
 	`degree`		int(10) not null default 0,
 
 	`portrait`		text,
+	`summary`		mediumtext,
 
 	`invite_date`	int(10) default 0,
 	`authtoken`		char(255),

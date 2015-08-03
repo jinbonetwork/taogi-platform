@@ -1,0 +1,360 @@
+{
+	"ace":{
+		"js":["contribute/ace/src-min-noconflict/ace.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"autosize":{
+		"js":["contribute/autosize/jquery.autosize.min.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"caret":{
+		"js":["contribute/caret/jquery.caret.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"cropper":{
+		"js":["contribute/cropper/dist/cropper.min.js"],
+		"css":["contribute/cropper/dist/cropper.min.css"],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"filemanager":{
+		"js":["contribute/filemanager/filemanager/plugin.min.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":[]
+	},
+	"html5sortable":{
+		"js":["contribute/html5sortable/jquery.sortable.min.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"is-loading":{
+		"js":["contribute/is-loading/jquery.isloading.min.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"imagesloaded":{
+		"js":["contribute/imagesloaded/imagesloaded.pkgd.min.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"imagefill":{
+		"js":["contribute/imagefill/js/jquery-imagefill.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["imagesloaded"]
+	},
+	"jquery-file-upload":{
+		"js":[
+			"contribute/jQuery-File-Upload/js/vendor/jquery.ui.widget.js",
+			"contribute/jQuery-File-Upload/js/jquery.iframe-transport.js",
+			"contribute/jQuery-File-Upload/js/jquery.fileupload.js"
+		],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"jquery.actual":{
+		"js":["contribute/jquery.actual/jquery.actual.min.js"],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"medium-editor":{
+		"js":["contribute/medium-editor/dist/js/medium-editor.js"],
+		"css":[
+			"contribute/medium-editor/dist/css/medium-editor.css",
+			"contribute/medium-editor/dist/css/themes/default.css"
+		],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"tinymce":{
+		"js":[
+			"contribute/tinymce/js/tinymce/jquery.tinymce.min.js",
+			"contribute/tinymce/js/tinymce/tinymce.min.js"
+		],
+		"css":[],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+
+	"html5":{
+		"js":["resources/js/html5.js"],
+		"css":[],
+		"priority": "-900",
+		"deps":[]
+	},
+	
+	"jquery":{
+		"js":["resources/js/jquery-1.11.0.min.js"],
+		"css":[],
+		"priority": "-1000",
+		"deps":[]
+	},
+
+	"jquery-ui":{
+		"js":["resources/js/jquery-ui-1.10.4/ui/jquery-ui.js"],
+		"css":["resources/js/jquery-ui-1.10.4/themes/base/jquery-ui.css"],
+		"priority": "-200",
+		"deps":["jquery"]
+	},
+	"jquery-bootstrap-tooltip":{
+		"js":["resources/js/jquery-bootstrap-tooltip/jquery-bootstrap-tooltip.js"],
+		"css":["resources/js/jquery-bootstrap-tooltip/jquery-bootstrap-tooltip.css"],
+		"priority": "-200",
+		"deps":["jquery"]
+	},
+
+	"fancybox":{
+		"js":[
+			"resources/js/fancyBox/source/jquery.fancybox.js",
+			"resources/js/fancyBox/source/jquery.fancybox.pack.js"
+		],
+		"css":["resources/js/fancyBox/source/jquery.fancybox.css"],
+		"priority": "-150",
+		"options": {
+			"class": "fancybox"
+		},
+		"deps":["jquery"]
+	},
+
+	"datetimepicker":{
+		"js":["resources/js/datetimepicker/jquery.datetimepicker.js"],
+		"css":["resources/js/datetimepicker/jquery.datetimepicker.css"],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+	"bgrins-spectrum":{
+		"js":["resources/js/bgrins-spectrum-9619bb4/spectrum.js"],
+		"css":["resources/js/bgrins-spectrum-9619bb4/spectrum.css"],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+
+	"datatables":{
+		"js":["resources/js/datatables/jquery.dataTables.min.js"],
+		"css":["resources/js/datatables/jquery.dataTables.min.css"],
+		"priority": "-150",
+		"deps":["jquery"]
+	},
+
+	"taogi-tinymce":{
+		"js":["resources/script/lib-tinymce.js"],
+		"css":["resources/css/lib-tinymce.css"],
+		"priority": "-150",
+		"deps":["tinymce"]
+	},
+	"taogi-filemanager":{
+		"js":[],
+		"css":["resources/css/lib-filemanager.css"],
+		"priority": "-150",
+		"deps":["filemanager"]
+	},
+
+	"taogi-defaults":{
+		"js":["resources/script/defaults.js"],
+		"css":["resources/css/defaults.css"],
+		"priority": "-100",
+		"deps":["jquery"]
+	},
+	"taogi-gnb":{
+		"js":["timeline/model/touchcarousel/js/gnb.js","include/gnb/script.js"],
+		"css":["include/gnb/style.css","timeline/model/touchcarousel/css/gnb.css"],
+		"priority": "-90",
+		"deps":["jquery"]
+	},
+	"taogi-ui-init":{
+		"js":["resources/script/ui-init.js"],
+		"css":["resources/css/ui-init.css"],
+		"priority": "-20",
+		"deps":[
+			"imagefill",
+			"taogi-defaults"
+		]
+	},
+	"taogi-ui-controls":{
+		"js":["resources/script/ui-controls.js"],
+		"css":["resources/css/ui-controls.css"],
+		"priority": "-10",
+		"deps":["taogi-ui-init","jquery-bootstrap-tooltip"]
+	},
+	"taogi-ui-hcard":{
+		"js":["resources/script/ui-hcard.js"],
+		"css":["resources/css/ui-hcard.css"],
+		"priority":"-10",
+		"deps":["taogi-ui-init"]
+	},
+	"taogi-ui-tabs":{
+		"js":["resources/script/ui-tabs.js"],
+		"css":["resources/css/ui-tabs.css"],
+		"priority":"-10",
+		"deps":["taogi-ui-init"]
+	},
+	"taogi-ui-gallery":{
+		"js":["resources/script/ui-gallery.js"],
+		"css":["resources/css/ui-gallery.css"],
+		"priority":"-10",
+		"deps":["taogi-ui-controls"]
+	},
+	"taogi-ui-table":{
+		"js":["resources/script/ui-table.js"],
+		"css":["resources/css/ui-table.css"],
+		"priority":"-10",
+		"deps":["taogi-ui-controls"]
+	},
+	"taogi-ui-forms":{
+		"js":["resources/script/ui-forms.js"],
+		"css":["resources/css/ui-forms.css"],
+		"priority": "-10",
+		"deps":["is-loading","taogi-ui-init"]
+	},
+	"taogi-ui-image-controller":{
+		"js":["resources/script/ui-image-controller.js"],
+		"css":["resources/css/ui-image-controller.css"],
+		"priority":"-10",
+		"deps":["taogi-ui-init"]
+	},
+
+	"taogi-app-admin":{
+		"js":["resources/script/app-admin.js"],
+		"css":["resources/css/app-admin.css"],
+		"deps":[
+			"taogi-ui-controls",
+			"taogi-ui-hcard",
+			"taogi-ui-tabs"
+		]
+	},
+	"taogi-app-admin-entries":{
+		"js":["resources/script/app-admin-entries.js"],
+		"css":["resources/css/app-admin-entries.css"],
+		"deps":[
+			"taogi-app-admin",
+			"taogi-ui-table"
+		]
+	},
+	"taogi-app-admin-users":{
+		"js":["resources/script/app-admin-users.js"],
+		"css":["resources/css/app-admin-users.css"],
+		"deps":[
+			"taogi-app-admin",
+			"taogi-ui-table"
+		]
+	},
+	"taogi-app-admin-settings":{
+		"js":["resources/script/app-admin-settings.js"],
+		"css":["resources/css/app-admin-settings.css"],
+		"deps":[
+			"taogi-app-admin"
+		]
+	},
+
+	"taogi-app-create":{
+		"js":["resources/script/app-create.js"],
+		"css":["resources/css/app-create.css"],
+		"deps":[
+			"jquery-ui",
+			"datetimepicker",
+			"caret",
+			"medium-editor",
+			"bgrins-spectrum",
+			"fancybox",
+			"ace",
+			"taogi-ui-controls"
+		]
+	},
+	"taogi-app-modify":{
+		"css":["resources/css/app-entry-modify.css"],
+		"deps":[
+			"taogi-app-create"
+		]
+	},
+
+	"taogi-app-entry":{
+		"js":["resources/script/app-entry.js"],
+		"css":["resources/css/app-entry.css"],
+		"deps":["taogi-defaults"]
+	},
+	"taogi-app-entry-revisions":{
+		"js":["resources/script/app-entry-revisions.js"],
+		"css":["resources/css/app-entry-revisions.css"],
+		"deps":[
+			"taogi-app-entry",
+			"taogi-ui-controls",
+			"taogi-ui-tabs",
+			"taogi-ui-table"
+		]
+	},
+	"taogi-app-entry-authors":{
+		"js":["resources/script/app-entry-authors.js"],
+		"css":["resources/css/app-entry-authors.css"],
+		"deps":[
+			"taogi-ui-controls",
+			"taogi-ui-tabs",
+			"taogi-ui-gallery",
+			"taogi-ui-table",
+			"taogi-ui-forms",
+			"taogi-app-entry"
+		]
+	},
+
+	"taogi-app-front":{
+		"js":["resources/script/app-front.js"],
+		"css":["resources/css/app-front.css"],
+		"deps":["taogi-ui-gallery"]
+	},
+
+	"taogi-app-login":{
+		"js":["resources/script/app-login.js"],
+		"css":["resources/css/app-login.css"],
+		"deps":["taogi-ui-init","taogi-ui-forms"]
+	},
+
+	"taogi-app-regist":{
+		"js":["resources/script/app-regist.js"],
+		"css":["resources/css/app-regist.css"],
+		"deps":["taogi-ui-forms"]
+	},
+
+	"taogi-app-user":{
+		"js":["resources/script/app-user.js"],
+		"css":["resources/css/app-user.css"],
+		"deps":[
+			"taogi-ui-hcard"
+		]
+	},
+	"taogi-app-user-archives":{
+		"js":["resources/script/app-user-archives.js"],
+		"css":["resources/css/app-user-archives.css"],
+		"deps":[
+			"taogi-app-user",
+			"taogi-ui-controls",
+			"taogi-ui-tabs",
+			"taogi-ui-gallery",
+			"taogi-ui-table"
+		]
+	},
+	"taogi-app-user-profile":{
+		"js":["resources/script/app-user-profile.js"],
+		"css":["resources/css/app-user-profile.css"],
+		"deps":[
+			"cropper",
+			"fancybox",
+			"jquery.actual",
+			"jquery-file-upload",
+			"taogi-tinymce",
+			"taogi-ui-forms",
+			"taogi-ui-image-controller",
+			"taogi-app-user"
+		]
+	}
+}

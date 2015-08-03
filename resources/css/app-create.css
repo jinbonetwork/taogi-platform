@@ -938,137 +938,6 @@ fieldset.slide .title-description .editor {
 	margin: 15px 0 30px 0;
 	overflow-y: show;
 }
-/*
-fieldset.slide .title-description .editor ul.toolbar {
-	display: none;
-	opacity: 0;
-	position: absolute;
-	z-index: 999999999;
-	top: -30px;
-	left: 0;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	border-radius: 3px;
-	background-color: #333333;
-}
-fieldset.slide .title-description .editor ul.toolbar:after {
-	position: absolute;
-	top: 24px;
-	left: 50%;
-	display: block;
-	width: 0;
-	height: 0;
-	content: '';
-	margin: 0 0 0 -6px;
-	border-color: #333333 transparent;
-	border-style: solid;
-	border-width: 6px 6px 0 6px;
-
-}
-fieldset.slide .title-description .editor ul.toolbar li {
-	float: left;
-	width: 24px;
-	height: 24px;
-	line-height: 24px;
-	text-align: center;
-	font-size: 13px;
-	font-family: 'FontAwesome';
-}
-fieldset.slide .title-description .editor ul.toolbar li a {
-	color: #999999;
-}
-fieldset.slide .title-description .editor ul.toolbar li a:hover {
-	color: #FFFFFF;
-}
-fieldset.slide .title-description .editor ul.toolbar li a,
-fieldset.slide .title-description .editor ul.toolbar li a:after {
-	display: block;
-	width: inherit;
-	height: inherit;
-	line-height: inherit;
-	text-align: inherit;
-	font-size: inherit;
-	font-family: inherit;
-}
-fieldset.slide .title-description .editor ul.toolbar li a span {
-	display: none;
-}
-fieldset.slide .title-description .editor ul.toolbar li.bold a:after {
-	content: '\F032';
-}
-fieldset.slide .title-description .editor ul.toolbar li.italic a:after {
-	content: '\F033';
-}
-fieldset.slide .title-description .editor ul.toolbar li.underline a:after {
-	content: '\F0CD';
-}
-fieldset.slide .title-description .editor ul.toolbar li.strike a:after {
-	content: '\F0CC';
-}
-fieldset.slide .title-description .editor ul.toolbar li.link a:after {
-	content: '\F0C1';
-}
-fieldset.slide .title-description .editor ul.toolbar li.unlink a:after {
-	content: '\F127';
-}
-fieldset.slide .title-description .editor ul.toolbar li span.constructed {
-	position: absolute;
-	z-index: 999999999;
-	left: 0;
-	top: -30px;
-	background-color: #333333;
-	color: #FFFFFF;
-	font-size: 0.5em;
-	width: 130px;
-	border-color: #333333 transparent;
-	border-style: solid;
-	border-width: 0 6px 0 6px;
-	border-radius: 3px;
-	opacity: 0;
-	transition: opacity 0.6s;
-	-webkit-transition: opacity 0.6s;
-	-moz-transition: opacity 0.6s;
-	-ms-transition: opacity 0.6s;
-	-o-transition: opacity 0.6s;
-}
-fieldset.slide .title-description .editor ul.toolbar li span.constructed:after {
-	position: absolute;
-	z-index: 999999999;
-	top: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	pointer-events: none;
-	border-color: rgba(51, 51, 51, 0);
-	border-top-color: #333333;
-	border-width: 6px;
-	margin-left: -6px;
-}
-fieldset.slide .title-description .editor ul.toolbar li.bold span.constructed {
-	left: -53px;
-}
-fieldset.slide .title-description .editor ul.toolbar li.italic span.constructed {
-	left: -29px;
-}
-fieldset.slide .title-description .editor ul.toolbar li.underline span.constructed {
-	left: -5px;
-}
-fieldset.slide .title-description .editor ul.toolbar li.strike span.constructed {
-	left: 19px;
-}
-fieldset.slide .title-description .editor ul.toolbar li.link span.constructed {
-	left: 44px;
-}
-fieldset.slide .title-description .editor ul.toolbar li.unlink span.constructed {
-	left: 67px;
-}
-fieldset.slide .title-description .editor ul.toolbar li:hover span.constructed {
-	opacity: 1;
-}
-*/
 fieldset.slide .title-description .description {
 	min-height: inherit;
 	line-height: 1.4;
@@ -1099,6 +968,9 @@ fieldset.slide .title-description .description strike {
 fieldset.slide .title-description .description b,
 fieldset.slide .title-description .description strong {
 	font-weight: bold;
+}
+.media .figure.instagram .instagram-caption {
+	font-size: 0.4em;
 }
 .slide-item fieldset.slide .field.console a.icon.show {
 	display: none;

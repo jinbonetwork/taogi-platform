@@ -13,23 +13,13 @@ class revisions_index extends Controller {
 		$this->description = $this->entry['summary'];
 
 		// Views
-		require_once JFE_PATH.'/include/userEntryControls.php';
-		require_once JFE_PATH.'/include/entryRevisionControls.php';
-
-		require_once JFE_PATH.'/include/entryEcard.php';
-		$this->css[] = 'ui-hcard.css';
-		$this->script[] = 'ui-hcard.js';
-
-		require_once JFE_PATH.'/include/entryRevisionTable.php'; 
-		$this->css[] = 'ui-table.css';
-		$this->script[] = 'ui-table.js';
 
 		// Resources - app
-		$this->css[] = 'app-entry.css';
-		$this->script[] = 'app-entry.js';
-		$this->css[] = 'app-entry-revisions.css';
-		$this->script[] = 'app-entry-revisions.js';
+		importResource("taogi-app-entry-revisions");
 
+		$this->ecard = Component::get("entry/ecard",array('entry'=>$this->entry));
+		$this->revisionTable = Component::get('entry/revision/table',array('entry'=>$this->entry,'revisions'=>$this->revisions));
+		$this->revisionsControls = Component::get('entry/revision/controls',array('entry'=>$this->entry));
 	}
 }
 ?>

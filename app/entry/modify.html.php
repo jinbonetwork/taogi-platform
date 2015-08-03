@@ -1,9 +1,5 @@
 <?php
-	$editor_title = "따오기 타임라인 작성하기";
-//    $fp = fopen(JFE_PATH."/include/editor/toolbar.html.php","r");
-//	$toolbar = fread($fp,filesize(JFE_PATH."/include/editor/toolbar.html.php"));
-//	fclose($fp);
-	require_once JFE_PATH."/include/editor/head.html.php";
+	print $editor_header;
 		if(@count($timeline['date']) > 0) {
 			foreach($timeline['date'] as $idx => $item) {?>
 				<div class="slide-item<?php if(isset($item['published']) && !$item['published']) print ' trashed'; ?>" id="date_<?php print $item['unique']; ?>" data-id="<?php print $item['unique']; ?>" data-index="<?php print ($idx+1); ?>" attr-published="<?php print (isset($item['published']) ? $item['published'] : 1); ?>">
@@ -27,7 +23,6 @@
 							<div class="title-description">
 								<h2 class="title editable article valid" contenteditable="true" data-name="headline" data-default-value="제목" data-id="<?php print $item['unique']; ?>" data-index="1" data-content=""><?php print $item['headline']; ?></h2>
 								<div class="editor">
-<?php print $toolbar; ?>
 									<div class="description editable article valid" contenteditable="true" data-name="text" data-default-value="본문" data-id="<?php print $item['unique']; ?>" data-type="article" data-index="2" data-content=""><?php print $item['text']; ?></div>
 								</div>
 							</div>
@@ -61,6 +56,6 @@
 				</div>
 <?php		}
 		}
-	require_once JFE_PATH."/include/editor/basic.html.php";
-	require_once JFE_PATH."/include/editor/foot.html.php";
+	print $editor_basic;
+	print $editor_footer;
 ?>

@@ -1,5 +1,4 @@
 <?php
-require_once dirname(__FILE__).'/../config/options.php';
 require_once dirname(__FILE__).'/../contribute/SimpleImage/src/abeautifulsite/SimpleImage.php';
 class Image extends Objects {
 	private static $init = false;
@@ -34,8 +33,8 @@ class Image extends Objects {
 			self::$console->setLogType(JFE_LOG_TYPE_FILE);
 		}
 
-		global $imageIndexes;
-		self::$index_pattern = $imageIndexes;
+		$context = Model_Context::instance();
+		self::$index_pattern = $context->getOptions('imageIndexes');
 		foreach(self::$index_pattern as $size => $value){
 			self::$sp_pattern[$size] = $value['dirname'];
 		}

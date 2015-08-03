@@ -109,6 +109,18 @@ class Entry_DBM extends Objects {
 		));
 	}
 
+	public static function addExtra($eid,$name,$value) {
+		$dbm = DBM::instance();
+		$que = "INSERT INTO {entryExtra} (`eid`,`name`,`val`) VALUES (?,?,?)";
+		$dbm->execute($que,array("dss",$eid,$name,$value));
+	}
+
+	public static function updateExtra($eid,$name,$value) {
+		$dbm = DBM::instance();
+		$que = "UPDATE {entryExtra} SET val = ? WHERE eid = ? AND name = ?";
+		$dbm->execute($que,array("sds",$value,$eid,$name));
+	}
+
 	public static function deleteEntry($eid) {
 		$dbm = DBM::instance();
 		$que = "DELETE FROM {entry} WHERE eid = ?";

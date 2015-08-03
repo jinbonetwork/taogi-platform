@@ -11,23 +11,13 @@ class settings_index extends Controller {
 		#$this->description = $this->user['summary'];
 		
 		// Views
-		require_once JFE_PATH.'/include/userVcard.php';
-		$this->css[] = 'ui-hcard.css';
-		$this->script[] = 'ui-hcard.js';
-
-		require_once JFE_PATH.'/include/adminTabs.php';
-		$this->css[] = 'ui-tabs.css';
-		$this->script[] = 'ui-tabs.js';
-
-		require_once JFE_PATH.'/include/adminSettingsForm.php';
-		$this->css[] = 'ui-form.css';
-		$this->script[] = 'ui-form.js';
 
 		// Resources - app
-		$this->css[] = 'app-admin.css';
-		$this->script[] = 'app-admin.js';
-		$this->css[] = 'app-admin-settings.css';
-		$this->script[] = 'app-admin-settings.js';
+		importResource('taogi-app-admin-settings');
+
+		$this->vcard = Component::get('user/vcard',array('user'=>$this->admin));
+		$this->tabs = Component::get('admin/tabs',array('current'=>'settings'));
+		$this->forms = Component::get('admin/settings/form',array());
 	}
 }
 ?>

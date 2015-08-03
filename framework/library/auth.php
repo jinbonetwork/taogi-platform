@@ -26,11 +26,11 @@ function requireLogin() {
 }
 
 function doesHaveMembership() {
-	return Acl::getIdentity('funch') !== null;
+	return Acl::getIdentity('taogi') !== null;
 }
 
 function requireMembership() {
-	if(Acl::getIdentity('funch') !== null) {
+	if(Acl::getIdentity('taogi') !== null) {
 		return true;
 	}
 	requireLogin();

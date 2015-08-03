@@ -10,10 +10,11 @@ define('__JFE_LOADED_CLASS__',true);
 $browser = Utils_Browser::instance();
 
 global $context, $config;
-$uri = Model_URIHandler::instance();
-$context = Model_Context::instance();
-$context->setProperty('service.base_uri',$uri->uri['root']);
 $config = Model_Config::instance();
+$context = Model_Context::instance();
+$uri = Model_URIHandler::instance();
+$context->setProperty('uri',$uri);
+$context->setProperty('service.base_uri',$uri->uri['root']);
 
 try {
 	if(!is_null($context->getProperty('database.DB'))) {

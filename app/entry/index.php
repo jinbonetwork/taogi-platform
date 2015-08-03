@@ -1,11 +1,9 @@
 <?php
+import('library.files');
 class entry_index extends Interface_Entry {
 	public function index() {
-		require_once JFE_PATH.'/library/files.php';
-		require_once JFE_PATH.'/include/userEntryControls.php';
-
-		global $uri;
 		$context = Model_Context::instance();
+		$uri = $context->getProperty('uri');
 		$this->timelineConfig = $context->getProperty('timeline.*');
 		$this->getEntryInfo();
 		$this->extra = Entry::getEntryExtra($this->entry['eid']);

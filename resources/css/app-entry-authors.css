@@ -1,10 +1,112 @@
 /**/
+#authors-private {
+	position: relative;
+	margin: 20px 0 20px 10px;
+	padding: 25px;
+	border-radius: 5px;
+	background: #efefef;
+}
+#authors-private:before {
+	position: absolute;
+	z-index: 2;
+	left: -15px;
+	top: -15px;
+	width: 30px;
+	height: 32px;
+	font-family: 'FontAwesome';
+	content: "\f21b";
+	font-size: 1.6em;
+	background: #efefef;
+	padding-left: 8px;
+	padding-top: 6px;
+	color: #fff;
+	border-radius: 19px;
+}
+.authors-go-user {
+	margin-top: 15px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+.authors-go-user a {
+	display: inline-block;
+	position: relative;
+	padding: 10px 10px 10px 40px;
+	border: 1px solid #428bca;
+	background: #fff;
+	color: #428bca;
+	border-radius: 3px;
+	text-decoration: none;
+	cursor: pointer;
+}
+.authors-go-user a:hover {
+	background: #428bca;
+	color: #fff;
+}
+.authors-go-user a span.profile {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	border: 1px solid #fff;
+	border-radius: 15px;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.25), inset 0 0 3px rgba(0, 0, 0, 0.25);
+	overflow: hidden;
+}
+.authors-go-user a:hover span.profile {
+	border: 2px solid #fff;
+}
+.authors-go-user a span.profile img {
+	width: 100%;
+	height: 100%;
+}
+
+#authors-settings {
+	margin: 10px 0;
+	padding: 15px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+#authors-settings fieldset.fields {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	padding: 5px 5px 5px 120px;
+	border: 0;
+}
+#authors-settings fieldset.fields label.field-label {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	margin: 0;
+	padding: 5px;
+	background: #efefef;
+	border-radius: 3px;
+}
+#authors-settings fieldset.buttons {
+	margin: 0 auto;
+	padding: 10px 0 0 0;
+	text-align: center;
+}
+#authors-settings fieldset.buttons button {
+	padding: 5px 10px;
+	border: 1px solid #428bca;
+	background: #428bca;
+	color: #fff;
+	border-radius: 3px;
+	text-decoration: none;
+	font-size: 12px;
+	cursor: pointer;
+}
 
 #invite-form-wrap {
 	position: relative;
 	z-index: 1;
 	margin-top: 40px;
-	padding: 15px;
+	padding: 0;
 	border: 1px solid #ccc;
 	background: #fff;
 	border-radius: 3px;
@@ -14,14 +116,38 @@
 	z-index: 2;
 	left: 15px;
 	top: -30px;
-	padding: 5px 15px;
+	padding: 5px 15px 0 15px;
 	background: #efefef;
 	border-radius: 3px;
 	border: 1px solid #ccc;
+	cursor: pointer;
+}
+#invite-form-wrap h3.subtitle:after {
+	font-family: 'FontAwesome';
+	content: "\f106";
+	padding: 0;
+	line-height: 0.9em;
+	margin: 0 auto;
+	text-align: center;
+	display: block;
+}
+#invite-form-wrap.collapsed h3.subtitle:after {
+	content: "\f107";
+}
+#invite-form-wrap .invite-form-content {
+	overflow: hidden;
+	transition: max-height 0.6s ease-in-out;
+	-webkit-transition: max-height 0.6s ease-in-out;
+	-moz-transition: max-height 0.6s ease-in-out;
+	-ms-transition: max-height 0.6s ease-in-out;
+	-o-transition: max-height 0.6s ease-in-out;
 }
 #invite-form-wrap form {
-	margin 5px 0;
-	padding: 0;
+	padding: 35px 15px 20px 15px;
+	margin: 0;
+}
+#invite-form-wrap.collapsed .invite-form-content {
+	max-height: 0;
 }
 #invite-form-wrap form fieldset {
 	margin: 0;
@@ -39,9 +165,12 @@
 	padding-left: 80px;
 	padding-bottom: 5px;
 }
+#invite-form-wrap form fieldset.fields.focus {
+	z-index: 2;
+}
 #invite-form-wrap form fieldset.fields label {
 	position: absolute;
-	z-index: 2;
+	z-index: 3;
 	left: 0;
 	top: 2px;
 	font-size: 0.9em;
@@ -70,6 +199,27 @@
 }
 #invite-form-wrap form fieldset.fields .main-fixed-footer {
 	margin-top: 20px;
+}
+#invite-form-wrap form fieldset.fields.buttons {
+	padding: 10px 0;
+	margin: 0 auto;
+	text-align: center;
+}
+#invite-form-wrap form fieldset.fields.buttons button {
+	padding: 15px;
+	border: 2px solid #428bca;
+	background: #428bca;
+	color: #fff;
+	border-radius: 5px;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: bold;
+	display: inline-block;
+	cursor: pointer;
+}
+#invite-form-wrap form fieldset.fields.buttons button:hover {
+	background: #fff;
+	color: #428bca;
 }
 #invitation-content .wrap {
 	padding: 2em;

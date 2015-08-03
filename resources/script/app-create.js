@@ -2060,7 +2060,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		},
 
 		/**
-		 * save timeline : this funtion require resources/script/default.js
+		 * save timeline : this funtion require resources/script/defaults.js
 		 **/
 		save: function() {
 			var self = this;

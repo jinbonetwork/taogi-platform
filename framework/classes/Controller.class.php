@@ -58,7 +58,6 @@ abstract class Controller {
 		if($taogiid) {
 			$this->permalink = "http://".$context->getProperty('service.domain')."/".implode("/",array_slice($uri->uri['fragment'],0,2));
 			$this->MyEntryClass($taogiid);
-			include_once JFE_PATH."/include/userEntryControls.php";
 		}
 
 		if($this->total_cnt) $this->PageNavigation();
@@ -84,38 +83,37 @@ abstract class Controller {
 			if(!$this->themes) $this->themes = $context->getProperty('service.themes');
 
 			if($this->params['output'] != "nolayout") {
-				$this->stylesheets = "";
-				$this->javascripts = "";
 				/**
 				 * @brief default javascript 를 호출. ex jquery
 				 **/
-//				$this->javascripts .= $this->jsHtml(JFE_RESOURCE_URI."/script/jquery.min.js");
-				$this->javascripts .= $this->initJs($this->initscript);
-				$this->javascripts .= Template::getGeneralHeader();
-				$this->javascripts .= $this->jsHtml(JFE_RESOURCE_URI."/script/default.js");
-				$this->stylesheets .= $this->cssHtml(JFE_RESOURCE_URI."/css/default.css");
-				if($this->layout == "admin")
-					$this->stylesheets .= $this->cssHtml(JFE_RESOURCE_URI."/css/admin.css");
+//				View_Resource::addScript("jquery.min.js");
+				$this->initJs($this->initscript);
+				Template::getGeneralHeader();
+				View_Resource::addScript("defaults.js",-100);
+				View_Resource::addCss("defaults.css",-100);
+				if($this->layout == "admin") {
+					View_Resource::addCss("admin.css");
+				}
 
 				/**
 				 * @brief resource/css에서 불러오도록 지정된 css들의 경로를 잡아준다.
 				 **/
 				if(@count($this->css)) {
 					foreach($this->css as $css) {
-						$this->stylesheets .= $this->cssHtml(JFE_RESOURCE_URI."/css/".$css);
+						View_Resource::addCss($css);
 					}
 				}
 				/**
 				 * @brief 해당 controller 경로에 style.css가 있으면 이 경로 밑에 있는 모는 페이지는 이 style.css를 포함한다.
 				 **/
 				if(file_exists($this->params['controller']['path']."/style.css")) {
-					$this->stylesheets .= $this->cssHtml($this->params['controller']['uri']."/style.css");
+					View_Resource::addCssURI($this->params['controller']['uri']."/style.css");
 				}
 				/**
 				 * @brief 해당 controller에 매치되는 controller.css가 있으면 포함한다.
 				 **/
 				if(file_exists($this->params['controller']['path']."/".$this->params['controller']['file'].".css")) {
-					$this->stylesheets .= $this->cssHtml($this->params['controller']['uri']."/".$this->params['controller']['file'].".css");
+					View_Resource::addCssURI($this->params['controller']['uri']."/".$this->params['controller']['file'].".css");
 				}
 
 				/**
@@ -124,49 +122,46 @@ abstract class Controller {
 
 				if(@count($this->js)) {
 					foreach($this->js as $js) {
-						$this->javascripts .= $this->jsHtml(JFE_RESOURCE_URI."/js/".$js);
+						View_Resource::addJs($js);
 					}
 				}
 				if(@count($this->script)) {
 					foreach($this->script as $script) {
-						$this->javascripts .= $this->jsHtml(JFE_RESOURCE_URI."/script/".$script);
+						View_Resource::addScript($script);
 					}
 				}
 				/**
 				 * @brief 해당 controller 경로에 script.js가 있으면 이 경로 밑에 있는 모는 페이지는 이 script.js를 포함한다.
 				 **/
 				if(file_exists($this->params['controller']['path']."/script.js")) {
-					$this->javascripts .= $this->jsHtml($this->params['controller']['uri']."/script.js");
+					View_Resource::addJsURI($this->params['controller']['uri']."/script.js");
 				}
 				/**
 				 * @brief 해당 controller에 매치되는 controller.js가 있으면 포함한다.
 				 **/
 				if(file_exists($this->params['controller']['path']."/".$this->params['controller']['file'].".js")) {
-					$this->header .= $this->jsHtml($this->params['controller']['uri']."/".$this->params['controller']['file'].".js");
+					View_Resource::addJsURI($this->params['controller']['uri']."/".$this->params['controller']['file'].".js");
 				}
 
 				/**
 				 * @brief themes에 있는 기본 css와 script 들을 가장 먼저 포함한다.
 				 **/
 				if($this->layout != "admin") {
-					$this->dirCssJsHtml("themes/".$this->themes);
-					$this->dirCssJsHtml("themes/".$this->themes."/css");
-					$this->dirCssJsHtml("themes/".$this->themes."/script");
+					if(file_exists(JFE_PATH."/themes/".$this->themes."/config.php")) {
+						require_once JFE_PATH."/themes/".$this->themes."/config.php";
+					}
+					$this->dirCssJsHtml("themes/".$this->themes,1000);
+					$this->dirCssJsHtml("themes/".$this->themes."/css",1000);
+					$this->dirCssJsHtml("themes/".$this->themes."/script",1000);
 				}
 				if(($html_file = $this->appPath())) {
 					$this->themeCssJs($html_file);
 				}
 
-				$this->header = $this->stylesheets.$this->javascripts."\n\t".$this->header;
-
 				if($this->entry) {
 //					$this->permalink = "http://".$context->getProperty('service.domain').base_uri().$this->entry['nickname'];
 					$this->xmlns = init_fb_html_xmlns();
 //					$this->header .= "\t".init_fb_meta($context->getProperty('service.fb_App_ID'),$this->entry['subject'],$this->uri,Favicon::image_url($this->entry['favicon']),$this->entry['summary']);
-					importLibrary('google');
-//					$this->xmlns .= init_google_plus_html_xmlns();
-//					$this->header .= "\t".init_google_plus_meta($this->entry['subject'],Favicon::image_url($this->entry['favicon']),$this->entry['summary']);
-//					$this->header .= "\t".init_google_plus_script();
 				}
 
 				/* FaceBook plugin */
@@ -185,6 +180,7 @@ abstract class Controller {
 			} else {
 				Respond::NotFoundPage();
 			}
+
 			if($this->params['output'] == "nolayout") {
 				header("Content-Type:text/html; charset=utf-8");
 				echo $content;
@@ -195,6 +191,15 @@ abstract class Controller {
 				if(file_exists(JFE_PATH."/themes/".$this->themes."/function.php")) {
 					$theme_path = JFE_URI."themes/".$this->themes;
 					require_once JFE_PATH."/themes/".$this->themes."/function.php";
+				}
+				/**
+				 * @brief include gnb
+				 **/
+				if( ($this->view_mode != 'view' || $has_gnb == true) && $params['skipgnb'] != 'true' ) {
+					ob_start();
+					include_once JFE_PATH."/include/gnb/index.html.php";
+					$taogi_gnb = ob_get_contents();
+					ob_end_clean();
 				}
 
 				/**
@@ -211,30 +216,51 @@ abstract class Controller {
 		}
 	}
 
-	private function dirCssJsHtml($dir) {
+	public function header() {
+		/**
+		 * @brief make header. rendering dynamic css and script
+		 **/
+		print View_Resource::renderCss().View_Resource::renderJs()."\t".$this->header;
+	}
+
+	public function footer() {
+		/**
+		 * @brief add google statistic script before body end
+		 **/
+		ob_start();
+		include_once JFE_RESOURCE_PATH."/script/google-static.js";
+		$google_static = ob_get_contents();
+		ob_end_clean();
+		View_Resource::addScriptSource($google_static,0,array('position'=>'footer'));
+		print $this->footer."\n".View_Resource::renderJs('footer');
+	}
+
+	private function dirCssJsHtml($dir,$priority) {
 		if(!@is_dir(JFE_PATH."/".$dir)) return;
 		$dp = opendir(JFE_PATH."/".$dir);
 		while($f = readdir()) {
 			if(substr($f,0,1) == ".") continue;
 			if(@is_dir(JFE_PATH."/".$dir."/".$f)) continue;
 			if(preg_match("/(.+)\.css$/i",$f)) {
-				$this->stylesheets .= $this->cssHtml(rtrim(JFE_URI,"/")."/".$dir."/".$f);
+				View_Resource::addCssURI(rtrim(JFE_URI,"/")."/".$dir."/".$f,$priority);
 			} else if(preg_match("/(.+)\.js$/i",$f)) {     
-				$this->javascripts .= $this->jsHtml(rtrim(JFE_URI,"/")."/".$dir."/".$f);
+				View_Resource::addJsURI(rtrim(JFE_URI,"/")."/".$dir."/".$f,$priority);
 			}
 		}
 		closedir($dp);
 	}
 
 	private function cssHtml($uri) {
-		return "\t<link rel=\"stylesheet\" href=\"$uri\" />\n";
+		View_Resource::addCssURI($uri);
 	}
 
 	private function jsHtml($uri) {
 		if(preg_match("/\.css$/i",$uri)) {
-			return $this->cssHtml($uri);
+			View_Resource::addCssURI($uri);
+//			return $this->cssHtml($uri);
 		}
-		return "\t<script type=\"text/javascript\" src=\"$uri\"></script>\n";
+		View_Resource::addJsURI($uri);
+//		return "\t<script type=\"text/javascript\" src=\"$uri\"></script>\n";
 	}
 
 	private function initJs($src) {
@@ -243,9 +269,9 @@ abstract class Controller {
 		}
 		if($src) $script .= $src;
 
-		if($script) $script = "\t<script type=\"text/javascript\" language=\"javascript\">\n".$script."\t</script>\n";
-
-		return $script;
+		if($script) {
+			View_Resource::addScriptSource($script,-50);
+		}
 	}
 
 	private function appPath() {
@@ -262,7 +288,7 @@ abstract class Controller {
 
 	private function themeCssJs($path) {
 		$_path = dirname("themes/".$this->themes."/".substr($path,strlen(JFE_APP_PATH)));
-		$this->dirCssJsHtml($_path);
+		$this->dirCssJsHtml($_path,100);
 	}
 
 	private function renderPath($path) {

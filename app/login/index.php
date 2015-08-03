@@ -26,8 +26,7 @@ class login_index extends Controller {
 		$this->fb_login_url = $facebook->getLoginUrl(array('redirect_uri'=>$redirect_uri));
 
 		if($this->params['output'] != "xml") {
-			$this->css[] = "app-login.css";
-			$this->script[] = "app-login.js";
+			importResource("taogi-app-login");
 		}
 		if(doesHaveMembership()) {
 			if($this->params['output'] == "xml") {

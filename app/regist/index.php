@@ -19,11 +19,7 @@ class regist_index extends Controller {
 		$this->facebook = $facebook;
 
 		if($this->params['output'] != "xml") {
-			$this->css[] = "ui-form.css";
-			$this->script[] = 'ui-form.js';
-
-			$this->css[] = "app-regist.css";
-			$this->script[] = "app-regist.js";
+			importResource('taogi-app-regist');
 		}
 		$this->title = JFE_NAME." 회원 가입";
 		if(doesHaveMembership()) {
@@ -92,6 +88,10 @@ class regist_index extends Controller {
 		if($this->params['request_URI'])
 			$redirect_uri .= "?requestURI=".$this->params['request_URI'];
 		$this->fb_login_url = $facebook->getLoginUrl(array('redirect_uri'=>$redirect_uri));
+		$this->email_form = Component::get('user/forms/email_id',array('user'=>null));
+		$this->password_form = Component::get('user/forms/password',array('password_necessary'=>'necessary'));
+		$this->name_form = Component::get('user/forms/name',array('user'=>null));
+		$this->profile_form = Component::get('user/forms/profile',array('user'=>null));
 	}
 }
 ?>

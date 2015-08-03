@@ -1,6 +1,5 @@
 <?php
-global $imageIndexes;
-$imageIndexes = array(
+$options['imageIndexes'] = array(
 	'small' => array(
 		'dirname' => 'thumbs',
 		'width' => 150,

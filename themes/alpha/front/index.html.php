@@ -41,7 +41,7 @@
 			<h1>타임라인 목록</h1>
 			<div class="content">
 <?php
-	echo getRecentEntryGallery($entries);
+	print Component::get('entry/recent/gallery',array('entries'=>$entries));
 ?>
 				</ul>
 			</div>
