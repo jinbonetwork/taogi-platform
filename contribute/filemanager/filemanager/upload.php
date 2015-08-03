@@ -41,6 +41,8 @@ if (!empty($_FILES)) {
 	$targetPath = $storeFolder;
 	$targetPathThumb = $storeFolderThumb;
 	$_FILES['file']['name'] = fix_filename($_FILES['file']['name'],$transliteration);
+	if(!Normalizer::isNormalized($_FILES['file']['name']))
+		$_FILES['file']['name'] = Normalizer::normalize($_FILES['file']['name']);
 	 
 	if(file_exists($targetPath.$_FILES['file']['name'])){
 	    $i = 1;

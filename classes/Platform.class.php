@@ -10,5 +10,10 @@ class Platform extends Objects {
 		$value = $context->getProperty($key,$default);
 		return $value;
 	}
+
+	public static function getURL(){
+		$url = 'http'.(Platform::getProperty('service.ssl')?'s':'').'://'.Platform::getProperty('service.domain');
+		return $url;
+	}
 }
 ?>

@@ -153,6 +153,13 @@ $get_params = http_build_query(array(
     'fldr'      => '',
 	'taogi_select_mode' => $taogi_select_mode,
 ));
+
+/** Disable cache (jinbonet) **/
+header('Expires: Sun, 19 Nov 1978 05:00:00 GMT');
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Pragma: no-cache');
+
 ?><!DOCTYPE html>
 <html xmlns="https://www.w3.org/1999/xhtml">
     <head>
@@ -636,7 +643,7 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
 				    <a class="folder-link" href="dialog.php?<?php echo $get_params.rawurlencode($src)."&".uniqid() ?>">
 				    <div class="img-precontainer">
 					<div class="img-container directory"><span></span>
-					<img class="directory-img"  src="img/<?php echo $icon_theme; ?>/folder<?php if($file==".."){ echo "_back"; }?>.jpg" alt="folder" />
+					<img class="directory-img"  src="img/<?php echo $icon_theme; ?>/folder<?php if($file==".."){ echo "_back"; }?>.jpg?v=<?php echo time(); ?>" alt="folder" />
 					</div>
 				    </div>
 				    <div class="img-precontainer-mini directory">
@@ -790,7 +797,7 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
 				    <?php if($is_icon_thumb){ ?><div class="filetype"><?php echo $extension_lower ?></div><?php } ?>
 				    <div class="img-container">
 					    <span></span>
-					    <img alt="<?php echo $filename." thumbnails";?>" class="<?php echo $show_original ? "original" : "" ?> <?php echo $is_icon_thumb ? "icon" : "" ?>" src="<?php echo $src_thumb; ?>">
+					    <img alt="<?php echo $filename." thumbnails";?>" class="<?php echo $show_original ? "original" : "" ?> <?php echo $is_icon_thumb ? "icon" : "" ?>" src="<?php echo $src_thumb; ?>?v=<?php echo time(); ?>">
 				    </div>
 				</div>
 				<div class="img-precontainer-mini <?php if($is_img) echo 'original-thumb' ?>">
@@ -798,7 +805,7 @@ $files=array_merge(array($prev_folder),array($current_folder),$sorted);
 				    <div class="img-container-mini">
 					<span></span>
 					<?php if($mini_src!=""){ ?>
-					<img alt="<?php echo $filename." thumbnails";?>" class="<?php echo $show_original_mini ? "original" : "" ?> <?php echo $is_icon_thumb_mini ? "icon" : "" ?>" src="<?php echo $mini_src; ?>">
+					<img alt="<?php echo $filename." thumbnails";?>" class="<?php echo $show_original_mini ? "original" : "" ?> <?php echo $is_icon_thumb_mini ? "icon" : "" ?>" src="<?php echo $mini_src; ?>?v=<?php echo time(); ?>">
 					<?php } ?>
 				    </div>
 				</div>

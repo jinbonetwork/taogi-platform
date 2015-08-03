@@ -14,6 +14,7 @@ CREATE TABLE `taogi_user` (
 
 	`reg_date`		int(10) default 0,
 	`last_login`	int(10) default 0,
+	`extra`			text,
 
 	KEY `TAOGINAME` (`taoginame`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -154,4 +155,25 @@ CREATE TABLE `taogi_entry2terms` (
 
 	KEY `EID` (`eid`,`weight`),
 	KEY `CID` (`tid`,`eid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `taogi_invite`;
+CREATE TABLE `taogi_invite` (
+	`id`			int(10) not null auto_increment primary key,
+	`eid`			int(10) not null default 0,
+	`uid`			int(10) not null default 0,
+	`email_id`		char(255) DEFAULT '',
+	`name`			char(255) default '',
+	`taoginame`		char(255) default '',
+	`display_name`	char(255) default '',
+	`degree`		int(10) not null default 0,
+
+	`portrait`		text,
+
+	`invite_date`	int(10) default 0,
+	`authtoken`		char(255),
+
+	KEY `EID` (`eid`,`id`),
+	KEY `UID` (`uid`),
+	KEY `EMAiL_ID` (`email_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

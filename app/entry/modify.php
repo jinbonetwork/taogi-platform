@@ -46,6 +46,9 @@ class entry_modify extends Controller {
 		/* jQuery UI - datepicker - i18n */
 		//$this->js[] = 'jquery-ui-1.10.4/ui/i18n/jquery.ui.datepicker-ko.js';
 
+		/* Ace Editor */
+		$this->js[] = '../../contribute/ace/src-min-noconflict/ace.js';
+
 		/* FancyBox */
 		$this->js[] = 'fancyBox/source/jquery.fancybox.css';
 		$this->js[] = 'fancyBox/source/jquery.fancybox.pack.js';

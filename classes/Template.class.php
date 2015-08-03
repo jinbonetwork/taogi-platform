@@ -1,8 +1,27 @@
 <?php
+require_once JFE_PATH.'/config/options.php';
 class Template extends Objects {
 	
 	public static function instance(){
 		return self::_instance(__CLASS__);
+	}
+
+	public static function getGeneralHeader(){
+		global $imageIndexes;
+		$base_uri = base_uri(); 
+		$taogi = json_encode(array(
+			'portrait' => array(
+				'width' => $imageIndexes['portrait']['width'],
+				'height' => $imageIndexes['portrait']['height'],
+			),
+		));
+		$markup = "
+			<script>
+				var base_uri = '{$base_uri}';
+				var taogi = {$taogi};
+			</script>
+		";
+		return $markup;
 	}
 
 	public static function buildSocialMetaTags($attributes=array()){
@@ -256,7 +275,7 @@ ASSET__BACK_BACKGROUND_IMAGE;
 						case 'extra__back_background_color':
 							$lesss->basic .= <<<EXTRA__BACK_BACKGROUND_COLOR
 
-								.touchcarousel-item.cover.back section.article {
+								.touchcarousel-item.cover.back section.article:before {
 									content: '';
 									position: absolute;
 									z-index: 1;
@@ -267,7 +286,7 @@ ASSET__BACK_BACKGROUND_IMAGE;
 									height: 100%;
 									background-color: {$property};
 								}
-								.touchcarousel-item.cover.back section.article  article.wrap {
+								.touchcarousel-item.cover.back section.article article.wrap {
 									z-index: 2;
 								}
 

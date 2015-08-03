@@ -59,10 +59,10 @@ PRESET;
 				<div class="field block">
 					<label for="asset_cover_background_image_uploader">배경 그림</label>
 					<div class="asset_cover_background_image_wrap">
-						<a class="asset_cover_background_image_uploader" id="asset_cover_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_cover_background_image&lang=ko_KR&taogi_select_mode='; ?>"><img class="asset_cover_background_image_preview" id="asset_cover_background_image_preview" src="<?php echo ($timeline['asset']['cover_background_image']?$timeline['asset']['cover_background_image']:DEFAULT_COVER_IMAGE); ?>"></a>
+						<a class="asset_cover_background_image_uploader" id="asset_cover_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_cover_background_image&lang=ko_KR&taogi_select_mode='; ?>"><div class="asset_cover_background_image_preview" id="asset_cover_background_image_preview"></div></a>
 						<a class="asset_cover_background_image_remover" id="asset_cover_background_image_remover" href="#asset_cover_background_image_preview"><span>이미지 삭제</span></a>
 					</div>
-					<input class="asset_cover_background_image" type="hidden" id="asset_cover_background_image" name="asset[cover_background_image]" value="<?php print $timeline['asset']['cover_background_image']; ?>" data-empty="<?php echo DEFAULT_COVER_IMAGE; ?>">
+					<input class="asset_cover_background_image" type="hidden" id="asset_cover_background_image" name="asset[cover_background_image]" value="<?php print $timeline['asset']['cover_background_image']; ?>" data-placeholder="<?php echo TRANSPARENT_PLACEHOLDER; ?>">
 				</div>
 				<div class="field inline">
 					<label for="extra_cover_background_color">배경 색깔</label>
@@ -101,10 +101,10 @@ PRESET;
 				<div class="field block">
 					<label for="asset_back_background_image_uploader">배경 그림</label>
 					<div class="asset_cover_background_image_wrap">
-						<a class="asset_cover_background_image_uploader" id="asset_back_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_back_background_image&lang=ko_KR&taogi_select_mode='; ?>"><img class="asset_cover_background_image_preview" id="asset_back_background_image_preview" src="<?php echo ($timeline['asset']['back_background_image']?$timeline['asset']['back_background_image']:DEFAULT_COVER_IMAGE); ?>"></a>
+						<a class="asset_cover_background_image_uploader" id="asset_back_background_image_uploader" href="<?php echo JFE_CONTRIBUTE_URI.'/filemanager/filemanager/dialog.php?type=2&subfolder=&editor=&field_id=asset_back_background_image&lang=ko_KR&taogi_select_mode='; ?>"><div class="asset_cover_background_image_preview" id="asset_back_background_image_preview"></div></a>
 						<a class="asset_cover_background_image_remover" id="asset_back_background_image_remover" href="#asset_back_background_image_preview"><span>이미지 삭제</span></a>
 					</div>
-					<input class="asset_cover_background_image" type="hidden" id="asset_back_background_image" name="asset[back_background_image]" value="<?php print $timeline['asset']['back_background_image']; ?>" data-empty="<?php echo DEFAULT_COVER_IMAGE; ?>">
+					<input class="asset_cover_background_image" type="hidden" id="asset_back_background_image" name="asset[back_background_image]" value="<?php print $timeline['asset']['back_background_image']; ?>" data-placeholder="<?php echo TRANSPARENT_PLACEHOLDER; ?>">
 				</div>
 				<div class="field inline">
 					<label for="extra_back_background_color">배경 색깔</label>
@@ -125,15 +125,20 @@ PRESET;
 		<legend>고급 설정</legend>
 		<div class="help"><p>주의: 이 항목에서 잘못된 값을 저장하면 오동작을 일으킬 수 있습니다.</p></div>
 		<div class="wrap">
-			<label>CSS 코드</label>
-			<textarea class="code" id="extra_css" name="extra[css]"><?php
-				if($eid){
-					require_once JFE_PATH."/library/files.php";
-					echo htmlspecialchars(_file_get_contents(getEntryExtraCssPath($eid)));
-				}else{
-					echo $eid;
-				}
-			?></textarea>
+			<label>CSS 코드 </label>
+			<div class="extra_css_wrap">
+				<textarea id="extra_css" name="extra[css]"><?php
+					if($eid){
+						require_once JFE_PATH."/library/files.php";
+						echo htmlspecialchars(_file_get_contents(getEntryExtraCssPath($eid)));
+					}else{
+						echo $eid;
+					}
+				?></textarea>
+			</div>
+			<div class="buttons">
+				<a id="extra_css_editor" class="button" href="javascript://" data-dummy-id="extra_css_dummy" data-origin-id="extra_css"><span>편집기 사용</span></a>
+			</div>
 		</div><!--/.wrap-->
 	</fieldset><!--/#editor_config_exterior_advanced-->
 </form>

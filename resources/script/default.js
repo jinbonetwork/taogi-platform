@@ -2,13 +2,69 @@ var $window;
 var $document;
 var $body;
 var $catchResize = {}; // callback array for resize event
-var fancyboxFilemanagerOptions = {
+var tinymceOptions = {
+	language: 'ko_KR',
+	theme: "modern",
+	/*
+	toolbar: [
+		"undo redo",
+		"bold italic underline",
+		"styleselect forecolor backcolor",
+		"alignleft aligncenter alignright alignjustify",
+		"bullist numlist outdent indent",
+		"link unlink",
+		"image media filemanager",
+		"preview code fullscreen"
+	].join(' | '),
+	*/
+	toolbar: [
+		"bold italic underline",
+		"forecolor backcolor",
+		"bullist numlist outdent indent",
+		"link unlink image media filemanager"
+	].join(' | '),
+	/*
+	plugins: [ 
+		"advlist autolink autoresize link image lists charmap print preview hr anchor pagebreak spellchecker",
+		"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+		"save table contextmenu directionality emoticons template paste textcolor filemanager"
+	]
+	*/
+	plugins: [ 
+		"autoresize link image lists charmap hr pagebreak",
+		"searchreplace insertdatetime media",
+		"table contextmenu paste textcolor filemanager"
+	],
+	menubar: false,
+	image_advtab: true
+};
+var fancyboxOptions = {
 	width       : 900,
 	height      : 600,
 	type        : 'iframe',
 	fitToView   : true,
 	autoSize    : false,
 	autoResize  : true
+};
+var cropperOptions = {
+	minCropBoxWidth: 64,
+	minCropBoxHeight: 64,
+	strict: true,
+	checkImageOrigin: false,
+	autoCrop: true,
+	autoCropArea: 1,
+	dragCrop: true,
+	movable: true,
+	resizable: true,
+	zoomable: false,
+	rotatable: false,
+	mouseWheelZoom: false,
+	touchDragZoom: false,
+	responsive: true,
+	modal: true,
+	guides: true,
+	highlight: true,
+	background: false,
 };
 jQuery(document).ready(function(e){
 	$window = jQuery(window);
@@ -18,24 +74,6 @@ jQuery(document).ready(function(e){
 
 
 });
-
-//-----------------------------------------------------------------------------
-//	Utilities
-//-----------------------------------------------------------------------------
-/*
-Object.prototype.join = function(glue,separator){
-	var object = this;
-	if(glue=='undefined'){
-		glue = '=';
-	}
-	if(separator=='undefined'){
-		separator = '&';
-	}
-	return jQuery.map(Object.getOwnPropertyNames(object),function(key){
-		return [key,object[key]].join(glue)
-	}).join(separator);
-};
-*/
 
 //-----------------------------------------------------------------------------
 //	Core

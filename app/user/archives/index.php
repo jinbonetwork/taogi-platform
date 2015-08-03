@@ -15,8 +15,8 @@ class archives_index extends Controller {
 
 		// Views
 		require_once JFE_PATH.'/include/userVcard.php';
-		$this->css[] = 'ui-vcard.css';
-		$this->script[] = 'ui-vcard.js';
+		$this->css[] = 'ui-hcard.css';
+		$this->script[] = 'ui-hcard.js';
 
 		require_once JFE_PATH.'/include/userTabs.php';
 		$this->css[] = 'ui-tabs.css';

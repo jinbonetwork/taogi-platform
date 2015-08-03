@@ -55,7 +55,7 @@ define("JFE_LOG_TYPE_ALL",		3);
 
 define("JFE_LOG_TYPE",			JFE_LOG_TYPE_PRINT);
 
-define("JFE_LOG_ID", 'donate');
+define("JFE_LOG_ID", 'taogi');
 define("JFE_LOG_DATE_FORMAT", 'Y-m-d H:i:s');
 define("JFE_ERROR_LOG_PATH", JFE_PATH."/files/log/");
 
@@ -119,13 +119,14 @@ define( 'OPEN_ID', -10);
 define('ITEMS_PER_PAGE',6);
 define('RELATIVE_TIME_COVERAGE',60*60*24); // in seconds
 define('DEFAULT_TIME_FORMAT','Y-m-d H:i:s');
-define('DEFAULT_ENTRY_IMAGE','/resources/images/default_entry_image.png');
-define('DEFAULT_ENTRY_BACKGROUND','/resources/images/default_entry_background.jpg');
-define('DEFAULT_USER_PORTRAIT','/resources/images/default_user_portrait.png');
-define('DEFAULT_USER_BACKGROUND','/resources/images/default_user_background.jpg');
 
 /** 편집화면 기본값들  **/
-define('DEFAULT_COVER_IMAGE','/resources/images/default_cover_image.png');
+define('IMAGE_PLACEHOLDER','/resources/images/z.png');
+define('TRANSPARENT_PLACEHOLDER','/resources/images/t.png');
+define('DEFAULT_USER_PORTRAIT',IMAGE_PLACEHOLDER);
+define('DEFAULT_USER_BACKGROUND',IMAGE_PLACEHOLDER);
+define('DEFAULT_ENTRY_COVER_FRONT',IMAGE_PLACEHOLDER);
+define('DEFAULT_ENTRY_COVER_BACK',IMAGE_PLACEHOLDER);
 
 /** 노드의 상태 **/
 define('NODE_STATUS_PRIVATE',0);
@@ -138,4 +139,10 @@ define('INVALID_DATA_FORMAT',500);
 define('DATA_NOT_FOUND',404);
 
 define('DIRECTORY_SEPARATOR','/');
+
+
+global $dev;
+$dev = array(
+	'timestamp' => time(),
+);
 ?>

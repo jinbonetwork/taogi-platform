@@ -23,28 +23,49 @@ final class Model_URIHandler extends Objects {
 		global $service;
 
 		$uri = parse_url(($_SERVER['HTTPS'] == 'on' ? "https" : "http")."://".$_SERVER['HTTP_HOST'].str_replace('index.php', '', $_SERVER['REQUEST_URI']));
-		$uri += array (
-			'fullpath'  => str_replace('index.php', '', $_SERVER["REQUEST_URI"]),
-			'root'      => rtrim(str_replace('index.php', '', $_SERVER["SCRIPT_NAME"]), 'index.php')
-		);
+		if($uri) {
+			$uri += array (
+				'fullpath'  => str_replace('index.php', '', $_SERVER["REQUEST_URI"]),
+				'root'      => rtrim(str_replace('index.php', '', $_SERVER["SCRIPT_NAME"]), 'index.php')
+			);
+		}
 		if (strpos($uri['fullpath'],$uri['root']) !== 0)
 			$uri['fullpath'] = $uri['root'].substr($uri['fullpath'], strlen($uri['root']) - 1);
 		if($uri['fullpath'] == "/") {
 			$uri['fullpath'] .= "front";
 		}
-		$uri['input'] = ltrim(substr($uri['fullpath'],strlen($uri['root']))).'/';
-		$part = strtok($uri['input'], '/');
-		if(in_array($part,array('resources','plugins','themes','files'))) {
+		$uri['input'] = ltrim(substr($uri['fullpath'],strlen($uri['root'])));
+		$path = strtok($uri['input'], '/');
+		if(in_array($path,array('resources','plugins','themes','files'))) {
 			$part = ltrim(rtrim($uri['input']), '/');
 			$part = (($qpos = strpos($part, '?')) !== false) ? substr($part, 0, $qpos) : $part;
-			if(file_exists($part)) {
+			if(!$_GET['s'] && file_exists($part)) {
 				require_once JFE_LIB_PATH.'/file.php';
 				dumpWithEtag($part);
 				exit;
 			} else {
-				header("HTTP/1.0 404 Not Found");exit;
+				if($path == 'files') {
+					require_once JFE_LIB_PATH.'/file.php';
+					$part = rawurldecode($part);
+					if($_GET['s']) {
+						$i_indexes = Image::getImageIndexes($part);
+						$part = $i_indexes[$_GET['s']]['filepath'];
+					}
+					if(file_exists($part)) {
+						dumpWithEtag($part);
+						exit;
+					}
+					if(Image::checkImage(JFE_PATH."/".$part)) {
+						dumpWithEtag($part);
+						exit;
+					}
+					header("HTTP/1.0 404 Not Found");exit;
+				} else {
+					header("HTTP/1.0 404 Not Found");exit;
+				}
 			}
 		}
+		$uri['input'] = $uri['input'].'/';
 		unset($uri['fragment']);
 		$uri['fragment'] = array_values(array_filter(explode('/',strtok($uri['input'],'?'))));
 		unset($part);

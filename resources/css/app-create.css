@@ -29,7 +29,7 @@ section#create {
 }
 #taogi-create-editor {
 	transition: transform 0.2s linear;
-	-webkit-transition: transform 0.2s linear;
+	-webkit-transition: -webkit-transform 0.2s linear;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -717,7 +717,7 @@ fieldset.timeline_properties hr {
 fieldset.timeline_properties hr:after {
 	display: none;
 }
-fieldset.timeline_properties p#timeline_text {
+fieldset.timeline_properties div#timeline_text {
 }
 fieldset.timeline_properties #extra_author_structure {
 	margin-top: 30px;
@@ -1316,6 +1316,10 @@ fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview 
 	border: 1px solid #DDDDDD;
 	background-color: #CCCCCC;
 }
+fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview .figure.instagram {
+	height: 100%;
+	overflow-y: auto;
+}
 @media all and ( max-width: 880px ) {
 	fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .preview,
 	fieldset.slide .media-nav ul.thumbnails li.fieldset-container fieldset .wrap-inner {
@@ -1774,7 +1778,7 @@ fieldset.slide > .wrap > .console .button.save {
 #editor_config_exterior ul.tabs li.tab {
 	opacity: 0.5;
 	float: left;
-	min-width: 3.5em;
+	min-width: 4em;
 	margin: 0;
 	padding: 0;
 }
@@ -1791,6 +1795,7 @@ fieldset.slide > .wrap > .console .button.save {
 	padding: 0 0.25em;
 	color: #666666;
 	font-size: 13px;
+	white-space: nowrap;
 }
 #editor_config_exterior ul.tabs li.tab a:before {
 	content: '\F105';
@@ -1891,14 +1896,22 @@ fieldset.slide > .wrap > .console .button.save {
 	display: block;
 	width: 100%;
 }
-#editor_config_exterior_basic a.asset_cover_background_image_uploader img {
+#editor_config_exterior_basic .asset_cover_background_image_preview {
 	box-sizing: border-box;
 	display: block;
 	width: 100%;
-	height: auto;
-	margin: 0;
-	padding: 1px;
-	border: 1px solid #000000;
+	height: 150px;
+	outline: 1px solid #000000;
+	border: 1px solid #FFFFFF;
+	background-color: #FFFFFF;
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+#editor_config_exterior_basic .asset_cover_background_image_preview.placeholder {
+	background-repeat: repeat;
+	background-size: auto;
 }
 #editor_config_exterior_basic a.asset_cover_background_image_remover {
 	opacity: 0.3;
@@ -1939,6 +1952,13 @@ fieldset.slide > .wrap > .console .button.save {
 	font-family: monospace;
 	white-space: pre;
 }
+textarea#extra_css_dummy {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
 
 /******************************************************************************
 	Richeditor
@@ -1953,3 +1973,4 @@ body.taogi-net .medium-editor-toolbar li button {
 body.taogi-net .medium-toolbar-arrow-under:after {
 	top: 30px;
 }
+

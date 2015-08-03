@@ -1,1 +1,82 @@
 /**/
+
+#invite-form-wrap {
+	position: relative;
+	z-index: 1;
+	margin-top: 40px;
+	padding: 15px;
+	border: 1px solid #ccc;
+	background: #fff;
+	border-radius: 3px;
+}
+#invite-form-wrap h3.subtitle {
+	position: absolute;
+	z-index: 2;
+	left: 15px;
+	top: -30px;
+	padding: 5px 15px;
+	background: #efefef;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+}
+#invite-form-wrap form {
+	margin 5px 0;
+	padding: 0;
+}
+#invite-form-wrap form fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#invite-form-wrap form fieldset:after {
+	clear: both;
+	content: ' ';
+	display: block;
+}
+#invite-form-wrap form fieldset.fields {
+	position: relative;
+	z-index: 1;
+	padding-left: 80px;
+	padding-bottom: 5px;
+}
+#invite-form-wrap form fieldset.fields label {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 2px;
+	font-size: 0.9em;
+}
+#invite-form-wrap form fieldset.fields label:before {
+	font-family: 'FontAwesome';
+	padding-right: 5px;
+}
+#invite-form-wrap form fieldset.fields label.email:before {
+	content: "\f003";
+}
+#invite-form-wrap form fieldset.fields label.subject:before {
+	content: "\f1dc";
+}
+#invite-form-wrap form fieldset.fields label.content:before {
+	content: "\f0f6";
+}
+#invite-form-wrap form fieldset input#email {
+}
+#invite-form-wrap form fieldset.fields input#subject {
+	width: 100%;
+}
+#invite-form-wrap form fieldset.fields textarea {
+	width: 100%;
+	height: 230px;
+}
+#invite-form-wrap form fieldset.fields .main-fixed-footer {
+	margin-top: 20px;
+}
+#invitation-content .wrap {
+	padding: 2em;
+	border: 1px solid #999999;
+	background-color: #FDFDFD;
+}
+#invitation-content .wrap:hover,
+#invitation-content .wrap:focus {
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

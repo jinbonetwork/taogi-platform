@@ -18,10 +18,6 @@ class User extends Objects {
 		$dbm->bind($db);
 		return $search_user;
 	}
-
-	public static function filter($user) {
-		return $user;
-	}
 	
 	//--------------------------------------------------------------------------------------
 	//	Utilities
@@ -42,6 +38,8 @@ class User extends Objects {
 	}
 
 	public static function getUserPortrait($user) {
+		$images = array();
+		$image = '';
 		if(is_numeric($user)) {
 			$context = Model_Context::instance();
 			$user = self::getUser($user,1);
@@ -49,15 +47,17 @@ class User extends Objects {
 		if(empty($user)) {
 			return;
 		}
-		$image = $user['portrait'];
-		if(!$image) {
-			$image = DEFAULT_USER_PORTRAIT;
+		if(isset($user['portrait'])){
+			$image = $user['portrait'];
 		}
-
-		return $image;
+		$image = $image?$image:DEFAULT_USER_PORTRAIT;
+		$imageset = Image::getImageset($image,DEFAULT_USER_PORTRAIT);
+		return $imageset;
 	}
 
 	public static function getUserBackground($user) {
+		$images = array();
+		$image = '';
 		if(is_numeric($user)) {
 			$context = Model_Context::instance();
 			$user = self::getUser($user,1);
@@ -65,12 +65,12 @@ class User extends Objects {
 		if(empty($user)) {
 			return;
 		}
-		$background = $user['background'];
-		if(!$background) {
-			$background = DEFAULT_USER_BACKGROUND;
+		if(isset($user['extra']['background'])){
+			$image = $user['extra']['background'];
 		}
-
-		return $background;
+		$image = $image?$image:DEFAULT_USER_BACKGROUND;
+		$imageset = Image::getImageset($image,DEFAULT_USER_BACKGROUND);
+		return $imageset;
 	}
 
 	public static function getUserDisplayName($user) {
@@ -128,12 +128,21 @@ class User extends Objects {
 
 		$user['DISPLAY_NAME'] = self::getUserDisplayName($user);
 		$user['ROLE'] = self::getUserRole($user);
-		$user['PORTRAIT'] = self::getUserPortrait($user);
-		$user['BACKGROUND'] = self::getUserBackground($user);
-
 		$user['NAMETAG'] = "<span class=\"NAMETAG value composition\">".($user['degree']?"<span class=\"ROLE value part\" data-degree=\"{$user['degree']}\"><span class=\"value-wrap-open\">(</span><span class=\"value-wrap-value\">{$user['ROLE']}</span><span class=\"value-wrap-close\">)</span></span>":'')."<span class=\"DISPLAY_NAME value part\">".$user['DISPLAY_NAME']."</span></span>";
-		$user['PORTRAITTAG'] = '<div class="PORTRAITTAG'.($user['PORTRAIT']==DEFAULT_USER_PORTRAIT?' default_user_portrait default_image_container':'').'"><img src="'.$user['PORTRAIT'].'"></div>';
 
+		$user['PORTRAIT'] = self::getUserPortrait($user);
+		$user['PORTRAIT']['CLASS'] = "PORTRAITTAG IMAGETAG ".($user['PORTRAIT']['original']==DEFAULT_USER_PORTRAIT?' default_user_portrait default_user_image default_image_container':''); 
+		$user['BACKGROUND'] = self::getUserBackground($user);
+		$user['BACKGROUND']['CLASS'] = "BACKGROUNDTAG IMAGETAG ".($user['BACKGROUND']['original']==DEFAULT_USER_BACKGROUND?' default_user_background default_user_image default_image_container':''); 
+
+		return $user;
+	}
+
+	//-------------------------------------------------------------------------
+	//	Filters
+	//-------------------------------------------------------------------------
+	public static function filter($user) {
+		$user['extra'] = json_decode(base64_decode($user['extra']),true);
 		return $user;
 	}
 

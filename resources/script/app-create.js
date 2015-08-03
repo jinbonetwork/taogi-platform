@@ -480,15 +480,20 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 **/
 		editorKeyEvent: function(element) {
 			var self = this;
-			if(!element.html())
+			if(!element.html()) {
 				element.attr('data-content',element.attr('data-default-value'));
+			}
 			element.keydown(function(event) {
 				var code = event.charCode || event.keyCode;
 				var f_name = jQuery(this).attr('data-name');
 				if(code == 13 && (event.ctrlKey || event.shiftKey)) {
 //					event.preventDefault();
 					self.isChanged = 1;
+<<<<<<< HEAD
 /*					if (f_name == 'text' && window.getSelection) {
+=======
+					if (f_name == 'text' && window.getSelection) {
+>>>>>>> f840e81ad989a3612389cc96683ef485abc1951e
 						var selection = window.getSelection(),
 							range = selection.getRangeAt(0),
 							br = document.createElement("br"),
@@ -502,7 +507,11 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						selection.removeAllRanges();
 						selection.addRange(range);
 						return false;
+<<<<<<< HEAD
 					}*/				
+=======
+					}				
+>>>>>>> f840e81ad989a3612389cc96683ef485abc1951e
 				} else if(code == 9 || code == 13) {
 					event.preventDefault();
 					if(!jQuery.trim(jQuery(this).html())) {
@@ -579,7 +588,15 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 * handlepaste, waitforpastedata, processpaste
 		 */
 		handlepaste: function(elem, e) {
-			var savedcontent = elem.innerHTML;
+			if(elem.childNodes.length > 0) {
+				if(jQuery(elem).text()) {
+					var savedcontent = elem.childNodes[0].innerHTML;
+				} else {
+					var savedcontent = '';
+				}
+			} else {
+				var savedcontent = '';
+			}
 			if (e && e.clipboardData && e.clipboardData.getData) {// Webkit - get data from clipboard, put into editdiv, cleanup, then cancel event
 				if (/text\/html/.test(e.clipboardData.types)) {
 					elem.innerHTML = e.clipboardData.getData('text/html');
@@ -713,8 +730,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				} else {
 					var dTime = this.setRealTime(item,d,iText);
 				}
+				return true;
+			} else {
+				return false;
 			}
-			return true;
 		},
 
 		setRealTime: function(item,d,iText) {
@@ -991,7 +1010,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					} else {
 						var spos = (posOpt == 2 ? scrollPos.top : topos.top) + Math.round((self.Height - h)/2);
 					}
-					trace("spos : "+spos);
 					this.scrollBody.animate({'scrollTop': spos+'px'},self.settings.sortspeed);
 				}
 			} else if(from < to) {
@@ -1153,7 +1171,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var $this = jQuery(this);
 				var options = self.settings.spectrumOptions;
 				
-				if($this.attr('id').search('background_color')){
+				if($this.attr('id').search('background\_color')>0){
 					options.showAlpha = true;
 				}
 				jQuery(this).spectrum(options);
@@ -1227,7 +1245,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			var url = base_uri+'contribute/filemanager/filemanager/dialog.php?type='+type+'&subfolder=&editor=mce_0&field_id='+id+'&lang=ko_KR&taogi_select_mode='+multi;
 			jQuery('#'+id).parent().find('a.upload').attr('href',url).click(function(e) {
 				e.preventDefault();
-				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
+				var options = jQuery.extend({},self.settings.fancyboxOptions,{
 					href		: url,
 					afterClose	: function() {
 						var inp = jQuery('.currentFileManagerTarget');
@@ -1450,7 +1468,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			fm.thumb = 1;
 			var mediaElem = this.createFigureElement(fm);
 			if(mediaElem) {
-				if(fm.type == 'image' || fm.type == 'instagram') {
+				if(fm.type == 'image') {
 					taogiVMM.alignattachElement('#'+fm.uid, mediaElem, '#'+fm.uid+(fm.thumb ? ' .feature_image' : ''), (fm.thumb ? 1 : 0));
 				} else {
 					taogiVMM.attachElement('#'+fm.uid,mediaElem);
@@ -1559,7 +1577,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				container.find('.preview').html('').append(figure);
 				var mediaElem = self.createFigureElement(m);
 				if(mediaElem) {
-					if(m.type == 'image' || m.type == 'instagram') {
+					if(m.type == 'image') {
 						taogiVMM.alignattachElement('#'+m.uid, mediaElem, '#'+m.uid+(m.thumb ? ' .feature_image' : ''), (m.thumb ? 1 : 0));
 					} else {
 						taogiVMM.attachElement('#'+m.uid,mediaElem);
@@ -1726,6 +1744,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		buildThumbnail: function(id,uid) {
 			var thumbnail = jQuery('#t_'+uid);
 			var src = thumbnail.attr('href');
+
 			var m = taogiVMM.ExternalAPI.MediaType(src);
             m.url = src;
 			m.uid = uid;
@@ -1799,7 +1818,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			jQuery('#'+m.uid+'_editor .preview').html('').append(figure);
 			var mediaElem = this.createFigureElement(m);
 			if(mediaElem) {
-				if(m.type == 'image' || m.type == 'instagram') {
+				if(m.type == 'image') {
 					taogiVMM.alignattachElement('#'+m.uid, mediaElem, '#'+m.uid+(m.thumb ? ' .feature_image' : ''), (m.thumb ? 1 : 0));
 				} else {
 					taogiVMM.attachElement('#'+m.uid,mediaElem);
@@ -1932,9 +1951,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				jQuery('#'+m.uid).addClass((m.thumb ? 'thumb-flickr taogi_buildGallery' : 'flickr')).html(loading_message);
 				taogiVMM.ExternalAPI.flickr.get(m);
 			} else if(m.type == "instagram") {
-				jQuery('#'+m.uid).addClass('taogi_buildGallery');
-				mediaElem = "<img src='"+taogiVMM.ExternalAPI.instagram.get(m)+"' class='feature_image' />";
-				if(m.credit) mediaElem += "<h5 class='caption'>"+m.caption+"</h5>";
+				jQuery('#'+m.uid).addClass((m.thumb ? 'thumb-' : '')+'instagram').html(loading_message);
+				taogiVMM.ExternalAPI.instagram.get(m);
 			} else if(m.type == "youtube") {
 				jQuery('#'+m.uid).addClass((m.thumb ? 'thumb-youtube taogi_buildGallery taogi-icon-player' : 'youtube'));
 				vw = this.resolutionOfVideo(m);
@@ -2033,7 +2051,13 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						if(m.use_proxy) {
 							m.id = './library/api.php?type=proxy&taogiauth=ACA20D8B4F7B63D8639C7824AC458D3A53F7E275&skip_referer=1&url='+encodeURIComponent(m.id);
 						}
-						mediaElem = '<img src="'+m.id+'" alt="'+m.caption+' '+m.credit+'" />';
+						var host_match = new RegExp("^http(s)?:\/\/"+window.location.hostname+"\/(.*)\.(jpeg|jpg|gif|bmp|png)$");
+						var src = m.id;
+						if(src.match(host_match)) src += "?s=small";
+						mediaElem = '<img src="'+src+'" alt="'+m.caption+' '+m.credit+'" />';
+						break;
+					case 'instagram':
+						mediaElem = '<img src="'+taogiVMM.ExternalAPI.instagram.getThumb(m)+'" alt="'+m.caption+' '+m.credit+'" />';
 						break;
 					default:
 						mediaElem = '<span>'+(m.caption ? m.caption : m.credit)+'</span>';
@@ -2139,7 +2163,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				timelineJSON.timeline.extra.back_body_color = jQuery('#extra_back_body_color').val();
 
 				timelineJSON.timeline.extra.css = jQuery('#extra_css').val();
-				//console.log(timelineJSON);
 			}
 
 			var replaceURI = false;
@@ -2418,7 +2441,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var $trigger = jQuery(this);
 				var $field = $trigger.closest('.field');
 				var $input = $field.find('input.asset_cover_background_image');
-				var options = jQuery.extend({},self.settings.fancyboxFilemanagerOptions,{
+				var options = jQuery.extend({},self.settings.fancyboxOptions,{
 					href: $trigger.attr('href'),
 					afterClose  : function(){
 						$input.trigger('change');
@@ -2439,12 +2462,18 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			$basicEditor.find('input.asset_cover_background_image').on('change',function(e){
 				var $input = jQuery(this);
 				var $field = $input.closest('.field');
-				var $image = $field.find('a.asset_cover_background_image_uploader img');
+				var $preview = $field.find('.asset_cover_background_image_preview');
 				var $source = $input.val();
 
-				$source = $source?$source:$input.attr('data-empty');
-				$image.attr('src',$source);
-			});
+				$source = $source?$source:$input.attr('data-placeholder');
+				$preview.css({'background-image':"url('"+$source+"')"});
+
+				if($source==$input.attr('data-placeholder')){
+					$preview.addClass('placeholder');
+				}else{
+					$preview.removeClass('placeholder');
+				}
+			}).trigger('change');
 		},
 
 		configurePreset: function() {
@@ -2514,7 +2543,38 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			});
 		},
 
-		configureAdvanced: function() {
+		configureAdvanced: function(){
+			var self = this;
+			var $extra_css = self.configure.find('#extra_css');
+
+			$extra_css.opener = self.configure.find('#extra_css_editor');
+			$extra_css.opener.on('click',function(e){
+				var $trigger = jQuery(this);
+				var options = jQuery.extend({},self.settings.fancyboxOptions,{
+					type: 'ajax',
+					href: base_uri+'include/editor/config.advanced.extra.css.html',
+					beforeShow: function(){
+						$extra_css.editor = ace.edit('extra_css_dummy');
+						$extra_css.editor.setValue($extra_css.val());
+						$extra_css.editor.setTheme('ace/theme/dawn');
+						$extra_css.editor.getSession().setMode('ace/mode/css');
+
+						$extra_css.button = {
+							save: jQuery('#extra_css_editor .button.save').on('click',function(e){
+								jQuery('#taogi-create-menu-bar .menu .save .button').trigger('click');
+							}),
+							preview: jQuery('#extra_css_editor .button.preview').on('click',function(e){
+								jQuery('#taogi-create-menu-bar .menu .preview .button').trigger('click');
+							})
+						};
+					},
+					beforeClose: function(){
+						$extra_css.val($extra_css.editor.getValue());
+					}
+				});
+
+				jQuery.fancybox.open(options);
+			});
 		}
 	}
 
@@ -2537,22 +2597,35 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			updateOnEmptySelection: false,
 			firstHeader: 'h1',
 			secondHeader: 'h2',
+			cleanPastedHTML: true,
 			targetBlank: true	
 		},
-		fancyboxFilemanagerOptions: fancyboxFilemanagerOptions,
+		fancyboxOptions: fancyboxOptions,
 	 	spectrumOptions: {
-			//preferredFormat: 'none',
+			containerClassName: 'colorpicker-container',
+			replacerClassName: 'colorpicker-replacer',
+
+			preferredFormat: 'rgb',
 			allowEmpty: true,
 			showInitial: true,
 			showInput: true,
 			//showAlpha: true,
 
 			showPalette: true,
-			palette: [['black','white','rgba(0,0,0,0.5)','rgba(255,255,255,0.5)']],
 			showSelectionPalette: true,
-			maxSelectionSize: 2,
+			maxSelectionSize: 1,
+			//showPaletteOnly: true,
+			//togglePaletteOnly: true,
+			//togglePaletteMoreText: '고급 옵션 펴기',
+			//togglePaletteLessText: '고급 옵션 닫기',
+			palette: [
+				['black','white'],
+				['rgba(0,0,0,0.5)','rgba(255,255,255,0.5)']
+			],
 			hideAfterPaletteSelect: true,
 
+			clickoutFiresChange: true,
+			showButtons: true,
 			chooseText: '선택',
 			cancelText: '취소'
 		}

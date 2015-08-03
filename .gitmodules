@@ -28,3 +28,15 @@
 [submodule "contribute/cropper"]
 	path = contribute/cropper
 	url = https://github.com/fengyuanchen/cropper.git
+[submodule "contribute/ace"]
+	path = contribute/ace
+	url = https://github.com/ajaxorg/ace-builds.git
+[submodule "contribute/SimpleImage"]
+	path = contribute/SimpleImage
+	url = https://github.com/claviska/SimpleImage.git
+[submodule "contribute/image"]
+	path = contribute/image
+	url = https://github.com/Intervention/image.git
+[submodule "contribute/Image"]
+	path = contribute/Image
+	url = https://github.com/Gregwar/Image.git

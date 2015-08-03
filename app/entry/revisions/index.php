@@ -17,8 +17,8 @@ class revisions_index extends Controller {
 		require_once JFE_PATH.'/include/entryRevisionControls.php';
 
 		require_once JFE_PATH.'/include/entryEcard.php';
-		$this->css[] = 'ui-ecard.css';
-		$this->script[] = 'ui-ecard.js';
+		$this->css[] = 'ui-hcard.css';
+		$this->script[] = 'ui-hcard.js';
 
 		require_once JFE_PATH.'/include/entryRevisionTable.php'; 
 		$this->css[] = 'ui-table.css';
