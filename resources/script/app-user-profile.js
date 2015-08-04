@@ -115,9 +115,9 @@ function check_profile(TheForm) {
 					});
 				}
 				jQuery('#taogi-gnb-footer .user .profile a span').text(json.display_name);
-				jQuery('#user-profile-vcard h1.DISPLAY_NAME').text(json.display_name);
+				jQuery('#user-profile-vcard h1.DISPLAY_NAME div.wrap').text(json.display_name);
 				jQuery('#user-profile-userinfo h2.ui-block span.profile-display-name').text(json.display_name);
-				jQuery('#user-profile-vcard div.summary').html(json.summary);
+				jQuery('#user-profile-vcard div.summary div.wrap').html(json.summary);
 			}
 		},
 		error: function(xhr, status, errors) {

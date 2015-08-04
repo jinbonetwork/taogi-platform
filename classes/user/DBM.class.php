@@ -6,11 +6,10 @@ class User_DBM extends Objects {
 
 	public static function updateUser($uid,$args) {
 		$dbm = DBM::instance();
-		$que = "UPDATE {user} SET `taoginame` = ?, `display_name` = ?, `portrait` = ?, `summary` = ? WHERE uid = ?";
-		$dbm->execute($que,array("ssssd",
+		$que = "UPDATE {user} SET `taoginame` = ?, `display_name` = ?, `summary` = ? WHERE uid = ?";
+		$dbm->execute($que,array("sssd",
 			$args['taoginame'],
 			$args['display_name'],
-			$args['portrait'],
 			$args['summary'],
 			$uid
 		));

@@ -80,7 +80,7 @@ class profile_save extends Controller {
 			}
 			$this->user['taoginame'] = $_SESSION['user']['taoginame'] = $this->params['taoginame'];
 			$this->user['display_name'] = $_SESSION['user']['display_name'] = $this->params['display_name'];
-			//$this->user['portrait'] = $_SESSION['user']['portrait'] = $this->params['portrait'];
+			$this->user['portrait'] = $_SESSION['user']['portrait'] = $this->params['portrait'];
 			$this->user['summary'] = $this->params['summary'];
 
 			if( $this->user['name'] != $this->params['name'] ) {
