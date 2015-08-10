@@ -269,7 +269,8 @@
 			"bgrins-spectrum",
 			"fancybox",
 			"ace",
-			"taogi-ui-controls"
+			"taogi-ui-controls",
+			"is-loading"
 		]
 	},
 	"taogi-app-modify":{
