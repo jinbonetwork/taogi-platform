@@ -42,7 +42,7 @@ $context = 'adminEntryTable';
 		</tr>
 		<tr id="ui-controls-container_<?php print $context; ?>_<?php print $entry['eid']; ?>" class="ui-controls-container" data-index="<?php print $index; ?>" data-eid="<?php print $entry['eid']; ?>">
 			<td class="item_controls" colspan="4">
-				<?php print Component::get('admin/entry/control',array('entry'=>$entry,'options'=>array('context'=>$context))) ?>;
+				<?php print Component::get('admin/entry/control',array('entry'=>$entry,'options'=>array('context'=>$context))); ?>
 			</td>
 		</tr>
 <?php }?>
