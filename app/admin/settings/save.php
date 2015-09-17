@@ -46,7 +46,7 @@ class profile_save extends Controller {
 				}
 				$token = User_DBM::makeChangeEmailToken($this->user['uid'],$this->params['email_id'],$this->params['password']);
 				$ret = sendChangeMail($this->user['uid'],$this->params['email_id'], $this->user['name'], $token);
-				if($ret != true)
+				if($ret[0] != true)
 					RespondJson::ResultPage(array(1,"이메일 수정 승인 메일을 보내는 동안 장애가 발생했습니다."));
 				$this->change_email_id = true;
 

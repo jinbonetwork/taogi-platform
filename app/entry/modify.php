@@ -1,4 +1,5 @@
 <?php
+importLibrary('sortByDate');
 $Acl = "editor";
 class entry_modify extends Controller {
 	public function index() {
@@ -27,6 +28,13 @@ class entry_modify extends Controller {
 		$this->timeline = json_decode($data['timeline'],true);
 		$this->timeline = $this->timeline['timeline'];
 		$this->extra = Entry::getEntryExtra($this->eid);
+		$datalist = $this->timeline['date'];
+		if($this->extra['sort'] == 'desc') {
+			usort($datalist,'_sortByDateDesc');
+		} else {
+			usort($datalist,'_sortByDateAsc');
+		}
+		$this->timeline['date'] = $datalist;
 		if( $this->entry['locked'] != $_COOKIE[Session::getName()] ) {
 			Entry_DBM::setLock($this->eid);
 			$this->revision = true;

@@ -68,7 +68,7 @@ class regist_index extends Controller {
 					RespondJson::ResultPage(array(1,"회원 가입 도중 장애가 발생했습니다."));
 
 				$ret = sendRegistMail($this->params['email_id'], $this->params['name'], $this->params['authtoken']);
-				if($ret != true)
+				if($ret[0] != true)
 					RespondJson::ResultPage(array(1,"회원 가입 승인 메일을 보내는 동안 장애가 발생했습니다."));
 
 				if(!$this->themes) $this->themes = $context->getProperty('service.themes');

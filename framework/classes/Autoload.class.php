@@ -19,7 +19,7 @@ class Autoload {
 			}
 		} else if( file_exists(ROOT.'/framework/classes/'.$className.'.class.php') ) {
 			require_once ROOT.'/framework/classes/'.$className.'.class.php';
-		} else {
+		} else if( file_exists(ROOT.'/classes/'.$className.'.class.php') ) {
 			require_once ROOT.'/classes/'.$className.'.class.php';
 		}
 	}

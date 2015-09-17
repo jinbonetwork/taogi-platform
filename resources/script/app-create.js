@@ -2219,6 +2219,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				complete: function() {
 				},
 				error: function(jqXHR, textStatus, errors) {
+					console.log(jqXHR);
 					jfe_unBlock_afterRequest();
 					alert(errors);
 					return false;

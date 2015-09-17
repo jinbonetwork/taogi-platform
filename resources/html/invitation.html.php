@@ -3,7 +3,7 @@
 	초대에 응할 의사가 있으시다면 아래 초대허락 버튼을 클릭하세요.
 </p>
 <p style="padding-top: 5px; padding-bottom: 15px; text-align: center;">
-	<a href="<?php print $base_uri.$user['taoginame']; ?>/<?php print $entry['nickname']; ?>/authors/invitation/?authtoken=<?php print $authtoken; ?>" target="_blank" style="padding: 15px; border: 2px solid #FF8888; background: #FF8888; color: #fff; border-radius: 5px; text-decoration: none; font-size: 16px; font-weight: bold; display: inline-block;">편집인 초대 승인</a>
+	<a href="<?php print $base_uri.$user['taoginame']; ?>/<?php print $entry['nickname']; ?>/authors/invitation/?email_id=<?php print $email; ?>&authtoken=<?php print $authtoken; ?>" target="_blank" style="padding: 15px; border: 2px solid #FF8888; background: #FF8888; color: #fff; border-radius: 5px; text-decoration: none; font-size: 16px; font-weight: bold; display: inline-block;">편집인 초대 승인</a>
 </p>
 <div style="padding-top: 5px; padding-bottom: 15px;">
 	<p>

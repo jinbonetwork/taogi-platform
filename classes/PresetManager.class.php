@@ -13,6 +13,7 @@ class PresetManager extends Objects {
 				if($preset['type']=='dir'){
 					$directory = JFE_PRESET_URI."/".$model."/".$preset['name']."/";
 					self::$presets[] = array (
+						'name' => $preset['name'],
 						'active' => ( ($current && $current == $preset['name']) ? ' active' : '' ),
 						'checked' => ( ($current && $current == $preset['name']) ? ' checked="checked"' : '' ),
 						'directory' => $directory,

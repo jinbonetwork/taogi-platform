@@ -1,13 +1,17 @@
 <?php
 function sendEmail($senderName, $senderEmail, $receivers, $subject, $message, $logging=0) {
-	require_once( JFE_CONTRIBUTE_PATH."/PHPMailer/class.smtp.php" );
-	require_once( JFE_CONTRIBUTE_PATH."/PHPMailer/class.phpmailer.php" );
+	require_once( JFE_CONTRIBUTE_PATH."/PHPMailer/PHPMailerAutoload.php" );
 
 	$context = Model_Context::instance();
 	$service = $context->getProperty('service.*');
 
-	$mail = new PHPMailer();
-	$mail->SetLanguage( 'en', JFE_CONTRIBUTE_PATH."/PHPMailer/language/" );
+	if($service['useoauth']) {
+		require_once( JFE_CONTRIBUTE_PATH."/PHPMailer/vendor/autoload.php" );
+		$mail = new PHPMailerOAuth;
+	} else {
+		$mail = new PHPMailer();
+	}
+	$mail->SetLanguage( 'ko', JFE_CONTRIBUTE_PATH."/PHPMailer/language/" );
 	$mail->IsHTML(true);
 	if($service['useSMTP']) {
 		$mail->IsSMTP();
@@ -15,8 +19,14 @@ function sendEmail($senderName, $senderEmail, $receivers, $subject, $message, $l
 		$mail->Port		= ($service['smtpPort'] ? $service['smtpPort'] : 25);
 		if($service['smtpSecure'])
 			$mail->SMTPSecure = $service['smtpSecure'];
-		if($service['smtpUsername'] && $service['smtpPassword']) {
-			$mail->SMTPAuth	= true;
+		$mail->SMTPAuth	= true;
+		if($service['useoauth']) {
+			$mail->AuthType = 'XOAUTH2';
+			$mail->oauthUserEmail = $service['smtpUsername'];
+			$mail->oauthClientId = $service['oauthClientId'];
+			$mail->oauthClientSecret = $service['oauthClientSecret'];
+			$mail->oauthRefreshToken = $service['oauthRefreshToken'];
+		} else if($service['smtpUsername'] && $service['smtpPassword']) {
 			$mail->Username = $service['smtpUsername'];
 			$mail->Password = $service['smtpPassword'];
 		}
@@ -34,15 +44,21 @@ function sendEmail($senderName, $senderEmail, $receivers, $subject, $message, $l
 			$mail->addAddress( $receiver['email'], "=?UTF-8?B?".base64_encode($receiver['name'])."?=" );
 		}
 		$ret = $mail->send();
-		if($logging && !$ret) {
+		if($logging) {
 			$fp = fopen("/tmp/taogi_log.txt","a+");
-			fputs($fp,$mail->ErrorInfo."\n");
+			if(!$ret) {
+				fputs($fp,$mail->ErrorInfo."\n");
+			} else {
+				fputs($fp,"success\n");
+			}
 			fclose($fp);
+		}
+		if(!$ret) {
 			return array(false,$mail->ErrorInfo);
 		}
 	}
 
-	return true;
+	return array(true);
 }
 
 function makeLetter($variables) {
@@ -81,10 +97,20 @@ function sendRegistMail($email_id,$name,$authtoken) {
 	$receiver = array();
 	$receiver[] = array('name'=>$name, 'email'=>$email_id);
 	$ret = sendEmail($context->getProperty('service.senderName'), $context->getProperty('service.senderEmail'), $receiver, $variables['title'], $mailMessage,1);
-	if($ret != true) {
-		array(1,$ret[1]);
-	}
-	return true;
+	return $ret;
+}
+
+function sendAuthorInvite($email_id,$name,$title,$mailMessage) {
+	$context = Model_Context::instance();
+	if (empty($email_id))
+		return array(1,'이메일을 입력하세요.');
+	if (!preg_match('/^[^@]+@([-a-zA-Z0-9]+\.)+[-a-zA-Z0-9]+$/', $email_id))
+		return array(1,'이메일 형식이 아닙니다');
+
+	$receiver = array();
+	$receiver[] = array('name'=>$name, 'email'=>$email_id);
+	$ret = sendEmail($context->getProperty('service.senderName'), $context->getProperty('service.senderEmail'), $receiver, $title, $mailMessage,1);
+	return $ret;
 }
 
 function sendChangeMail($uid,$email_id,$name,$authtoken) {
@@ -110,9 +136,6 @@ function sendChangeMail($uid,$email_id,$name,$authtoken) {
 	$receiver = array();
 	$receiver[] = array('name'=>$name, 'email'=>$email_id);
 	$ret = sendEmail($context->getProperty('service.senderName'), $context->getProperty('service.senderEmail'), $receiver, $variables['title'], $mailMessage,1);
-	if($ret != true) {
-		array(1,$ret[1]);
-	}
-	return true;
+	return $ret;
 }
 ?>

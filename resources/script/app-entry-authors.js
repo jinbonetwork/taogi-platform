@@ -49,6 +49,12 @@ function check_invite(TheForm) {
 		removeAlertMessage(jQuery(TheForm.email));
 	}
 
+	if(TheForm.name.value == '') {
+		return addAlertMessage(jQuery(TheForm.name),'닉네임을 입력하세요');
+	} else {
+		removeAlertMessage(jQuery(TheForm.name));
+	}
+
 	if(TheForm.subject.value == '') {
 		return addAlertMessage(jQuery(TheForm.subject),'초대장 제목을 입력하세요');
 	} else {
@@ -91,10 +97,19 @@ function check_invite(TheForm) {
 					return addAlertMessage(jQuery('input#email'),message);
 					break;
 				case 2:
-					return addAlertMessage(jQuery('input#subject'),message);
+					return addAlertMessage(jQuery('input#name'),message);
 					break;
 				case 3:
+					return addAlertMessage(jQuery('input#subject'),message);
+					break;
+				case 4:
 					return addAlertMessage(jQuery('text#content'),message);
+					break;
+				case 5:
+					jQuery('body').statusBox({
+						message : message,
+						type: 'error'
+					});
 					break;
 				default:
 					break;

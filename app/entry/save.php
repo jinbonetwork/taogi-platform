@@ -2,6 +2,7 @@
 import('library.validateJS');
 import('library.getJson');
 import('library.files');
+import('library.sortByDate');
 $Acl = "editor";
 class entry_save extends Controller {
 	public function index() {
@@ -51,6 +52,13 @@ class entry_save extends Controller {
 		}
 
 		$vtimeline = validateTimeLineJS($timeline);
+		$datalist = $vtimeline['timeline']['date'];
+		if($vtimeline['timeline']['extra']['sort'] == 'desc') {
+			usort($datalist,'_sortByDateDesc');
+		} else {
+			usort($datalist,'_sortByDateAsc');
+		}
+		$vtimeline['timeline']['data'] = $datalist;
 
 		if($this->revision == true) {
 			$this->vid = Entry_DBM::createRevision($this->eid,$uid,$vtimeline);

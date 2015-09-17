@@ -18,6 +18,10 @@ ob_end_clean();
 				<label for="email" class="email">이메일</label>
 				<input type="email" id="email" name="email" class="ui-text" placeholder="your@email.com" />
 			</fieldset>
+			<fieldset id="invitation-name" class="fields ui-form">
+				<label for="name" class="name">닉네임</label>
+				<input type="text" id="name" name="name" class="ui-text" placeholder="닉네임" />
+			</fieldset>
 			<fieldset id="invitation-title" class="fields ui-form">
 				<label for="subject" class="subject">제 목</label>
 				<input type="text" id="subject" name="subject" class="ui-text" placeholder="초대장 제목" value="<?php print $user['display_name']; ?>님이 따오기 '<?php print $entry['subject']; ?>' 타임라인에 귀하를 공동편집인으로 초대합니다." />
