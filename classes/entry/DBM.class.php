@@ -73,7 +73,7 @@ class Entry_DBM extends Objects {
 	public static function updateRevision($vid,$timeline) {
 		$dbm = DBM::instance();
 		$que = "UPDATE {revision} SET `subject`=?, `timeline`=?, `modified`=? WHERE `vid` = ?";
-		$fp = fopen("/tmp/taogi_log.txt","a+");
+//		$fp = fopen("/tmp/taogi_log.txt","a+");
 		$dbm->execute($que,array("ssdd",
 			$timeline['timeline']['headline'],
 			base64_encode(json_encode($timeline)),

@@ -2141,6 +2141,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			}
 
 			if(true){
+				timelineJSON.timeline.extra.preset = jQuery('.preset.current input[name="extra[preset]"]').val();
 				timelineJSON.timeline.asset.cover_background_image = jQuery('#asset_cover_background_image').val();
 				timelineJSON.timeline.extra.cover_background_color = jQuery('#extra_cover_background_color').val();
 				timelineJSON.timeline.extra.cover_title_color = jQuery('#extra_cover_title_color').val();

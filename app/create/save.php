@@ -2,6 +2,7 @@
 import('library.validateJS');
 import('library.getJson');
 import('library.files');
+import('library.sortByDate');
 $Acl = "user";
 class create_save extends Controller {
 	public function index() {
@@ -27,6 +28,13 @@ class create_save extends Controller {
 			}
 		}
 		$vtimeline = validateTimeLineJS($timeline);
+		$datalist = $vtimeline['timeline']['date'];
+		if($vtimeline['timeline']['extra']['sort'] == 'desc') {
+			usort($datalist,'_sortByDateDesc');
+		} else {
+			usort($datalist,'_sortByDateAsc');
+		}
+                $vtimeline['timeline']['data'] = $datalist;
 
 		list($this->eid,$this->vid) = Entry_DBM::createEntry($uid,$vtimeline);
 		$this->nickname = $timeline['timeline']['permalink'];
