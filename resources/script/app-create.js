@@ -517,6 +517,9 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					if(f_name == "startDate" || f_name == "headline") {
 						self.makeSlideTitle(jQuery(this).attr('data-id'));
 					}
+					if(f_name == 'startDate' && self.isSorting == false) {
+						self.sortItemsById(jQuery(this).attr('data-id'),1);
+					}
 					var dataType = jQuery(this).attr('data-type');
 					jQuery(this).data('isEditing',0);
 					if(dataType == 'article')
@@ -866,7 +869,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		focus: function(item) {
 			var val = item.html();
 			if(!val) val = item.val();
-			//if(val) item.caret(-1);
+			if(val) item.caret(-1);
 			else item.focus();
 			item.data('isEditing',1);
 		},
