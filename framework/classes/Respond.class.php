@@ -51,6 +51,7 @@ class Respond {
 	
 	public static function MessagePage($type,$message) {
 		header("Content-Type: text/html; charset=utf-8");
+		define( "__Require_Taogi_Error_Header__", true );
 		include_once JFE_RESOURCE_PATH."/html/error.html.php";
 		exit;
 	}

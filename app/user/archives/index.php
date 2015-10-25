@@ -5,13 +5,15 @@ class archives_index extends Controller {
 		$this->user = User::getUserProfile($this->params['userid']);
 		$entries = Entry::getEntryProfiles(Entry_List::getOwnList($this->params['userid'],-1));
 		$this->entries = array();
-		foreach($entries as $entry) {
-			if($entry['is_public'] < 1) {
-				if(!Acl::checkAcl($entry['eid'],BITWISE_EDITOR)) {
-					continue;
+		if(is_array($entries)) {
+			foreach($entries as $entry) {
+				if($entry['is_public'] < 1) {
+					if(!Acl::checkAcl($entry['eid'],BITWISE_EDITOR)) {
+						continue;
+					}
 				}
+				$this->entries[] = $entry;
 			}
-			$this->entries[] = $entry;
 		}
 
 		// Page

@@ -326,6 +326,12 @@
 		"deps":["taogi-ui-forms"]
 	},
 
+	"taogi-app-invitation": {
+		"js":["resources/script/app-entry-invitation.js"],
+		"css":["resources/css/app-regist.css","resources/css/app-entry-invitation.css"],
+		"deps":["taogi-ui-forms"]
+	},
+
 	"taogi-app-user":{
 		"js":["resources/script/app-user.js"],
 		"css":["resources/css/app-user.css"],

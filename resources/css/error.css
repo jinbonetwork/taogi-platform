@@ -1,0 +1,105 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+body {
+	background: #efefef;
+}
+#taogi-net-site-error-container {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	display: table;
+}
+#taogi-net-site-error-container .error {
+	display: table-cell;
+	vertical-align: middle;
+}
+#taogi-net-site-error-container .error .message-box {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 600px;
+	padding: 15px 0;
+	zoom: 1;
+	border-radius: 10px;
+	background: #fff;
+	position: relative;
+	z-index: 1;
+	-webkit-box-shadow: 3px 3px 3px 0px rgba(102,102,102,1);
+	-moz-box-shadow: 3px 3px 3px 0px rgba(102,102,102,1);
+	box-shadow: 3px 3px 3px 0px rgba(102,102,102,1);
+}
+#taogi-net-site-error-container .error .message-box:after {
+	clear: both;
+	content: ' ';
+	display: block;
+}
+#taogi-net-site-error-container .error .message-box .block {
+	float: left;
+	width: 50%;
+}
+#taogi-net-site-error-container .error .message-box .block.info .inner {
+	border-right: 1px solid #ccc;
+}
+#taogi-net-site-error-container .error .message-box .block img {
+	width: 100%;
+}
+#taogi-net-site-error-container .error .message-box .block .inner {
+	padding: 20px;
+	text-align: justify;
+}
+#taogi-net-site-error-container .error .message-box .block .inner h1 {
+	display: table;
+}
+#taogi-net-site-error-container .error .message-box .block .inner h1 span {
+	display: table-cell;
+	vertical-align: middle;
+}
+#taogi-net-site-error-container .error .message-box .block .inner h1 span.code {
+	font-size: 1.8em;
+	letter-spacing: -0.05em;
+	color: #f00;
+}
+#taogi-net-site-error-container .error .message-box .block .inner h1 span.message {
+	padding-left: 15px;
+	font-size: 0.85em;
+	letter-spacing: -0.05em;
+	color: #a33;
+}
+#taogi-net-site-error-container .error .message-box .block.message {
+	color: #333;
+}
+#taogi-net-site-error-container .error .message-box .block.message .inner h2 {
+	margin-top: 0;
+}
+#taogi-net-site-error-container .error .message-box .block.message .inner p {
+	margin: 0;
+	padding: 15px;
+	background: #efefef;
+	color: #333;
+}
+#taogi-net-site-error-container .error .message-box .contact {
+	position: absolute;
+	z-index: 3;
+	bottom: 15px;
+	right: 15px;
+	width: 38%;
+	border-radius: 5px;
+	padding: 20px;
+	background: #F88;
+	color: #fff;
+	font-size: 0.85em;
+}
+#taogi-net-site-error-container .error .message-box .contact .home-button {
+	margin-top: 20px;
+	text-align: center;
+}
+#taogi-net-site-error-container .error .message-box .contact .home-button a {
+	padding: 10px 20px;
+	background: #0fa;
+	color: #000;
+	text-decoration: none;
+	border-radius: 3px;
+}

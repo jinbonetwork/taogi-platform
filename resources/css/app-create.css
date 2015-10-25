@@ -101,7 +101,7 @@ time.editable {
 	background-color: transparent;
 	border: 1px solid #CCCCCC;
 	box-shadow: 0 0 5px #CCCCCC;
-	color: #000000;
+	color: #999999;
 }
 .editable.valid {
 	color: #333333;

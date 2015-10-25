@@ -1,9 +1,9 @@
 <?php
-function Error($msg,$errorcode=505) {
+function Error($msg,$errorcode=400) {
 	if($_GET['output'] == "xml" || $_POST['output'] == "xml") {
 		Respond::ResultPage(array(1,$msg));
 	} else {
-		Respond::MessagePage($errcode,$msg);
+		Respond::MessagePage($errorcode,$msg);
 	}
 }
 

@@ -215,9 +215,9 @@ TIMELINECONFIG;
 		if($this->json['timeline']['extra']['theme']) {
 			$this->header .= $this->taogi_theme->makeStyle();
 		}
-		if($this->json['timeline']['extra']['preset'] && file_exists(JFE_PRESET_PATH."/".$this->model."/".$this->json['timeline']['extra']['preset']."/style.css")) {
-			$this->header .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".JFE_PRESET_URI."/".$this->model."/".$this->json['timeline']['extra']['preset']."/style.css\" />\n";
-		}
+//		if($this->json['timeline']['extra']['preset'] && file_exists(JFE_PRESET_PATH."/".$this->model."/".$this->json['timeline']['extra']['preset']."/style.css")) {
+//			$this->header .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".JFE_PRESET_URI."/".$this->model."/".$this->json['timeline']['extra']['preset']."/style.css\" />\n";
+//		}
 
 		$this->header .= "\t<script type=\"text/javascript\">\n\t\tvar TaogiLanguagePack='".$this->taogi_language->json_url(TAOGI_SOURCE_URI."/model/".$this->model)."';\n\t\t</script>\n";
 		$this->header .= "\t<script type=\"text/javascript\" src=\"".TAOGI_SOURCE_URI."/model/".$this->model."/js/jquery.easing.1.3.js\"></script>\n";

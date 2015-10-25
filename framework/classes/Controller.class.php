@@ -355,4 +355,25 @@ abstract class Controller {
 			$this->entry_class = "entry-".$taogiid;
 		}
 	}
+
+	public function Error($message,$type=505) {
+		ob_start();
+		include_once JFE_RESOURCE_PATH."/html/error.html.php";
+		$content = ob_get_contents();
+		ob_end_clean();
+
+		if($this->params['output'] != "nolayout") {
+			$layout_file = $this->LayoutFile();
+
+			if($layout_file) {
+				ob_start();
+				include $layout_file;
+				$html = ob_get_contents();
+				ob_end_clean();
+				print $html;
+			}
+		} else {
+			print $content;
+		}
+	}
 }

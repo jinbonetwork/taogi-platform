@@ -15,7 +15,7 @@ function check_login(TheForm) {
 	}
 
 	var url = base_uri+"login";
-	var params = "email_id="+e.val()+"&password="+p.val()+"&requestURI="+jQuery(TheForm).find('input[name="requestURI"]').val()+"&output=xml";
+	var params = "email_id="+e.val()+"&password="+p.val()+"&requestURI="+encodeURIComponent(jQuery(TheForm).find('input[name="requestURI"]').val())+"&output=xml";
 
 	jQuery.ajax({
 		type: 'POST',
@@ -47,9 +47,18 @@ function check_login(TheForm) {
 				var p = jQuery(TheForm).find('input[name="password"]');
 				p.val('');
 				display_error(p,message);
+			} else if(error == '-3') {
+            	jfe_unBlock_afterRequest(element);
+				jQuery('body').statusBox({
+					message : message,
+					type: 'error'
+				});
 			} else if(error == '1') {
             	jfe_unBlock_afterRequest(element);
-				jQuery(TheForm).append('<div class="alert">'+message+'</div>');
+				jQuery('body').statusBox({
+					message : message,
+					type: 'error'
+				});
 			} else {
 				window.location.href = message;
 			}
@@ -61,7 +70,10 @@ function check_login(TheForm) {
 				var element = '';
 			}
             jfe_unBlock_afterRequest(element);
-			jQuery(TheForm).append('<div class="alert">'+errors+'</div>');
+			jQuery('body').statusBox({
+				message : errors,
+				type: 'error'
+			});
         }
 	});
 	return false;

@@ -52,6 +52,7 @@ class authors_invite extends Interface_Entry {
 		}
 		$author = User::search('email_id',$this->params['email']);
 		if($author) {
+			$author = User::getUserProfile($author['uid']);
 			$priv = User_DBM::getPrivilege($author['uid'],$this->params['taogiid']);
 			if($priv['uid']) {
 				RespondJson::ResultPage(array(1,"이미 공동 편집인으로 등록된 이용자의 E-Mail 주소입니다."));
@@ -85,17 +86,17 @@ class authors_invite extends Interface_Entry {
 		$content = ob_get_contents();
 		ob_end_clean();
 
-		$ret = sendAuthorInvite( ($author ? $author['email_id'] : $this->params['email']), ($author ? $author['taoginame'] : $this->params['name']), $this->params['subject'], $content );
+		$ret = sendAuthorInvite( ($author ? $author['email_id'] : $this->params['email']), ($author ? $author['display_name'] : $this->params['name']), $this->params['subject'], $content );
 		if($ret[0] != true) {
 			RespondJson::ResultPage(array(5,"초대장을 발송하던 도중 장애가 발생했습니다. ".$ret[1]));
 		}
 
 		if($author) {
-			$invite = array(
+			$new_invite = array(
 				'eid' => $this->params['taogiid'],
 				'uid' => $author['uid'],
 				'email_id' => $author['email_id'],
-				'name' => $author['taoginame'],
+				'name' => $author['display_name'],
 				'taoginame' => $author['taoginame'],
 				'display_name' => $author['display_name'],
 				'degree' => $author['degree'],
@@ -103,14 +104,14 @@ class authors_invite extends Interface_Entry {
 				'authtoken' => $authtoken
 			);
 		} else {
-			$invite = array(
+			$new_invite = array(
 				'eid' => $this->params['taogiid'],
 				'email_id' => $this->params['email'],
 				'name' => $this->params['name'],
 				'authtoken' => $authtoken
 			);
 		}
-		Entry_Invite::add($invite);
+		Entry_Invite::add($new_invite);
 
 		$dbm = DBM::instance();
 		$dbm->commit();

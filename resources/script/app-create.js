@@ -2494,6 +2494,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 						var l1,d1,l2,d2,l3,d3,selector;
 						jQuery.getJSON($preset.attr('data-settings'))
 							.done(function(data){
+								console.log(data);
 								jQuery.each(data,function(l1,d1){
 									jQuery.each(d1,function(l2,d2){
 										if(l2=='background_image'){

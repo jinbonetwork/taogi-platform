@@ -158,15 +158,15 @@ class Template extends Objects {
 	public static function getExteriorCss($that){
 		$output;
 		$lesss = (object) array(
-			'preset' => '',
+//			'preset' => '',
 			'basic' => '',
 			'extra' => '',
 		);
 
-		if($that->preset){
+/*		if($that->preset){
 			$preset_style_path = JFE_PRESET_PATH.'/'.$that->model.'/'.$that->preset.'/style.css';
 			$lesss->preset = file_get_contents($preset_style_path);
-		}
+		} */
 
 		if(true){
 			self::checkExteriorBasicSettings($that);

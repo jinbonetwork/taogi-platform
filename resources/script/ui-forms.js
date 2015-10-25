@@ -88,12 +88,14 @@
 						'left' : ( $this.position().left + parseInt( ( $this.outerWidth() - e.outerWidth() ) / 2 ) )+'px',
 					});
 				}
-				setTimeout(function() {
-					e.css({ opacity : 0 });
+				if(options.autoclose !== false) {
 					setTimeout(function() {
-						e.remove();
-					}, 800)
-				},1000);
+						e.css({ opacity : 0 });
+						setTimeout(function() {
+							e.remove();
+						}, 800)
+					},1000);
+				}
 			}
 		});
 	};

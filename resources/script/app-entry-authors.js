@@ -83,8 +83,9 @@ function check_invite(TheForm) {
 			jfe_unBlock_afterRequest();
 			switch(error) {
 				case 0:
-					jQuery('#entryInviteTable').replaceWith(message);
+					jQuery('#inviteTableList').replaceWith(message);
 					jQuery('#invite-form-wrap #email').val('');
+					jQuery('#invite-form-wrap #name').val('');
 					jQuery('#invite-form-wrap #subject').val(jQuery('#invite-form-wrap #subject').attr('origin-data'));
 					tinyMCE.activeEditor.dom.setHTML('invitation_email','');
 					tinyMCE.activeEditor.dom.setHTML('invitation_email2','');

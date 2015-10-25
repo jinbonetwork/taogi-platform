@@ -9,25 +9,16 @@ a:hover, a:active {
 }
 
 #carousel-timeline .touchcarousel-wrapper {
-	box-shadow: 2px 3px 2px #000 !important;
+	box-shadow: 2px 3px 2px #000;
 }
 
 #carousel-timeline .item-container {
 	box-shadow: 3px 3px 5px #000;
 }
 
-html#taogi-net .touchcarousel-item.cover.back section.article::before,
-html#taogi-net .touchcarousel-item.cover.front section.article::before {
-	background-color: #2d2d2d !important;
-}
-html#taogi-net .touchcarousel-item section.article,
-li.touchcarousel-item .item-container {
-	color: #fff;
-	background: #2D2D2D !important;
-}
-html#taogi-net .touchcarousel-item.cover.front section.article .social a,
-html#taogi-net .touchcarousel-item.cover.back section.article .social a {
-	color: #bdbdbd !important;
+#taogi-net .touchcarousel-item.cover.front section.article .social a,
+#taogi-net .touchcarousel-item.cover.back section.article .social a {
+	color: #bdbdbd;
 }
 
 /* 로고 옆 제목 */
@@ -35,20 +26,17 @@ html#taogi-net .touchcarousel-item.cover.back section.article .social a {
 	color: #FFF;
 }
 
-html#taogi-net .touchcarousel-item section.article .title,
-html#taogi-net .touchcarousel-item section.article .description {
-	color: #FFF !important;
+#taogi-net .touchcarousel-item section.article .title,
+#taogi-net .touchcarousel-item section.article .description {
+	color: #FFF;
 }
 
 /* 날짜 */
-html#taogi-net .touchcarousel-item section.article .pubdate {
+#taogi-net .touchcarousel-item section.article .pubdate {
+	color: #95A5B7;
     border-bottom: 0 none;
 }
 
-html#taogi-net .touchcarousel-item section.article .pubdate,
-html#taogi-net .touchcarousel-item.cover.front section.article .title {
-	color: #95A5B7 !important;
-}
 .cover .section.article h1.title, .cover .section.article div.description, .cover .section.article .meta {
 	text-align: left;
 }

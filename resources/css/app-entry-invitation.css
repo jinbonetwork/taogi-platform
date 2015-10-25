@@ -1,0 +1,90 @@
+.entry-author-invitation-info .summary-profile {
+	position: relative;
+	z-index: 1;
+	border:1px solid #ccc;
+	padding: 25px 15px 15px 15px;
+	margin-top: 30px;
+	border-radius: 3px;
+	zoom: 1;
+}
+.entry-author-invitation-info .summary-profile:after {
+	clear: both;
+	content: ' ';
+	display: block;
+}
+.entry-author-invitation-info .summary-profile h4 {
+	position: absolute;
+	z-index: 2;
+	top: -15px;
+	left: 15px;
+	background: #efefef;
+	padding: 8px;
+	border:1px solid #ccc;
+	border-radius: 3px;
+}
+.entry-author-invitation-info .summary-profile img {
+	float: left;
+	margin-right: 15px;
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	border-radius: 100px;
+	border: 3px solid #FFFFFF;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.25), inset 0 0 3px rgba(0, 0, 0, 0.25);
+}
+.entry-author-invitation-info .summary-profile h5 {
+	font-size: 1.1em;
+	margin-bottom: 15px;
+}
+.entry-author-invitation-info .summary-profile a {
+	color: #f60;
+	text-decoration: none;
+}
+
+.entry-author-invitation-info .login-notice {
+	margin: 15px 0;
+}
+.entry-author-invitation-info .login-notice li {
+	position: relative;
+	padding: 0 10px 10px 30px;
+	line-height: 1.6em;
+}
+.entry-author-invitation-info .login-notice li:before {
+	position: absolute;
+	left: 10px;
+	top: 2px;
+	font-family: 'FontAwesome';
+	content: "\f096";
+}
+.entry-author-invitation-info .login-notice .button {
+	border-radius: 3px;
+	color: #fff;
+	padding: 1px 8px 3px 8px;
+	margin-right: 4px;
+}
+.entry-author-invitation-info .login-notice .button.login {
+	background: #5bc0de;
+}
+.entry-author-invitation-info .login-notice .button.regist {
+	background: #5cb85c;
+}
+
+#invitation form#join_form {
+	position: relative;
+	z-index: 1;
+	border:1px solid #ccc;
+	padding: 35px 15px 15px 15px;
+	margin-top: 30px;
+	border-radius: 3px;
+}
+#invitation form#join_form legend {
+	position: absolute;
+	z-index: 2;
+	top: -15px;
+	left: 15px;
+	background: #efefef;
+	padding: 8px;
+	border:1px solid #ccc;
+	border-radius: 3px;
+}

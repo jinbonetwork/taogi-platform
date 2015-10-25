@@ -1,7 +1,6 @@
 {
 	"cover": {
 		"background_image": "cover.png",
-		"background_color": "#FFFFFF",
 		"title_color": "#000000",
 		"body_color": "#000000"
 	},

@@ -18,11 +18,17 @@ function Logout() {
 	session_destroy();
 }
 
-function requireLogin() {
+function requireLogin($query=null) {
 	$context = Model_Context::instance();
 	$service = $context->getProperty('service.*');
 	$requestURI = ($_SERVER['HTTPS'] == 'on' ? "https://" : "http://").$service['domain'].$_SERVER['REQUEST_URI'];
-	RedirectURL('login',array('ssl'=>true,'query'=>array('requestURI'=>$requestURI)));
+	if(is_array($query)) {
+		if(!$query['requestURI'])
+			$query['requestURI'] = $requestURI;
+	} else {
+		$query = array( 'requestURI' => $requestURI );
+	}
+	RedirectURL( 'login', array( 'ssl'=>true, 'query'=>$query ) );
 }
 
 function doesHaveMembership() {

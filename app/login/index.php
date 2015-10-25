@@ -22,7 +22,7 @@ class login_index extends Controller {
 		$context = Model_Context::instance();
 		$redirect_uri = "https://".$context->getProperty('service.domain').base_uri().'login/fb';
 		if($this->params['request_URI'])
-			$redirect_uri .= "?requestURI=".$this->params['request_URI'];
+			$redirect_uri .= "?requestURI=".rawurldecode($this->params['request_URI']);
 		$this->fb_login_url = $facebook->getLoginUrl(array('redirect_uri'=>$redirect_uri));
 
 		if($this->params['output'] != "xml") {
@@ -32,7 +32,7 @@ class login_index extends Controller {
 			if($this->params['output'] == "xml") {
 				Respond::ResultPage(array(2,"이미 로그인하셨습니다"));
 			} else {
-				Error("이미 로그인하셨습니다.");
+				Respond::ResultPage(array(-3, "이미 로그인하셨습니다."));
 			}
 		}
 		if( !empty($this->params['email_id']) &&
