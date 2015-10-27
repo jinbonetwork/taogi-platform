@@ -2115,8 +2115,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				var $this = this.items[i].item;
 				var item = {};
 				item.startDate = this.items[i].sDate;
-				item.headline = jQuery.trim(this.items[i].item.find('[data-name="headline"]').html().replace(/"/g,"&quot;"));
-				item.text = jQuery.trim(this.items[i].item.find('[data-name="text"]').html()).replace(/"/g,"&quot;");
+				item.headline = this.setAdjustForJson( jQuery.trim(this.items[i].item.find('[data-name="headline"]').html()) );
+				item.text = this.setAdjustForJson( jQuery.trim(this.items[i].item.find('[data-name="text"]').html()) );
 				item.published = this.items[i].published;
 				if(this.items[i].featured >= 0) {
 					item.asset = {};
@@ -2243,7 +2243,12 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			if(typeof(value) == 'none') return out;
 			if(typeof(value) == undefined) return out;
 			if(!value) return out;
-			out = jQuery.trim(value).replace(/"/g,"&quot;");
+			out = jQuery.trim(value).replace(/&amp;/g,"&");
+			out = out.replace(/&quote;/g,"");
+			out = out.replace(/(&quot;){1,}/g,"");
+			out = out.replace(/["]{1,}/g,"&quot;");
+			out = out.replace(/<p\s+?(.|[\r\n])*?>/, '<p>');
+			out = out.replace(/"/g,"&quot;");
 			return out;
 		},
 

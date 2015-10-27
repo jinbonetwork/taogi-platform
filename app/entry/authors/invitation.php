@@ -49,7 +49,8 @@ class authors_invitation extends Interface_Entry {
 				 * if no loggined, login at first.
 				 */
 				if(doesHaveMembership()) {
-					User_DBM::addPrivilege($author['uid'],$this->params['taogiid'],BITWISE_EDITOR);
+					User_DBM::addPrivilege( $author['uid'],$this->params['taogiid'], BITWISE_EDITOR );
+					Acl::setEntryAcl( $this->params['taogiid'], BITWISE_EDITOR );
 					Entry_Invite::deletebyUid( $this->params['taogiid'], $author['uid'] );
 					RedirectURL($this->baselink."/authors/");
 				} else {
