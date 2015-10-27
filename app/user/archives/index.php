@@ -3,7 +3,7 @@ class archives_index extends Controller {
 	public function index() {
 		// Objects
 		$this->user = User::getUserProfile($this->params['userid']);
-		$entries = Entry::getEntryProfiles(Entry_List::getOwnList($this->params['userid'],-1));
+		$entries = Entry::getEntryProfiles(Entry_List::getEditList($this->params['userid'],-1));
 		$this->entries = array();
 		if(is_array($entries)) {
 			foreach($entries as $entry) {

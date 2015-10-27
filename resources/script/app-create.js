@@ -2192,7 +2192,10 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 					} else if(error == -2 || error == -4) {
 						return self.checkField('#timeline_url',message);
 					} else if(error == -3) {
-						alert(message);
+						jQuery('body').statusBox({
+							type: 'error',
+							message: message
+						});
 						return false;
 					} else if(!error) {
 						var eid = json.eid;

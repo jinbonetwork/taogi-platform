@@ -94,7 +94,7 @@
 						setTimeout(function() {
 							e.remove();
 						}, 800)
-					},1000);
+					},3000);
 				}
 			}
 		});

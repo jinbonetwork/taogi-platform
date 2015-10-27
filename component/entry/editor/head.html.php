@@ -46,7 +46,7 @@
 					<input type="hidden" id="nickname" name="nickname" value="<?php print $entry['nickname']; ?>">
 					<input type="hidden" id="is_public" name="is_public" value="<?php print ($entry['is_public'] ? $entry['is_public'] : 0); ?>">
 					<h1 id="timeline_headline" class="editable article" contenteditable="true" data-name="headline" data-default-value="타임라인 제목"><?php print $timeline['headline']; ?></h1>
-					<p id="timeline_url_structure"><code>http://taogi.net/<span id="taogi_permalink"><?php print ($user['taoginame'] ? $user['taoginame'] : $user['uid']); ?></span>/<span id="timeline_url" class="editable article" contenteditable="true" data-name="url" data-default-value="timeline"><?php print $entry['nickname']; ?></span></code></p>
+					<p id="timeline_url_structure"><code>http://taogi.net/<span id="taogi_permalink"><?php print ($author['taoginame'] ? $author['taoginame'] : $author['uid']); ?></span>/<span id="timeline_url" class="editable article" contenteditable="true" data-name="url" data-default-value="timeline"><?php print $entry['nickname']; ?></span></code></p>
 					<hr>
 					<div id="timeline_text" class="editable article" contenteditable="true" data-name="text" data-default-value="타임라인에 대한 간단한 설명"><?php print $timeline['text']; ?></div>
 					<p id="extra_author_structure"><span id="extra_author_label">작성자: </span><span id="extra_author" name="extra[author]" class="editable article" contenteditable="true" data-default-value="<?php print $user['name']; ?>"><?php print ($timeline['extra']['author'] ? $timeline['extra']['author'] : $user['name']); ?></span></p>

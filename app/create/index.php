@@ -11,6 +11,8 @@ class create_index extends Controller {
 		$uid = Acl::getIdentity('taogi');
 		if($uid < 1) Error("타임라인을 만드시려면 먼저 회원 가입을 하셔야 합니다.");
 
+		$this->author = $this->user;
+
 		$_SESSION['current'] = array('mode'=>'entry_create');
 
 		/* Local */

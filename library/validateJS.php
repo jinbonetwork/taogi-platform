@@ -21,6 +21,11 @@ function validateTimeLineJS($json) {
 			'published' => ($json['timeline']['extra']['published'] ? $json['timeline']['extra']['published'] : 0)
 		)
 	);
+	if($json['timeline']['asset']['cover_background_image']) {
+		$rJSON['timeline']['asset']['media'] = $json['timeline']['asset']['cover_background_image'];
+	} else {
+		$rJSON['timeline']['asset']['media'] = url("http://".$_SERVER['HTTP_HOST'].base_uri().'/resources/images/taogi-og.png');
+	}
 	for($i=0; $i<count($json['timeline']['date']); $i++) {
 		$item = $json['timeline']['date'][$i];
 		if(!$item['startDate']) continue;

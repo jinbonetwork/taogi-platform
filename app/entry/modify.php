@@ -19,6 +19,7 @@ class entry_modify extends Controller {
 		$this->entry = Entry::getEntryInfoByID($this->eid,0);
 		if($this->params['vid']) $this->entry['vid'] = $this->params['vid'];
 		$this->vid = $this->entry['vid'];
+		$this->author = User::getUserProfile( $this->entry['owner'] );
 
 		$data = Entry::getEntryData($this->eid,$this->vid);
 		if($this->entry['locked'] && $this->entry['locked'] != $_COOKIE[Session::getName()]) {

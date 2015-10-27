@@ -15,6 +15,9 @@ class create_save extends Controller {
 		require_once dirname(__FILE__)."/../../timeline/model/touchcarousel/config/config.php";
 
 		$timeline = json_decode(stripslashes(rawurldecode($this->params['content'])),true);
+		if(!$timeline) {
+			RespondJson::ResultPage(array(-3,"날짜 입력이 잘못된 슬라이드가 있거나 본문에 잘못된 테크가 있어 타임라인을 저장할 수 없습니다. 다시 확인해서 저장해주세요."));
+		}
 		if(!$timeline['timeline']['permalink']) {
 			list($usec,$sec) = explode(" ",microtime());
 			$timeline['timeline']['permalink'] = $sec.substr($usec,2);
@@ -34,7 +37,7 @@ class create_save extends Controller {
 		} else {
 			usort($datalist,'_sortByDateAsc');
 		}
-                $vtimeline['timeline']['data'] = $datalist;
+		$vtimeline['timeline']['data'] = $datalist;
 
 		list($this->eid,$this->vid) = Entry_DBM::createEntry($uid,$vtimeline);
 		$this->nickname = $timeline['timeline']['permalink'];

@@ -34,7 +34,7 @@ if($user['uid'] == Acl::getIdentity('taogi')) {
 		} else {
 			$controls = false;
 		}?>
-		<tr data-index="<?php print $index; ?>" data-eid="<?php print $entry['eid']; ?>">
+		<tr data-index="<?php print $index; ?>" data-eid="<?php print $entry['eid']; ?>" class="<?php print ( ($entry['owner'] == $user['uid']) ? 'owner' : 'editor' ); ?>">
 <?php	if($controls == true) {?>
 			<td class="item_checkbox ui-checkbox-container">
 				<input class="ui-checkbox" type="checkbox" name="eid[]" value="<?php print $entry['eid']; ?>">

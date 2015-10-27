@@ -75,7 +75,7 @@ class entry_index extends Interface_Entry {
 			'published_time' => $this->entry['published'],
 			'modified_time' => $this->entry['modified'],
 			'description' => $this->json['timeline']['text'],
-			'image' => $this->exterior['filtered']['asset__cover_background_image'],
+			'image' => ( $this->json['timeline']['asset']['media'] ? $this->json['timeline']['asset']['media'] : ( $this->json['timeline']['asset']['cover_background_image'] ? $this->json['timeline']['asset']['cover_background_image'] : url("http://".$_SERVER['HTTP_HOST'].base_uri().'/resources/images/taogi-og.png') ) )
 		));
 		$this->header .= Template::getExteriorHeaderTags($this);
 	}

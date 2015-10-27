@@ -22,7 +22,7 @@ if($user['uid'] == Acl::getIdentity('taogi')) {
 			$controls = true;
 		} else {
 			$controls = false;
-		}?><li class="ui-item" data-index="<?php print $index; ?>" data-eid="<?php print $entry['eid']; ?>" data-hover-class="hover" data-click-target=".item_title a">
+		}?><li class="ui-item <?php print ( ($entry['owner'] == $user['uid']) ? 'owner' : 'editor' ); ?>" data-index="<?php print $index; ?>" data-eid="<?php print $entry['eid']; ?>" data-hover-class="hover" data-click-target=".item_title a">
 			<dl>
 				<dt class="keepRatio item_image" data-width="16" data-height="10">
 					<a href="<?php print $entry['permalink']; ?>"><div class="<?php print $entry['COVERFRONT']['CLASS']; ?>" style="background-image:url('<?php print $entry['COVERFRONT']['medium_versioned']; ?>')"></div></a>

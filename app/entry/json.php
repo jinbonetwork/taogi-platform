@@ -25,7 +25,13 @@ class entry_json extends Controller {
 	}
 
 	private function fixBadUnicodeForJson($str) {
-		$str = stripslashes(preg_replace("/\\\\u([a-f0-9]{4})/e", "iconv('UCS-4LE','UTF-8',pack('V', hexdec('U$1')))", $str));
+		$str = stripslashes(preg_replace_callback(
+			"/\\\\u([a-f0-9]{4})/i",
+			function($matched) {
+				iconv('UCS-4LE','UTF-8',pack('V', hexdec('U'.$matched[0])));
+			},
+			$str)
+		);
 		return $str;
 	}
 
