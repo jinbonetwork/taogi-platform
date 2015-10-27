@@ -480,7 +480,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		 **/
 		editorKeyEvent: function(element) {
 			var self = this;
-			if(!element.html()) {
+			if(!jQuery.trim(element.html())) {
 				element.attr('data-content',element.attr('data-default-value'));
 			}
 			element.keydown(function(event) {
@@ -2595,6 +2595,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 		configure: 'editor_config_exterior',
 		richeditorOptions: {
 			//anchorInputPlaceholder: 'Type a link',
+			placeholder: '',
 			buttons: ['bold','italic','underline','strikethrough','anchor'],
 			diffLeft: 0,
 			diffTop: -10,
