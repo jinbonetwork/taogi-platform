@@ -3,6 +3,7 @@ importLibrary('sortByDate');
 $Acl = "editor";
 class entry_modify extends Controller {
 	public function index() {
+		$this->pre_title = "편집";
 		$this->title = "따오기 타임라인 수정하기";
 		$context = Model_Context::instance();
 		require JFE_PATH."/timeline/model/touchcarousel/config/config.php";

@@ -2,7 +2,7 @@
 $Acl = "user";
 class create_index extends Controller {
 	public function index() {
-		$this->title = "따오기 타임라인 만들기";
+		$this->title = "타임라인 만들기";
 		$context = Model_Context::instance();
 		require JFE_PATH."/timeline/model/touchcarousel/config/config.php";
 

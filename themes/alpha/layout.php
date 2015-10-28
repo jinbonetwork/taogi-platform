@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-	<title>따오기 타임라인<?php echo (isset($timeline['headline'])?':'.$timeline['headline']:''); ?></title>
+	<title><?php print ($pre_title ? $pre_title." > " : '').(isset($timeline['headline'])? $timeline['headline'].' :: ' : ($title ? $title." :: " : '') ); ?>따오기 타임라인</title>
 <?php print $this->header(); ?>
 </head>
 <body class="taogi-net <?php print $breadcrumbs_class; ?> <?php print $entry_class; ?> <?php print ' '.$view_mode.' '.$model.($has_gnb ? ' has_gnb' : ''); ?>">
