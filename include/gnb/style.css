@@ -5,6 +5,29 @@
 ****************************************************************************************************/
 /** Sharing **/
 #taogi-gnb .share {
+	zoom: 1;
+}
+#taogi-gnb .share:after {
+	clear: both;
+	content: ' ';
+	display: block;
+}
+#taogi-gnb .author {
+	margin: 20px 20px 0 20px;
+	padding: 0 0 8px 0;
+	border-bottom: 1px solid rgba(255,255,255,0.4)
+}
+#taogi-gnb .author a {
+	color: #999; 
+}
+#taogi-gnb .author a:hover {
+	color: #fff;
+}
+#taogi-gnb .author a img.portrait {
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+	margin-right: 3px;
 }
 /** Controls **/
 #taogi-gnb .ui-controls {

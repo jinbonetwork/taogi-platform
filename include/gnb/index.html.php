@@ -20,6 +20,9 @@ importResource('taogi-gnb');
 					<li class="embed" style="display:block"><a href="<?php print $entry['permalink']; ?>"><span>홈페이지에 붙여넣기</span></a></li>
 				</ul>
 			</div>
+			<div class="author">
+				<a href="<?php print $entry['owner_dashboard_link']; ?>">by <?php if($entry['owner_PORTRAIT']['small']) {?><img src="<?php print $entry['owner_PORTRAIT']['small']; ?>" class="portrait" align="absmiddle" /><?php }?><?php print $entry['owner_display_name']; ?></a>
+			</div>
 <?php
 	}
 ?>
