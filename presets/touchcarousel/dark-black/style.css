@@ -8,10 +8,6 @@ a:hover, a:active {
 	color: #C7DEED;
 }
 
-#carousel-timeline .touchcarousel-wrapper {
-	box-shadow: 2px 3px 2px #000;
-}
-
 #carousel-timeline .item-container {
 	box-shadow: 3px 3px 5px #000;
 }

@@ -37,7 +37,7 @@ class entry_save extends Controller {
 			RespondJson::ResultPage(array(-4,"타임라인 주소는 알파벳과 숫자 그리고 .-_ 만 허용합니다."));
 		}
 
-		$_entry = Entry::searchByNickname($uid,$timeline['timeline']['permalink']);
+		$_entry = Entry::searchByNickname($this->entry['owner'],$timeline['timeline']['permalink']);
 		if($_entry && ($_entry['eid'] != $this->eid)) RespondJson::ResultPage(array(-2,"다른 타임라인에서 사용하는 주소입니다."));
 
 		$cssPath = getEntryExtraCssPath($_entry['eid']);
