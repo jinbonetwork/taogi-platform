@@ -1,7 +1,7 @@
 <?php
 class entry_gnb extends Controller {
 	public function index() {
-		$this->title = "따오기 타임라인 수정하기";
+		$this->title = "타임라인 수정하기";
 		$this->params['output'] = 'json';
 		$context = Model_Context::instance();
 

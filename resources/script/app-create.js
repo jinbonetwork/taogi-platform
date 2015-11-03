@@ -2538,7 +2538,8 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			firstHeader: 'h1',
 			secondHeader: 'h2',
 			cleanPastedHTML: true,
-			targetBlank: true	
+			targetBlank: true,
+			cleanTags: ['meta','h1','h2','h3','h4','h5'],
 		},
 		fancyboxOptions: fancyboxOptions,
 	 	spectrumOptions: {

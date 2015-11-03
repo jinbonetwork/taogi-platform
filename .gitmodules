@@ -40,3 +40,6 @@
 [submodule "contribute/Image"]
 	path = contribute/Image
 	url = https://github.com/Gregwar/Image.git
+[submodule "resources/jframework"]
+	path = resources/jframework
+	url = https://github.com/jinbonetwork/jframework.git

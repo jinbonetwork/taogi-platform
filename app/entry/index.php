@@ -24,7 +24,7 @@ class entry_index extends Interface_Entry {
 			$this->entry['vid'] = $this->params['vid'];
 		}
 
-		$revision = Entry::getEntryData($this->entry['eid'],$this->entry['vid']); 
+		$this->revision = Entry::getEntryData($this->entry['eid'],$this->entry['vid']); 
 		if($this->mode != 'revision') {
 			if(!$this->entry['is_public']) {
 				if($_SESSION['acl']['taogi.'.$this->entry['eid']] < BITWISE_EDITOR) {
@@ -32,8 +32,8 @@ class entry_index extends Interface_Entry {
 				}
 			}
 			if(!($json_path = $this->getJsonPath())) {
-				if($revision) {
-					$this->entry = array_merge($this->entry,$revision);
+				if($this->revision) {
+					$this->entry = array_merge($this->entry,$this->revision);
 					if($this->entry['is_public']) {
 						$this->makeJson();
 						$json_path = $this->getJsonPath();
@@ -46,8 +46,8 @@ class entry_index extends Interface_Entry {
 				}
 			}
 		} else {
-			if($revision) {
-				$this->entry = array_merge($this->entry,$revision);
+			if($this->revision) {
+				$this->entry = array_merge($this->entry,$this->revision);
 			} else {
 				Respond::NotFoundPage();
 			}
@@ -83,7 +83,7 @@ class entry_index extends Interface_Entry {
 	public function sendHeader($message){
 		switch($message){
 			case 'last-modified':
-				$this->entry['modified'] = $revision['modified'];
+				$this->entry['modified'] = $this->revision['modified'];
 				$last_modified = gmdate('D, d M Y H:i:s',$this->entry['modified']);
 				$header = array("Last-Modified: {$last_modified} GMT",true,200);
 			break;
@@ -199,6 +199,7 @@ TIMELINECONFIG;
 			$this->timeline = $this->json['timeline'];
 			$this->datalist = $this->json['timeline']['date'];
 		}
+		$this->timeline['endDate'] = date("Y.m.d H:i:s",$this->revision['modified']);
 
 		$this->taogi_language = new TaogiLanguage(TAOGI_SOURCE_PATH."/model/".$this->model,$this->config['lang'],$this->skinname);
 

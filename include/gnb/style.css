@@ -19,6 +19,7 @@
 }
 #taogi-gnb .author a {
 	color: #999; 
+	font-weight: bold;
 }
 #taogi-gnb .author a:hover {
 	color: #fff;
