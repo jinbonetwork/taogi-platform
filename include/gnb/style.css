@@ -12,6 +12,91 @@
 	content: ' ';
 	display: block;
 }
+#taogi-gnb #taogi-embed-code {
+	margin: 10px 5px;
+	transition: max-height 0.5s ease-in-out;
+	-webkit-transition: max-height 0.5s ease-in-out;
+	-moz-transition: max-height 0.5s ease-in-out;
+	-ms-transition: max-height 0.5s ease-in-out;
+	-o-transition: max-height 0.5s ease-in-out;
+	overflow: hidden;
+	display: none;
+}
+#taogi-gnb #taogi-embed-code.collapsed {
+}
+#taogi-gnb #taogi-embed-code .taogi-embed-code-wrapper {
+	border: 1px solid #fff;
+	border-radius: 5px;
+	padding: 10px;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields {
+	position: relative;
+	padding-bottom: 8px;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields input[type="text"] {
+	width: 60px;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields input[type="checkbox"] {
+	vertical-align: middle;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields span.taogi-embed-height-wrap {
+	display: inline-block;
+	transition: width 0.5s, opacity 0.5s;
+	-webkit-transition: width 0.6s, opacity 0.6s;
+	-moz-transition: width 0.6s, opacity 0.6s;
+	-ms-transition: width 0.6s, opacity 0.6s;
+	-o-transition: width 0.6s, opacity 0.6s;
+	width: 0;
+	opacity: 0;
+	overflow: hidden;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields span.taogi-embed-height-wrap.show {
+	width: 70px;
+	opacity: 1;
+}
+#taogi-gnb #taogi-embed-code textarea {
+	width: 100%;
+	height: 180px;
+	padding: 8px;
+	border-radius: 3px;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields .help {
+	position: absolute;
+	right: -10px;;
+	top: 10px;
+	max-width: 100%;
+	padding: 10px;
+	z-index: -1;
+	transition: opacity 0.6s;
+	-webkit-transition: opacity 0.6s;
+	-moz-transition: opacity 0.6s;
+	-ms-transition: opacity 0.6s;
+	-o-transition: opacity 0.6s;
+	opacity: 0;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields .help.show {
+	z-index: 2;
+	opacity: 1;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields .help .help-inner {
+	position: relative;
+	padding: 15px;
+	background: #000;
+	color: #fff;
+	border: 2px solid #fff;
+	border-radius: 5px;
+}
+#taogi-gnb #taogi-embed-code fieldset.fields .help .help-inner i.fa-close {
+	position: absolute;
+	z-index: 3;
+	right: -10px;
+	top: -10px;
+	padding: 0 4px;
+	background: #fff;
+	border: 1px solid #fff;
+	border-radius: 10px;
+	color: #000;
+}
 #taogi-gnb .author {
 	margin: 20px 20px 0 20px;
 	padding: 0 0 8px 0;

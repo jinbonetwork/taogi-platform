@@ -2539,7 +2539,7 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 			secondHeader: 'h2',
 			cleanPastedHTML: true,
 			targetBlank: true,
-			cleanTags: ['meta','h1','h2','h3','h4','h5','p','div'],
+			cleanTags: ['meta','h1','h2','h3','h4','h5','p','div','form','input','select','textarea'],
 		},
 		fancyboxOptions: fancyboxOptions,
 	 	spectrumOptions: {

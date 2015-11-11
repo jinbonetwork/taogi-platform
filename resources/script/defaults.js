@@ -397,40 +397,65 @@ jQuery(document).ready(function(e){
 	}
 
 
-	jQuery.fn.taogiSlideDown = function(duration,easing) {
+	jQuery.fn.taogiSlideDown = function(duration,easing,callback) {
 		return this.each(function() {
-			var zIndex = parseInt(jQuery(this).css('z-index'));
-			jQuery(this).css('z-index',(zIndex+1));
+			var $el = jQuery(this);
+
+			var zIndex = parseInt($el.css('z-index'));
+			$el.css('z-index',(zIndex+1));
+
+			$el.css('max-height', "none");
+
+			var height = $el.outerHeight();
 			var h = jQuery(document).height() - jQuery(this).offset().top;
+			if(h < height) height = h;
+			$el.css({'max-height': 0, 'overflow': 'hidden'});
+
 			if(useWebkit) {
-				if(jQuery(this).css('display') == 'none') jQuery(this).css('display','block');
-				jQuery(this).css({transition: 'max-height '+duration+'ms '+easing, 'max-height':h+'px'});
-				jQuery(this).bind(transitionEnd,function() {
-					jQuery(this).css({ 'overflow':'auto', 'z-index':zIndex });
-					jQuery(this).unbind(transitionEnd);
-				});
+				if($el.css('display') == 'none') $el.css('display','block');
+				setTimeout(function() {
+					$el.css({transition: 'max-height '+duration+'ms '+easing, 'max-height':height+'px'});
+					$el.bind(transitionEnd,function() {
+						jQuery(this).css({ 'overflow':'auto', 'z-index':zIndex });
+						if(typeof callback === 'function') {
+							callback();
+						}
+						jQuery(this).unbind(transitionEnd);
+					});
+				},1);
 			} else {
-				jQuery(this).css({ 'max-height': h+'px' });
-				jQuery(this).slideDown(duration,function() {
+				$el.css({ 'max-height': height+'px' });
+				$el.slideDown(duration,function() {
 					jQuery(this).css({ 'overflow':'auto', 'z-index':zIndex });
+					if(typeof callback === 'function') {
+						callback();
+					}
 				});
 			}
 		});
 	};
 
-	jQuery.fn.taogiSlideUp = function(duration,easing) {
+	jQuery.fn.taogiSlideUp = function(duration,easing,callback) {
 		return this.each(function() {
+			var $el = jQuery(this);
 			if(useWebkit) {
-				if(parseInt(jQuery(this).css('max-height')) != 0) {
-					jQuery(this).css({transition: 'max-height '+duration+'ms '+easing, 'max-height':'0px', 'overflow':'hidden'});
-					jQuery(this).bind(transitionEnd,function() {
+				if(parseInt($el.css('max-height')) != 0) {
+					$el.css({transition: 'max-height '+duration+'ms '+easing, 'max-height':'0px', 'overflow':'hidden'});
+					$el.bind(transitionEnd,function() {
+						if(typeof callback === 'function') {
+							callback();
+						}
 						jQuery(this).unbind(transitionEnd);
 					});
 				}
 			} else {
-				if(!jQuery(this).is(':hidden')) {
-					jQuery(this).css('overflow','hidden');
-					jQuery(this).slideUp(duration);
+				if(!$el.is(':hidden')) {
+					$el.css('overflow','hidden');
+					$el.slideUp(duration,function*() {
+						if(typeof callback === 'function') {
+							callback();
+						}
+					});
 				}
 			}
 		});

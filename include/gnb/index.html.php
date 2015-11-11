@@ -17,8 +17,25 @@ importResource('taogi-gnb');
 					<li class="facebook"><a href="https://facebook.com/sharer.php?u=<?php print $entry['permalink']; ?>" target="_blank"><span>페이스북에 링크하기</span></a></li>
 					<li class="googleplus"><a href="https://plus.google.com/share?url=<?php print $entry['permalink']; ?>" target="_blank"><span>구글플러스에 링크하기</span></a></li>
 					<li class="kakaotalk"><a href="https://plus.google.com/share?url=<?php print $entry['permalink']; ?>" target="_blank"><span>카카오톡에 링크하기</span></a></li>
-					<li class="embed" style="display:block"><a href="<?php print $entry['permalink']; ?>"><span>홈페이지에 붙여넣기</span></a></li>
+					<li class="embed" style="display:block"><a href="#"><span>홈페이지에 붙여넣기</span></a></li>
 				</ul>
+			</div>
+			<div id="taogi-embed-code" class="collapsed">
+				<div class="taogi-embed-code-wrapper">
+					<h3>소스코드</h3>
+					<fieldset class="fields">
+						<label for="taogi-embed-width">가로크기</label> :
+						<input type="text" id="taogi-embed-width" name="width" value="100%" />
+						<a href="javascript://" class="open-tooltip"><i class="fa fa-info-circle"></i></a><div class="help"><p class="help-inner">가로크기를 <strong>100%</strong>나 <strong>600px</strong>와 같은 형식으로 embed하는 곳의 환경에 따라 설정하시면 됩니다.<a href="javascript://" class="close-tooltip"><i class="fa fa-close"></i></a></p></div>
+					</fieldset>
+					<fieldset class="fields">
+						<label for="taogi-embed-height">세로크기</label> :
+						<span class="taogi-embed-height-wrap"><input type="text" id="taogi-embed-height" name="height" value="100%" /></span>
+						<input type="checkbox" id="taogi-embed-auto-height" name="auto" value="true" checked /><label for="taogi-embed-auto-height">Auto</label>
+						<a href="javascript://" class="open-tooltip"><i class="fa fa-info-circle"></i></a><div class="help"><p class="help-inner">높이는 기본적으로 가로대비 2/3으로 자동 설정됩니다. 수동으로 높이를 설정해야 하는 경우에는 Auto 체크박스 체크를 해지하세요. 수동 입력창이 나옵니다. 입력창에 <strong>100%</strong>나 <strong>600px</strong>와 같은 형식으로 설정하시면 됩니다.<a href="javascript://" class="close-tooltip"><i class="fa fa-close"></i></a></p></div>
+					</fieldset>
+					<textarea data-src="<?php print $entry['permalink']; ?>?embed=true"></textarea>
+				</div>
 			</div>
 			<div class="author">
 				<a href="<?php print $entry['owner_dashboard_link']; ?>">by <?php if($entry['owner_PORTRAIT']['small']) {?><img src="<?php print $entry['owner_PORTRAIT']['small']; ?>" class="portrait" align="absmiddle" /><?php }?><?php print $entry['owner_display_name']; ?></a>
