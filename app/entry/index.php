@@ -9,6 +9,11 @@ class entry_index extends Interface_Entry {
 		$this->extra = Entry::getEntryExtra($this->entry['eid']);
 		$this->view_mode ='view';
 
+		if( isset($this->params['embed']) ) {
+			$this->isEmbed = true;
+			define("__TAGOI_IS_EMBEDED__", true);
+		}
+
 		if(!$this->entry['is_public']) {
 			$taogi_id = $this->params['taogiid'];
 			$__Acl = Acl::instance();

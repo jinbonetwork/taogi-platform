@@ -1,5 +1,9 @@
 <?php
 importResource('taogi-gnb');
+if( $isEmbed == true || (defined("__TAGOI_IS_EMBEDED__") && __TAGOI_IS_EMBEDED__ != true) ) {
+	$is_embeded = true;
+	$alink_target=' target="_blank"';
+}
 ?>
 <div id="taogi-gnb">
 	<div id="taogi-gnb-wrap">
@@ -17,12 +21,15 @@ importResource('taogi-gnb');
 					<li class="facebook"><a href="https://facebook.com/sharer.php?u=<?php print $entry['permalink']; ?>" target="_blank"><span>페이스북에 링크하기</span></a></li>
 					<li class="googleplus"><a href="https://plus.google.com/share?url=<?php print $entry['permalink']; ?>" target="_blank"><span>구글플러스에 링크하기</span></a></li>
 					<li class="kakaotalk"><a href="https://plus.google.com/share?url=<?php print $entry['permalink']; ?>" target="_blank"><span>카카오톡에 링크하기</span></a></li>
+<?php			if( $is_embeded != true ) {?>
 					<li class="embed" style="display:block"><a href="#"><span>홈페이지에 붙여넣기</span></a></li>
+<?php			}?>
 				</ul>
 			</div>
+<?php	if( $is_embeded != true ) {?>
 			<div id="taogi-embed-code" class="collapsed">
 				<div class="taogi-embed-code-wrapper">
-					<h3>소스코드</h3>
+					<h3>퍼가기 소스코드</h3>
 					<fieldset class="fields">
 						<label for="taogi-embed-width">가로크기</label> :
 						<input type="text" id="taogi-embed-width" name="width" value="100%" />
@@ -37,6 +44,7 @@ importResource('taogi-gnb');
 					<textarea data-src="<?php print $entry['permalink']; ?>?embed=true"></textarea>
 				</div>
 			</div>
+<?php	}?>
 			<div class="author">
 				<a href="<?php print $entry['owner_dashboard_link']; ?>">by <?php if($entry['owner_PORTRAIT']['small']) {?><img src="<?php print $entry['owner_PORTRAIT']['small']; ?>" class="portrait" align="absmiddle" /><?php }?><?php print $entry['owner_display_name']; ?></a>
 			</div>
@@ -50,42 +58,42 @@ importResource('taogi-gnb');
 			<div id="user-console" class="ui-controls ui-console icon label list">
 				<h3>사용자</h3>
 				<ul class="user">
-					<li class="home"><a href="/"><span>첫 페이지</span></a></li>
+					<li class="home"><a href="/"<?php print $alink_target; ?>><span>첫 페이지</span></a></li>
 <?php
-					if($_SESSION['user']['degree']==10) {
+				if($_SESSION['user']['degree']==10) {
 ?>
-					<li class="admin"><a href="/admin/"><span>사이트 관리</span></a></li>
+					<li class="admin"><a href="/admin/"<?php print $alink_target; ?>><span>사이트 관리</span></a></li>
 <?php
-					}
-?>
-<?php
-					if($_SESSION['user']['uid'] > 0) {
-						$profile_url = url($user['taoginame']);
-						/*
-						if($user['favicon']){
-							if(preg_match("/http:\/\//i",$user['favicon'])) {
-								$avatar_src = $user['favicon'];
-							} else {
-								$avatar_src = url($user['favicon'],array('ssl'=>false));
-							}
+				}
+				if($_SESSION['user']['uid'] > 0) {
+					$profile_url = url($user['taoginame']);
+					/*
+					if($user['favicon']){
+						if(preg_match("/http:\/\//i",$user['favicon'])) {
+							$avatar_src = $user['favicon'];
 						} else {
-							$avatar_src = JFE_RESOURCE_URI."/images/user_default.png";
+							$avatar_src = url($user['favicon'],array('ssl'=>false));
 						}
-						$avatar_img = '<img src="'.$avatar_src.'" alt="">';
-						 */
-						$avatar_img = '';
-?>
-					<li class="profile"><a href="<?php print $profile_url; ?>"><span><?php print $avatar_img; ?><?php print $user['nickname']; ?></span></a></li>
-<?php
+					} else {
+						$avatar_src = JFE_RESOURCE_URI."/images/user_default.png";
 					}
+					$avatar_img = '<img src="'.$avatar_src.'" alt="">';
+					 */
+					$avatar_img = '';
 ?>
-					<li class="write"><a href="<?php print url('create'); ?>"><span>타임라인 만들기</span></a></li>
-<?php		if(!$_SESSION['user']['uid']) {?>
+					<li class="profile"><a href="<?php print $profile_url; ?>"<?php print $alink_target; ?>><span><?php print $avatar_img; ?><?php print $user['nickname']; ?></span></a></li>
+<?php
+				}
+?>
+					<li class="write"><a href="<?php print url('create'); ?>"<?php print $alink_target; ?>><span>타임라인 만들기</span></a></li>
+<?php		if($is_embeded != true) {
+				if(!$_SESSION['user']['uid']) {?>
 					<li class="login"><a class="fancybox ajax" href="<?php print url('login'); ?>"><span>로그인</span></a></li>
 					<li class="register"><a class="fancybox ajax" href="<?php print url('regist'); ?>"><span>가입하기</span></a></li>
-<?php		} else {?>
+<?php			} else {?>
 					<li class="logout"><a href="<?php print url('login/logout'); ?>"><span>로그아웃</span></a></li>
-<?php		}?>
+<?php			}
+			}?>
 				</ul>
 			</div><!--/#user-console-->
 <?php
@@ -93,8 +101,8 @@ importResource('taogi-gnb');
 		global $taogiid;
 		return ($taogiid ? true : false);
 	}
-	if(is_timeline()) {
-		if(user_logged_in()) {
+	if(is_timeline() && $is_embeded != true) {
+		if( user_logged_in() ) {
 			importResource('taogi-ui-forms');
 			importResource('taogi-ui-controls');
 			print Component::get('user/entry/control',array('entry'=>$entry,'instance'=>0,'options'=>array('context'=>'entrySidebar','class'=>array('list','icon','label'))));

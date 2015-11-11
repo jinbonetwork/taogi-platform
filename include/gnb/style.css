@@ -29,6 +29,16 @@
 	border-radius: 5px;
 	padding: 10px;
 }
+#taogi-gnb #taogi-embed-code h3 {
+	margin-bottom: 8px;
+	border-bottom: 1px dotted #fff;
+}
+#taogi-gnb #taogi-embed-code h3:before {
+	font-family: 'FontAwesome';
+	content: "\f121";
+	padding-right: 6px;
+}
+
 #taogi-gnb #taogi-embed-code fieldset.fields {
 	position: relative;
 	padding-bottom: 8px;

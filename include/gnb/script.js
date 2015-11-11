@@ -49,6 +49,9 @@ jQuery(document).ready(function(e){
 						ta.buildTagoiEmbedCode(jQuery(this).val(),'auto');
 					} else {
 						height_input_wrapper.addClass('show');
+						setTimeout(function() {
+							height_input.focus();
+						},600);
 						ta.buildTagoiEmbedCode(jQuery(this).val(),height_input.val());
 					}
 				});
@@ -80,6 +83,7 @@ jQuery(document).ready(function(e){
 	jQuery('#taogi-gnb ul.social li.embed a').click(function(event) {
 		event.preventDefault();
 		var embed = jQuery('#taogi-gnb #taogi-embed-code');
+		if( embed.length < 1 ) return;
 		if(embed.hasClass('collapsed')) {
 			embed.taogiSlideDown('500ms','ease-in-out',function() {
 				embed.removeClass('collapsed');
