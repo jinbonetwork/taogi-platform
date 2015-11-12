@@ -12,6 +12,11 @@
 	content: ' ';
 	display: block;
 }
+#taogi-gnb-header ul.social li.embed a:before {
+	font-family: 'FontAwesome' !important;
+	content: "\f121" !important;
+	font-size: 20px;
+}
 #taogi-gnb #taogi-embed-code {
 	margin: 10px 5px;
 	transition: max-height 0.5s ease-in-out;
