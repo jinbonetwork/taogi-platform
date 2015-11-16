@@ -339,11 +339,14 @@ function _getVendorPropertyName(prop) {
 }
 
 var TransitionEndeventNames = {
-	'transition':      'transitionEnd',
+	'transition':      'transitionend',
 	'-Moz-Transition':  'transitionend',
-	'-O-Transition':      'oTransitionEnd',
-	'-Webkit-Transition': 'webkitTransitionEnd',
-	'-ms-Transition':    'msTransitionEnd'
+	'-Webkit-Transition': 'webkitTransitionEnd'
+};
+var transEndEventNames = {
+	'WebkitTransition'	: 'webkitTransitionEnd', 
+	'MozTransition'		: 'transitionend',       
+	'transition'		: 'transitionend'        
 };
 
 var SUPPORTS_TOUCH = 'ontouchstart' in window;
@@ -385,10 +388,10 @@ var transitionEnd;
 	};
 })(jQuery);
 
+useWebkit = false;
 jQuery(document).ready(function(e){
 // BEGIN CODE
 	TaogiContainerStyle = jQuery('#taogi-net-site-main-container')[0].style;
-	useWebkit = false;
 	if(SUPPORTS_TOUCH || _getVendorPropertyName('transition')) {
 		useWebkit = true;
 		transition = _getVendorPropertyName('transition');
@@ -451,7 +454,7 @@ jQuery(document).ready(function(e){
 			} else {
 				if(!$el.is(':hidden')) {
 					$el.css('overflow','hidden');
-					$el.slideUp(duration,function*() {
+					$el.slideUp(duration,function() {
 						if(typeof callback === 'function') {
 							callback();
 						}

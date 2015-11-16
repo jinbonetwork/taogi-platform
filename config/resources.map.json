@@ -78,6 +78,10 @@
 		"priority": "-150",
 		"deps":["jquery"]
 	},
+	"modernizr.js": {
+		"js":["contribute/modernizr/modernizr-custom.js"],
+		"priority": "-150"
+	},
 	"tinymce":{
 		"js":[
 			"contribute/tinymce/js/tinymce/jquery.tinymce.min.js",

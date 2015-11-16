@@ -37,11 +37,28 @@ function _pop_regist(_url) {
 
 jQuery(document).ready(function(e){
 // BEGIN CODE
+	var transEndEventNames = {
+		'WebkitTransition' : 'webkitTransitionEnd', 
+		'MozTransition'    : 'transitionend',       
+		'transition'       : 'transitionend'        
+	};
+
+	if(Modernizr.touch) {
+		SUPPORTS_TOUCH = true;
+	} else {
+		SUPPORTS_TOUCH = true;
+	}
+
+	if(Modernizr.csstransitions) {
+		useWebkit = true;
+	} else {
+		useWebkit = false;
+	}
 	if(useWebkit) {
-		var transition = _getVendorPropertyName('transition');
-		var transform = _getVendorPropertyName('transform');
+		var transition = Modernizr.prefixedCSS('transition');
+		var transform = Modernizr.prefixedCSS('transform')
 		var _transform = transform+' 0.3s ease-in';
-		var transitionEnd = TransitionEndeventNames[transition] || null;
+		var transitionEnd = transEndEventNames[Modernizr.prefixed('transition')];
 		if(transitionEnd) transitionEnd = transitionEnd+'.taogi';
 	}
 	jQuery('#taogi-net-site-main-container .taogi-gnb-switch a.switch').bind('touchstart click',function(e) {

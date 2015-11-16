@@ -1,5 +1,6 @@
 <?php
 import('library.files');
+importResource('modernizr.js');
 class entry_index extends Interface_Entry {
 	public function index() {
 		$context = Model_Context::instance();
