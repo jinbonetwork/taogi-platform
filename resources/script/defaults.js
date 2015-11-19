@@ -392,13 +392,19 @@ useWebkit = false;
 jQuery(document).ready(function(e){
 // BEGIN CODE
 	TaogiContainerStyle = jQuery('#taogi-net-site-main-container')[0].style;
-	if(SUPPORTS_TOUCH || _getVendorPropertyName('transition')) {
+	if( typeof( Modernizr ) !== 'undefined' ) {
 		useWebkit = true;
-		transition = _getVendorPropertyName('transition');
-		transitionEnd = TransitionEndeventNames[transition] || null;
-		if(transitionEnd) transitionEnd = transitionEnd+'.taogi';
+		transition = Modernizr.prefixedCSS('transition');
+		transitionEnd = transEndEventNames[Modernizr.prefixed('transition')];
+	} else {
+		if(SUPPORTS_TOUCH || _getVendorPropertyName('transition')) {
+			useWebkit = true;
+			transition = _getVendorPropertyName('transition');
+			console.log(transition);
+			transitionEnd = TransitionEndeventNames[transition] || null;
+			if(transitionEnd) transitionEnd = transitionEnd+'.taogi';
+		}
 	}
-
 
 	jQuery.fn.taogiSlideDown = function(duration,easing,callback) {
 		return this.each(function() {
