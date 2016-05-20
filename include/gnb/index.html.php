@@ -8,7 +8,7 @@ if( $isEmbed == true || (defined("__TAGOI_IS_EMBEDED__") && __TAGOI_IS_EMBEDED__
 <div id="taogi-gnb">
 	<div id="taogi-gnb-wrap">
 		<div id="taogi-gnb-header">
-			<h1 class="title"><?php print ($timeline['headline']?$timeline['headline']:$title); ?></h1>
+			<h1 class="title"><?php print ($timeline['headline']? rtrim($timeline['headline'],"<br>") : $title); ?></h1>
 			<div class="description"><?php print Filter::getExcerpt(($timeline['text']?$timeline['text']:$description)); ?></div>
 <?php
 	if(is_timeline()) {
@@ -17,7 +17,7 @@ if( $isEmbed == true || (defined("__TAGOI_IS_EMBEDED__") && __TAGOI_IS_EMBEDED__
 			<div class="share">
 				<h2 class="subtitle">공유</h2>
 				<ul class="social">
-					<li class="twitter"><a href="https://twitter.com/share?url=<?php print $entry['permalink']; ?>&text=<?php print $entry['subject'].': '.$entry['summary']; ?>" target="_blank"><span>트위터에 링크하기</span></a></li>
+					<li class="twitter"><a href="https://twitter.com/share?url=<?php print $entry['permalink']; ?>&text=<?php print strip_tags($entry['subject']).': '.strip_tags($entry['summary']); ?>" target="_blank"><span>트위터에 링크하기</span></a></li>
 					<li class="facebook"><a href="https://facebook.com/sharer.php?u=<?php print $entry['permalink']; ?>" target="_blank"><span>페이스북에 링크하기</span></a></li>
 					<li class="googleplus"><a href="https://plus.google.com/share?url=<?php print $entry['permalink']; ?>" target="_blank"><span>구글플러스에 링크하기</span></a></li>
 					<li class="kakaotalk"><a href="https://plus.google.com/share?url=<?php print $entry['permalink']; ?>" target="_blank"><span>카카오톡에 링크하기</span></a></li>

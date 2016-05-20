@@ -489,22 +489,6 @@ if(typeof taogiEditVMM != 'undefined' && typeof taogiEditVMM.Util == 'undefined'
 				if(code == 13 && (event.ctrlKey || event.shiftKey)) {
 //					event.preventDefault();
 					self.isChanged = 1;
-/*
-					if (f_name == 'text' && window.getSelection) {
-						var selection = window.getSelection(),
-							range = selection.getRangeAt(0),
-							br = document.createElement("br"),
-							textNode = document.createTextNode("\u00a0"); //Passing " " directly will not end up being shown correctly
-						range.deleteContents();//required or not?
-						range.insertNode(br);
-						range.collapse(false);
-						range.insertNode(textNode);
-						range.selectNodeContents(textNode);
-
-						selection.removeAllRanges();
-						selection.addRange(range);
-						return false;
-					} */
 				} else if(code == 9 || code == 13) {
 					event.preventDefault();
 					if(!jQuery.trim(jQuery(this).html())) {
